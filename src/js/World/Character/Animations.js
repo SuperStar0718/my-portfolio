@@ -1,0 +1,98 @@
+import * as THREE from 'three'
+import Experience from '../../Experience'
+
+export default class Animations {
+    constructor(model) {
+        this.experience = new Experience()
+        this.resources = this.experience.resources
+        this.time = this.experience.time
+        this.debug = this.experience.debug
+
+        this.resource = this.resources.items.characterModel
+
+        this.model = model
+
+        // debug 
+        if (this.debug.active) {
+            this.debugFolder = this.debug.ui.folders.find((folder) => folder._title === 'Character').addFolder('Animations').close()
+
+            this.debugAnimations()
+        }
+
+        this.setAnimations()
+    }
+
+    setAnimations() {
+        this.mixer = new THREE.AnimationMixer(this.model)
+
+        this.defineActions()
+
+        this.actions.current = this.actions.idle
+    }
+
+    defineActions() {
+        this.actions = {}
+
+        // Left desktop action 
+        this.actions.leftDesktopAction = this.mixer.clipAction(this.resource.animations.find((animation) => animation.name === 'left-desktop-action'))
+        this.actions.leftDesktopAction.repetitions = 1
+        this.actions.leftDesktopAction.clampWhenFinished = true
+        this.actions.leftDesktopAction.allowedOutsideLanding = false
+
+        // idle action 
+        this.actions.idle = this.mixer.clipAction(this.resource.animations.find((animation) => animation.name === 'idle'))
+        this.actions.idle.loop = THREE.LoopPingPong
+        this.actions.idle.allowedOutsideLanding = false
+
+        // wave action 
+        this.actions.wave = this.mixer.clipAction(this.resource.animations.find((animation) => animation.name === 'wave'))
+        this.actions.wave.repetitions = 1
+        this.actions.wave.clampWhenFinished = true
+        this.actions.wave.allowedOutsideLanding = false
+
+        // fall down action 
+        this.actions.fallDown = this.mixer.clipAction(this.resource.animations.find((animation) => animation.name === 'fall-down'))
+        this.actions.fallDown.repetitions = 1
+        this.actions.fallDown.clampWhenFinished = true
+        this.actions.fallDown.allowedOutsideLanding = true
+
+        // water idle action 
+        this.actions.waterIdle = this.mixer.clipAction(this.resource.animations.find((animation) => animation.name === 'water-idle'))
+        this.actions.waterIdle.loop = THREE.LoopPingPong
+        this.actions.waterIdle.allowedOutsideLanding = true
+    }
+
+    play(name, transitionDuration = .5) {
+        const newAction = this.actions[name]
+        const oldAction = this.actions.current
+
+        if (oldAction._clip.name != newAction._clip.name && (newAction.allowedOutsideLanding || this.experience.ui.landingPage.visible)) {
+            newAction.reset()
+            newAction.play()
+            newAction.crossFadeFrom(oldAction, transitionDuration)
+
+            this.actions.current = newAction
+        } else if (this.debug.active) {
+            console.log('Illegal animation.')
+        }
+    }
+
+    debugAnimations() {
+        const debugObject = {
+            playIdle: () => { this.play('idle') },
+            playOpening: () => { this.play('wave') },
+            playLeftDesktopAction: () => { this.play('leftDesktopAction') },
+            playWaterIdle: () => { this.play('waterIdle') },
+        }
+        this.debugFolder.add(debugObject, 'playIdle').name('Play Idle')
+        this.debugFolder.add(debugObject, 'playOpening').name('Play Wave')
+        this.debugFolder.add(debugObject, 'playLeftDesktopAction').name('Play Left Desktop')
+        this.debugFolder.add(debugObject, 'playWaterIdle').name('Play Water Idle')
+    }
+
+    update() {
+        if (this.mixer) {
+            this.mixer.update(this.time.delta * 0.001)
+        }
+    }
+}

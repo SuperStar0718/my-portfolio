@@ -1,0 +1,80 @@
+/****************************Overlay**************************/
+#overlay-container {
+    position: fixed;
+    height: calc(100% - 30px);
+    padding: 15px 0;
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+#header-container {
+    position: relative;
+    top: 0;
+    transition: 250ms;
+}
+
+/*Header Logo*/
+#header-logo-svg {
+    position: absolute;
+    transform-origin: center center;
+}
+
+#logo-dark-background {
+    background: #091434;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    clip-path: url(#logo-clip-path); 
+}
+
+#logo-white-background {
+    background: white;
+    height: 107vh;
+    position: absolute;
+    top: calc(100vh - 15px);
+    width: 110%;
+    left: -5%;
+    transform: rotate(1deg);
+}
+
+.overlay-button {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    border-radius: 15px;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: transform 0.125s ease-out;
+}
+
+.overlay-button:hover {
+    transform: scale(1.1);
+}
+
+/**Sound button*/
+#sound-button {
+    right: 62px;
+    background: #a7adb8;
+}
+
+/**Menu Button*/
+#menu-button {
+    right: 0;
+    background: #FF923E;
+}
+
+.menu-button-bar {
+    width: 26px;
+    height: 4px;
+    background: white;
+    margin: 2.5px;
+    border-radius: 2px;
+}
+
+#menu-button-scale-container {
+    transform-origin: top right;
+    transform: scale(0.95);
+}

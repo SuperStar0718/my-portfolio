@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="/src/assets/favicon.ico">
+    <title>David | Creative Web Developer</title>
+</head>
+
+<body>
+    <!--Canvas-->
+    <canvas id="main-canvas"></canvas>
+
+    <!--Loading Container-->
+    <div id="transition-container"></div>
+    <div id="loadig-animation-container">
+        <div id="loading-mask-container">
+            <div id="loading-animation"></div>
+        </div>
+        <img id="loading-logo-outline" src="/src/assets/logo-outline.png">
+    </div>
+
+    <!--Overlay Container-->
+    <div id="overlay-container" class="content-width">
+        <div id="header-container">
+            <!--Logo-->
+            <div id="logo-transform-container">
+                <svg id="header-logo-svg" viewBox="0 0 56 60" xmlns="http://www.w3.org/2000/svg" height="60" width="56">
+                    <defs>
+                        <path id="logo-path" fill="none" stroke="#fff" stroke-width="1px"
+                            d="M3 14 24 2C28 0 28 0 32 2L53 14C56 16 56 17 56 19L56 43C56 46 55 47 51 49L32 59C28 61 28 61 24 59L5 49C1 47 0 46 0 43L0 19C0 17 0 16 3 14M28 4 5 17 28 28 51 17 28 4M53 20 30 31 30 56 53 44 53 20M40 42 33 35C33 35 32 34 33 33 34 32 35 33 36 34L36 34 43 41C44 42 44 42 43 43L35 51C35 51 34 52 33 51 32 50 33 49 33 49L40 42M16 42 23 35C23 35 24 34 23 33 22 32 21 33 20 34L13 41C12 42 12 42 13 43L21 51C21 51 22 52 23 51 24 50 23 49 23 49L16 42">
+                        </path>
+
+                        <clipPath id="logo-clip-path" transform="scale(0.87)">
+                            <use fill="white" href="#logo-path"></use>
+                        </clipPath>
+                    </defs>
+                </svg>
+            </div>
+
+            <div id="logo-dark-background">
+                <div id="logo-white-background"></div>
+            </div>
+
+            <!--Sound Button-->
+            <div id="sound-button-scale-container">
+                <div id="sound-button" class="center overlay-button">
+                    <svg id="header-logo-svg" viewBox="0 0 6 9" xmlns="http://www.w3.org/2000/svg" height="30"
+                        width="30">
+                        <path fill="white"
+                            d="M0 4C0 4 0 3 1 3L2 3 3 2C5 0 5 1 5 2L5 7C5 8 5 9 3 7L2 6 1 6C0 6 0 5 0 5L0 4">
+                        </path>
+                    </svg>
+                </div>
+            </div>
+
+            <!--Menu Button-->
+            <div id="menu-button-scale-container">
+                <div id="menu-button" class="center column overlay-button">
+                    <div id="menu-button-bar-0" class="menu-button-bar"></div>
+                    <div id="menu-button-bar-1" class="menu-button-bar"></div>
+                    <div id="menu-button-bar-2" class="menu-button-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Menu-->
+    <div id="menu-container" class="column slide-out-left-transition">
+        <div id="menu-content-container" class="column">
+            <!--Menu Items-->
+            <div id="menu-items-container">
+                <div class="column menu-items-column-container">
+                    <a tabindex="-1" class="menu-item active-menu-item">Home</a>
+                    <a tabindex="-1" class="menu-item">About</a>
+                </div>
+                <div class="column menu-items-column-container">
+                    <a tabindex="-1" class="menu-item">Work</a>
+                    <a tabindex="-1" class="menu-item">Contact</a>
+                </div>
+            </div>
+            <!--Social Link-->
+            <div id="menu-social-container" class="row">
+                <a tabindex="-1" class="social-icon" id="menu-github-icon" target="_blank"
+                    href="https://github.com/davidhckh"></a>
+                <a tabindex="-1" class="social-icon" id="menu-linkedin-icon" target="_blank"
+                    href="https://www.linkedin.com/in/david-heckhoff-1ba8a622a/"></a>
+                <a tabindex="-1" class="social-icon" id="menu-mail-icon" href="mailto:david.heckhoff@gmail.com"></a>
+            </div>
+            <hr>
+            <!--Legal Container-->
+            <div id="legal-container" class="row">
+                <a>Legal Notice</a>
+                <a>Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+
+    <!--Hover Icon-->
+    <div id="hover-icon">
+        <svg viewBox="-1 0 15 8" xmlns="http://www.w3.org/2000/svg" height="32" width="32">
+            <path fill="white" id="arrow-path"
+                d="M0 4C0 4 0 3 1 3L7 3C8 3 8 3 8 2L8 1C8 1 8 0 9 0 9 0 8 0 9 0 10 0 12 2 13 3 14 4 14 4 13 5 12 6 10 8 9 8 8 8 8 7 8 7L8 6C8 5 8 5 7 5L1 5C0 5 0 4 0 4L0 4">
+            </path>
+        </svg>
+    </div>
+
+    <!--Landing Page-->
+    <div id="landing-page" class="content-container landing-slow-transition">
+        <section id="landing-page-section" class="content-width slide-out-left-transition">
+            <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                <foreignObject x="0" y="0" width="500" height="300" requiredExtensions="http://www.w3.org/1999/xhtml">
+                    <div class="column" style="margin-left: 2px">
+                        <!--Hi, my name is...-->
+                        <h1 id="landing-headline">
+                            <span>Hi, my</span>
+                            <br>
+                            <span>name is David.</span>
+                        </h1>
+                        <!--Subheader-->
+                        <span id="landing-subheader">I'm a <span style="font-weight: 600">Creative Web
+                                Developer</span> from
+                            Germany.</span>
+                        <!--Buttons-->
+                        <button id="landing-cta-button" class="row big-button">
+                            <span>Contact Me</span>
+                        </button>
+                    </div>
+                </foreignObject>
+            </svg>
+        </section>
+    </div>
+
+    <!--Scroll Container-->
+    <div id="scroll-container" class="landing-slow-transition center column">
+        <!--About Container-->
+        <section id="about-section" class="content-width">
+            <div id="about-content-container">
+                <!--Header Container SVG-->
+                <svg id="about-header-svg" viewBox="-4 -4 506 176" xmlns="http://www.w3.org/2000/svg"
+                    preserveAspectRatio="xMinYMid">
+                    <defs>
+                        <!--Profile picture aniamtion line gradient-->
+                        <linearGradient id="about-profile-picture-mask-gradient" gradientTransform="rotate(90)">
+                            <stop offset="5%" stop-color="#60CAFF" />
+                            <stop offset="100%" stop-color="rgba(0, 0, 0, 0)" />
+                        </linearGradient>
+                    </defs>
+
+                    <!--Profile Picture Background-->
+                    <polyline id="about-profile-background" class="about-box-background"
+                        points="80,170 0,170 0,15 15,0 80,0 160,0 160,170" />
+
+                    <!--Profile Picture line that moves up on animation-->
+                    <g mask="url(#about-profil-picture-mask)">
+                        <rect fill="url(#about-profile-picture-mask-gradient)" height="35" width="158" x="1" y="168"
+                            id="about-profile-picture-gradient" style="transition: 1.5s"></rect>
+                    </g>
+
+                    <!--Content Background-->
+                    <polyline id="about-header-background" class="about-box-background"
+                        points="175,171 175,100 501,100 500,170" />
+
+                    <!--Profile Picture Mask-->
+                    <mask id="about-profil-picture-mask">
+                        <rect fill="white" x="0" y="0" width="159" height="168" />
+                        <rect id="about-profile-picture-mask-rect" fill="black" width="159" height="168"
+                            style="transition: 1.5s" x="0" y="0" />
+                        <polyline fill="black" points="0,0 0,15 15,0"></polyline>
+                    </mask>
+
+                    <!--Profile Picture-->
+                    <image href="../src/assets/skills-profile-picture.png" opacity="1" height="168" width="150" x="6"
+                        mask="url(#about-profil-picture-mask)" image-rendering="optimizeSpeed" />
+
+                    <!--Profile Picture Border Lines-->
+                    <polyline class="about-box-line" points="80,170 0,170 0,15 15,0 80,0" />
+                    <polyline class="about-box-line" points="80,170 160,170 160,0 80,0" />
+
+                    <!--About Borders-->
+                    <polyline class="about-box-line" points="175,171 175,100 501,100" />
+                    <polyline class="about-box-line" points="500,99 500,170 174,170" />
+
+                    <!--Content-->
+                    <g transform="translate(200 128)" fill="#34bfff" font-weight="bold">
+                        <text x="0" y="0" font-size="12">Name :</text>
+                        <text x="0" y="20" font-size="18" id="about-header-david">David</text>
+                        <text x="90" y="0" font-size="12">Age :</text>
+                        <text x="90" y="20" font-size="18" id="about-header-23">23</text>
+                        <text x="170" y="0" font-size="12">From :</text>
+                        <text x="170" y="20" font-size="18" id="about-header-germany">Germany</text>
+                    </g>
+                </svg>
+
+                <!--Info Container SVG-->
+                <svg id="about-info-svg" viewBox="-4 -4 506 800" xmlns="http://www.w3.org/2000/svg"
+                    preserveAspectRatio="xMinYMid">
+                    <defs>
+                        <linearGradient id="about-background-gradient" gradientTransform="rotate(90)">
+                            <stop offset="30%" stop-color="rgba(0, 88, 165, 0.15)" />
+                            <stop offset="95%" stop-color="rgba(0, 132, 255, 0.25)" />
+                        </linearGradient>
+                    </defs>
+
+                    <!--Skills Background-->
+                    <polyline id="about-info-background" class="about-box-background"
+                        points="253,40 240,40 230,5 30,5 20,40 0,40 0,329 243,329 253,363 260,363 300,363 500,363 500,330 500,40" />
+
+                    <!--Skills Header-->
+                    <text x="102" y="30" class="about-text about-heading">SKILLS</text>
+
+                    <!--Skills Content-->
+                    <foreignObject x="-2" y="2" width="506" height="340" transform="translate(0 47)">
+                        <!--Skills Content-->
+                        <div id="about-skills-container" class="about-container">
+                            <!--Main Render Container-->
+                            <div id="about-skills-render-container"></div>
+                            <!--Others Render Container-->
+                            <div id="about-others-render-container"></div>
+                        </div>
+                    </foreignObject>
+
+                    <!--Skills Lines-->
+                    <polyline id="about-info-left-line" class="about-box-line"
+                        points="253,40 240,40 230,5 30,5 20,40 0,40 0,329 243,329 253,363 260,363"></polyline>
+                    <polyline id="about-info-right-line" class="about-box-line"
+                        points="253,40 500,40 500,330 500,363 300,363 260,363"></polyline>
+
+
+                    <!--------------------------- About ---------------------------->
+
+                    <!--About Content-->
+                    <g transform="translate(18 400)" id="about-about-container" class="">
+                        <defs>
+                            <!--Icon Template-->
+                            <polyline id="about-icon-background" fill="#00b7ff33"
+                                points="0,10 10,0 65,0 75,10 75,65 65,75 10,75 0,65" />
+
+                            <!--Pixel Template-->
+                            <rect id="pixel" height="4" width="4" fill="#34bfff"></rect>
+                            <!-- <circle id="pixel" r="2" fill="#34bfff"></circle> -->
+                        </defs>
+                        <!--Icons-->
+                        <use class="about-icon" href="#about-icon-background"></use>
+                        <use class="about-icon" href="#about-icon-background" x="390" y="75"></use>
+                        <use class="about-icon" href="#about-icon-background" x="0" y="150"></use>
+
+                        <!--First Icon-->
+                        <g id="about-icon-0" transform="translate(5 2) scale(0.8)"> </g>
+
+                        <!--First Text-->
+                        <text x="88" y="33" class="about-text">At the age of 15 David first came in touch with
+                            UX</text>
+                        <text x="88" y="50" class="about-text">Design and app development.</text>
+
+                        <!--Second Icon-->
+                        <g id="about-icon-1" transform="translate(399 79) scale(0.8)"> </g>
+
+                        <!--Second Text-->
+                        <text x="0" y="108" class="about-text">During his 4 years of military service developing
+                            has</text>
+                        <text x="0" y="125" class="about-text">always been a passion of him.</text>
+
+                        <!--Third Icon-->
+                        <g id="about-icon-2" transform="translate(5 155) scale(0.8)"> </g>
+
+                        <!--Third Text-->
+                        <text x="88" y="183" class="about-text">Now, after professional coaching, David is looking
+                            for</text>
+                        <text x="88" y="200" class="about-text">new challenges to work as a web developer.</text>
+                    </g>
+
+                    <!--About Lines-->
+                    <polyline id="about-info-left-line" class="about-box-line"
+                        points="253,380 240,380 230,345 30,345 20,380 0,380 0,630 253,630"></polyline>
+                    <polyline id="about-info-right-line" class="about-box-line"
+                        points="253,380 500,380 500,500 340,500 325,500 253,500"></polyline>
+
+                </svg>
+            </div>
+        </section>
+
+        <!--Work Container-->
+        <section id="work-section" class="content-width center">
+            <!--Background-->
+            <div id="work-background"></div>
+            <!--Header-->
+            <h2>Selected Work</h2>
+            <!--Render Container-->
+            <div id="work-render-container"></div>
+            <!--Navigation-->
+            <div id="work-navigation-container" class="row">
+                <div id="work-back-button" class="work-navigation-button work-disabled-navigation-button">
+                    <svg viewBox="-14 0 15 8" xmlns="http://www.w3.org/2000/svg" height="28" width="28">
+                        <use href="#arrow-path" style="transform: scaleX(-1)"></use>
+                    </svg>
+                </div>
+                <div id="work-next-button" class="work-navigation-button">
+                    <svg viewBox="-1 0 15 8" xmlns="http://www.w3.org/2000/svg" height="28" width="28">
+                        <use href="#arrow-path"></use>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!--Contact Container-->
+        <section id="contact-section" class="content-width column">
+            <h2>Contact Me</h2>
+            <span id="contact-get-in-touch-label">
+                Get in touch via the form below, or send me an
+                <a tabindex="-1" href="mailto:david.heckhoff@gmail.com">Email</a> directly.
+            </span>
+            <div id="contact-container" class="column">
+                <div id="contact-name-input" class="input-container column">
+                    <span>Name :</span>
+                    <input tabindex="-1">
+                </div>
+                <div id="contact-mail-input" class="input-container column">
+                    <span>Email :</span>
+                    <input type="email" tabindex="-1">
+                </div>
+                <div id="contact-message-input" class="input-container column">
+                    <span>Message :</span>
+                    <textarea tabindex="-1"></textarea>
+                </div>
+                <div class="row">
+                    <div class="small-button">
+                        Submit
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--Footer-->
+        <footer class="center hide">
+            <div class="content-width height-100">
+                <div id="back-to-top-button">
+                    <svg viewBox="-1 0 15 8" xmlns="http://www.w3.org/2000/svg" height="28" width="28">
+                        <use href="#arrow-path"></use>
+                    </svg>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

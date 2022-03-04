@@ -1,0 +1,95 @@
+#menu-container {
+    position: absolute;
+    right: calc(-350px - 10vw);
+    width: calc(350px + 10vw);
+    height: 100%;
+    background: white;
+    z-index: 2;
+    max-width: 45vw;
+    box-sizing: border-box;
+    padding: 50px 50px 70px 50px;
+}
+
+#menu-content-container {
+    position: relative;
+    height: 100%;
+    width: 240px;
+}
+
+#menu-items-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.menu-items-column-container {
+    width: 100%;
+}
+
+.menu-item {
+    border-radius: 15px;
+    margin: 15px 0;
+    font-weight: 600;
+    font-size: 1.6rem;
+    width: fit-content;
+}
+
+.active-menu-item {
+    position: relative; 
+}
+
+.active-menu-item {
+    cursor: unset !important;
+}
+
+.active-menu-item::after {
+    position: absolute;
+    height: 3px;
+    margin: 0 auto;
+    content: '';
+    background: #FF923E;
+    width: 100%;
+    bottom: -2px;
+    left: 0;
+}
+
+#menu-content-container .social-icon {
+    filter:  grayscale(1) brightness(6);
+    height: 28px;
+    width: 28px;
+    transition: 0.125s ease-in;
+}
+
+#menu-content-container .social-icon:hover {
+    filter: unset;
+    transform: scale(1.05);
+}
+
+#menu-github-icon {
+    background: url('../assets/icons/github-icon.png');
+    margin-right: 20px;
+}
+
+#menu-linkedin-icon {
+    background: url('../assets/icons/linkedin-icon.png');
+    margin-right: 20px;
+}
+
+#menu-mail-icon {
+    background: url('../assets/icons/mail-icon.png')
+}
+
+/**Legal container*/
+#legal-container a {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+#legal-container :first-child{
+    margin-right: 20px;
+}
+
+#legal-container a:hover {
+    text-decoration: underline;
+}

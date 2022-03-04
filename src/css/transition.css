@@ -1,0 +1,55 @@
+#transition-container {
+    top: -50vh;
+    left: 0;
+    position: absolute;
+    z-index: 998;
+    height: 200vh;
+    width: 130vw;
+    background: #FF923E;
+}
+
+.hideTransition {
+    animation: hideTransition ease-in .7s;
+    animation-fill-mode: forwards; 
+}
+
+@keyframes hideTransition {
+    0% {left: 0; transform: rotate(-15deg);}
+    100% {left: 135vw; transform: rotate(8deg);}
+}
+
+#loadig-animation-container {
+    height: 130px;
+    width: 130px;
+    position: relative;
+    z-index: 999;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#loading-mask-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    mask-image: url('../assets/logo-mask.png');
+    -webkit-mask-image: url('../assets/logo-mask.png');
+    mask-size: 100%;
+    -webkit-mask-size: 100%;  
+    width: 100%;
+    height: 130px;
+}
+
+#loading-animation {
+    background: white;
+    transition: 0.5s;
+    width: 100%;
+}
+
+#loading-logo-outline {
+    height: 130px;
+    width: 130px;
+    position: absolute;
+    top: 0;
+}

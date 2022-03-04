@@ -1,0 +1,117 @@
+#about-section {
+    color: white;
+    justify-content: flex-start;
+    font-family: 'Electrolize', sans-serif;
+    color: #34bfff;
+    max-height: 100vh;
+}
+
+/**---------------------------------------------------------------Content-----------------------------------------------------*/
+#about-content-container {
+    width: 550px;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+#about-header-svg, #about-info-svg {
+    width:100%;
+}
+
+#about-header-svg {
+    margin-top: 160px;
+    margin-bottom: 15px;
+}
+
+.about-box-line {
+    fill: none;
+    stroke: #00b7ff;
+    stroke-width: 3;
+    stroke-dasharray: 0;
+    stroke-dashoffset: 0;
+}
+
+.about-box-background {
+    stroke-width: 0;
+    fill: url('#about-background-gradient')
+}
+
+.about-text {
+    font-weight: bold;
+    font-size: 15px;
+    fill: #34bfff
+}
+
+/**Skills + About Container*/
+#about-content-main-container {
+    width: 500px;
+    max-width: 100%;
+}
+
+/**Heading*/
+.about-heading{
+    font-size: 18px !important;
+}
+
+/**Main*/
+#about-main-container {
+    padding: 15px 0;
+}
+
+#about-main-container :first-child {
+    margin-top: 0;
+}
+
+#about-main-container :last-child {
+    margin-bottom: 0;
+}
+
+#about-skills-container {
+    padding: 10px 0;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/**Render Result*/
+#about-skills-render-container {
+    margin-bottom: 25px;
+}
+#about-skills-render-container :nth-child(even), #about-others-render-container :nth-child(odd){
+    background: #2d88dd18;
+}
+
+.about-skill-container {
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 4px 20px;
+    margin: 2px 0;
+}
+
+.about-skill-container span {
+    width: 250px;
+    background: transparent !important;
+}
+
+/**Bar*/
+.about-skill-bar-container {
+    width: 100%;
+    height: 10px;
+    background: #00b7ff33 !important;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+.about-skill-bar {
+    height: 100%;
+    background: linear-gradient(to right, #2d88dd, #34bfff) !important;
+    width: 30%;
+    border-radius: 5px;
+}
+
+/**Others*/
+#about-others-header {
+    font-size: 17px;
+    margin-left: 20px;
+}

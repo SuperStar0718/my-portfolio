@@ -1,0 +1,89 @@
+#contact-section {
+    align-items:  flex-start;
+    justify-content: center;
+    height: 100vh;
+}
+
+#contact-section h2 {
+    margin-bottom: 10px;
+    font-size: 2.5em;
+}
+
+#contact-get-in-touch-label {
+    font-size: 15px;
+    margin-bottom: 50px;
+    max-width: 500px;
+    color: #7C8594;
+}
+
+#contact-get-in-touch-label a{
+    color: #FF923E;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#contact-get-in-touch-label a:hover {
+    opacity: 0.5
+}
+
+#contact-container {
+    padding: 15px;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0px 30px 70px #93683325;
+    width: 440px;
+}
+
+#contact-container input,textarea {
+    border: none;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    background: unset;
+    font-weight: 500;
+    color: #111029;
+    resize: none;
+}
+
+#contact-container input:focus,textarea:focus {
+    outline: none;
+    border: none;
+}
+
+#contact-container textarea {
+    height: 150px;
+}
+
+.input-container {
+    width: 100%;
+    box-sizing: border-box;
+    background: #F5F5F5;
+    color: #ACACAC;
+    border-radius: 12px;
+    padding: 7px;
+    padding-left: 15px;
+    border: 2px solid #F5F5F5;
+}
+
+.input-container:focus-within {
+    border: 2px solid #c7c7c7;
+}
+
+.input-container span {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+#contact-name-input {
+    margin-bottom: 20px;
+}
+
+#contact-mail-input {
+    margin-bottom: 20px;
+}
+
+#contact-container .small-button {
+    margin-top: 20px;
+    margin-left: auto;
+    font-size: 15px;
+    border-radius: 20px;
+}
