@@ -1,6 +1,6 @@
 export default [
     {
-        name: 'ThreeJS / WebGL',
+        name: 'ThreeJS',
         width: '65%',
         category: 'main',
     },

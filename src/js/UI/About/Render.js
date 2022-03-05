@@ -10,9 +10,6 @@ export default class SkillsRender {
     constructor() {
         this.skills = skills
 
-        //Clear example 
-        this.domElements.skillsRenderContainer.innerHTML = ''
-
         this.renderSkills() 
     }
 

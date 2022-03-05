@@ -10,6 +10,7 @@ import HoverIcon from './HoverIcon'
 import Header from './Header'
 import AboutIcons from './About/Icons'
 import Menu from './Menu'
+import ScrollIcon from './SrollIcon'
 
 export default class UI {
 
@@ -25,6 +26,7 @@ export default class UI {
             this.landingPage = new LandingPage()
             this.scroll = new Scroll()
             this.menu = new Menu()
+            this.scrollIcon = new ScrollIcon()
 
             //About
             this.about = {}

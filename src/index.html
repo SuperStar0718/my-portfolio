@@ -39,7 +39,6 @@
                     </defs>
                 </svg>
             </div>
-
             <div id="logo-dark-background">
                 <div id="logo-white-background"></div>
             </div>
@@ -64,6 +63,11 @@
                     <div id="menu-button-bar-2" class="menu-button-bar"></div>
                 </div>
             </div>
+        </div>
+
+        <!--Scroll CTA-->
+        <div id="landing-scroll-icon">
+            <div id="landing-scroll-wheel"></div>
         </div>
     </div>
 
@@ -139,145 +143,203 @@
         <section id="about-section" class="content-width">
             <div id="about-content-container">
                 <!--Header Container SVG-->
-                <svg id="about-header-svg" viewBox="-4 -4 506 176" xmlns="http://www.w3.org/2000/svg"
+                <svg id="skills-svg" viewBox="-2 -2 506 1000" xmlns="http://www.w3.org/2000/svg"
                     preserveAspectRatio="xMinYMid">
+
                     <defs>
+                        <!---Pixel-->
+                        <rect id="pixel" height="4" width="4" fill="#34bfff"></rect>
+
                         <!--Profile picture aniamtion line gradient-->
                         <linearGradient id="about-profile-picture-mask-gradient" gradientTransform="rotate(90)">
                             <stop offset="5%" stop-color="#60CAFF" />
                             <stop offset="100%" stop-color="rgba(0, 0, 0, 0)" />
                         </linearGradient>
-                    </defs>
 
-                    <!--Profile Picture Background-->
-                    <polyline id="about-profile-background" class="about-box-background"
-                        points="80,170 0,170 0,15 15,0 80,0 160,0 160,170" />
-
-                    <!--Profile Picture line that moves up on animation-->
-                    <g mask="url(#about-profil-picture-mask)">
-                        <rect fill="url(#about-profile-picture-mask-gradient)" height="35" width="158" x="1" y="168"
-                            id="about-profile-picture-gradient" style="transition: 1.5s"></rect>
-                    </g>
-
-                    <!--Content Background-->
-                    <polyline id="about-header-background" class="about-box-background"
-                        points="175,171 175,100 501,100 500,170" />
-
-                    <!--Profile Picture Mask-->
-                    <mask id="about-profil-picture-mask">
-                        <rect fill="white" x="0" y="0" width="159" height="168" />
-                        <rect id="about-profile-picture-mask-rect" fill="black" width="159" height="168"
-                            style="transition: 1.5s" x="0" y="0" />
-                        <polyline fill="black" points="0,0 0,15 15,0"></polyline>
-                    </mask>
-
-                    <!--Profile Picture-->
-                    <image href="../src/assets/skills-profile-picture.png" opacity="1" height="168" width="150" x="6"
-                        mask="url(#about-profil-picture-mask)" image-rendering="optimizeSpeed" />
-
-                    <!--Profile Picture Border Lines-->
-                    <polyline class="about-box-line" points="80,170 0,170 0,15 15,0 80,0" />
-                    <polyline class="about-box-line" points="80,170 160,170 160,0 80,0" />
-
-                    <!--About Borders-->
-                    <polyline class="about-box-line" points="175,171 175,100 501,100" />
-                    <polyline class="about-box-line" points="500,99 500,170 174,170" />
-
-                    <!--Content-->
-                    <g transform="translate(200 128)" fill="#34bfff" font-weight="bold">
-                        <text x="0" y="0" font-size="12">Name :</text>
-                        <text x="0" y="20" font-size="18" id="about-header-david">David</text>
-                        <text x="90" y="0" font-size="12">Age :</text>
-                        <text x="90" y="20" font-size="18" id="about-header-23">23</text>
-                        <text x="170" y="0" font-size="12">From :</text>
-                        <text x="170" y="20" font-size="18" id="about-header-germany">Germany</text>
-                    </g>
-                </svg>
-
-                <!--Info Container SVG-->
-                <svg id="about-info-svg" viewBox="-4 -4 506 800" xmlns="http://www.w3.org/2000/svg"
-                    preserveAspectRatio="xMinYMid">
-                    <defs>
+                        <!--Background Gradient-->
                         <linearGradient id="about-background-gradient" gradientTransform="rotate(90)">
                             <stop offset="30%" stop-color="rgba(0, 88, 165, 0.15)" />
                             <stop offset="95%" stop-color="rgba(0, 132, 255, 0.25)" />
                         </linearGradient>
+
+                        <!--Icon Template-->
+                        <polyline id="about-icon-background" fill="#00b7ff33"
+                            points="0,10 10,0 65,0 75,10 75,65 65,75 10,75 0,65" />
                     </defs>
 
-                    <!--Skills Background-->
-                    <polyline id="about-info-background" class="about-box-background"
-                        points="253,40 240,40 230,5 30,5 20,40 0,40 0,329 243,329 253,363 260,363 300,363 500,363 500,330 500,40" />
-
-                    <!--Skills Header-->
-                    <text x="102" y="30" class="about-text about-heading">SKILLS</text>
-
-                    <!--Skills Content-->
-                    <foreignObject x="-2" y="2" width="506" height="340" transform="translate(0 47)">
-                        <!--Skills Content-->
-                        <div id="about-skills-container" class="about-container">
-                            <!--Main Render Container-->
-                            <div id="about-skills-render-container"></div>
-                            <!--Others Render Container-->
-                            <div id="about-others-render-container"></div>
-                        </div>
-                    </foreignObject>
-
-                    <!--Skills Lines-->
-                    <polyline id="about-info-left-line" class="about-box-line"
-                        points="253,40 240,40 230,5 30,5 20,40 0,40 0,329 243,329 253,363 260,363"></polyline>
-                    <polyline id="about-info-right-line" class="about-box-line"
-                        points="253,40 500,40 500,330 500,363 300,363 260,363"></polyline>
+                    <!--Header-->
+                    <g>
+                        <!--Profile Picture Background-->
+                        <polyline id="about-profile-background" class="about-box-background"
+                            points="70,0 130,0 145,15 145,150 130,165 80,165 75,170 65,170, 15,170, 0,155 0,15 15,0" />
 
 
-                    <!--------------------------- About ---------------------------->
+                        <!--Header Content Background-->
+                        <polyline id="about-header-background" class="about-box-background"
+                            points="145,75 205,75 215,85 485,85 500,100 500,125 500,145 145,145" />
 
-                    <!--About Content-->
-                    <g transform="translate(18 400)" id="about-about-container" class="">
-                        <defs>
-                            <!--Icon Template-->
-                            <polyline id="about-icon-background" fill="#00b7ff33"
-                                points="0,10 10,0 65,0 75,10 75,65 65,75 10,75 0,65" />
+                        <!--Profile Picture Mask-->
+                        <mask id="about-profil-picture-mask">
+                            <!--Black Background-->
+                            <rect fill="black" x="0" y="0" width="145" height="170" />
+                            <!--White Background-->
+                            <polyline fill="white"
+                                points="70,0 130,0 145,15 145,150 130,165 80,165 75,170 65,170, 15,170, 0,155 0,15 15,0">
+                            </polyline>
+                            <!--Rect to make white background visible-->
+                            <rect id="about-profile-picture-mask-rect" fill="black" width="145" height="170"
+                                style="transition: 1.2s" x="0" y="-0" />
+                        </mask>
 
-                            <!--Pixel Template-->
-                            <rect id="pixel" height="4" width="4" fill="#34bfff"></rect>
-                            <!-- <circle id="pixel" r="2" fill="#34bfff"></circle> -->
-                        </defs>
-                        <!--Icons-->
-                        <use class="about-icon" href="#about-icon-background"></use>
-                        <use class="about-icon" href="#about-icon-background" x="390" y="75"></use>
-                        <use class="about-icon" href="#about-icon-background" x="0" y="150"></use>
+                        <!--Profile Picture-->
+                        <image href="../src/assets/skills-profile-picture.png" opacity="1" height="170" width="145"
+                            x="2" mask="url(#about-profil-picture-mask)" image-rendering="optimizeSpeed" />
 
-                        <!--First Icon-->
-                        <g id="about-icon-0" transform="translate(5 2) scale(0.8)"> </g>
+                        <!--Profile Picture line that moves up on animation-->
+                        <g mask="url(#about-profil-picture-mask)">
+                            <rect fill="url(#about-profile-picture-mask-gradient)" height="35" width="155" y="170"
+                                id="about-profile-picture-gradient" style="transition: 1.2s"></rect>
+                        </g>
 
-                        <!--First Text-->
-                        <text x="88" y="33" class="about-text">At the age of 15 David first came in touch with
-                            UX</text>
-                        <text x="88" y="50" class="about-text">Design and app development.</text>
+                        <!--Profile Picture Borders-->
+                        <polyline class="about-box-line" points="65,170 15,170 0,155 0,15 15,0 70,0" />
+                        <polyline class="about-box-line"
+                            points="65,170 75,170 80,165 130,165 145,150 145,15 130,0 70,0" />
 
-                        <!--Second Icon-->
-                        <g id="about-icon-1" transform="translate(399 79) scale(0.8)"> </g>
+                        <!--Header Content Borders-->
+                        <polyline class="about-box-line" points="145,75 205,75 215,85 485,85 500,100 500,125" />
+                        <polyline class="about-box-line" points="145,145 500,145 500,125" />
 
-                        <!--Second Text-->
-                        <text x="0" y="108" class="about-text">During his 4 years of military service developing
-                            has</text>
-                        <text x="0" y="125" class="about-text">always been a passion of him.</text>
-
-                        <!--Third Icon-->
-                        <g id="about-icon-2" transform="translate(5 155) scale(0.8)"> </g>
-
-                        <!--Third Text-->
-                        <text x="88" y="183" class="about-text">Now, after professional coaching, David is looking
-                            for</text>
-                        <text x="88" y="200" class="about-text">new challenges to work as a web developer.</text>
+                        <!--Header Content-->
+                        <g transform="translate(170 107)" fill="#34bfff" font-weight="bold">
+                            <text x="0" y="0" font-size="12" id="about-header-name">Name :</text>
+                            <text x="0" y="20" font-size="18" id="about-header-david">David</text>
+                            <text x="110" y="0" font-size="12" id="about-header-age">Age :</text>
+                            <text x="110" y="20" font-size="18" id="about-header-23">23</text>
+                            <text x="200" y="0" font-size="12" id="about-header-from">From :</text>
+                            <text x="200" y="20" font-size="18" id="about-header-germany">Germany</text>
+                        </g>
                     </g>
 
-                    <!--About Lines-->
-                    <polyline id="about-info-left-line" class="about-box-line"
-                        points="253,380 240,380 230,345 30,345 20,380 0,380 0,630 253,630"></polyline>
-                    <polyline id="about-info-right-line" class="about-box-line"
-                        points="253,380 500,380 500,500 340,500 325,500 253,500"></polyline>
+                    <!--Skills -->
+                    <g transform="translate(0 -10)">
+                        <foreignObject x="0" y="210" width="506" height="340" transform="translate(0 47)">
+                            <!--Skills Content-->
+                            <div id="about-skills-container" class="about-container">
+                                <!--Main Render Container-->
+                                <div id="about-skills-render-container"></div>
+                                <!--Others Render Container-->
+                                <div id="about-others-render-container"></div>
+                            </div>
+                        </foreignObject>
 
+                        <!--Background-->
+                        <polyline id="about-header-background" class="about-box-background"
+                            points="250,210 475,210 490,225 490,255 500,265 500,520 250,520 210,520 200,530 15,530 0,515 0,210" />
+
+                        <!--Lines-->
+                        <polyline class="about-box-line"
+                            points="250,210 475,210 490,225 490,255 500,265 500,520 250,520" />
+                        <polyline class="about-box-line" points="250,210 0,210 0,515 15,530 200,530 210,520 250,520" />
+
+                        <!--Header Mask-->
+                        <mask id="skills-header-mask">
+                            <polyline fill="white" points="0,210 0,245 140,245 150,210"></polyline>
+                            <text x="20" y="234" font-size="19" font-weight="bold">SKILLS</text>
+                            <rect fill="white" x="0" y="210" width="480" height="5"></rect>
+                        </mask>
+
+                        <!--Header Box-->
+                        <rect x="0" y="210" height="40" width="478" fill="#00b7ff" mask="url(#skills-header-mask)">
+                        </rect>
+                    </g>
+
+                    <!--About-->
+                    <!--First Container-->
+                    <g transform="translate(0 580)">
+                        <!--Background-->
+                        <polyline id="about-first-item-background" class="about-box-background"
+                            points="250,0 475,0 490,15 490,45 500,55 500,130 250,130 0,130 0,0" />
+
+                        <!--Border-->
+                        <polyline class="about-box-line" points="250,0 0,0 0,130 250,130" />
+                        <polyline class="about-box-line" points="250,0 475,0 490,15 490,45 500,55 500,130 250,130" />
+
+                        <!--Header Mask-->
+                        <mask id="about-header-mask">
+                            <polyline fill="white" points="0,0 0,35 140,35 150,0"></polyline>
+                            <rect fill="white" x="0" y="0" width="480" height="5"></rect>
+                            <text x="20" y="24" font-size="19" font-weight="bold">ABOUT</text>
+                        </mask>
+
+                        <!--Header Box-->
+                        <rect x="0" y="1" height="40" width="478" fill="#00b7ff" mask="url(#about-header-mask)">
+                        </rect>
+
+                        <!--First Content-->
+                        <g transform="translate(10 45)">
+
+                            <use class="about-icon" href="#about-icon-background"></use>
+
+                            <!--First Icon Render Container-->
+                            <g id="about-icon-0" transform="translate(5 2) scale(0.8)"> </g>
+
+                            <!--First Text-->
+                            <text x="88" y="33" class="about-text">At the age of 15 David first came in touch with
+                                UX</text>
+                            <text x="88" y="50" class="about-text">Design and app development.</text>
+                        </g>
+                    </g>
+
+                    <!--Second Container-->
+                    <g transform="translate(0 730)">
+                        <!--Background-->
+                        <polyline id="about-second-item-background" class="about-box-background"
+                            points="250,0 0,0 0,97 250,97 500,97 500,0" />
+
+                        <!--Border-->
+                        <polyline class="about-box-line" points="250,0 0,0 0,97 250,97" />
+                        <polyline class="about-box-line" points="250,0 500,0 500,97 250,97" />
+
+                        <!--Second Content-->
+                        <g transform="translate(10 11)">
+
+                            <use class="about-icon" href="#about-icon-background" x="405"></use>
+
+                            <!--Second Icon Render Container-->
+                            <g id="about-icon-1" transform="translate(414 5) scale(0.8)"> </g>
+
+                            <!--Second Text-->
+                            <text x="5" y="33" class="about-text">During his 4 years of military service developing
+                                has</text>
+                            <text x="5" y="50" class="about-text">always been a passion of him.</text>
+                        </g>
+                    </g>
+
+                    <!--Third Container-->
+                    <g transform="translate(0 847)">
+                        <!--Background-->
+                        <polyline id="about-second-item-background" class="about-box-background"
+                            points="50,0 0,0 0,97 15,112 200,112 210,102 250,102 500,102 500,0" />
+
+                        <!--Border-->
+                        <polyline class="about-box-line" points="250,0 0,0 0,97 15,112 200,112 210,102 250,102" />
+                        <polyline class="about-box-line" points="250,0 500,0 500,102 250,102" />
+
+                        <!--Third Content-->
+                        <g transform="translate(10 10)">
+
+                            <use class="about-icon" href="#about-icon-background"></use>
+
+                            <!--Third Icon Render Container-->
+                            <g id="about-icon-2" transform="translate(5 5) scale(0.8)"> </g>
+
+                            <!--Third Text-->
+                            <text x="88" y="33" class="about-text">Now, after professional coaching, David is looking
+                                for</text>
+                            <text x="88" y="50" class="about-text">new challenges to work as a web developer.</text>
+                        </g>
+                    </g>
                 </svg>
             </div>
         </section>

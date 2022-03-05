@@ -9,8 +9,7 @@ export default class AboutTabbedContent {
         infoBackground: document.getElementById('about-info-background'),
         profilePictureMaskRect: document.getElementById('about-profile-picture-mask-rect'),
         profilePictureGradient: document.getElementById('about-profile-picture-gradient'),
-        headerSvg: document.getElementById('about-header-svg'),
-        infoSvg: document.getElementById('about-info-svg'),
+        skillsSvg: document.getElementById('skills-svg'),
     }
 
     animatedSpans = {
@@ -160,35 +159,37 @@ export default class AboutTabbedContent {
     }
 
     animateInfoBox() {
-        document.getElementById('about-header-svg').classList.remove('hide')
-
         // Lines
         this.fillLine(document.querySelectorAll('.about-box-line')[0], .25)
         this.fillLine(document.querySelectorAll('.about-box-line')[1], .25)
-        this.fillLine(document.querySelectorAll('.about-box-line')[2])
-        this.fillLine(document.querySelectorAll('.about-box-line')[3])
+        this.fillLine(document.querySelectorAll('.about-box-line')[2], .45)
+        this.fillLine(document.querySelectorAll('.about-box-line')[3], .45)
+
+        // Span Headers
+        gsap.fromTo(document.getElementById('about-header-name'), { opacity: 0 }, { opacity: 1, duration: .2, delay: .2 })
+        gsap.fromTo(document.getElementById('about-header-age'), { opacity: 0 }, { opacity: 1, duration: .2, delay: .35 })
+        gsap.fromTo(document.getElementById('about-header-from'), { opacity: 0 }, { opacity: 1, duration: .2, delay: .5 })
 
         // Spans
-        this.animateSpan(this.animatedSpans.infoDavid, .1)
-        this.animateSpan(this.animatedSpans.info23, .2)
-        this.animateSpan(this.animatedSpans.infoGermany, .3)
+        this.animateSpan(this.animatedSpans.infoDavid, 0.3)
+        this.animateSpan(this.animatedSpans.info23, 0.45)
+        this.animateSpan(this.animatedSpans.infoGermany, 0.6)
 
         // Backgrounds
-        gsap.fromTo(document.getElementById('about-header-background'), { opacity: 0 }, { opacity: 1, duration: 0.7, ease: Power2.easeIn })
+        gsap.fromTo(document.getElementById('about-header-background'), { opacity: 0 }, { opacity: 1, duration: 0.7, ease: Power2.easeIn, delay: .35 })
         gsap.fromTo(document.getElementById('about-profile-background'), { opacity: 0 }, { opacity: 1, duration: 0.7, ease: Power2.easeIn })
 
         // Profile Picture
         this.domElements.profilePictureMaskRect.classList.remove('no-transition')
-        this.domElements.profilePictureMaskRect.style.transform = 'translateY(-203px)'
+        this.domElements.profilePictureMaskRect.style.transform = 'translateY(-205px)'
 
         //Move gradient with Profile picture
         this.domElements.profilePictureGradient.classList.remove('no-transition')
-        this.domElements.profilePictureGradient.style.transform = 'translateY(-203px)'
+        this.domElements.profilePictureGradient.style.transform = 'translateY(-205px)'
     }
 
     fadeInHologramUI(delay) {
-        gsap.fromTo(this.domElements.headerSvg, { opacity: 0 }, { opacity: 1, delay: delay, duration: .15 })
-        gsap.fromTo(this.domElements.infoSvg, { opacity: 0 }, { opacity: 1, delay: delay, duration: .15 })
+        gsap.fromTo(this.domElements.skillsSvg, { opacity: 0 }, { opacity: 1, delay: delay, duration: .15 })
     }
 
     playHologramAnimation(delay = 0) {
@@ -230,7 +231,7 @@ export default class AboutTabbedContent {
     }
 
     // ------------------------ SVG ---------------------------------------------------------------------------------------------- 
-    fillLine(line, delay = .1) {
+    fillLine(line, delay = 0) {
         //check if line is rendered
         if (line.getClientRects().length != 0) {
             const lineLength = line.getTotalLength()
