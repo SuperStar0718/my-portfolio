@@ -15,7 +15,6 @@ export default class Scroll extends EventEmitter {
     domElements = {
         scrollContainer: document.getElementById('scroll-container'),
         logoWhiteBackground: document.getElementById('logo-white-background'),
-        aboutContainer: document.getElementById('about-content-container')
     }
 
     constructor() {
@@ -35,6 +34,15 @@ export default class Scroll extends EventEmitter {
         this.events = []
 
         this.initEventListener()
+        this.setAboutContainerDetails()
+        this.setLogoOverlayHeight()
+    }
+
+    setAboutContainerDetails() {
+        this.aboutContainer = {}
+        this.aboutContainer.dom = document.getElementById('about-section')
+        this.aboutContainer.offset = this.aboutContainer.dom.clientHeight - window.innerHeight
+        this.aboutContainer.height = this.aboutContainer.dom.clientHeight
     }
 
     addEvent(height, direction, task, unique) {
@@ -81,6 +89,7 @@ export default class Scroll extends EventEmitter {
                 }
             }
 
+            //update last wheel to prevent too slow scrolling down before opening landing page
             if (direction == -1) this.updateLastWheelUp()
 
             //Trigger Event Emitter
@@ -98,15 +107,24 @@ export default class Scroll extends EventEmitter {
     }
 
     performScroll() {
-        const scrollTo = this.preventFromScrollingBottom()
-        const scrollPercentage = scrollTo / (this.domElements.scrollContainer.clientHeight - window.innerHeight)
+        const contentScrollTo = this.preventFromScrollingBottom()
+
+        let scrollPercentage = 0
+        if (this.scrollY > this.aboutContainer.offset) {
+            scrollPercentage = (this.scrollY - this.aboutContainer.offset) / (this.domElements.scrollContainer.clientHeight - this.aboutContainer.height)
+        }
+
+        //cap scroll percentage
+        if (scrollPercentage < 0) scrollPercentage = 0
+        if (scrollPercentage > 1) scrollPercentage = 1
 
         //Scroll Container
-        gsap.to(this.domElements.scrollContainer, { y: -scrollTo, duration: this.parameters.scrollDuration })
+        gsap.to(this.domElements.scrollContainer, { y: -contentScrollTo, duration: this.parameters.scrollDuration })
 
-        if (true) {
+
+        if (scrollPercentage >= 0) {
             //Background Plane
-            gsap.to(this.background.material.uniforms.uOffset, { value: scrollTo / (window.innerHeight * 0.9), duration: this.parameters.scrollDuration })
+            gsap.to(this.background.material.uniforms.uOffset, { value: contentScrollTo * scrollPercentage / window.innerHeight, duration: this.parameters.scrollDuration })
 
             //Camera
             gsap.to(this.camera.instance.position, { y: -12.4 * scrollPercentage - 10, duration: this.parameters.scrollDuration })
@@ -115,7 +133,7 @@ export default class Scroll extends EventEmitter {
             gsap.to(this.fog, { near: (7 * scrollPercentage) + 12, far: (2.7 * scrollPercentage) + 16.3 })
 
             //Logo Background
-            gsap.to(this.domElements.logoWhiteBackground, { y: -scrollTo - window.innerHeight, duration: this.parameters.scrollDuration })
+            gsap.to(this.domElements.logoWhiteBackground, { y: - contentScrollTo - window.innerHeight, duration: this.parameters.scrollDuration })
         }
     }
 
@@ -130,8 +148,14 @@ export default class Scroll extends EventEmitter {
         this.lastWheelUp = this.time.current
     }
 
+    setLogoOverlayHeight() {
+        document.getElementById('logo-white-background').style.height = this.aboutContainer.height + (window.innerHeight * 0.07) + 'px'
+    }
+
     resize() {
         this.events = []
+        this.setAboutContainerDetails()
+        this.setLogoOverlayHeight()
         if (!this.landingPage.visible) this.performScroll()
     }
 }

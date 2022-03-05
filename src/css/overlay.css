@@ -32,7 +32,6 @@
 
 #logo-white-background {
     background: white;
-    height: 107vh;
     position: absolute;
     top: calc(100vh - 15px);
     width: 110%;
