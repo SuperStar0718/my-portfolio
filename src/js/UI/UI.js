@@ -11,6 +11,8 @@ import Header from './Header'
 import AboutIcons from './About/Icons'
 import Menu from './Menu'
 import ScrollIcon from './SrollIcon'
+import ScrollBar from './ScrollBar'
+import Sound from './Sound'
 
 export default class UI {
 
@@ -23,10 +25,12 @@ export default class UI {
         this.resources.on('ready', () => {
             // Setup
             this.transition = new Transition()
+            this.scrollIcon = new ScrollIcon('landing-scroll-icon', 'landing-scroll-wheel')
             this.landingPage = new LandingPage()
             this.scroll = new Scroll()
+            this.scrollbar = new ScrollBar()
             this.menu = new Menu()
-            this.scrollIcon = new ScrollIcon()
+            this.sound = new Sound()
 
             //About
             this.about = {}
@@ -54,5 +58,8 @@ export default class UI {
     resize() {
         if (this.scroll)
             this.scroll.resize()
+
+        if (this.scrollbar)
+            this.scrollbar.resize()
     }
 }

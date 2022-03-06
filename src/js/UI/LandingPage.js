@@ -27,6 +27,7 @@ export default class LandingPage extends EventEmitter {
         this.about = this.experience.ui.about
         this.character = this.experience.world.character
         this.waypoints = this.experience.waypoints
+        this.scrollIcon = this.experience.ui.scrollIcon
 
         this.gestures.on('scroll-down', () => this.hide())
     }
@@ -35,6 +36,7 @@ export default class LandingPage extends EventEmitter {
         if (this.visible && !this.isAnimating) {
             this.visible = false
             this.lockScrolling()
+            this.scrollIcon.hide()
 
             //Room Bounce
             gsap.fromTo(this.room.scale, { x: 1, y: 1, z: 1 }, { x: 0, y: 0, z: 0, duration: .5, ease: Back.easeIn.config(1.7) })

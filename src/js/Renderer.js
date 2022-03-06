@@ -52,7 +52,6 @@ export default class Renderer {
             frameBufferType: THREE.HalfFloatType,
 
         })
-        this.postProcess.composer.s
         this.postProcess.depthOfField = new DepthOfFieldEffect()
         this.postProcess.contrast = new BrightnessContrastEffect()
 

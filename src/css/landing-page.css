@@ -29,6 +29,7 @@
     width: 45%;
     max-width: 500px;
     max-height: 80%;
+    position: relative;
 }
 
 /**Subheader*/
@@ -45,9 +46,6 @@
     width: max-content;
 }
 
-#landing-cta-button:hover {
-    transform: none;
-}
 /**---------------------------------------------------------------Responsive-----------------------------------------------------*/
 /**Adapt to landscape mode*/
 @media  (max-aspect-ratio: 11/10){

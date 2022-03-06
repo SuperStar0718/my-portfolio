@@ -94,6 +94,7 @@ export default class Scroll extends EventEmitter {
 
             //Trigger Event Emitter
             this.trigger(direction == -1 ? 'wheel-up' : 'wheel-down')
+            this.trigger('scroll')
         }
     }
 
@@ -107,7 +108,7 @@ export default class Scroll extends EventEmitter {
     }
 
     performScroll() {
-        const contentScrollTo = this.preventFromScrollingBottom()
+        this.contentScrollTo = this.preventFromScrollingBottom()
 
         let scrollPercentage = 0
         if (this.scrollY > this.aboutContainer.offset) {
@@ -119,12 +120,12 @@ export default class Scroll extends EventEmitter {
         if (scrollPercentage > 1) scrollPercentage = 1
 
         //Scroll Container
-        gsap.to(this.domElements.scrollContainer, { y: -contentScrollTo, duration: this.parameters.scrollDuration })
+        gsap.to(this.domElements.scrollContainer, { y: -this.contentScrollTo, duration: this.parameters.scrollDuration })
 
 
         if (scrollPercentage >= 0) {
             //Background Plane
-            gsap.to(this.background.material.uniforms.uOffset, { value: contentScrollTo * scrollPercentage / window.innerHeight, duration: this.parameters.scrollDuration })
+            gsap.to(this.background.material.uniforms.uOffset, { value: this.contentScrollTo * scrollPercentage / window.innerHeight, duration: this.parameters.scrollDuration })
 
             //Camera
             gsap.to(this.camera.instance.position, { y: -12.4 * scrollPercentage - 10, duration: this.parameters.scrollDuration })
@@ -133,7 +134,7 @@ export default class Scroll extends EventEmitter {
             gsap.to(this.fog, { near: (7 * scrollPercentage) + 12, far: (2.7 * scrollPercentage) + 16.3 })
 
             //Logo Background
-            gsap.to(this.domElements.logoWhiteBackground, { y: - contentScrollTo - window.innerHeight, duration: this.parameters.scrollDuration })
+            gsap.to(this.domElements.logoWhiteBackground, { y: - this.contentScrollTo - window.innerHeight, duration: this.parameters.scrollDuration })
         }
     }
 

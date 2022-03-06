@@ -1,7 +1,7 @@
 #about-section {
     color: white;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     font-family: 'Electrolize', sans-serif;
     color: #34bfff;
     min-height: 100vh;
@@ -16,7 +16,7 @@
 }
 
 #skills-svg {
-    margin-top: 15vh;
+    margin-top: 12vh;
     width: 100%;
 }
 
@@ -31,12 +31,6 @@
 .about-box-background {
     stroke-width: 0;
     fill: url('#about-background-gradient');
-}
-
-.about-heading {
-    font-weight: bold;
-    font-size: 19px;
-    fill: #34bfff
 }
 
 .about-text {
@@ -99,7 +93,7 @@
 /**Bar*/
 .about-skill-bar-container {
     width: 100%;
-    height: 14px;
+    height: 12px;
     background: #00b7ff33 !important;
     overflow: auto;
 }

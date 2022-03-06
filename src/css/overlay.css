@@ -56,9 +56,15 @@
 /**Sound button*/
 #sound-button {
     right: 62px;
+    transition: 125ms;
     background: #a7adb8;
 }
 
+#header-sound-svg {
+    height: 50px;
+    width: 50px;
+    transform: translateX(12px) scale(1.2);
+}
 /**Menu Button*/
 #menu-button {
     right: 0;

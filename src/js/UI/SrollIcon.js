@@ -2,22 +2,20 @@ import { gsap, Power3 } from 'gsap'
 
 export default class ScrollIcon {
 
-    domElements = {
-        container: document.getElementById('landing-scroll-icon'),
-        wheel: document.getElementById('landing-scroll-wheel')
-    }
+    constructor(containerId, wheelId) {
+        this.container = document.getElementById(containerId)
+        this.wheel = document.getElementById(wheelId)
 
-    constructor() {
         this.startAnimation()
     }
 
     startAnimation() {
-        gsap.fromTo(this.domElements.wheel, { y: 0 }, { y: 5, duration: 1, ease: Power3.easeIn, repeat: -1, yoyo: true })
+        gsap.fromTo(this.wheel, { y: 0 }, { y: 5, duration: 1, ease: Power3.easeIn, repeat: -1, yoyo: true })
     }
 
     hide() {
-        gsap.to(this.domElements.container, { opacity: 0, duration: .3 })
+        gsap.to(this.container, { opacity: 0, duration: .3 })
 
-        setTimeout(() => gsap.killTweensOf(this.domElements.wheel), 300)
+        setTimeout(() => gsap.killTweensOf(this.wheel), 300)
     }
 }

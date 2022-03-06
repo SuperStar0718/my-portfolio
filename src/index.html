@@ -46,11 +46,18 @@
             <!--Sound Button-->
             <div id="sound-button-scale-container">
                 <div id="sound-button" class="center overlay-button">
-                    <svg id="header-logo-svg" viewBox="0 0 6 9" xmlns="http://www.w3.org/2000/svg" height="30"
-                        width="30">
-                        <path fill="white"
-                            d="M0 4C0 4 0 3 1 3L2 3 3 2C5 0 5 1 5 2L5 7C5 8 5 9 3 7L2 6 1 6C0 6 0 5 0 5L0 4">
-                        </path>
+                    <svg id="header-sound-svg" viewBox="0 0 18 9" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="white">
+                            <path id="sound-body-path"
+                                d="M 0 4 C 0 4 0 3 1 3 L 2 3 L 3 2 C 5 0 5 1 5 2 L 5 7 C 5 8 5 9 3 7 L 2 6 L 1 6 C 0 6 0 5 0 5 L 0 4">
+                            </path>
+                            <path id="sound-volume-0-path"
+                                d="M 7 4 C 8 4 8 5 7 5 C 6 5 6 6 7 6 C 9 6 9 3 7 3 C 6 3 6 4 7 4">
+                            </path>
+                            <path id="sound-volume-1-path"
+                                d="M 7 2 C 10 2 10 7 7 7 C 6 7 6 8 7 8 C 11 8 11 1 7 1 C 6 1 6 2 7 2">
+                            </path>
+                        </g>
                     </svg>
                 </div>
             </div>
@@ -115,8 +122,8 @@
     <div id="landing-page" class="content-container landing-slow-transition">
         <section id="landing-page-section" class="content-width slide-out-left-transition">
             <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
-                <foreignObject x="0" y="0" width="500" height="300" requiredExtensions="http://www.w3.org/1999/xhtml">
-                    <div class="column" style="margin-left: 2px">
+                <foreignObject x="0" y="0" width="550" height="300" requiredExtensions="http://www.w3.org/1999/xhtml">
+                    <div class="column" style="margin-left: 10px">
                         <!--Hi, my name is...-->
                         <h1 id="landing-headline">
                             <span>Hi, my</span>
@@ -139,11 +146,13 @@
 
     <!--Scroll Container-->
     <div id="scroll-container" class="landing-slow-transition center column">
+        <div id="scroll-bar"></div>
+
         <!--About Container-->
         <section id="about-section" class="content-width">
             <div id="about-content-container">
                 <!--Header Container SVG-->
-                <svg id="skills-svg" viewBox="-2 -2 506 1000" xmlns="http://www.w3.org/2000/svg"
+                <svg id="skills-svg" viewBox="-2 -2 506 800" xmlns="http://www.w3.org/2000/svg"
                     preserveAspectRatio="xMinYMid">
 
                     <defs>
@@ -171,20 +180,19 @@
                     <g>
                         <!--Profile Picture Background-->
                         <polyline id="about-profile-background" class="about-box-background"
-                            points="70,0 130,0 145,15 145,150 130,165 80,165 75,170 65,170, 15,170, 0,155 0,15 15,0" />
+                            points="65,170 15,170 0,155 0,15 15,0 70,0 130,0 145,15 145,170" />
 
 
                         <!--Header Content Background-->
                         <polyline id="about-header-background" class="about-box-background"
-                            points="145,75 205,75 215,85 485,85 500,100 500,125 500,145 145,145" />
+                            points="145,100 205,100 215,110 485,110 500,125 500,150 500,170 145,170" />
 
                         <!--Profile Picture Mask-->
                         <mask id="about-profil-picture-mask">
                             <!--Black Background-->
                             <rect fill="black" x="0" y="0" width="145" height="170" />
                             <!--White Background-->
-                            <polyline fill="white"
-                                points="70,0 130,0 145,15 145,150 130,165 80,165 75,170 65,170, 15,170, 0,155 0,15 15,0">
+                            <polyline fill="white" points="65,170 15,170 0,155 0,15 15,0 70,0 130,0 145,15 145,170">
                             </polyline>
                             <!--Rect to make white background visible-->
                             <rect id="about-profile-picture-mask-rect" fill="black" width="145" height="170"
@@ -203,15 +211,14 @@
 
                         <!--Profile Picture Borders-->
                         <polyline class="about-box-line" points="65,170 15,170 0,155 0,15 15,0 70,0" />
-                        <polyline class="about-box-line"
-                            points="65,170 75,170 80,165 130,165 145,150 145,15 130,0 70,0" />
+                        <polyline class="about-box-line" points="65,170 145,170 145,15 130,0 70,0" />
 
                         <!--Header Content Borders-->
-                        <polyline class="about-box-line" points="145,75 205,75 215,85 485,85 500,100 500,125" />
-                        <polyline class="about-box-line" points="145,145 500,145 500,125" />
+                        <polyline class="about-box-line" points="145,100 205,100 215,110 485,110 500,125 500,150" />
+                        <polyline class="about-box-line" points="145,170 500,170 500,150" />
 
                         <!--Header Content-->
-                        <g transform="translate(170 107)" fill="#34bfff" font-weight="bold">
+                        <g transform="translate(170 133)" fill="#34bfff" font-weight="bold">
                             <text x="0" y="0" font-size="12" id="about-header-name">Name :</text>
                             <text x="0" y="20" font-size="18" id="about-header-david">David</text>
                             <text x="110" y="0" font-size="12" id="about-header-age">Age :</text>
@@ -222,8 +229,8 @@
                     </g>
 
                     <!--Skills -->
-                    <g transform="translate(0 -10)">
-                        <foreignObject x="0" y="210" width="506" height="340" transform="translate(0 47)">
+                    <g transform="translate(0 -20)">
+                        <foreignObject x="0" y="202" width="506" height="340" transform="translate(0 47)">
                             <!--Skills Content-->
                             <div id="about-skills-container" class="about-container">
                                 <!--Main Render Container-->
@@ -235,49 +242,49 @@
 
                         <!--Background-->
                         <polyline id="about-header-background" class="about-box-background"
-                            points="250,210 475,210 490,225 490,255 500,265 500,520 250,520 210,520 200,530 15,530 0,515 0,210" />
+                            points="50,210 500,210 500,265 500,410 250,410 0,410 0,210" />
 
                         <!--Lines-->
-                        <polyline class="about-box-line"
-                            points="250,210 475,210 490,225 490,255 500,265 500,520 250,520" />
-                        <polyline class="about-box-line" points="250,210 0,210 0,515 15,530 200,530 210,520 250,520" />
+                        <polyline class="about-box-line" points="250,210 500,210 500,265 500,410 250,410" />
+                        <polyline class="about-box-line" points="250,210 0,210 0,410 250,410" />
 
                         <!--Header Mask-->
                         <mask id="skills-header-mask">
                             <polyline fill="white" points="0,210 0,245 140,245 150,210"></polyline>
-                            <text x="20" y="234" font-size="19" font-weight="bold">SKILLS</text>
-                            <rect fill="white" x="0" y="210" width="480" height="5"></rect>
+                            <text x="20" y="234" font-size="18" font-weight="bold">SKILLS</text>
+                            <rect fill="white" x="0" y="210" width="500" height="6"></rect>
                         </mask>
 
                         <!--Header Box-->
-                        <rect x="0" y="210" height="40" width="478" fill="#00b7ff" mask="url(#skills-header-mask)">
+                        <rect x="0" y="210" height="38" width="500" fill="#00b7ff" mask="url(#skills-header-mask)">
                         </rect>
                     </g>
 
                     <!--About-->
-                    <!--First Container-->
-                    <g transform="translate(0 580)">
-                        <!--Background-->
-                        <polyline id="about-first-item-background" class="about-box-background"
-                            points="250,0 475,0 490,15 490,45 500,55 500,130 250,130 0,130 0,0" />
+                    <g transform="translate(0 201)">
 
-                        <!--Border-->
-                        <polyline class="about-box-line" points="250,0 0,0 0,130 250,130" />
-                        <polyline class="about-box-line" points="250,0 475,0 490,15 490,45 500,55 500,130 250,130" />
+                        <!--Background-->
+                        <polyline id="about-header-background" class="about-box-background"
+                            points="250,210 0,210 0,495 15,510 200,510 210,500 250,500 500,500 500,210" />
+
+                        <!--Lines-->
+                        <polyline id="test-line" stroke-dashoffset="10" class="about-box-line"
+                            points="250,210 500,210 500,500 250,500" />
+                        <polyline class="about-box-line" points="250,210 0,210 0,495 15,510 200,510 210,500 250,500" />
 
                         <!--Header Mask-->
                         <mask id="about-header-mask">
-                            <polyline fill="white" points="0,0 0,35 140,35 150,0"></polyline>
-                            <rect fill="white" x="0" y="0" width="480" height="5"></rect>
-                            <text x="20" y="24" font-size="19" font-weight="bold">ABOUT</text>
+                            <polyline fill="white" points="0,210 0,245 140,245 150,210"></polyline>
+                            <text x="20" y="234" font-size="18" font-weight="bold">ABOUT</text>
+                            <rect fill="white" x="0" y="210" width="500" height="6"></rect>
                         </mask>
 
                         <!--Header Box-->
-                        <rect x="0" y="1" height="40" width="478" fill="#00b7ff" mask="url(#about-header-mask)">
+                        <rect x="0" y="210" height="38" width="500" fill="#00b7ff" mask="url(#about-header-mask)">
                         </rect>
 
                         <!--First Content-->
-                        <g transform="translate(10 45)">
+                        <g transform="translate(10 255)">
 
                             <use class="about-icon" href="#about-icon-background"></use>
 
@@ -289,20 +296,9 @@
                                 UX</text>
                             <text x="88" y="50" class="about-text">Design and app development.</text>
                         </g>
-                    </g>
-
-                    <!--Second Container-->
-                    <g transform="translate(0 730)">
-                        <!--Background-->
-                        <polyline id="about-second-item-background" class="about-box-background"
-                            points="250,0 0,0 0,97 250,97 500,97 500,0" />
-
-                        <!--Border-->
-                        <polyline class="about-box-line" points="250,0 0,0 0,97 250,97" />
-                        <polyline class="about-box-line" points="250,0 500,0 500,97 250,97" />
 
                         <!--Second Content-->
-                        <g transform="translate(10 11)">
+                        <g transform="translate(10 335)">
 
                             <use class="about-icon" href="#about-icon-background" x="405"></use>
 
@@ -314,20 +310,9 @@
                                 has</text>
                             <text x="5" y="50" class="about-text">always been a passion of him.</text>
                         </g>
-                    </g>
-
-                    <!--Third Container-->
-                    <g transform="translate(0 847)">
-                        <!--Background-->
-                        <polyline id="about-second-item-background" class="about-box-background"
-                            points="50,0 0,0 0,97 15,112 200,112 210,102 250,102 500,102 500,0" />
-
-                        <!--Border-->
-                        <polyline class="about-box-line" points="250,0 0,0 0,97 15,112 200,112 210,102 250,102" />
-                        <polyline class="about-box-line" points="250,0 500,0 500,102 250,102" />
 
                         <!--Third Content-->
-                        <g transform="translate(10 10)">
+                        <g transform="translate(10 415)">
 
                             <use class="about-icon" href="#about-icon-background"></use>
 

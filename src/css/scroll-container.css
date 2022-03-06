@@ -5,3 +5,16 @@
     left: 0;
     right: 0;
 }
+
+#scroll-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 500px;
+    background: #FF923E;
+    background: #00b7ff;
+    border-radius: 5px;
+    z-index: 2;
+    display: none;
+}

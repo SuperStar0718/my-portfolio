@@ -21,10 +21,6 @@ export default class HoverIcon {
             class: '.small-button',
             background: '#FF923E'
         },
-        {
-            class: '#landing-cta-button',
-            background: '#FF923E'
-        },
     ]
 
     constructor() {

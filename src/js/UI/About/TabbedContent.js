@@ -34,8 +34,9 @@ export default class AboutTabbedContent {
         this.icons = this.experience.ui.about.icons
 
         //this.addScrollEvents()
-        //this.addTabEventListeners()
+        //this.addTabEventListeners(
     }
+
 
     // ------------------------ Tabbed Content ---------------------------------------------------------------------------------------------- 
     tabs = [

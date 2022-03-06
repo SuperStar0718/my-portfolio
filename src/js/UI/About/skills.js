@@ -24,14 +24,4 @@ export default [
         width: '85%',
         category: 'main',
     },
-    {
-        name: 'Design Thinking',
-        width: '75%',
-        category: 'others',
-    },
-    {
-        name: '3D Modelling',
-        width: '45%',
-        category: 'others',
-    },
 ]
