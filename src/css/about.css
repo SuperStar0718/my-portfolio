@@ -10,7 +10,7 @@
 /**---------------------------------------------------------------Content-----------------------------------------------------*/
 #about-content-container {
     width: 550px;
-    max-width: 45%;
+    max-width: 50%;
     display: flex;
     flex-direction: column;
 }

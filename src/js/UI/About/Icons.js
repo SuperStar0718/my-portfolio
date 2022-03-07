@@ -24,6 +24,7 @@ export default class AboutIcons {
             ]
         },
         {
+            //Heart Icon
             domElement: 'about-icon-1',
             pixels: [
                 '4 3', '5 3', '6 3', '11 3', '12 3', '13 3',
@@ -44,6 +45,7 @@ export default class AboutIcons {
             ]
         },
         {
+            //Rocket Icon
             domElement: 'about-icon-2',
             pixels: [
                 '14 1', '15 1', '16 1', '17 1', '18 1',

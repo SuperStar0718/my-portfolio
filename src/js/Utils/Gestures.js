@@ -18,12 +18,12 @@ export default class Gestures extends EventEmitter {
         // event listeners 
         document.addEventListener('touchstart', this.touchStart)
         document.addEventListener('touchend', this.touchEnd)
-
         document.addEventListener('mousewheel', this.mousewheelOrKey)
         document.addEventListener('wheel', this.mousewheelOrKey)
         window.addEventListener('keyup', this.mousewheelOrKey)
     }
 
+    //Current Hover Element
     defineCurrentHoverElement() {
         window.addEventListener('mouseover', () => {
             if (event.path) {
@@ -32,14 +32,18 @@ export default class Gestures extends EventEmitter {
         })
     }
 
+    //scroll down and up
     mousewheelOrKey() {
         if (event.deltaY > 0 || event.keyCode == 40) {
+            this.trigger('scroll')
             this.trigger('scroll-down')
         } else if (event.deltaY < 0 || event.keyCode == 38) {
+            this.trigger('scroll')
             this.trigger('scroll-up')
         }
     }
 
+    //Touch
     touchStart() {
         this.mTouchStartY = event.changedTouches[0].clientY
         this.mTouchEndY = 0

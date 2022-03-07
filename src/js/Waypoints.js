@@ -18,7 +18,17 @@ export default class Waypoints {
             name: 'scroll-start',
             position: {x: 5.8, y: -10, z: 8.3},
             lookAt: {x: -2.7, y: -13.7, z: 0},
-        }
+        },
+        {
+            name: 'lab-menu',
+            position: {x: -6, y: -10, z: 9.3},
+            lookAt: {x: .5, y: -13.7, z: 0},
+        },
+        {
+            name: 'contact-menu',
+            position: {x: 3, y: -22.4, z: 8.3},
+            lookAt: {x: 2, y: -26.1, z: 0},
+        },
     ]
 
     constructor() {

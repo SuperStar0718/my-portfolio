@@ -33,12 +33,12 @@ export default class Background {
         this.colors.bottomRight.instance = new THREE.Color(this.colors.bottomRight.value)
 
         // Geometry
-        this.geometry = new THREE.PlaneGeometry(2, 2.1, 1, 1)
+        this.geometry = new THREE.PlaneGeometry(2, 2.3, 1, 1)
 
         // Material
         this.material = new THREE.ShaderMaterial({
             uniforms: {
-                uOffset: { value: -2.1 }
+                uOffset: { value: -2.3 }
             },
             vertexColors: true,
             depthWrite: false,

@@ -145,7 +145,7 @@
     </div>
 
     <!--Scroll Container-->
-    <div id="scroll-container" class="landing-slow-transition center column">
+    <div id="scroll-container" class="center column">
         <div id="scroll-bar"></div>
 
         <!--About Container-->
@@ -177,7 +177,7 @@
                     </defs>
 
                     <!--Header-->
-                    <g>
+                    <g id="about-svg-header">
                         <!--Profile Picture Background-->
                         <polyline id="about-profile-background" class="about-box-background"
                             points="65,170 15,170 0,155 0,15 15,0 70,0 130,0 145,15 145,170" />
@@ -229,7 +229,7 @@
                     </g>
 
                     <!--Skills -->
-                    <g transform="translate(0 -20)">
+                    <g transform="translate(0 -20)" id="about-svg-skills">
                         <foreignObject x="0" y="202" width="506" height="340" transform="translate(0 47)">
                             <!--Skills Content-->
                             <div id="about-skills-container" class="about-container">
@@ -241,7 +241,7 @@
                         </foreignObject>
 
                         <!--Background-->
-                        <polyline id="about-header-background" class="about-box-background"
+                        <polyline id="about-skills-background" class="about-box-background"
                             points="50,210 500,210 500,265 500,410 250,410 0,410 0,210" />
 
                         <!--Lines-->
@@ -256,15 +256,15 @@
                         </mask>
 
                         <!--Header Box-->
-                        <rect x="0" y="210" height="38" width="500" fill="#00b7ff" mask="url(#skills-header-mask)">
+                        <rect id="skills-header-rect" x="0" y="210" height="38" width="500" fill="#00b7ff" mask="url(#skills-header-mask)">
                         </rect>
                     </g>
 
                     <!--About-->
-                    <g transform="translate(0 201)">
+                    <g transform="translate(0 201)" id="about-svg-about">
 
                         <!--Background-->
-                        <polyline id="about-header-background" class="about-box-background"
+                        <polyline id="about-about-background" class="about-box-background"
                             points="250,210 0,210 0,495 15,510 200,510 210,500 250,500 500,500 500,210" />
 
                         <!--Lines-->
@@ -280,7 +280,7 @@
                         </mask>
 
                         <!--Header Box-->
-                        <rect x="0" y="210" height="38" width="500" fill="#00b7ff" mask="url(#about-header-mask)">
+                        <rect id="about-header-rect" x="0" y="210" height="38" width="500" fill="#00b7ff" mask="url(#about-header-mask)">
                         </rect>
 
                         <!--First Content-->

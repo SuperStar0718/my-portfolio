@@ -6,7 +6,7 @@ export default [
     },
     {
         name: 'JavaScript',
-        width: '80%',
+        width: '85%',
         category: 'main',
     },
     {

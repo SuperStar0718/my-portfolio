@@ -33,7 +33,7 @@ export default class LandingPage extends EventEmitter {
     }
 
     hide() {
-        if (this.visible && !this.isAnimating) {
+        if (this.visible && !this.isAnimating && !this.experience.ui.menu.visible && !this.experience.ui.menu.isAnimating) {
             this.visible = false
             this.lockScrolling()
             this.scrollIcon.hide()
@@ -66,7 +66,7 @@ export default class LandingPage extends EventEmitter {
                 setTimeout(() => this.renderer.instance.setClearColor('#EFE7DC'), 700)
 
                 //About hologram animation
-                this.experience.ui.about.tabbedContent.playHologramAnimation(.35)
+                this.experience.ui.about.animations.playHologramAnimation(.35)
 
                 // Character Animation
                 this.character.animation.play('fallDown', .3)
@@ -86,6 +86,9 @@ export default class LandingPage extends EventEmitter {
                     this.character.animation.play('waterIdle', .5)
                 }, 500)
 
+                //Hide bubbles
+                this.experience.world.lab.bubbles.hideAllBubbles()
+
                 //spawn bubbles
                 setTimeout(() => {
                     const totalBubbles = 12
@@ -93,8 +96,6 @@ export default class LandingPage extends EventEmitter {
                         this.experience.world.lab.bubbles.spawnBubble(Math.random() * 1.8 + 1.2, 'back')
                     }
                 }, 50)
-
-                this.experience.world.lab.bubbles.hideAllBubbles()
 
                 //Start wireframe material switch
                 this.character.checkForWireframe = 'down'
@@ -125,7 +126,7 @@ export default class LandingPage extends EventEmitter {
             this.waypoints.moveToWaypoint('landing-page', true, this.scrollAnimationDuration)
 
             //Background
-            gsap.to(this.background.material.uniforms.uOffset, { value: -2.1, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
+            gsap.to(this.background.material.uniforms.uOffset, { value: -2.3, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
 
             //Logo
             gsap.to(this.domElements.logoWhiteBackground, { y: 0, ease: Power2.easeInOut, duration: this.scrollAnimationDuration })
@@ -168,6 +169,6 @@ export default class LandingPage extends EventEmitter {
     lockScrolling() {
         //Deactivate to prevent too fast scrolling
         this.isAnimating = true
-        setTimeout(() => this.isAnimating = false, this.scrollAnimationDuration * 1000 + 100)
+        setTimeout(() => this.isAnimating = false, this.scrollAnimationDuration * 1000 + 200)
     }
 }

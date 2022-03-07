@@ -1,8 +1,7 @@
 import Experience from '../Experience'
 import { gsap } from 'gsap'
-import EventEmitter from '../Utils/EventEmitter'
 
-export default class Scroll extends EventEmitter {
+export default class Scroll {
 
     parameters = {
         scrollStrength: 140,
@@ -18,8 +17,6 @@ export default class Scroll extends EventEmitter {
     }
 
     constructor() {
-        super()
-
         this.experience = new Experience()
         this.camera = this.experience.camera
         this.sizes = this.experience.sizes
@@ -27,15 +24,20 @@ export default class Scroll extends EventEmitter {
         this.time = this.experience.time
         this.background = this.experience.world.background
         this.fog = this.experience.world.fog
+        this.gestures = this.experience.gestures
 
         //Hide scroll container
         this.domElements.scrollContainer.style.top = '100%'
+        setTimeout(() => this.domElements.scrollContainer.classList.add('scroll-container-transitions'))
 
         this.events = []
 
-        this.initEventListener()
         this.setAboutContainerDetails()
         this.setLogoOverlayHeight()
+
+        //Scroll
+        this.gestures.on('scroll-down', () => this.scroll(1))
+        this.gestures.on('scroll-up', () => this.scroll(-1))
     }
 
     setAboutContainerDetails() {
@@ -51,7 +53,7 @@ export default class Scroll extends EventEmitter {
         const index = this.events.length - 1
 
         //wheel event listeners
-        this.on('wheel-' + direction, () => {
+        this.gestures.o('scroll-' + direction, () => {
             if ((direction === 'up' ? height >= this.scrollY : height <= this.scrollY) && !this.events[index].played) {
                 //execute
                 this.events[index].task()
@@ -62,22 +64,17 @@ export default class Scroll extends EventEmitter {
         })
 
         //check if unique -> listen to opposite direction to make event playable again
-        if (!unique) this.on('wheel-' + (direction === 'up' ? 'down' : 'up'), () => {
+        if (!unique) this.gestures.on('scroll-' + (direction === 'up' ? 'down' : 'up'), () => {
             if ((direction === 'up' ? height < this.scrollY : height > this.scrollY) && this.events[index].played) {
                 this.events[index].played = false
             }
         })
     }
 
-    initEventListener() {
-        window.addEventListener('wheel', () => {
-            this.scroll(Math.sign(event.deltaY))
-        })
-    }
-
     scroll(direction) {
-        if (!this.landingPage.isAnimating && !this.landingPage.visible) {
+        if (!this.landingPage.isAnimating && !this.landingPage.visible && !this.experience.ui.menu.visible && !this.experience.ui.menu.isAnimating) {
             if (direction == -1 && this.scrollY <= 0) {
+                //Open landing page
                 this.checkLandingPageOpening()
             } else if (this.scrollY != 0 || direction == 1) {
                 //check if scroll is possible
@@ -91,15 +88,14 @@ export default class Scroll extends EventEmitter {
 
             //update last wheel to prevent too slow scrolling down before opening landing page
             if (direction == -1) this.updateLastWheelUp()
-
-            //Trigger Event Emitter
-            this.trigger(direction == -1 ? 'wheel-up' : 'wheel-down')
-            this.trigger('scroll')
         }
     }
 
     preventFromScrollingBottom() {
-        //set scrollTo to maximum bottom
+         /**
+          * Set scroll maximum at bottom
+          *  return original scrollY if not required
+         **/
         if (this.scrollY >= this.domElements.scrollContainer.clientHeight - window.innerHeight) {
             return this.domElements.scrollContainer.clientHeight - window.innerHeight
         } else {
@@ -125,7 +121,7 @@ export default class Scroll extends EventEmitter {
 
         if (scrollPercentage >= 0) {
             //Background Plane
-            gsap.to(this.background.material.uniforms.uOffset, { value: this.contentScrollTo * scrollPercentage / window.innerHeight, duration: this.parameters.scrollDuration })
+            gsap.to(this.background.material.uniforms.uOffset, { value: 2.3 * scrollPercentage, duration: this.parameters.scrollDuration })
 
             //Camera
             gsap.to(this.camera.instance.position, { y: -12.4 * scrollPercentage - 10, duration: this.parameters.scrollDuration })
@@ -149,12 +145,15 @@ export default class Scroll extends EventEmitter {
         this.lastWheelUp = this.time.current
     }
 
+    //Re-position logo white background
     setLogoOverlayHeight() {
-        document.getElementById('logo-white-background').style.height = this.aboutContainer.height + (window.innerHeight * 0.07) + 'px'
+        document.getElementById('logo-white-background').style.height = this.aboutContainer.height + (window.innerHeight * 0.12) + 'px'
     }
 
     resize() {
+        //Clear events and reinitialize
         this.events = []
+        
         this.setAboutContainerDetails()
         this.setLogoOverlayHeight()
         if (!this.landingPage.visible) this.performScroll()

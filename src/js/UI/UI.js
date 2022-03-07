@@ -5,7 +5,6 @@ import Transition from './Transition'
 import WorkCards from './Work/Cards'
 import WorkRender from './Work/Render'
 import SkillsRender from './About/Render'
-import AboutTabbedContent from './About/TabbedContent'
 import HoverIcon from './HoverIcon'
 import Header from './Header'
 import AboutIcons from './About/Icons'
@@ -13,6 +12,7 @@ import Menu from './Menu'
 import ScrollIcon from './SrollIcon'
 import ScrollBar from './ScrollBar'
 import Sound from './Sound'
+import AboutAnimations from './About/Animations'
 
 export default class UI {
 
@@ -28,7 +28,7 @@ export default class UI {
             this.scrollIcon = new ScrollIcon('landing-scroll-icon', 'landing-scroll-wheel')
             this.landingPage = new LandingPage()
             this.scroll = new Scroll()
-            this.scrollbar = new ScrollBar()
+            //this.scrollbar = new ScrollBar()
             this.menu = new Menu()
             this.sound = new Sound()
 
@@ -36,7 +36,7 @@ export default class UI {
             this.about = {}
             this.about.render = new SkillsRender()
             this.about.icons = new AboutIcons()
-            this.about.tabbedContent = new AboutTabbedContent()
+            this.about.animations = new AboutAnimations()
 
             //Work
             this.work = {}
@@ -61,5 +61,8 @@ export default class UI {
 
         if (this.scrollbar)
             this.scrollbar.resize()
+
+        if(this.menu) 
+            this.menu.resize()
     }
 }

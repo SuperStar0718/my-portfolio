@@ -1,5 +1,4 @@
 import Experience from '../Experience'
-import { gsap, Back } from 'gsap'
 
 export default class Header {
 
@@ -11,10 +10,13 @@ export default class Header {
 
     constructor() {
         this.experience = new Experience()
-        this.scroll = this.experience.ui.scroll
+        this.landingPage = this.experience.ui.landingPage
+        this.menu = this.experience.ui.menu
+        this.gestures = this.experience.gestures
 
-        this.scroll.on('wheel-up', () => this.show())
-        this.scroll.on('wheel-down', () => this.hide())
+        //Trigger Events
+        this.gestures.on('scroll-up', () => this.show())
+        this.gestures.on('scroll-down', () => this.hide())
     }
 
     show() {
@@ -26,7 +28,7 @@ export default class Header {
     }
 
     hide() {
-        if (this.visible) {
+        if (this.visible && !this.landingPage.isAnimating && !this.menu.isAnimating) {
             this.visible = false
 
             this.domElements.header.style.top = '-100px'
