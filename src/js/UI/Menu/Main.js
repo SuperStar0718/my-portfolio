@@ -1,7 +1,7 @@
-import Experience from '../Experience'
+import Experience from '../../Experience'
 import { gsap, Power2 } from 'gsap'
 
-export default class Menu {
+export default class MenuMain {
 
     visible = false
     initials = {}

@@ -1,23 +1,42 @@
 #transition-container {
-    top: -50vh;
-    left: 0;
     position: absolute;
     z-index: 998;
-    height: 200vh;
-    width: 130vw;
-    background: #FF923E;
+    width:200vw;
+    bottom: -40%;
+    transform: rotate(15deg);
+    left: -40%;
+}
+
+#transition-wave-svg{
+    transform: translateY(20px);
 }
 
 .hideTransition {
-    animation: hideTransition ease-in .7s;
+    animation: hideTransition cubic-bezier(0.550, 0.055, 0.675, 0.190) .8s;
     animation-fill-mode: forwards; 
 }
 
 @keyframes hideTransition {
-    0% {left: 0; transform: rotate(-15deg);}
-    100% {left: 135vw; transform: rotate(8deg);}
+    0% {bottom: -40%; left: -40%; }
+    100% {bottom: -200%; left: -60%; }
 }
 
+.showTransition {
+    animation: showTransition cubic-bezier(0.550, 0.055, 0.675, 0.190) .8s;
+    animation-fill-mode: forwards; 
+}
+
+@keyframes showTransition {
+    0% {bottom: -200%; left: -60%; }
+    100% {bottom: -40%; left: -40%; }
+}
+
+#transition-push {
+    height: 150vh;
+    background: #FF923E;
+}
+
+/**----------------------------------- LOGO --------------------------------*/
 #loadig-animation-container {
     height: 130px;
     width: 130px;

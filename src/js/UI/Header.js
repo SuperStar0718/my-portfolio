@@ -11,7 +11,7 @@ export default class Header {
     constructor() {
         this.experience = new Experience()
         this.landingPage = this.experience.ui.landingPage
-        this.menu = this.experience.ui.menu
+        this.menu = this.experience.ui.menu.main
         this.gestures = this.experience.gestures
 
         //Trigger Events

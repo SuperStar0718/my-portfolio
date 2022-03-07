@@ -8,11 +8,12 @@ import SkillsRender from './About/Render'
 import HoverIcon from './HoverIcon'
 import Header from './Header'
 import AboutIcons from './About/Icons'
-import Menu from './Menu'
+import MenuMain from './Menu/Main'
 import ScrollIcon from './SrollIcon'
 import ScrollBar from './ScrollBar'
 import Sound from './Sound'
 import AboutAnimations from './About/Animations'
+import MenuItems from './Menu/Items'
 
 export default class UI {
 
@@ -29,8 +30,12 @@ export default class UI {
             this.landingPage = new LandingPage()
             this.scroll = new Scroll()
             //this.scrollbar = new ScrollBar()
-            this.menu = new Menu()
             this.sound = new Sound()
+
+            //Menu 
+            this.menu = {}
+            this.menu.main = new MenuMain()
+            this.menu.items = new MenuItems()
 
             //About
             this.about = {}
@@ -62,7 +67,7 @@ export default class UI {
         if (this.scrollbar)
             this.scrollbar.resize()
 
-        if(this.menu) 
-            this.menu.resize()
+        if (this.menu) if(this.menu.main)
+            this.menu.main.resize()
     }
 }

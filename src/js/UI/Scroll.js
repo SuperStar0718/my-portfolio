@@ -72,7 +72,7 @@ export default class Scroll {
     }
 
     scroll(direction) {
-        if (!this.landingPage.isAnimating && !this.landingPage.visible && !this.experience.ui.menu.visible && !this.experience.ui.menu.isAnimating) {
+        if (!this.landingPage.isAnimating && !this.landingPage.visible && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating) {
             if (direction == -1 && this.scrollY <= 0) {
                 //Open landing page
                 this.checkLandingPageOpening()

@@ -33,7 +33,7 @@ export default class LandingPage extends EventEmitter {
     }
 
     hide() {
-        if (this.visible && !this.isAnimating && !this.experience.ui.menu.visible && !this.experience.ui.menu.isAnimating) {
+        if (this.visible && !this.isAnimating && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating) {
             this.visible = false
             this.lockScrolling()
             this.scrollIcon.hide()
