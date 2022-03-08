@@ -48,7 +48,6 @@ export default class Sections {
         const styles = window.getComputedStyle(element)
 
         return Math.ceil(parseFloat(styles['marginTop']))
-        
     }
 
     resize() {

@@ -107,15 +107,27 @@ export default class MenuMain extends EventEmitter {
     }
 
     focusLabScene() {
+        //Background
         gsap.to(this.labBackground.material.uniforms.uOffset, { value: 0, duration: .9 })
+
+        //set scroll y to 0
         gsap.to(this.domElements.scrollContainer, { y: 0, duration: .9, ease: Power2.easeInOut })
+
+        //Logo background
         gsap.to(this.domElements.logoWhiteBackground, { y: -window.innerHeight })
+
+        //camera
         this.waypoints.moveToWaypoint('lab-menu')
     }
 
     focusContactScene() {
+        //Lab background
         gsap.to(this.labBackground.material.uniforms.uOffset, { value: this.labBackground.height, duration: .9 })
+
+        //set scroll y to bottom
         gsap.to(this.domElements.scrollContainer, { y: -this.domElements.scrollContainer.clientHeight + window.innerHeight, duration: .9, ease: Power2.easeInOut })
+
+        //camera
         this.waypoints.moveToWaypoint('contact-menu')
     }
 

@@ -65,6 +65,7 @@ export default class LandingPage extends EventEmitter {
                 setTimeout(() => this.renderer.instance.setClearColor('#EFE7DC'), 700)
 
                 //About hologram animation
+                this.experience.ui.about.animations.hologramPlayed = false
                 this.experience.ui.about.animations.playHologramAnimation(.35)
 
                 // Character Animation

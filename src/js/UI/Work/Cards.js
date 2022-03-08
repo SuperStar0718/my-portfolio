@@ -1,4 +1,5 @@
 import Experience from '../../Experience.js'
+import { gsap, Back} from 'gsap'
 
 export default class WorkCards {
     positionStyles = [
@@ -20,6 +21,11 @@ export default class WorkCards {
         this.experience = new Experience()
         this.gestures = this.experience.gestures
         this.render = this.experience.ui.work.render
+        this.debug = this.experience.debug
+
+        if(this.debug.active) {
+            this.initDebug()
+        }
 
         this.currentItemIndex = 2
 
@@ -91,5 +97,19 @@ export default class WorkCards {
             this.nextButton.classList.remove('work-disabled-navigation-button')
             this.backButton.classList.remove('work-disabled-navigation-button')
         }
+    }
+
+    playOpenAnimation() {
+        gsap.fromTo(document.querySelectorAll('.work-item-container')[2], {scale: 0}, {scale: 1, ease: Back.easeOut.config(1.5)})
+    }
+
+    initDebug() {
+        this.debugFolder = this.debug.ui.addFolder('Work UI')
+
+        const debugObject = {
+            playOpenAnimation: () => { this.playOpenAnimation() },
+        }
+        
+        this.debugFolder.add(debugObject, 'playOpenAnimation').name('Play Open Animation')
     }
 }

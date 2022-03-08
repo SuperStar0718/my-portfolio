@@ -85,6 +85,7 @@ export default class Resources extends EventEmitter {
         this.loadingAnimation.style.height = this.loaded / this.toLoad * 100 + '%'
     }
 
+    //pre-render textures
     initTextures() {
         this.textures.forEach((texture) => {
             this.experience.renderer.instance.initTexture(texture)

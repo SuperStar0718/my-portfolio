@@ -162,7 +162,8 @@ section {
 }
 
 .content-width {
-    width: calc(75% - 30px);
+    width: 1400px;
+    max-width: calc(100% - 30px);
 }
 
 /****************************experience**************************/

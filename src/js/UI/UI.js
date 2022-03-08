@@ -74,5 +74,8 @@ export default class UI {
 
         if (this.sections)
             this.sections.resize()
+
+        if (this.about) if (this.about.animations)
+            this.about.animations.resize()
     }
 }

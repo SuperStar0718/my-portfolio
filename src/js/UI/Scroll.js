@@ -61,7 +61,7 @@ export default class Scroll {
         const index = this.events.length - 1
 
         //wheel event listeners
-        this.gestures.o('scroll-' + direction, () => {
+        this.gestures.on('scroll-' + direction, () => {
             if ((direction === 'up' ? height >= this.scrollY : height <= this.scrollY) && !this.events[index].played) {
                 //execute
                 this.events[index].task()

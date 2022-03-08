@@ -4,6 +4,8 @@ import Experience from '../../Experience'
 
 export default class AboutAnimations {
 
+    hologramPlayed = false
+
     parameters = {
         skillsAdditionalDelay: .2,
         aboutAdditionalDelay: .45,
@@ -40,25 +42,32 @@ export default class AboutAnimations {
         this.experience = new Experience()
         this.skills = this.experience.ui.about.render.skills
         this.icons = this.experience.ui.about.icons
+        this.scroll = this.experience.ui.scroll
+
+        this.addScrollEvents()
     }
 
     playHologramAnimation(delay = 0) {
-        //Hide Hologram Animation
-        this.fadeInHologramUI(delay)
+        if (!this.hologramPlayed) {
+            this.hologramPlayed = true
 
-        //Reset Profile Picture Mask
-        this.domElements.profilePictureMaskRect.classList.add('no-transition')
-        this.domElements.profilePictureMaskRect.style.transform = 'translateY(0)'
+            //Hide Hologram Animation
+            this.fadeInHologramUI(delay)
 
-        //Reset Profile Picture Gradient
-        this.domElements.profilePictureGradient.classList.add('no-transition')
-        this.domElements.profilePictureGradient.style.transform = 'translateY(0)'
+            //Reset Profile Picture Mask
+            this.domElements.profilePictureMaskRect.classList.add('no-transition')
+            this.domElements.profilePictureMaskRect.style.transform = 'translateY(0)'
 
-        gsap.delayedCall(delay, () => {
-            this.animateInfoBox()
-            gsap.delayedCall(this.parameters.skillsAdditionalDelay, () => this.animateSkillsBox())
-            gsap.delayedCall(this.parameters.aboutAdditionalDelay, () => this.animateAboutBox())
-        })
+            //Reset Profile Picture Gradient
+            this.domElements.profilePictureGradient.classList.add('no-transition')
+            this.domElements.profilePictureGradient.style.transform = 'translateY(0)'
+
+            gsap.delayedCall(delay, () => {
+                this.animateInfoBox()
+                gsap.delayedCall(this.parameters.skillsAdditionalDelay, () => this.animateSkillsBox())
+                gsap.delayedCall(this.parameters.aboutAdditionalDelay, () => this.animateAboutBox())
+            })
+        }
     }
 
     animateInfoBox() {
@@ -143,7 +152,11 @@ export default class AboutAnimations {
     }
 
 
-
+    addScrollEvents() {
+        this.scroll.addEvent(window.innerHeight, 'up', () => {
+            this.playHologramAnimation(.1)
+        })
+    }
 
 
     // ------------------------ Animations ---------------------------------------------------------------------------------------------- 
@@ -183,5 +196,9 @@ export default class AboutAnimations {
                 if (currentString.length == span.text.length) clearInterval(newCharacterInterval)
             }, speed)
         }, delay * 1000)
+    }
+
+    resize() {
+        this.addScrollEvents()
     }
 }

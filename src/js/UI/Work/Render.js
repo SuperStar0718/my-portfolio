@@ -17,24 +17,20 @@ export default class WorkRender {
     renderItems() {
         this.items.forEach((item) => {
             this.renderContainer.insertAdjacentHTML('beforeend', `
-                <svg id="work-item-${item.id}" class="work-card-svg" viewBox="0 0 320 550" xmlns="http://www.w3.org/2000/svg">
-                    <foreignObject x="0" y="0" width="320" height="550" requiredExtensions="http://www.w3.org/1999/xhtml">
-                        <div class="work-item-container column">
-                            <img class="work-item-image" src="${item.image}">
-                            <div class="work-item-content-container">
-                                <h3>${item.name}</h3>
-                                <div class="work-item-tag-container row">
-                                    ${this.renderTags(item.tags)}
-                                </div>
-                                <span>${item.description}</span>
-                            </div>
-                            <div class="work-item-button-container row">
-                                <div id="work-item-gray-button-${item.id}" class="work-item-gray-button center">Github</div>
-                                <div id="work-item-orange-button-${item.id}" class="work-item-orange-button small-button center">Live View</div>
-                            </div>
-                        </div>
-                    </foreignObject>
-                </svg>
+            <div id="work-item-${item.id}" class="work-item-container column">
+                <img class="work-item-image" src="${item.image}">
+                <div class="work-item-content-container">
+                    <h3>${item.name}</h3>
+                    <div class="work-item-tag-container row">
+                        ${this.renderTags(item.tags)}
+                    </div>
+                    <span>${item.description}</span>
+                </div>
+                <div class="work-item-button-container row">
+                    <div id="work-item-gray-button-${item.id}" class="work-item-gray-button center">Github</div>
+                    <div id="work-item-orange-button-${item.id}" class="work-item-orange-button small-button center">Live View</div>
+                </div>
+            </div>
             `)
 
             this.addEventListenersToCard(item)

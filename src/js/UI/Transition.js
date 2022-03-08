@@ -26,18 +26,22 @@ export default class Transition {
         }, 300)
     }
 
-    hide() {
-        this.domElements.container.classList.remove('showTransition')
-        this.domElements.container.classList.add('hideTopTransition')
-
-        setTimeout(() => this.isShowing = false, this.duration * 1000)
-    }
-
     show() {
+        //Prevent actions while open
         this.isShowing = true
 
         this.domElements.container.classList.remove('hideTopTransition')
         this.domElements.container.classList.remove('hideIntroTransition')
         this.domElements.container.classList.add('showTransition')
+    }
+
+    hide() {
+        setTimeout(() => {
+            this.domElements.container.classList.remove('showTransition')
+            this.domElements.container.classList.add('hideTopTransition')
+
+            //allow actions agains
+            setTimeout(() => this.isShowing = false, this.duration * 1000)
+        }, 150)
     }
 }
