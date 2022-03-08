@@ -4,6 +4,9 @@ import Experience from '../Experience'
 import * as THREE from 'three'
 
 export default class Background {
+
+    height = 2.3
+
     constructor() {
         this.experience = new Experience()
         this.debug = this.experience.debug
@@ -33,12 +36,12 @@ export default class Background {
         this.colors.bottomRight.instance = new THREE.Color(this.colors.bottomRight.value)
 
         // Geometry
-        this.geometry = new THREE.PlaneGeometry(2, 2.3, 1, 1)
+        this.geometry = new THREE.PlaneGeometry(2, this.height, 1, 1)
 
         // Material
         this.material = new THREE.ShaderMaterial({
             uniforms: {
-                uOffset: { value: -2.3 }
+                uOffset: { value: -this.height }
             },
             vertexColors: true,
             depthWrite: false,

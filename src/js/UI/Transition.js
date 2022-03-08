@@ -3,11 +3,13 @@ import Experience from '../Experience'
 
 export default class Transition {
 
+    isShowing = false
+    duration = .7
+
     domElements = {
         container: document.getElementById('transition-container'),
         logo: document.getElementById('loadig-animation-container'),
     }
-
 
     constructor() {
         this.experience = new Experience()
@@ -20,18 +22,22 @@ export default class Transition {
         setTimeout(() => {
             gsap.to(this.domElements.logo, { scale: 0, duration: .6, ease: Back.easeIn.config(1.7) })
 
-            this.domElements.container.classList.add('hideTransition')
+            this.domElements.container.classList.add('hideIntroTransition')
         }, 300)
     }
 
     hide() {
         this.domElements.container.classList.remove('showTransition')
         this.domElements.container.classList.add('hideTopTransition')
+
+        setTimeout(() => this.isShowing = false, this.duration * 1000)
     }
 
     show() {
+        this.isShowing = true
+
         this.domElements.container.classList.remove('hideTopTransition')
-        this.domElements.container.classList.remove('hideTransition')
+        this.domElements.container.classList.remove('hideIntroTransition')
         this.domElements.container.classList.add('showTransition')
     }
 }

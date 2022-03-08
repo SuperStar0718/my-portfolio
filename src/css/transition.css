@@ -15,12 +15,12 @@
     transform: rotate(180deg) translateY(20px);
 }
 
-.hideTransition {
-    animation: hideTransition ease-in .8s;
+.hideIntroTransition {
+    animation: hideIntroTransition ease-in .8s;
     animation-fill-mode: forwards; 
 }
 
-@keyframes hideTransition {
+@keyframes hideIntroTransition {
     0% { bottom: -100%; left: -40%; }
     100% { bottom: -300%; left: -60%; }
 }

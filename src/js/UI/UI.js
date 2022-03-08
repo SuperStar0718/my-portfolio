@@ -14,6 +14,7 @@ import ScrollBar from './ScrollBar'
 import Sound from './Sound'
 import AboutAnimations from './About/Animations'
 import MenuItems from './Menu/Items'
+import Sections from './Sections'
 
 export default class UI {
 
@@ -29,6 +30,7 @@ export default class UI {
             this.scrollIcon = new ScrollIcon('landing-scroll-icon', 'landing-scroll-wheel')
             this.landingPage = new LandingPage()
             this.scroll = new Scroll()
+            this.sections = new Sections()
             //this.scrollbar = new ScrollBar()
             this.sound = new Sound()
 
@@ -67,7 +69,10 @@ export default class UI {
         if (this.scrollbar)
             this.scrollbar.resize()
 
-        if (this.menu) if(this.menu.main)
+        if (this.menu) if (this.menu.main)
             this.menu.main.resize()
+
+        if (this.sections)
+            this.sections.resize()
     }
 }

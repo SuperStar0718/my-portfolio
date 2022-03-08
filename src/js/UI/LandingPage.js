@@ -28,12 +28,13 @@ export default class LandingPage extends EventEmitter {
         this.character = this.experience.world.character
         this.waypoints = this.experience.waypoints
         this.scrollIcon = this.experience.ui.scrollIcon
+        this.transiton = this.experience.ui.transition
 
         this.gestures.on('scroll-down', () => this.hide())
     }
 
     hide() {
-        if (this.visible && !this.isAnimating && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating) {
+        if (this.visible && !this.isAnimating && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating && !this.transiton.isShowing) {
             this.visible = false
             this.lockScrolling()
             this.scrollIcon.hide()
@@ -104,7 +105,7 @@ export default class LandingPage extends EventEmitter {
     }
 
     show() {
-        if (this.domElements.scrollContainer.scrollTop == 0 && !this.visible && !this.isAnimating) {
+        if (this.domElements.scrollContainer.scrollTop == 0 && !this.visible && !this.isAnimating  && !this.transiton.isShowing) {
             this.visible = true
 
             //Lock scrolling depending on last scroll top
@@ -123,7 +124,7 @@ export default class LandingPage extends EventEmitter {
             this.waypoints.moveToWaypoint('landing-page', true, this.scrollAnimationDuration)
 
             //Background
-            gsap.to(this.background.material.uniforms.uOffset, { value: -2.3, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
+            gsap.to(this.background.material.uniforms.uOffset, { value: -this.background.height, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
 
             //Logo
             gsap.to(this.domElements.logoWhiteBackground, { y: 0, ease: Power2.easeInOut, duration: this.scrollAnimationDuration })

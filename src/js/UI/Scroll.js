@@ -24,6 +24,7 @@ export default class Scroll {
         this.background = this.experience.world.background
         this.fog = this.experience.world.fog
         this.gestures = this.experience.gestures
+        this.transition = this.experience.ui.transition
 
         //Hide scroll container
         this.domElements.scrollContainer.style.top = '100%'
@@ -79,7 +80,7 @@ export default class Scroll {
     }
 
     scroll(direction) {
-        if (!this.landingPage.isAnimating && !this.landingPage.visible && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating) {
+        if (!this.landingPage.isAnimating && !this.landingPage.visible && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating && !this.transition.isShowing) {
             if (direction == -1 && this.scrollY <= 0) {
                 //Open landing page
                 this.checkLandingPageOpening()
@@ -110,7 +111,7 @@ export default class Scroll {
         }
     }
 
-    performScroll() {
+    performScroll(duration = this.parameters.scrollDuration) {
         this.contentScrollTo = this.preventFromScrollingBottom()
 
         let scrollPercentage = 0
@@ -126,21 +127,21 @@ export default class Scroll {
         if (scrollPercentage > 1) scrollPercentage = 1
 
         //Scroll Container
-        gsap.to(this.domElements.scrollContainer, { y: -this.contentScrollTo, duration: this.parameters.scrollDuration })
+        gsap.to(this.domElements.scrollContainer, { y: -this.contentScrollTo, duration: duration })
 
 
         if (scrollPercentage >= 0) {
             //Background Plane
-            gsap.to(this.background.material.uniforms.uOffset, { value: 2.3 * scrollPercentage, duration: this.parameters.scrollDuration })
+            gsap.to(this.background.material.uniforms.uOffset, { value: this.background.height * scrollPercentage, duration: duration })
 
             //Camera
-            gsap.to(this.camera.instance.position, { y: -12.4 * scrollPercentage - 10, duration: this.parameters.scrollDuration })
+            gsap.to(this.camera.instance.position, { y: -12.4 * scrollPercentage - 10, duration: duration })
 
             //Fog
             gsap.to(this.fog, { near: (7 * scrollPercentage) + 12, far: (2.7 * scrollPercentage) + 16.3 })
 
             //Logo Background
-            gsap.to(this.domElements.logoWhiteBackground, { y: - this.contentScrollTo - window.innerHeight, duration: this.parameters.scrollDuration })
+            gsap.to(this.domElements.logoWhiteBackground, { y: - this.contentScrollTo - window.innerHeight, duration: duration })
         }
     }
 

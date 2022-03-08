@@ -17,21 +17,18 @@ export default class MenuItems {
             elements: [
                 document.querySelectorAll('.menu-item')[0]
             ],
-            y: 'landing',
         },
         {
             name: 'about',
             elements: [
                 document.querySelectorAll('.menu-item')[1]
             ],
-            y: 0,
         },
         {
             name: 'work',
             elements: [
                 document.querySelectorAll('.menu-item')[2]
             ],
-            y: 500,
         },
         {
             name: 'contact',
@@ -39,7 +36,6 @@ export default class MenuItems {
                 document.querySelectorAll('.menu-item')[3],
                 document.getElementById('landing-cta-button')
             ],
-            y: 1000,
         },
     ]
 
@@ -55,7 +51,9 @@ export default class MenuItems {
         this.menu = this.experience.ui.menu.main
         this.background = this.experience.world.background
         this.room = this.experience.world.landingPage.room.model
+        this.sections = this.experience.ui.sections
 
+        this.menu.on('open', () => this.updateActiveItem())
         this.addClickEventListeners()
     }
 
@@ -69,19 +67,53 @@ export default class MenuItems {
         })
     }
 
+    updateActiveItem() {
+        if (this.landingPage.visible) {
+            this.clearAllActiveItems()
+            document.querySelectorAll('.menu-item')[0].classList.add('active-menu-item')
+        } else {
+            this.items.forEach((item) => {
+                if (item.name !== 'home') {
+                    const sectionY = this.sections.sections.find((section) => section.name === item.name).y
+
+                    if (this.scroll.scrollY + (window.innerHeight / 2) >= sectionY) {
+                        this.clearAllActiveItems()
+                        document.querySelectorAll('.menu-item')[this.items.indexOf(item)].classList.add('active-menu-item')
+                        return
+                    }
+                }
+            })
+        }
+    }
+
+    clearAllActiveItems() {
+        const allItems = document.querySelectorAll('.menu-item')
+
+        allItems.forEach((item) => {
+            item.classList.remove('active-menu-item')
+        })
+    }
+
     openItem(item) {
-        //transition
-        this.transition.show()
-        setTimeout(() => {
-            this.transition.hide()
-            this.setupItem(item)
-        }, 700)
+        if (!this.transition.isShowing && !item.elements[0].classList.contains('active-menu-item')) {
+            //start transition
+            this.transition.show()
+            setTimeout(() => {
+                this.transition.hide()
+
+                //setup item
+                this.setupItem(item)
+
+                //Clear all active items to make elements outside of menu clickable
+                this.clearAllActiveItems()
+            }, 700)
+        }
     }
 
     setupItem(item) {
         this.scrollIcon.hide()
 
-        item.y != 'landing' ? this.setupScrollContainerItem(item) : this.setupLandingPage()
+        item.name != 'home' ? this.setupScrollContainerItem(item) : this.setupLandingPage()
     }
 
     setupLandingPage() {
@@ -104,7 +136,7 @@ export default class MenuItems {
 
         this.renderer.instance.setClearColor('#F5EFE6')
 
-        this.background.material.uniforms.uOffset.value = -2.3
+        this.background.material.uniforms.uOffset.value = -this.background.height
 
         gsap.to(this.experience.scene.fog, { near: 15, far: 20, duration: 0 })
 
@@ -131,8 +163,8 @@ export default class MenuItems {
 
         this.instantHideMenu()
 
-        this.scroll.scrollY = item.y
-        this.scroll.performScroll()
+        this.scroll.scrollY = this.sections.sections.find((section) => section.name === item.name).y
+        this.scroll.performScroll(0)
     }
 
     instantHideMenu() {

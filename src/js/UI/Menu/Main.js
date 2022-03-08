@@ -1,7 +1,8 @@
 import Experience from '../../Experience'
 import { gsap, Power2 } from 'gsap'
+import EventEmitter from '../../Utils/EventEmitter'
 
-export default class MenuMain {
+export default class MenuMain extends EventEmitter {
 
     visible = false
     initials = {}
@@ -20,6 +21,8 @@ export default class MenuMain {
     }
 
     constructor() {
+        super()
+
         this.experience = new Experience()
         this.landingPage = this.experience.ui.landingPage
         this.waypoints = this.experience.waypoints
@@ -27,6 +30,7 @@ export default class MenuMain {
         this.labBackground = this.experience.world.background
         this.camera = this.experience.camera
         this.gestures = this.experience.gestures
+        this.transition = this.experience.ui.transition
 
         this.menuButtonClick()
         this.hideEvents()
@@ -40,7 +44,10 @@ export default class MenuMain {
     }
 
     switchVisiblity(withCamera = true, force = false) {
-        if ((!this.isAnimating && !this.landingPage.isAnimating) || force) {
+        if ((!this.isAnimating && !this.landingPage.isAnimating && !this.transition.isShowing) || force) {
+            //Trigger Event
+            this.trigger(this.visible ? 'hide' : 'open')
+
             this.visible = !this.visible
 
             //Button
@@ -107,7 +114,7 @@ export default class MenuMain {
     }
 
     focusContactScene() {
-        gsap.to(this.labBackground.material.uniforms.uOffset, { value: 2.3, duration: .9 })
+        gsap.to(this.labBackground.material.uniforms.uOffset, { value: this.labBackground.height, duration: .9 })
         gsap.to(this.domElements.scrollContainer, { y: -this.domElements.scrollContainer.clientHeight + window.innerHeight, duration: .9, ease: Power2.easeInOut })
         this.waypoints.moveToWaypoint('contact-menu')
     }
