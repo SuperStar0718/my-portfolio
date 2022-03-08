@@ -130,7 +130,6 @@ export default class Character {
     // ------------------------ Scene 1 Transition Materials ---------------------------------------------------------------------------------------------- 
     updateWireframe(direction) {
         // check each children of model 
-
         this.model.children[0].children.forEach((children) => {
             if (children.wireframeAt) {
                 if (direction == 'up' && this.model.position.y > children.wireframeAt - 5.7) {

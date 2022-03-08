@@ -41,8 +41,6 @@ export default class LandingPage extends EventEmitter {
             //Room Bounce
             gsap.fromTo(this.room.scale, { x: 1, y: 1, z: 1 }, { x: 0, y: 0, z: 0, duration: .5, ease: Back.easeIn.config(1.7) })
 
-            this.lockScrolling()
-
             setTimeout(() => {
                 // Landing Page Content
                 this.domElements.landingPage.style.top = '-100%'
@@ -77,9 +75,8 @@ export default class LandingPage extends EventEmitter {
                     this.character.body.faceCall.kill()
                 }
 
-                //character fall down and scale down to adapt to scene
+                //character fall down
                 gsap.to(this.character.model.position, { y: -14.95, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
-                gsap.to(this.character.model.scale, { x: 0.97, y: 0.97, z: 0.97, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
 
                 //play water idle animation 
                 setTimeout(() => {
@@ -139,7 +136,6 @@ export default class LandingPage extends EventEmitter {
 
             // character position
             gsap.to(this.character.model.position, { y: -5.7, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
-            gsap.to(this.character.model.scale, { x: 1, y: 1, z: 1, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
 
             // character animation
             this.character.animation.play('idle', .5)
@@ -149,14 +145,6 @@ export default class LandingPage extends EventEmitter {
 
             // update face
             this.character.body.face.material.map = this.character.body.faceTextures.default
-
-            // start inverals, if not started yet
-            if (!this.character.leftDesktopIntervalCall) {
-                this.character.leftDesktopInterval()
-            }
-            if (!this.character.scrollIntervalCall) {
-                this.character.scrollInterval()
-            }
 
             //Start wireframe material switch
             this.character.checkForWireframe = 'up'

@@ -9,7 +9,6 @@ export default class Scroll {
     }
 
     scrollY = 0
-    startScrollY = 1000
 
     domElements = {
         scrollContainer: document.getElementById('scroll-container'),
@@ -38,6 +37,14 @@ export default class Scroll {
         //Scroll
         this.gestures.on('scroll-down', () => this.scroll(1))
         this.gestures.on('scroll-up', () => this.scroll(-1))
+
+        //Reset Y on open
+        this.landingPage.on('hide', () => {
+            if(this.scrollY != 0) {
+                this.scrollY = 0
+            }
+
+        })
     }
 
     setAboutContainerDetails() {
@@ -110,6 +117,9 @@ export default class Scroll {
         if (this.scrollY > this.aboutContainer.offset) {
             scrollPercentage = (this.scrollY - this.aboutContainer.offset) / (this.domElements.scrollContainer.clientHeight - this.aboutContainer.height)
         }
+
+        //cap scrollY at 0
+        if(this.contentScrollTo < 0) this.contentScrollTo = 0
 
         //cap scroll percentage
         if (scrollPercentage < 0) scrollPercentage = 0

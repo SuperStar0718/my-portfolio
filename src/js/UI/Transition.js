@@ -20,16 +20,17 @@ export default class Transition {
         setTimeout(() => {
             gsap.to(this.domElements.logo, { scale: 0, duration: .6, ease: Back.easeIn.config(1.7) })
 
-            this.hide()
+            this.domElements.container.classList.add('hideTransition')
         }, 300)
     }
-    
+
     hide() {
         this.domElements.container.classList.remove('showTransition')
-        this.domElements.container.classList.add('hideTransition')
+        this.domElements.container.classList.add('hideTopTransition')
     }
 
     show() {
+        this.domElements.container.classList.remove('hideTopTransition')
         this.domElements.container.classList.remove('hideTransition')
         this.domElements.container.classList.add('showTransition')
     }

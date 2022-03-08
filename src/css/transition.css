@@ -1,8 +1,8 @@
 #transition-container {
     position: absolute;
     z-index: 998;
-    width:200vw;
-    bottom: -40%;
+    width: 200vw;
+    bottom: -100%;
     transform: rotate(15deg);
     left: -40%;
 }
@@ -11,28 +11,42 @@
     transform: translateY(20px);
 }
 
+#transition-wave-svg-bottom {
+    transform: rotate(180deg) translateY(20px);
+}
+
 .hideTransition {
-    animation: hideTransition cubic-bezier(0.550, 0.055, 0.675, 0.190) .8s;
+    animation: hideTransition ease-in .8s;
     animation-fill-mode: forwards; 
 }
 
 @keyframes hideTransition {
-    0% {bottom: -40%; left: -40%; }
-    100% {bottom: -200%; left: -60%; }
+    0% { bottom: -100%; left: -40%; }
+    100% { bottom: -300%; left: -60%; }
+}
+
+.hideTopTransition {
+    animation: hideTopTransition ease-in .7s;
+    animation-fill-mode: forwards; 
+}
+
+@keyframes hideTopTransition {
+    0% { bottom: -100%; left: -40%; }
+    100% { bottom: 100%; left: 40%; }
 }
 
 .showTransition {
-    animation: showTransition cubic-bezier(0.550, 0.055, 0.675, 0.190) .8s;
+    animation: showTransition ease-in .7s;
     animation-fill-mode: forwards; 
 }
 
 @keyframes showTransition {
-    0% {bottom: -200%; left: -60%; }
-    100% {bottom: -40%; left: -40%; }
+    0% { bottom: -300%; left: -60%; }
+    100% { bottom: -100%; left: -40%;}
 }
 
 #transition-push {
-    height: 150vh;
+    height: 170vh;
     background: #FF923E;
 }
 
