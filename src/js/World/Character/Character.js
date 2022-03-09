@@ -18,6 +18,7 @@ export default class Character {
         this.mouse = this.experience.world.landingPage.mouse
         this.messagePopUp = this.experience.world.landingPage.messagePopUp
         this.desktops = this.experience.world.landingPage.desktops
+        this.sounds = this.experience.sounds
 
         // debug 
         if (this.debug.active) {
@@ -81,14 +82,15 @@ export default class Character {
         this.leftDesktopInterval()
     }
 
-    // scroll desktop 0 with 50% chance if idle is playing
+    // scroll desktop 0 if idle is playing
     // repeat interval afterwards
     scrollInterval() {
         //Start delayed call
-        this.scrollIntervalCall = gsap.delayedCall(Math.random() + 1.5, () => {
+        this.scrollIntervalCall = gsap.delayedCall(Math.random() * 3 + 1.5, () => {
             if (this.experience.ui.landingPage.visible) {
-                if (this.animation.actions.current._clip.name == 'idle' && Math.random() < 0.5) {
+                if (this.animation.actions.current._clip.name == 'idle') {
                     this.desktops.scrollDesktop0()
+                    this.sounds.play('mouseWheel')
                 }
             }
             //Repeat
@@ -98,7 +100,7 @@ export default class Character {
 
     // play left desktop action, show message pop up in room and repeat interval afterwards 
     leftDesktopInterval() {
-        this.leftDesktopIntervalCall = gsap.delayedCall(this.leftDesktopIntervalDuration + this.animation.actions.leftDesktopAction._clip.duration, () => {
+        this.leftDesktopIntervalCall = gsap.delayedCall(this.leftDesktopIntervalDuration + this.animation.actions.leftDesktopAction._clip.duration + (Math.random() * 4), () => {
             if (this.experience.ui.landingPage.visible) {
                 gsap.delayedCall(.18, () => this.animation.play('leftDesktopAction', .3))
 

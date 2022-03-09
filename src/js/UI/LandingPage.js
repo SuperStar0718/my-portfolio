@@ -12,6 +12,10 @@ export default class LandingPage extends EventEmitter {
         landingPage: document.getElementById('landing-page'),
         scrollContainer: document.getElementById('scroll-container'),
         logoWhiteBackground: document.getElementById('logo-white-background'),
+        contentSvg: document.getElementById('landing-content-svg'),
+        heading: document.querySelectorAll('.landing-headline'),
+        subheading: document.querySelector('.landing-subheading'),
+        button: document.getElementById('landing-cta-button')
     }
 
     constructor() {
@@ -31,6 +35,23 @@ export default class LandingPage extends EventEmitter {
         this.transiton = this.experience.ui.transition
 
         this.gestures.on('scroll-down', () => this.hide())
+        //this.playOpeningAnimation(1)
+    }
+
+    playOpeningAnimation(delay = 0) {
+        gsap.fromTo(this.domElements.contentSvg, { opacity: 0 }, { opacity: 1, delay: delay, duration: .5 })
+        gsap.fromTo(this.domElements.contentSvg, { x: 270 }, { x: -50, delay: delay, ease: Back.easeOut.config(1.3), duration: 1.4 })
+
+        const aniamtedElements = [
+            this.domElements.heading,
+            this.domElements.subheading,
+            this.domElements.button,
+        ]
+
+        aniamtedElements.forEach((element) => {
+            gsap.fromTo(element, { x: 100 }, { x: 0, ease: Back.easeOut.config(2), delay: (aniamtedElements.indexOf(element) / 2.5), duration: 1.4 })
+            gsap.fromTo(element, { scaleX: 0.7 }, { scaleX: 1, ease: Back.easeOut.config(1.6), delay: (aniamtedElements.indexOf(element) / 3), duration: 1.1 })
+        })
     }
 
     hide() {
@@ -106,7 +127,7 @@ export default class LandingPage extends EventEmitter {
     }
 
     show() {
-        if (this.domElements.scrollContainer.scrollTop == 0 && !this.visible && !this.isAnimating  && !this.transiton.isShowing) {
+        if (this.domElements.scrollContainer.scrollTop == 0 && !this.visible && !this.isAnimating && !this.transiton.isShowing) {
             this.visible = true
 
             //Lock scrolling depending on last scroll top

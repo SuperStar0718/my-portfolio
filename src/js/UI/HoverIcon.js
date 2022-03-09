@@ -7,19 +7,19 @@ export default class HoverIcon {
     hoverElements = [
         {
             class: '.menu-item',
-            background: '#FF923E'
-        },
-        {
-            class: '.about-tab',
-            background: '#2aa6f8'
+            background: '#0B3568'
         },
         {
             class: '.work-item-gray-button',
-            background: '#FF923E'
+            background: '#0B3568'
         },
         {
             class: '.small-button',
-            background: '#FF923E'
+            background: '#0B3568'
+        },
+        {
+            class: '#landing-cta-button',
+            background: '#0B3568'
         },
     ]
 
@@ -76,7 +76,7 @@ export default class HoverIcon {
             this.icon.style.background = background
 
             // animate 
-            if(this.closeScaleAnimation) this.closeScaleAnimation.kill()
+            if (this.closeScaleAnimation) this.closeScaleAnimation.kill()
 
             this.openScaleAnimation = gsap.fromTo(this.icon, { scale: 0 }, { scale: 1, duration: .2 })
             gsap.to(this.icon, { x: event.pageX, y: event.pageY, duration: 0 })
@@ -85,7 +85,7 @@ export default class HoverIcon {
 
     hideIcon(element) {
         // animate
-        if(this.openScaleAnimation) this.openScaleAnimation.kill()
+        if (this.openScaleAnimation) this.openScaleAnimation.kill()
 
         this.closeScaleAnimation = gsap.to(this.icon, { scale: 0, duration: .2 })
 

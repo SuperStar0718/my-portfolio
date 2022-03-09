@@ -11,16 +11,19 @@ export default class ScrollBar {
     constructor() {
         this.experience = new Experience()
         this.scroll = this.experience.ui.scroll
+        this.landingPage = this.experience.ui.landingPage
+        this.gestures = this.experience.gestures
 
-        this.scroll.on('wheel-up', () => this.updatePosition())
-        this.scroll.on('wheel-down', () => this.updatePosition())
+        this.gestures.on('scroll', () => setTimeout(() => this.updatePosition()))
 
         this.setHeight()
     }
 
     updatePosition() {
-        const position = this.scroll.contentScrollTo + (window.innerHeight * (this.scroll.contentScrollTo / (this.domElements.scrollContainer.clientHeight)))
-        gsap.to(this.domElements.scrollBar, { y: position, duration: this.scroll.parameters.scrollDuration })
+        if (!this.landingPage.visible) {
+            const position = this.scroll.contentScrollTo + (window.innerHeight * (this.scroll.contentScrollTo / (this.domElements.scrollContainer.clientHeight)))
+            gsap.to(this.domElements.scrollBar, { y: position, duration: this.scroll.parameters.scrollDuration })
+        }
     }
 
     setHeight() {

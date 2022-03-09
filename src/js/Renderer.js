@@ -57,11 +57,11 @@ export default class Renderer {
 
         new SMAAImageLoader().load(([search, area]) => {
             this.postProcess.smaaEffect = new SMAAEffect(search, area)
-            this.postProcess.composer.addPass(new EffectPass(this.camera.instance, this.postProcess.smaaEffect))
+            this.postProcess.composer.addPass(new EffectPass(this.camera.instance, this.postProcess.depthOfField, this.postProcess.smaaEffect))
         })
 
         this.postProcess.composer.addPass(this.postProcess.renderPass)
-        this.postProcess.composer.addPass(new EffectPass(this.camera, this.postProcess.depthOfField, this.postProcess.contrast))
+        this.postProcess.composer.addPass(new EffectPass(this.camera, this.postProcess.contrast))
 
 
 

@@ -19,18 +19,28 @@ export default class Sound {
 
     constructor() {
         this.experience = new Experience()
+        this.sounds = this.experience.sounds
 
         //Init
         localStorage.getItem('soundActive') === 'true' || localStorage.getItem('soundActive') === true ? this.activate() : this.deactivate()
+        this.sounds.mute(!this.active)
 
         //Event Listener
         this.domElements.button.addEventListener('click', () => {
             this.active ? this.deactivate() : this.activate()
         })
+
+        // M Key
+        window.addEventListener('keydown', () => {
+            if (event.key === 'm') {
+                this.active ? this.deactivate() : this.activate()
+            }
+        })
     }
 
     deactivate() {
         this.active = false
+        this.sounds.mute(true)
 
         //Icon
         gsap.to(this.domElements.body, { x: 2, duration: .2 })
@@ -45,6 +55,7 @@ export default class Sound {
 
     activate() {
         this.active = true
+        this.sounds.mute(false)
 
         //Icon
         gsap.to(this.domElements.body, { x: 0, duration: .2 })

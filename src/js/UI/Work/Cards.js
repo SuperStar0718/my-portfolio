@@ -104,7 +104,7 @@ export default class WorkCards {
     }
 
     initDebug() {
-        this.debugFolder = this.debug.ui.addFolder('Work UI')
+        this.debugFolder = this.debug.ui.addFolder('Work UI').close()
 
         const debugObject = {
             playOpenAnimation: () => { this.playOpenAnimation() },

@@ -10,10 +10,12 @@
 #work-background {
     background: #F5EFE6;
     transform: rotate(1deg);
+    transform: rotate(1deg);
     width: 110%;
     height: 100%;
     position: absolute;
     z-index: -1;
+    box-shadow: 0px 30px 70px #93683310;
 }
 
 #work-section h2 {

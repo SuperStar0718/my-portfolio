@@ -25,11 +25,25 @@
     position: relative;
 }
 
-#landing-page-section svg{
+#landing-content-svg{
     width: 45%;
-    max-width: 500px;
+    max-width: 600px;
     max-height: 80%;
     position: relative;
+    transform: translateX(-50px);
+}
+
+.landing-headline {
+    transform-origin: left;
+    font-size: 64px;
+    font-weight: bold;
+    fill: #091434;
+}
+
+.landing-subheading {
+    font-size: 17px;
+    fill:#7C8594;
+    transform-origin: left;
 }
 
 /**Subheader*/
@@ -38,12 +52,12 @@
     margin-bottom: 50px;
     font-size: 1.1em;
     color: #7C8594;
-    transform: translateY();
 }
 
 /**Contact me button*/
-#landing-cta-button {
+#landing-cta-button .big-button {
     width: max-content;
+    transform-origin: left;
 }
 
 /**---------------------------------------------------------------Responsive-----------------------------------------------------*/

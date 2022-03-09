@@ -50,7 +50,7 @@
 }
 
 #contact-container textarea {
-    height: 150px;
+    height: 180px;
 }
 
 .input-container {
@@ -81,8 +81,17 @@
     margin-bottom: 20px;
 }
 
-#contact-container .small-button {
+#contact-button-container {
     margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#contact-button-container .small-button {
     margin-left: auto;
     font-size: 15px;
+}
+
+#contact-button-container .social-icon {
+    margin: 0 8px;
 }

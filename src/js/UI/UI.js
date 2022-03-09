@@ -11,10 +11,11 @@ import AboutIcons from './About/Icons'
 import MenuMain from './Menu/Main'
 import ScrollIcon from './SrollIcon'
 import ScrollBar from './ScrollBar'
-import Sound from './Sound'
+import SoundButton from './SoundButton'
 import AboutAnimations from './About/Animations'
 import MenuItems from './Menu/Items'
 import Sections from './Sections'
+import ContactForm from './ContactForm'
 
 export default class UI {
 
@@ -32,7 +33,7 @@ export default class UI {
             this.scroll = new Scroll()
             this.sections = new Sections()
             //this.scrollbar = new ScrollBar()
-            this.sound = new Sound()
+            this.soundButton = new SoundButton()
 
             //Menu 
             this.menu = {}
@@ -52,6 +53,7 @@ export default class UI {
 
             //Contact
             this.contact = {}
+            this.contact.form = new ContactForm()
 
             this.header = new Header()
             this.hoverIcon = new HoverIcon()

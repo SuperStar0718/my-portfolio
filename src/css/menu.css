@@ -61,30 +61,8 @@
     transform: translate(-28px, -50%);
 }
 
-#menu-content-container .social-icon {
-    filter:  grayscale(1) brightness(6);
-    height: 28px;
-    width: 28px;
-    transition: 0.125s ease-in;
-}
-
-#menu-content-container .social-icon:hover {
-    filter: unset;
-    transform: scale(1.05);
-}
-
-#menu-github-icon {
-    background: url('../assets/icons/github-icon.png');
-    margin-right: 20px;
-}
-
-#menu-linkedin-icon {
-    background: url('../assets/icons/linkedin-icon.png');
-    margin-right: 20px;
-}
-
-#menu-mail-icon {
-    background: url('../assets/icons/mail-icon.png')
+#menu-container .social-icon {
+    margin-right: 15px;
 }
 
 /**Legal container*/

@@ -112,11 +112,11 @@
             </div>
             <!--Social Link-->
             <div id="menu-social-container" class="row">
-                <a tabindex="-1" class="social-icon" id="menu-github-icon" target="_blank"
+                <a tabindex="-1" class="social-icon github-icon" target="_blank"
                     href="https://github.com/davidhckh"></a>
-                <a tabindex="-1" class="social-icon" id="menu-linkedin-icon" target="_blank"
+                <a tabindex="-1" class="social-icon linkedin-icon" target="_blank"
                     href="https://www.linkedin.com/in/david-heckhoff-1ba8a622a/"></a>
-                <a tabindex="-1" class="social-icon" id="menu-mail-icon" href="mailto:david.heckhoff@gmail.com"></a>
+                <a tabindex="-1" class="social-icon mail-icon" href="mailto:david.heckhoff@gmail.com"></a>
             </div>
             <hr>
             <!--Legal Container-->
@@ -139,24 +139,19 @@
     <!--Landing Page-->
     <div id="landing-page" class="content-container landing-slow-transition">
         <section id="landing-page-section" class="content-width slide-out-left-transition">
-            <svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
-                <foreignObject x="0" y="0" width="550" height="300" requiredExtensions="http://www.w3.org/1999/xhtml">
-                    <div class="column" style="margin-left: 10px">
-                        <!--Hi, my name is...-->
-                        <h1 id="landing-headline">
-                            <span>Hi, my</span>
-                            <br>
-                            <span>name is David.</span>
-                        </h1>
-                        <!--Subheader-->
-                        <span id="landing-subheader">I'm a <span style="font-weight: 600">Creative Web
-                                Developer</span> from
-                            Germany.</span>
-                        <!--Buttons-->
-                        <button id="landing-cta-button" class="row big-button">
-                            <span>Contact Me</span>
-                        </button>
-                    </div>
+            <svg id="landing-content-svg" viewBox="-50 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                <text class="landing-headline" y="60" x="5">Hi, my</text>
+                <text class="landing-headline" y="135" x="5">name is David.</text>
+                <text class="landing-subheading" x="10" y="190">
+                    <tspan>I'm a</tspan>
+                    <tspan font-weight="600" dx="7"> Creative Web Developer </tspan>
+                    <tspan dx="7">living in Germany.</tspan>
+                </text>
+                <foreignObject id="landing-cta-button" x="10" y="235" width="200" height="70"
+                    requiredExtensions="http://www.w3.org/1999/xhtml">
+                    <button class="row big-button">
+                        <span>Contact Me</span>
+                    </button>
                 </foreignObject>
             </svg>
         </section>
@@ -392,7 +387,11 @@
                     <span>Message :</span>
                     <textarea tabindex="-1"></textarea>
                 </div>
-                <div class="row">
+                <div class="row" id="contact-button-container">
+                    <a tabindex="-1" class="social-icon github-icon" target="_blank"
+                        href="https://github.com/davidhckh"></a>
+                    <a tabindex="-1" class="social-icon linkedin-icon" target="_blank"
+                        href="https://www.linkedin.com/in/david-heckhoff-1ba8a622a/"></a>
                     <div class="small-button">
                         Submit
                     </div>

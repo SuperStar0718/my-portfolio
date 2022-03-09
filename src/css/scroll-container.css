@@ -16,8 +16,8 @@
     right: 0;
     width: 10px;
     height: 500px;
-    background: #FF923E;
     background: #00b7ff;
+    background: #FF923E;
     border-radius: 5px;
     z-index: 2;
     display: none;
