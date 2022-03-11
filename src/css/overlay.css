@@ -65,6 +65,11 @@
     width: 50px;
     transform: translateX(12px) scale(1.2);
 }
+
+#sound-button-scale-container {
+    transform-origin: top right;
+}
+
 /**Menu Button*/
 #menu-button {
     right: 0;
@@ -106,4 +111,38 @@
     background: #091434;
     border-radius: 2px;
     margin-top: 3px;
+}
+
+/*------------------------------------------ Responsive -----------------------------*/
+@media (max-aspect-ratio: 11/10) {
+    
+}
+
+/**Scale down buttons*/
+@media (max-width: 800px), (max-height: 800px) {
+    #logo-clip-path{
+        transform: scale(0.8);
+    }
+
+    #scroll-icon, #menu-button-scale-container, #sound-button-scale-container, #landing-scroll-icon {
+        transform: scale(0.9);
+    }
+
+    #sound-button {
+        right: 64px;
+    }
+}
+
+@media (max-width: 550px), (max-height: 550px) {
+    #logo-clip-path{
+        transform: scale(0.72);
+    }
+
+    #scroll-icon, #menu-button-scale-container, #sound-button-scale-container, #landing-scroll-icon {
+        transform: scale(0.8);
+    }
+
+    #sound-button {
+        right: 60px;
+    }
 }

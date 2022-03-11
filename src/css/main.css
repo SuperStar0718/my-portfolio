@@ -188,5 +188,11 @@ section {
     height: 100%;
     z-index: 0;
     bottom: 0;
-    transition: background-color 300ms ease-in;
+}
+
+/*------------------------------------------ Responsive -----------------------------*/
+@media (max-aspect-ratio: 11/10) {
+    .content-width {
+        max-width: calc(100% - 30px);
+    }
 }

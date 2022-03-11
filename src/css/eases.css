@@ -3,5 +3,5 @@
 }
 
 .slide-out-left-transition {
-    transition: .9s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    transition: left .9s cubic-bezier(0.645, 0.045, 0.355, 1.000), right .9s cubic-bezier(0.645, 0.045, 0.355, 1.000);
 }
