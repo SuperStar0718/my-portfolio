@@ -43,6 +43,7 @@ export default class AboutAnimations {
         this.skills = this.experience.ui.about.render.skills
         this.icons = this.experience.ui.about.icons
         this.scroll = this.experience.ui.scroll
+        this.sounds = this.experience.sounds
 
         this.addScrollEvents()
     }
@@ -51,7 +52,8 @@ export default class AboutAnimations {
         if (!this.hologramPlayed) {
             this.hologramPlayed = true
 
-            //Hide Hologram Animation
+            gsap.delayedCall(.3, () => this.sounds.play('hologram'))
+
             this.fadeInHologramUI(delay)
 
             //Reset Profile Picture Mask
@@ -135,7 +137,7 @@ export default class AboutAnimations {
         const allIcons = document.querySelectorAll('.about-icon')
         for (let i = 0; i < allIcons.length; i++) {
             //fade in from top to bottom
-            gsap.fromTo(allIcons[i], { opacity: 0 }, { opacity: 1, duration: .5, delay: i / 5 })
+            gsap.fromTo(allIcons[i], { opacity: 0 }, { opacity: 1, duration: .5, delay: i / 10 })
         }
 
         //Fade in text
@@ -147,8 +149,8 @@ export default class AboutAnimations {
 
         //Pixels
         this.icons.playPixelAnimation(0, 0)
-        this.icons.playPixelAnimation(1, .25)
-        this.icons.playPixelAnimation(2, .5)
+        this.icons.playPixelAnimation(1, .15)
+        this.icons.playPixelAnimation(2, .3)
     }
 
 

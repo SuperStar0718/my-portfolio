@@ -33,8 +33,8 @@ export default class World {
 
             //Landing Page
             this.landingPage = {}
-            this.landingPage.room = new Room()
             this.landingPage.roomShadow = new RoomShadow()
+            this.landingPage.room = new Room()
             this.landingPage.desktops = new Desktops()
             this.landingPage.mouse = new Mouse()
             this.landingPage.messagePopUp = new MessagePopUp()

@@ -8,6 +8,7 @@ export default class MessagePopUp {
         this.resources = this.experience.resources
         this.room = this.experience.world.landingPage.room
         this.desktops = this.experience.world.landingPage.desktops
+        this.sounds = this.experience.sounds
 
         this.setSprite()
     }
@@ -26,6 +27,10 @@ export default class MessagePopUp {
 
     // play message pop up animation 
     show() {
+        //sound
+        this.sounds.play('notification')
+
+        //animation
         gsap.fromTo(this.sprite.position, { y: 3.3 }, { y: 4, duration: 2, ease: Power3.easeOut })
         gsap.fromTo(this.material, { opacity: 0 }, { opacity: 1, duration: .5 })
         gsap.fromTo(this.material, { opacity: 1 }, { opacity: 0, duration: .5, delay: 1.3 })

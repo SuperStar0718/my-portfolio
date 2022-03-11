@@ -40,7 +40,8 @@ export default class ContactShadow {
             transparent: true,
             uniforms: {
                 alphaMask: { value: this.shadowTexture },
-                uColor: { value: new THREE.Color(this.parameters.color) }
+                uColor: { value: new THREE.Color(this.parameters.color) },
+                uOpacity: { value: 1 }
             },
             vertexShader: roomShadowVertex,
             fragmentShader: roomShadowFragment

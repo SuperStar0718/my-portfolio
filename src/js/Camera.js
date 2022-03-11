@@ -84,11 +84,16 @@ export default class Camera {
             }
             this.debugFolder.add(debugObject, 'unlockControls').name('Unlock Orbit Controls')
 
-            this.debugFolder.add(this.instance.position, 'x').min(-5).max(15).step(0.01)
-            this.debugFolder.add(this.instance.position, 'y').min(-5).max(15).step(0.01)
-            this.debugFolder.add(this.instance.position, 'z').min(-15).max(25).step(0.01)
+            const logPosition = () => console.log('Position updated:', this.instance.position.x, this.instance.position.y, this.instance.position.z)
 
-            const updateLookAt = () => this.instance.lookAt(this.lookAtStartParameters)
+            this.debugFolder.add(this.instance.position, 'x').min(-5).max(15).step(0.01).onChange(() => logPosition())
+            this.debugFolder.add(this.instance.position, 'y').min(-5).max(15).step(0.01).onChange(() => logPosition())
+            this.debugFolder.add(this.instance.position, 'z').min(-15).max(25).step(0.01).onChange(() => logPosition())
+
+            const updateLookAt = () => {
+                this.instance.lookAt(this.lookAtStartParameters)
+                console.log('Looking at: ', this.lookAtStartParameters.x, this.lookAtStartParameters.y, this.lookAtStartParameters.z)
+            }
 
             this.debugFolder.add(this.lookAtStartParameters, 'x').min(-20).max(10).step(0.01).name('Look At X').onChange(() => updateLookAt())
             this.debugFolder.add(this.lookAtStartParameters, 'y').min(-20).max(10).step(0.01).name('Look At Y').onChange(() => updateLookAt())

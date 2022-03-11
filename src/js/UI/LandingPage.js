@@ -24,7 +24,7 @@ export default class LandingPage extends EventEmitter {
         this.experience = new Experience()
         this.gestures = this.experience.gestures
         this.camera = this.experience.camera
-        this.room = this.experience.world.landingPage.room.model
+        this.room = this.experience.world.landingPage.room
         this.roomShadow = this.experience.world.landingPage.roomShadow.model
         this.background = this.experience.world.background
         this.renderer = this.experience.renderer
@@ -33,6 +33,7 @@ export default class LandingPage extends EventEmitter {
         this.waypoints = this.experience.waypoints
         this.scrollIcon = this.experience.ui.scrollIcon
         this.transiton = this.experience.ui.transition
+        this.sounds = this.experience.sounds
 
         this.gestures.on('scroll-down', () => this.hide())
         //this.playOpeningAnimation(1)
@@ -59,9 +60,11 @@ export default class LandingPage extends EventEmitter {
             this.visible = false
             this.lockScrolling()
             this.scrollIcon.hide()
+            this.sounds.muteGroup('landing', true, 1)
+            this.sounds.muteGroup('lab', false, 2)
 
             //Room Bounce
-            gsap.fromTo(this.room.scale, { x: 1, y: 1, z: 1 }, { x: 0, y: 0, z: 0, duration: .5, ease: Back.easeIn.config(1.7) })
+            this.room.bounceOut()
 
             setTimeout(() => {
                 // Landing Page Content
@@ -87,12 +90,12 @@ export default class LandingPage extends EventEmitter {
 
                 //About hologram animation
                 this.experience.ui.about.animations.hologramPlayed = false
-                this.experience.ui.about.animations.playHologramAnimation(.35)
+                this.experience.ui.about.animations.playHologramAnimation(.5)
 
                 // Character Animation
                 this.character.animation.play('fallDown', .3)
 
-                // Update Face3
+                // Update Face
                 this.character.body.face.material.map = this.character.body.faceTextures.scared
                 if (this.character.body.faceCall) {
                     this.character.body.faceCall.kill()
@@ -100,6 +103,7 @@ export default class LandingPage extends EventEmitter {
 
                 //character fall down
                 gsap.to(this.character.model.position, { y: -14.95, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
+                gsap.delayedCall(.4, () => this.sounds.play('waterSplash'))
 
                 //play water idle animation 
                 setTimeout(() => {
@@ -129,12 +133,14 @@ export default class LandingPage extends EventEmitter {
     show() {
         if (this.domElements.scrollContainer.scrollTop == 0 && !this.visible && !this.isAnimating && !this.transiton.isShowing) {
             this.visible = true
+            this.sounds.muteGroup('landing', false, 1)
+            this.sounds.muteGroup('lab', true, 1)
 
             //Lock scrolling depending on last scroll top
             this.lockScrolling()
 
             //Room Bounce
-            gsap.fromTo(this.room.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1, duration: .5, ease: Back.easeOut.config(1.7), delay: .47 })
+            this.room.bounceIn(.47)
 
             // Landing Page Content
             this.domElements.landingPage.style.top = '0'
@@ -159,6 +165,13 @@ export default class LandingPage extends EventEmitter {
 
             // character position
             gsap.to(this.character.model.position, { y: -5.7, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
+
+            //Restart calls
+            if (this.character.scrollIntervalCall)
+                this.character.scrollIntervalCall.restart(true)
+
+            if (this.character.leftDesktopIntervalCall)
+                this.character.leftDesktopIntervalCall.restart(true)
 
             // character animation
             this.character.animation.play('idle', .5)

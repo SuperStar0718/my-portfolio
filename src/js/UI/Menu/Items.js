@@ -52,8 +52,9 @@ export default class MenuItems {
         this.character = this.experience.world.character
         this.menu = this.experience.ui.menu.main
         this.background = this.experience.world.background
-        this.room = this.experience.world.landingPage.room.model
+        this.room = this.experience.world.landingPage.room
         this.sections = this.experience.ui.sections
+        this.sounds = this.experience.sounds
 
         //Update active item on menu open
         this.menu.on('open', () => this.updateActiveItem())
@@ -132,14 +133,25 @@ export default class MenuItems {
 
         this.waypoints.moveToWaypoint('landing-page', false)
 
+        this.sounds.muteGroup('landing', false)
+        this.sounds.muteGroup('lab', true)
+
         //Room
-        this.room.scale.set(1, 1, 1)
+        this.room.baseModel.scale.set(1, 1, 1)
+        this.room.shadow.material.uniforms.uOpacity.value = 1
 
         //Character
         this.character.model.position.y = -5.7
         this.character.animation.play('idle', 0)
         this.character.updateWireframe('up')
         this.character.body.face.material.map = this.character.body.faceTextures.default
+
+        //Restart calls
+        if (this.character.scrollIntervalCall)
+            this.character.scrollIntervalCall.restart(true)
+
+        if (this.character.leftDesktopIntervalCall)
+            this.character.leftDesktopIntervalCall.restart(true)
 
         //Character Mouse
         this.experience.world.landingPage.mouse.moveToIdleStartPositon()
@@ -172,6 +184,9 @@ export default class MenuItems {
 
         this.waypoints.moveToWaypoint('scroll-start', false)
 
+        this.sounds.muteGroup('landing', true)
+        this.sounds.muteGroup('lab', false)
+
         //Character
         this.character.model.position.y = -14.95
         this.character.animation.play('waterIdle', 0)
@@ -197,7 +212,7 @@ export default class MenuItems {
 
         //Button
         this.menu.resetMenuButton()
-        
+
         //Content positions
         this.moveWithoutTransition(this.domElements.scrollContainer, 'left', '0')
         this.moveWithoutTransition(this.domElements.landingPageContent, 'left', '0')

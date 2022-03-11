@@ -6,7 +6,7 @@ import tubeVertexShader from '../../shaders/tube/vertex.glsl'
 export default class Tube {
 
     parameters = {
-        uColorTop: '#0084ff',
+        uColorTop: '#0047d6',
         uColorBottom: '#00ffff',
         uOpacity: 0.25,
     }

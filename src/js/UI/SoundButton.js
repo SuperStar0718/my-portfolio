@@ -20,6 +20,7 @@ export default class Sound {
     constructor() {
         this.experience = new Experience()
         this.sounds = this.experience.sounds
+        this.landingPage = this.experience.ui.landingPage
 
         //Init
         localStorage.getItem('soundActive') === 'true' || localStorage.getItem('soundActive') === true ? this.activate() : this.deactivate()
@@ -50,7 +51,8 @@ export default class Sound {
         //Background
         this.domElements.button.style.background = this.parameters.deactiveColor
 
-        this.updateLocalStorage()
+        this.sounds.muteGroup((this.landingPage.visible ? 'lab' : 'landing'), true, 0)
+        this.sounds.muteGroup((!this.landingPage.visible ? 'lab' : 'landing'), false, 0)
     }
 
     activate() {

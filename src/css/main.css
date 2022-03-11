@@ -123,7 +123,7 @@ hr {
 
 /**Small Button*/
 .small-button {
-    padding: 9px 30px;
+    padding: 9px 32px;
     background: #FF923E;
     color: white;
     border-radius: 16px;
@@ -178,7 +178,7 @@ section {
 
 .content-width {
     width: 1400px;
-    max-width: calc(100% - 30px);
+    max-width: calc(94% - 30px);
 }
 
 /****************************experience**************************/

@@ -25,6 +25,7 @@ export default class Scroll {
         this.fog = this.experience.world.fog
         this.gestures = this.experience.gestures
         this.transition = this.experience.ui.transition
+        this.sounds = this.experience.sounds
 
         //Hide scroll container
         this.domElements.scrollContainer.style.top = '100%'
@@ -117,6 +118,10 @@ export default class Scroll {
         let scrollPercentage = 0
         if (this.scrollY > this.aboutContainer.offset) {
             scrollPercentage = (this.scrollY - this.aboutContainer.offset) / (this.domElements.scrollContainer.clientHeight - this.aboutContainer.height)
+
+            this.sounds.labAmbienceScroll((this.scrollY - this.aboutContainer.offset) / ((this.domElements.scrollContainer.clientHeight * 0.7) - this.aboutContainer.height))
+        } else {
+            this.sounds.labAmbienceScroll(0)
         }
 
         //cap scrollY at 0

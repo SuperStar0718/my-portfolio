@@ -7,6 +7,7 @@ export default class Desktops {
         this.experience = new Experience()
         this.room = this.experience.world.landingPage.room
         this.resources = this.experience.resources
+        this.sounds = this.experience.sounds
 
         this.desktops = []
         this.desktopLayers = {}
@@ -16,7 +17,7 @@ export default class Desktops {
     }
 
     setDesktop0() {
-        this.desktop0 = this.room.model.children.find((children) => children.name === 'desktop-plane-0')
+        this.desktop0 = this.room.baseModel.children.find((children) => children.name === 'desktop-plane-0')
 
         //Material
         this.desktop0Layer0Material = new THREE.MeshBasicMaterial({ map: this.resources.items.desktop0 })
@@ -37,10 +38,12 @@ export default class Desktops {
         const scrollDepth = Math.random() * (-0.25 - 0.25) + 0.25
 
         gsap.to(this.resources.items.desktop0.offset, { y: scrollDepth, duration: 1 })
+
+        this.sounds.play('mouseWheel')
     }
 
     setDesktop1() {
-        this.desktop1 = this.room.model.children.find((children) => children.name === 'desktop-plane-1')
+        this.desktop1 = this.room.baseModel.children.find((children) => children.name === 'desktop-plane-1')
 
         //Material
         this.desktop1PlaneMaterial = new THREE.MeshBasicMaterial({ map: this.resources.items.desktop1 })
@@ -86,7 +89,8 @@ export default class Desktops {
         desktopMesh.geometry.setAttribute('uvs', uvs)
 
         //Add to scene
-        this.room.model.add(desktopMesh)
+        this.room.baseModel.add(desktopMesh)
+
         this.desktopLayers[name] = desktopMesh
     }
 }

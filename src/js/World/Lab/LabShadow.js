@@ -5,7 +5,7 @@ import shadowFragment from '../../shaders/shadow/fragment.glsl'
 
 export default class LabShadow {
     parameters = {
-        color: '#09182f'
+        color: '#002152'
     }
 
     constructor() {
@@ -39,7 +39,8 @@ export default class LabShadow {
             transparent: true,
             uniforms: {
                 alphaMask: { value: this.shadowTexture },
-                uColor: { value: new THREE.Color(this.parameters.color) }
+                uColor: { value: new THREE.Color(this.parameters.color) },
+                uOpacity: { value: 1 }
             },
             vertexShader: shadowVertex,
             fragmentShader: shadowFragment

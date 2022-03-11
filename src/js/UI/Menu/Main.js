@@ -31,6 +31,7 @@ export default class MenuMain extends EventEmitter {
         this.camera = this.experience.camera
         this.gestures = this.experience.gestures
         this.transition = this.experience.ui.transition
+        this.sounds = this.experience.sounds
 
         this.menuButtonClick()
         this.hideEvents()
@@ -104,6 +105,9 @@ export default class MenuMain extends EventEmitter {
 
         gsap.to(this.domElements.scrollContainer, { y: -this.initials.scrollY, duration: .9, ease: Power2.easeInOut })
         gsap.to(this.domElements.logoWhiteBackground, { y: this.initials.logoBackgroundY, duration: .9, ease: Power2.easeInOut })
+        
+        //Lab Sounds
+        this.sounds.labAmbienceScroll('recent')
     }
 
     focusLabScene() {
@@ -118,6 +122,9 @@ export default class MenuMain extends EventEmitter {
 
         //camera
         this.waypoints.moveToWaypoint('lab-menu')
+
+        //sound
+        this.sounds.muteGroup('lab', false, .4)
     }
 
     focusContactScene() {

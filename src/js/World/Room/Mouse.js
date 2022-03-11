@@ -12,6 +12,9 @@ export default class Mouse {
 
     setModel() {
         this.model = this.room.model.children.find((children) => children.name === 'mouse')
+        this.model.position.z += 2.229
+
+        this.room.baseModel.add(this.model)
 
         //Adjust positioning to hand
         this.model.position.x += 0.15
@@ -39,7 +42,7 @@ export default class Mouse {
         const rightBorder = 0.6
 
         if (position.y < 1.63 - 5.7 && position.y > 1.58 - 5.7 && position.x > leftBorder && position.x < rightBorder) {
-            this.model.position.z = -position.x - 1.849
+            this.model.position.z = -position.x - 1.849 + 2.229
             this.model.position.x = position.z + 0.92
         }
     }

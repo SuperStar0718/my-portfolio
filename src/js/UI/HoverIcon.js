@@ -7,19 +7,15 @@ export default class HoverIcon {
     hoverElements = [
         {
             class: '.menu-item',
-            background: '#0B3568'
         },
         {
             class: '.work-item-gray-button',
-            background: '#0B3568'
         },
         {
             class: '.small-button',
-            background: '#0B3568'
         },
         {
             class: '#landing-cta-button',
-            background: '#0B3568'
         },
     ]
 
@@ -71,9 +67,6 @@ export default class HoverIcon {
 
             this.userLeftElement = false
             this.isHovering = true
-
-            // set background color 
-            this.icon.style.background = background
 
             // animate 
             if (this.closeScaleAnimation) this.closeScaleAnimation.kill()

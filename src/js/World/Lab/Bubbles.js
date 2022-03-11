@@ -4,13 +4,14 @@ import { gsap, Power0, Back } from 'gsap'
 
 export default class Bubbles {
 
-    count = 12
+    count = 15
 
     constructor() {
         this.experience = new Experience()
         this.resources = this.experience.resources
         this.lab = this.experience.world.lab.model
         this.debug = this.experience.debug
+        this.sounds = this.experience.sounds
 
         this.setSprite()
         this.startInterval()
@@ -35,8 +36,8 @@ export default class Bubbles {
             )
             this.availableSprites.push(this.sprites[i])
 
-            this.sprites[i].position.x = Math.sin(i) * 1.1 //Maximaler radius
-            this.sprites[i].position.z = Math.cos(i) * 1.1 /*Maximaler radius*/ - 0.15 // z-offet
+            this.sprites[i].position.x = Math.sin(i) * 1.1 //Max radius
+            this.sprites[i].position.z = Math.cos(i) * 1.1 /*Max radius*/ - 0.15 // z-offet
 
             this.lab.model.add(this.sprites[i])
         }
@@ -53,11 +54,9 @@ export default class Bubbles {
     spawnBubble(startY = Math.random() * 1.1, ease) {
         if (this.availableSprites.length != 0) {
             const bubble = this.getAvailableSprite()
-            const maxBubbleMoveDuration = ease === 'back' ? 4 : 5
+            const maxBubbleMoveDuration = ease === 'back' ? 4 : 2
             const easeToUse = ease === 'back' ? Back.easeIn.config(2.5) : Power0.easeNone
             const moveDuration = maxBubbleMoveDuration - (maxBubbleMoveDuration * (startY / 3.9))
-
-
 
             startY += 0.8
 
@@ -77,7 +76,6 @@ export default class Bubbles {
 
             // Fade Out
             gsap.to(bubble.material, { opacity: 0, duration: .2, delay: moveDuration - .2, ease: easeToUse })
-
         } else {
             if (this.debug.active) {
                 console.log('No available bubbles')
@@ -86,7 +84,7 @@ export default class Bubbles {
     }
 
     startInterval() {
-        gsap.delayedCall(Math.random() + .8, () => {
+        gsap.delayedCall((Math.random() * 0.3) + 0.15, () => {
             this.spawnBubble()
             this.startInterval()
         })

@@ -147,7 +147,7 @@ export default class Body {
     updateFace(name) {
         if (name === 'default') {
             this.faceTransitions.count = this.faceTransitions.current.length - 1
-            const faceTransitionsTimeout = () => this.faceCall = gsap.delayedCall(.04, () => {
+            const faceTransitionsTimeout = () => this.faceCall = gsap.delayedCall(.033, () => {
                 this.face.material.map = this.faceTransitions.current[this.faceTransitions.count]
                 this.faceTransitions.count--
                 if (this.faceTransitions.count == -1) {
@@ -160,7 +160,7 @@ export default class Body {
         } else {
             this.faceTransitions.current = this.faceTransitions[name]
             this.faceTransitions.count = 0
-            const faceTransitionsTimeout = () => this.faceCall = gsap.delayedCall(.04, () => {
+            const faceTransitionsTimeout = () => this.faceCall = gsap.delayedCall(.033, () => {
                 this.face.material.map = this.faceTransitions[name][this.faceTransitions.count]
                 this.faceTransitions.count++
                 if (this.faceTransitions.count != this.faceTransitions[name].length) {
@@ -174,14 +174,14 @@ export default class Body {
     // ------------------------ Wireframe ---------------------------------------------------------------------------------------------- 
     defineWireframe() {
         this.wireframeParameters = {
-            color: '#00eeff',
+            color: '#009dff',
         }
 
         // Wireframe Material 
         this.materials.wireframeMaterial = new THREE.MeshBasicMaterial({
             color: this.wireframeParameters.color,
             wireframe: true,
-            opacity: 0.27,
+            opacity: 0.3,
             blending: 2,
         })
 

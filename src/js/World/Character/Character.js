@@ -86,11 +86,16 @@ export default class Character {
     // repeat interval afterwards
     scrollInterval() {
         //Start delayed call
-        this.scrollIntervalCall = gsap.delayedCall(Math.random() * 3 + 1.5, () => {
+        this.scrollIntervalCall = gsap.delayedCall((Math.random() * 2) + 3, () => {
             if (this.experience.ui.landingPage.visible) {
                 if (this.animation.actions.current._clip.name == 'idle') {
+                    //Scroll
                     this.desktops.scrollDesktop0()
-                    this.sounds.play('mouseWheel')
+
+                    //Perform double scroll
+                    if(Math.random() <= 0.33) {
+                        setTimeout(() => this.desktops.scrollDesktop0(), 700)
+                    }
                 }
             }
             //Repeat
@@ -102,9 +107,14 @@ export default class Character {
     leftDesktopInterval() {
         this.leftDesktopIntervalCall = gsap.delayedCall(this.leftDesktopIntervalDuration + this.animation.actions.leftDesktopAction._clip.duration + (Math.random() * 4), () => {
             if (this.experience.ui.landingPage.visible) {
+                //Animation
                 gsap.delayedCall(.18, () => this.animation.play('leftDesktopAction', .3))
 
+                //Pop Up Animation
                 this.messagePopUp.show()
+
+                //Type sound
+                setTimeout(() => this.sounds.play('longKeyboard'), 1700)
 
                 // play idle afterwards 
                 gsap.delayedCall(this.animation.actions.leftDesktopAction._clip.duration, () => {

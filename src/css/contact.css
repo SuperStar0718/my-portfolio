@@ -83,6 +83,7 @@
 
 #contact-button-container {
     margin-top: 20px;
+    margin-bottom: 4px;
     display: flex;
     align-items: center;
 }
@@ -90,6 +91,7 @@
 #contact-button-container .small-button {
     margin-left: auto;
     font-size: 15px;
+    border-radius: 22px;
 }
 
 #contact-button-container .social-icon {
