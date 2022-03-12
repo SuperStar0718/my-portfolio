@@ -10,8 +10,7 @@
 #work-background {
     background: #F5EFE6;
     transform: rotate(1deg);
-    transform: rotate(1deg);
-    width: 110%;
+    width: 300%;
     height: 100%;
     position: absolute;
     z-index: -1;

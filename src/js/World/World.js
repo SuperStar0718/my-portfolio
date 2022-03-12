@@ -16,6 +16,7 @@ import Mouse from './Room/Mouse'
 import MessagePopUp from './Room/MessagePopUp.js'
 import ContactScene from './Contact/ContactScene.js'
 import ContactShadow from './Contact/ContactShadow.js'
+import David from './Contact/David.js'
 
 export default class World {
     constructor() {
@@ -53,6 +54,7 @@ export default class World {
             this.contact = {}
             this.contact.scene = new ContactScene()
             this.contact.shadow = new ContactShadow()
+            this.contact.david = new David()
 
             this.character = new Character()
         })
@@ -61,7 +63,7 @@ export default class World {
     setFog() {
         this.fog = new THREE.Fog('#042C61', 15, 20)
 
-        this.scene.fog = this.fog
+        //this.scene.fog = this.fog
 
         // Debug Fog
         if (this.debug.active) {

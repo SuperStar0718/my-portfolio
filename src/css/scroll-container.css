@@ -1,9 +1,8 @@
 #scroll-container {
     position: absolute;
     top: 50%;
-    margin: 0 auto;
     left: 0;
-    right: 0;
+    width: 100%;
 }
 
 .scroll-container-transitions {

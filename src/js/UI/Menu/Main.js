@@ -32,9 +32,18 @@ export default class MenuMain extends EventEmitter {
         this.gestures = this.experience.gestures
         this.transition = this.experience.ui.transition
         this.sounds = this.experience.sounds
+        this.sizes = this.experience.sizes
 
         this.menuButtonClick()
         this.hideEvents()
+        
+        this.sizes.on('portrait', () => this.onOrientationChange())
+        this.sizes.on('landscape', () => this.onOrientationChange())
+    }
+
+    onOrientationChange() {
+        this.switchVisiblity(true, true)
+        this.domElements.menuContainer.style.right = this.sizes.portrait ? '-100%' : 'calc(-350px - 10vw)'
     }
 
     menuButtonClick() {
@@ -51,18 +60,13 @@ export default class MenuMain extends EventEmitter {
 
             this.visible = !this.visible
 
+            //Position
+            this.domElements.menuContainer.style.right = this.visible ? '0' : (this.sizes.portrait ? '-100%' : 'calc(-350px - 10vw)')
+
             //Button
             this.visible ? this.crossMenuButton() : this.resetMenuButton()
 
-            //Position
-            this.domElements.menuContainer.style.right = this.visible ? '0' : 'calc(-350px - 10vw)'
-
-            //Camera
-            if (withCamera) this.landingPage.visible ? this.landingPageTransition() : this.scrollContainerTransition()
-
-            //Content
-            this.domElements.landingPageContent.style.left = this.visible ? '-100%' : '0'
-            this.domElements.scrollContainer.style.left = this.visible ? '-100%' : '0'
+            if (withCamera && !this.sizes.portrait) this.landingPage.visible ? this.landingPageTransition() : this.scrollContainerTransition()
 
             //Prevent too fast reopening
             this.isAnimating = true
@@ -73,6 +77,7 @@ export default class MenuMain extends EventEmitter {
     //Open Menu with landing page view
     landingPageTransition() {
         this.waypoints.moveToWaypoint((this.visible ? 'landing-menu' : 'landing-page'), true, .9)
+        this.domElements.landingPageContent.style.left = this.visible ? '-100%' : '0'
     }
 
     /**
@@ -84,11 +89,15 @@ export default class MenuMain extends EventEmitter {
         if (!this.visible) {
             //Close Menu
             this.returnToInitialPosition()
+
+            this.domElements.scrollContainer.style.left = '0'
         } else {
             //Show Menu
             const labScene = this.scroll.scrollY <= this.domElements.aboutSection.clientHeight + (window.innerHeight * 0.12)
             this.setInitialPositions()
             labScene ? this.focusLabScene() : this.focusContactScene()
+
+            this.domElements.scrollContainer.style.left = '-100%'
         }
     }
 
@@ -105,7 +114,7 @@ export default class MenuMain extends EventEmitter {
 
         gsap.to(this.domElements.scrollContainer, { y: -this.initials.scrollY, duration: .9, ease: Power2.easeInOut })
         gsap.to(this.domElements.logoWhiteBackground, { y: this.initials.logoBackgroundY, duration: .9, ease: Power2.easeInOut })
-        
+
         //Lab Sounds
         this.sounds.labAmbienceScroll('recent')
     }
@@ -171,5 +180,6 @@ export default class MenuMain extends EventEmitter {
     resize() {
         if (this.visible)
             this.switchVisiblity(true, true)
+
     }
 }

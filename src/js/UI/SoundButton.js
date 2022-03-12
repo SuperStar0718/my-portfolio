@@ -68,6 +68,8 @@ export default class Sound {
         this.domElements.button.style.background = this.parameters.activeColor
 
         this.updateLocalStorage()
+
+        if (!this.landingPage.visible) this.sounds.labAmbienceScroll('recent')
     }
 
     updateLocalStorage() {

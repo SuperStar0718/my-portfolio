@@ -36,13 +36,9 @@ export default class Sizes extends EventEmitter {
     checkPortrait() {
         const isPortrait = window.innerWidth / window.innerHeight <= 1.1
 
-        if (isPortrait != this.portrait) {
+        if (isPortrait !== this.portrait) {
             this.portrait = isPortrait
-
             this.trigger(this.portrait ? 'portrait' : 'landscape')
-
-            if (this.debug.active)
-                console.log(this.portrait ? 'portrait' : 'landscape')
         }
     }
 
@@ -53,9 +49,6 @@ export default class Sizes extends EventEmitter {
             this.touch = isTouch
 
             this.trigger(this.touch ? 'touch' : 'no-touch')
-
-            if (this.debug.active)
-                console.log(this.touch ? 'touch' : 'no-touch')
         }
     }
 }

@@ -34,9 +34,20 @@ export default class LandingPage extends EventEmitter {
         this.scrollIcon = this.experience.ui.scrollIcon
         this.transiton = this.experience.ui.transition
         this.sounds = this.experience.sounds
+        this.sizes = this.experience.sizes
+        this.waypoints = this.experience.waypoints
 
         this.gestures.on('scroll-down', () => this.hide())
         //this.playOpeningAnimation(1)
+
+        this.waypoints.moveToWaypoint(this.sizes.portrait ? 'landing-page-portrait' : 'landing-page', false)
+
+        this.sizes.on('portrait', () => this.onOrientationChange())
+        this.sizes.on('landscape', () => this.onOrientationChange())
+    }
+
+    onOrientationChange() {
+        this.waypoints.moveToWaypoint(this.sizes.portrait ? 'landing-page-portrait' : 'landing-page')
     }
 
     playOpeningAnimation(delay = 0) {
@@ -149,7 +160,7 @@ export default class LandingPage extends EventEmitter {
             this.domElements.scrollContainer.style.top = '100%'
 
             //Camera
-            this.waypoints.moveToWaypoint('landing-page', true, this.scrollAnimationDuration)
+            this.waypoints.moveToWaypoint((this.sizes.portrait ? 'landing-page-portrait' : 'landing-page'), true, this.scrollAnimationDuration)
 
             //Background
             gsap.to(this.background.material.uniforms.uOffset, { value: -this.background.height, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })

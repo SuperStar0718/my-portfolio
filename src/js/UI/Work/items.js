@@ -13,7 +13,7 @@ export default [
         name: 'Portfolio 2022',
         description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi saepe illo maiores illum harum laudantium.',
         image: 'images/projects/portfolio.png',
-        tags: ['threejs', 'javascript', 'svg', 'glsl', 'html', 'css'],
+        tags: ['webgl', 'javascript', 'svg', 'html', 'css'],
         liveview: 'https://www.google.com/',
         github: 'https://github.com/davidhckh',
     },

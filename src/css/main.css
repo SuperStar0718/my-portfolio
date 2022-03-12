@@ -28,6 +28,8 @@ body
     font-family: 'Poppins', sans-serif;
     color: #091434;
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 .hide {
@@ -167,6 +169,7 @@ section {
     justify-content: center;
     align-items: center;
     z-index: 1;
+
 }
 
 .content-container {

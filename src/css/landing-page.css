@@ -60,6 +60,33 @@
 }
 
 /**---------------------------------------------------------------Responsive-----------------------------------------------------*/
-@media  (max-aspect-ratio: 11/10){
+@media (max-aspect-ratio: 11/10) {
+    #landing-content-svg {
+        max-width: 100%;
+    }
 
+    #landing-page {
+        align-items: flex-start;
+        padding: 65px 0;
+    }
+
+    #landing-page-section {
+        max-height: 40vh;
+        justify-content: center;
+        align-items: center;
+    }
 }
+
+/**Adapt so smaller overlay*/
+@media (max-width: 800px), (max-height: 800px) {
+    #landing-page {
+        padding: 65px 0;
+    }
+}
+
+@media (max-width: 550px), (max-height: 550px) {
+    #landing-page {
+        padding: 50px 0;
+    }
+}
+    

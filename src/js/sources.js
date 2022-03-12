@@ -39,9 +39,10 @@ export default [
     { name: 'bubbleSprite', type: 'texture', path: 'textures/sprites/bubble.png' },
 
     //Contact Scene
-    {name: 'contactSceneModel', type:'gltfModel', path:'models/contact/model.glb'},
-    {name: 'bakedContactTexture', type:'texture', path:'models/contact/baked.jpg'},
+    { name: 'contactSceneModel', type: 'gltfModel', path: 'models/contact/model.glb' },
+    { name: 'bakedContactTexture', type: 'texture', path: 'models/contact/baked.jpg' },
     { name: 'contactShadowModel', type: 'gltfModel', path: 'models/contact/shadow-model.glb' },
     { name: 'bakedShadowContactTexture', type: 'texture', path: 'models/contact/shadow-baked.jpg' },
+    { name: 'davidImage', type: 'texture', path: 'images/david.png' }
 
 ]

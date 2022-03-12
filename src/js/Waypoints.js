@@ -11,8 +11,8 @@ export default class Waypoints {
         },
         {
             name: 'landing-page-portrait',
-            position: { x: 9.5, y: 1.5, z: 13 },
-            lookAt: { x: 0.4, y: -0.7, z: 0 },
+            position: { x: 10.5, y: 2.5, z: 14 },
+            lookAt: { x: 0.4, y: -0.1, z: 0 },
         },
         {
             name: 'landing-menu',
@@ -43,7 +43,6 @@ export default class Waypoints {
         this.time = this.experience.time
 
         this.setupWaypoints()
-        this.moveToWaypoint('landing-page', false)
     }
 
     setupWaypoints() {

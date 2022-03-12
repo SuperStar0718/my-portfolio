@@ -78,3 +78,59 @@
 #legal-container a:hover {
     text-decoration: underline;
 }
+
+@media (max-aspect-ratio: 11/10) {
+    #menu-container {
+        right: -100%;
+        width: 100% !important;
+        max-width: unset;
+        align-items: center;
+    }
+
+    .menu-items-column-container {
+        align-items: center;
+    }
+
+    #menu-social-container {
+        justify-content: center;
+    }
+
+    #legal-container {
+        justify-content: center;
+    }
+}
+
+/**Decrease Menu in height*/
+@media(max-height: 600px) {
+    .menu-item {
+        font-size: 1.3rem;
+        margin: 10px 0;
+    }
+
+    #menu-container .social-icon {
+        height: 24px;
+        width:  24px;
+    }
+
+    #menu-container hr {
+        margin: 15px 0;
+    }
+
+    #legal-container a {
+        font-size: 12px;
+    }
+
+    .menu-items-column-container {
+        justify-content: center;
+    }
+}
+
+@media(max-height: 450px) {
+    #menu-items-container {
+        flex-direction: row;
+    }
+
+    #menu-container {
+        padding: 30px 30px 45px 30px;
+    }
+}
