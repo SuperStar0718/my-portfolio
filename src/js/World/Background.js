@@ -5,7 +5,7 @@ import * as THREE from 'three'
 
 export default class Background {
 
-    height = 2.3
+    height = 3.5
 
     constructor() {
         this.experience = new Experience()

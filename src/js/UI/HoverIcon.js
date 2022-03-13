@@ -37,7 +37,7 @@ export default class HoverIcon {
 
                 // Mouseeenter 
                 domElement.addEventListener('mouseenter', () => {
-                    this.showIcon(event.srcElement, element.background)
+                    this.showIcon(event.srcElement)
                 })
 
                 // mouseleave 
@@ -56,13 +56,13 @@ export default class HoverIcon {
         })
     }
 
-    showIcon(element, background) {
+    showIcon(element) {
         const isActiveMenuItem = element.classList.contains('active-menu-item')
         const isActiveAboutTab = element.classList.contains('about-active-tab')
         const isActiveWorkItemChildren = !element.parentElement.parentElement.parentElement.parentElement.classList.contains('work-inactive-item-container')
-        const isMobile = this.sizes.mobile
+        const isTouch = this.sizes.touch
 
-        if (!isActiveMenuItem && !isActiveAboutTab && isActiveWorkItemChildren && !isMobile) {
+        if (!isActiveMenuItem && !isActiveAboutTab && isActiveWorkItemChildren && !isTouch) {
             this.currentHoverElement = element
 
             this.userLeftElement = false

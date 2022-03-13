@@ -13,12 +13,12 @@ export default class Sizes extends EventEmitter {
         this.debug = this.experience.debug
 
         // Setup
-        this.checkTouchDevice()
-        this.checkPortrait()
-
         this.width = window.innerWidth
         this.height = window.innerHeight
         this.pixelRatio = Math.min(window.devicePixelRatio, 2)
+
+        this.checkTouchDevice()
+        this.checkPortrait()
 
         // Resize event
         window.addEventListener('resize', () => {
@@ -48,7 +48,7 @@ export default class Sizes extends EventEmitter {
         if (isTouch != this.touch) {
             this.touch = isTouch
 
-            this.trigger(this.touch ? 'touch' : 'no-touch')
+            setTimeout(() => this.trigger(this.touch ? 'touch' : 'no-touch'))
         }
     }
 }

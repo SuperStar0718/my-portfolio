@@ -55,6 +55,7 @@ export default class MenuItems {
         this.room = this.experience.world.landingPage.room
         this.sections = this.experience.ui.sections
         this.sounds = this.experience.sounds
+        this.sizes = this.experience.sizes
 
         //Update active item on menu open
         this.menu.on('open', () => this.updateActiveItem())
@@ -122,6 +123,9 @@ export default class MenuItems {
         //Hide Scroll Icon on Landing Page
         this.scrollIcon.hide()
 
+        //Hover Icon
+        this.experience.ui.hoverIcon.hideIcon()
+
         if (item.onOpen) item.onOpen()
 
         // setup either scroll or landing page item
@@ -131,7 +135,7 @@ export default class MenuItems {
     setupLandingPage() {
         this.landingPage.visible = true
 
-        this.waypoints.moveToWaypoint('landing-page', false)
+        this.waypoints.moveToWaypoint(this.sizes.portrait ? 'landing-page-portrait' : 'landing-page', false)
 
         this.sounds.muteGroup('landing', false)
         this.sounds.muteGroup('lab', true)
@@ -167,7 +171,7 @@ export default class MenuItems {
         this.background.material.uniforms.uOffset.value = -this.background.height
 
         //Fog
-        gsap.to(this.experience.scene.fog, { near: 15, far: 20, duration: 0 })
+        this.experience.world.fog.hide(0)
 
         //Logo white background
         gsap.to(this.domElements.logoWhiteBackground, { y: 0, duration: 0 })
@@ -182,7 +186,7 @@ export default class MenuItems {
     setupScrollContainerItem(item) {
         this.landingPage.visible = false
 
-        this.waypoints.moveToWaypoint('scroll-start', false)
+        this.waypoints.moveToWaypoint(this.sizes.portrait ? 'scroll-start-portrait' : 'scroll-start', false)
 
         this.sounds.muteGroup('landing', true)
         this.sounds.muteGroup('lab', false)
@@ -191,7 +195,6 @@ export default class MenuItems {
         this.character.model.position.y = -14.95
         this.character.animation.play('waterIdle', 0)
         this.character.updateWireframe('down')
-
 
         //Move Landing Page and Scroll Container to positions
         this.moveWithoutTransition(this.domElements.landingPage, 'top', '-100%')
@@ -216,7 +219,10 @@ export default class MenuItems {
         //Content positions
         this.moveWithoutTransition(this.domElements.scrollContainer, 'left', '0')
         this.moveWithoutTransition(this.domElements.landingPageContent, 'left', '0')
-        this.moveWithoutTransition(this.domElements.menuContainer, 'right', 'calc(-350px - 10vw)')
+        this.moveWithoutTransition(this.domElements.menuContainer, 'right', this.sizes.portrait ? '-100%' : 'calc(-350px - 10vw)')
+
+        //Logo white background
+        gsap.to(this.domElements.logoWhiteBackground, { opacity: 1, duration: 0 })
     }
 
     moveWithoutTransition(element, style, value) {

@@ -1,7 +1,7 @@
 /****************************Overlay**************************/
 #overlay-container {
     position: absolute;
-    height: calc(100% - 30px);
+    height: calc(100vh - 30px);
     padding: 15px 0;
     margin: 0 auto;
     right: 0;
@@ -11,7 +11,6 @@
 }
 
 #header-container {
-    position: relative;
     top: 0;
     transition: 250ms;
 }

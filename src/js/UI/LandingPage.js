@@ -36,8 +36,10 @@ export default class LandingPage extends EventEmitter {
         this.sounds = this.experience.sounds
         this.sizes = this.experience.sizes
         this.waypoints = this.experience.waypoints
+        this.fog = this.experience.world.fog
 
         this.gestures.on('scroll-down', () => this.hide())
+        this.gestures.on('touch-down', () => this.hide())
         //this.playOpeningAnimation(1)
 
         this.waypoints.moveToWaypoint(this.sizes.portrait ? 'landing-page-portrait' : 'landing-page', false)
@@ -47,7 +49,9 @@ export default class LandingPage extends EventEmitter {
     }
 
     onOrientationChange() {
-        this.waypoints.moveToWaypoint(this.sizes.portrait ? 'landing-page-portrait' : 'landing-page')
+        if (this.visible) {
+            this.waypoints.moveToWaypoint(this.sizes.portrait ? 'landing-page-portrait' : 'landing-page', false)
+        }
     }
 
     playOpeningAnimation(delay = 0) {
@@ -85,7 +89,7 @@ export default class LandingPage extends EventEmitter {
                 this.domElements.scrollContainer.style.top = '0'
 
                 //Camera
-                this.waypoints.moveToWaypoint('scroll-start', true, this.scrollAnimationDuration)
+                this.waypoints.moveToWaypoint((this.sizes.portrait ? 'scroll-start-portrait' : 'scroll-start'), true, this.scrollAnimationDuration)
 
                 //Background
                 gsap.to(this.background.material.uniforms.uOffset, { value: 0, ease: Power2.easeInOut, duration: this.scrollAnimationDuration })
@@ -94,7 +98,7 @@ export default class LandingPage extends EventEmitter {
                 gsap.to(this.domElements.logoWhiteBackground, { y: -window.innerHeight, ease: Power2.easeInOut, duration: this.scrollAnimationDuration })
 
                 //Fog
-                setTimeout(() => gsap.to(this.experience.scene.fog, { near: 12, far: 16.3, duration: this.scrollAnimationDuration, ease: Power4.easeOut }), 300)
+                setTimeout(() => gsap.to(this.experience.scene.fog, { near: (this.sizes.portrait ? 18.5 : 12), far: (this.sizes.portrait ? 23 : 16.3), duration: this.scrollAnimationDuration, ease: Power4.easeOut }), 300)
 
                 //Render Clear Color
                 setTimeout(() => this.renderer.instance.setClearColor('#EFE7DC'), 700)
@@ -169,7 +173,7 @@ export default class LandingPage extends EventEmitter {
             gsap.to(this.domElements.logoWhiteBackground, { y: 0, ease: Power2.easeInOut, duration: this.scrollAnimationDuration })
 
             //Fog
-            setTimeout(() => gsap.to(this.experience.scene.fog, { near: 15, far: 20, duration: this.scrollAnimationDuration }), 300)
+            setTimeout(() => this.fog.hide(), 300)
 
             //Renderer Clear color
             this.renderer.instance.setClearColor('#F5EFE6')

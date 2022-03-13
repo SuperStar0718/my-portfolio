@@ -17,6 +17,10 @@ export default class WorkCards {
     backButton = document.getElementById('work-back-button')
     nextButton = document.getElementById('work-next-button')
 
+    domElements = {
+        section: document.getElementById('work-section')
+    }
+
     constructor() {
         this.experience = new Experience()
         this.gestures = this.experience.gestures
@@ -47,8 +51,21 @@ export default class WorkCards {
     }
 
     initSwipes() {
-        this.gestures.on('scroll-right', () => this.moveForward())
-        this.gestures.on('scroll-left', () => this.moveBack())
+        this.gestures.on('swipe-right', () => this.swipe('right'))
+        this.gestures.on('swipe-left', () => this.swipe('left'))
+
+        this.domElements.section.addEventListener('touchend', () => {
+            setTimeout(() => this.isCurrentSwipeElement = false)
+        })
+        this.domElements.section.addEventListener('touchstart', () => {
+            this.isCurrentSwipeElement = true
+        })
+    }
+
+    swipe(direction) {
+        if(this.isCurrentSwipeElement) {
+            direction == 'right' ? this.moveForward() : this.moveBack()
+        }
     }
 
     moveBack() {

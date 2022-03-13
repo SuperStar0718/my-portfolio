@@ -16,6 +16,8 @@ export default class Sections {
 
     constructor() {
         this.experience = new Experience()
+        this.scroll = this.experience.ui.scroll
+        this.gestures = this.experience.gestures
 
         this.setSectionsY()
     }

@@ -109,3 +109,20 @@
     font-size: 17px;
     margin-left: 20px;
 }
+
+/**---------------------------------------------------------------Responsive-----------------------------------------------------*/
+@media (max-aspect-ratio: 11/10) {
+    #about-section {
+        justify-content: center;
+    }
+
+    #about-content-container {
+        max-width: 100%;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    #skills-svg{
+        margin-top: 65vh;
+    }
+}

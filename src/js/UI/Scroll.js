@@ -22,10 +22,11 @@ export default class Scroll {
         this.landingPage = this.experience.ui.landingPage
         this.time = this.experience.time
         this.background = this.experience.world.background
-        this.fog = this.experience.world.fog
+        this.fog = this.experience.world.fog.fog
         this.gestures = this.experience.gestures
         this.transition = this.experience.ui.transition
         this.sounds = this.experience.sounds
+        this.waypoints = this.experience.waypoints
 
         //Hide scroll container
         this.domElements.scrollContainer.style.top = '100%'
@@ -33,6 +34,7 @@ export default class Scroll {
 
         this.events = []
 
+        this.setCameraRange()
         this.setAboutContainerDetails()
         this.setLogoOverlayHeight()
 
@@ -40,13 +42,44 @@ export default class Scroll {
         this.gestures.on('scroll-down', () => this.scroll(1))
         this.gestures.on('scroll-up', () => this.scroll(-1))
 
+        //Touch
+        this.gestures.on('touch-down', () => this.scroll(1, -this.gestures.touchDistanceY * 2))
+        this.gestures.on('touch-up', () => this.scroll(-1, this.gestures.touchDistanceY * 2))
+
         //Reset Y on open
         this.landingPage.on('hide', () => {
-            if(this.scrollY != 0) {
+            if (this.scrollY != 0) {
                 this.scrollY = 0
             }
-
         })
+
+        //Orientation Change
+        this.sizes.on('portrait', () => this.onOrientationChange())
+        this.sizes.on('landscape', () => this.onOrientationChange())
+    }
+
+    onOrientationChange() {
+        this.setCameraRange()
+
+        if (!this.landingPage.visible) {
+            this.moveToTop()
+        }
+    }
+
+    moveToTop() {
+        this.waypoints.moveToWaypoint((this.sizes.portrait ? 'scroll-start-portrait' : 'scroll-start'), false)
+        this.scrollY = 0
+        this.performScroll(0)
+        this.experience.ui.header.show()
+    }
+
+    setCameraRange() {
+        this.cameraRange = {}
+
+        const waypoint = this.waypoints.waypoints.find((waypoint) => waypoint.name === (this.sizes.portrait ? 'scroll-start-portrait' : 'scroll-start'))
+
+        this.cameraRange.top = waypoint.position.y
+        this.cameraRange.bottom = this.sizes.portrait ? -50 : -22.4
     }
 
     setAboutContainerDetails() {
@@ -80,7 +113,7 @@ export default class Scroll {
         })
     }
 
-    scroll(direction) {
+    scroll(direction, strength = this.parameters.scrollStrength) {
         if (!this.landingPage.isAnimating && !this.landingPage.visible && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating && !this.transition.isShowing) {
             if (direction == -1 && this.scrollY <= 0) {
                 //Open landing page
@@ -89,7 +122,7 @@ export default class Scroll {
                 //check if scroll is possible
                 if (this.scrollY < this.domElements.scrollContainer.clientHeight - window.innerHeight || direction == -1) {
                     //set scroll height if possible
-                    this.scrollY += direction * this.parameters.scrollStrength
+                    this.scrollY += direction * strength
 
                     this.performScroll()
                 }
@@ -101,10 +134,10 @@ export default class Scroll {
     }
 
     preventFromScrollingBottom() {
-         /**
-          * Set scroll maximum at bottom
-          *  return original scrollY if not required
-         **/
+        /**
+         * Set scroll maximum at bottom
+         *  return original scrollY if not required
+        **/
         if (this.scrollY >= this.domElements.scrollContainer.clientHeight - window.innerHeight) {
             return this.domElements.scrollContainer.clientHeight - window.innerHeight
         } else {
@@ -116,16 +149,21 @@ export default class Scroll {
         this.contentScrollTo = this.preventFromScrollingBottom()
 
         let scrollPercentage = 0
-        if (this.scrollY > this.aboutContainer.offset) {
-            scrollPercentage = (this.scrollY - this.aboutContainer.offset) / (this.domElements.scrollContainer.clientHeight - this.aboutContainer.height)
-
-            this.sounds.labAmbienceScroll((this.scrollY - this.aboutContainer.offset) / ((this.domElements.scrollContainer.clientHeight * 0.7) - this.aboutContainer.height))
+        if (this.scrollY > this.aboutContainer.offset || this.sizes.portrait) {
+            if (this.sizes.portrait) {
+                scrollPercentage = this.contentScrollTo / this.domElements.scrollContainer.clientHeight
+                this.sounds.labAmbienceScroll(this.scrollY / this.aboutContainer.height)
+            }
+            else {
+                scrollPercentage = (this.contentScrollTo - this.aboutContainer.offset) / (this.domElements.scrollContainer.clientHeight - this.aboutContainer.height)
+                this.sounds.labAmbienceScroll((this.contentScrollTo - this.aboutContainer.offset) / ((this.domElements.scrollContainer.clientHeight * 0.7) - this.aboutContainer.height))
+            }
         } else {
             this.sounds.labAmbienceScroll(0)
         }
 
         //cap scrollY at 0
-        if(this.contentScrollTo < 0) this.contentScrollTo = 0
+        if (this.contentScrollTo < 0) this.contentScrollTo = 0
 
         //cap scroll percentage
         if (scrollPercentage < 0) scrollPercentage = 0
@@ -134,19 +172,18 @@ export default class Scroll {
         //Scroll Container
         gsap.to(this.domElements.scrollContainer, { y: -this.contentScrollTo, duration: duration })
 
-
         if (scrollPercentage >= 0) {
             //Background Plane
-            gsap.to(this.background.material.uniforms.uOffset, { value: this.background.height * scrollPercentage, duration: duration })
+            gsap.to(this.background.material.uniforms.uOffset, { value: (this.background.height * 1.5) * scrollPercentage, duration: duration })
 
             //Camera
-            gsap.to(this.camera.instance.position, { y: -12.4 * scrollPercentage - 10, duration: duration })
+            gsap.to(this.camera.instance.position, { y: (this.cameraRange.bottom - this.cameraRange.top) * scrollPercentage + this.cameraRange.top, duration: duration })
 
             //Fog
-            gsap.to(this.fog, { near: (7 * scrollPercentage) + 12, far: (2.7 * scrollPercentage) + 16.3 })
+            gsap.to(this.fog, { near: ((this.sizes.portrait ? 13 : 7) * scrollPercentage) + (this.sizes.portrait ? 18.5 : 12), far: ((this.sizes.portrait ? 8.7 : 2.7) * scrollPercentage) + (this.sizes.portrait ? 23 : 16.3) })
 
             //Logo Background
-            gsap.to(this.domElements.logoWhiteBackground, { y: - this.contentScrollTo - window.innerHeight, duration: duration })
+            gsap.to(this.domElements.logoWhiteBackground, { y: - this.contentScrollTo - window.innerHeight , duration: duration })
         }
     }
 
@@ -163,15 +200,16 @@ export default class Scroll {
 
     //Re-position logo white background
     setLogoOverlayHeight() {
-        document.getElementById('logo-white-background').style.height = this.aboutContainer.height + (window.innerHeight * 0.12) + 'px'
+        document.getElementById('logo-white-background').style.height = this.aboutContainer.height + (window.innerHeight * (this.sizes.portrait ? 0.03 : 0.12)) +'px'
     }
 
     resize() {
         //Clear events and reinitialize
         this.events = []
-        
+
         this.setAboutContainerDetails()
         this.setLogoOverlayHeight()
-        if (!this.landingPage.visible) this.performScroll()
+
+        if (!this.landingPage.visible) this.performScroll(0)
     }
 }

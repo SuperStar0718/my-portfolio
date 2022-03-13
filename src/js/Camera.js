@@ -52,11 +52,11 @@ export default class Camera {
     }
 
     update() {
-        if (this.controls) {
+        if (this.controls)
             this.controls.update()
-        }
 
-        this.updateParallax()
+        if (!this.sizes.touch)
+            this.updateParallax()
     }
 
     // update parallax animation using cursor movement 

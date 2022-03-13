@@ -36,13 +36,15 @@ export default class MenuMain extends EventEmitter {
 
         this.menuButtonClick()
         this.hideEvents()
-        
+
         this.sizes.on('portrait', () => this.onOrientationChange())
         this.sizes.on('landscape', () => this.onOrientationChange())
     }
 
     onOrientationChange() {
-        this.switchVisiblity(true, true)
+        if (this.visible)
+            this.switchVisiblity(true, true)
+
         this.domElements.menuContainer.style.right = this.sizes.portrait ? '-100%' : 'calc(-350px - 10vw)'
     }
 
@@ -62,6 +64,7 @@ export default class MenuMain extends EventEmitter {
 
             //Position
             this.domElements.menuContainer.style.right = this.visible ? '0' : (this.sizes.portrait ? '-100%' : 'calc(-350px - 10vw)')
+            if (this.sizes.portrait) gsap.to(this.domElements.logoWhiteBackground, {opacity: this.visible ? 0 : 1, duration: .7})
 
             //Button
             this.visible ? this.crossMenuButton() : this.resetMenuButton()
@@ -180,6 +183,5 @@ export default class MenuMain extends EventEmitter {
     resize() {
         if (this.visible)
             this.switchVisiblity(true, true)
-
     }
 }

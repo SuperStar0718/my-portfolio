@@ -1,4 +1,3 @@
-import * as THREE from 'three'
 import Experience from '../Experience.js'
 import Room from './Room/Room.js'
 import RoomShadow from './Room/RoomShadow.js'
@@ -17,6 +16,7 @@ import MessagePopUp from './Room/MessagePopUp.js'
 import ContactScene from './Contact/ContactScene.js'
 import ContactShadow from './Contact/ContactShadow.js'
 import David from './Contact/David.js'
+import SceneFog from './Fog.js'
 
 export default class World {
     constructor() {
@@ -24,12 +24,15 @@ export default class World {
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.debug = this.experience.debug
+        this.sizes = this.experience.sizes
 
-        this.setFog()
 
         // Wait for resources
         this.resources.on('ready', () => {
+            this.sizes.checkPortrait()
+
             // Setup
+            this.fog = new SceneFog()
             this.background = new Background()
 
             //Landing Page
@@ -58,21 +61,6 @@ export default class World {
 
             this.character = new Character()
         })
-    }
-
-    setFog() {
-        this.fog = new THREE.Fog('#042C61', 15, 20)
-
-        //this.scene.fog = this.fog
-
-        // Debug Fog
-        if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder('Fog').close()
-
-            this.debugFolder.add(this.fog, 'near').min(-3).max(30).step(0.1)
-            this.debugFolder.add(this.fog, 'far').min(-3).max(30).step(0.1)
-            this.debugFolder.addColor(this.fog, 'color')
-        }
     }
 
     update() {

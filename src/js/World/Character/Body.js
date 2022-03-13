@@ -183,6 +183,7 @@ export default class Body {
             wireframe: true,
             opacity: 0.3,
             blending: 2,
+            wireframeLinewidth: 1,
         })
 
         this.debugWireframe()

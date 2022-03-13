@@ -199,3 +199,9 @@ section {
         max-width: calc(100% - 30px);
     }
 }
+
+@media(max-width: 800px), (max-height: 800px) {
+        h2 {
+        font-size: 2.2rem;
+    }
+}

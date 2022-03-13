@@ -25,6 +25,11 @@ export default class Waypoints {
             lookAt: { x: -2.7, y: -13.7, z: 0 },
         },
         {
+            name: 'scroll-start-portrait',
+            position: { x: 10.5, y: -8.5, z: 14 },
+            lookAt: { x: 0.4, y: -15, z: 0 },
+        },
+        {
             name: 'lab-menu',
             position: { x: -6, y: -10, z: 9.3 },
             lookAt: { x: .5, y: -13.7, z: 0 },
