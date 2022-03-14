@@ -61,15 +61,15 @@ export default class Body {
         this.materials = {}
 
         // Define Matcap materials 
-        this.materials.shirtMaterial = new THREE.MeshMatcapMaterial({ matcap: this.resources.items.shirtMatcap })
-        this.materials.skinMaterial = new THREE.MeshMatcapMaterial({ matcap: this.resources.items.skinMatcap })
-        this.materials.pantsMaterial = new THREE.MeshMatcapMaterial({ matcap: this.resources.items.pantsMatcap })
-        this.materials.whiteMaterial = new THREE.MeshMatcapMaterial({ matcap: this.resources.items.whiteMatcap })
+        this.materials.shirtMaterial = new THREE.MeshMatcapMaterial({ matcap: this.resources.items.shirtMatcap, transparent: true, fog: false })
+        this.materials.skinMaterial = new THREE.MeshMatcapMaterial({ matcap: this.resources.items.skinMatcap, transparent: true, fog: false })
+        this.materials.pantsMaterial = new THREE.MeshMatcapMaterial({ matcap: this.resources.items.pantsMatcap, transparent: true, fog: false })
+        this.materials.whiteMaterial = new THREE.MeshMatcapMaterial({ matcap: this.resources.items.whiteMatcap, transparent: true, fog: false })
 
         // Define baked materials 
         this.bakedTexture = this.resources.items.bakedCharacterHeadTexture
         this.bakedTexture.flipY = false
-        this.materials.bakedMaterial = new THREE.MeshBasicMaterial({ map: this.bakedTexture })
+        this.materials.bakedMaterial = new THREE.MeshBasicMaterial({ map: this.bakedTexture, fog: false })
     }
 
     applyMaterials() {
@@ -130,7 +130,7 @@ export default class Body {
         }
 
         // Material 
-        this.face.material = new THREE.MeshBasicMaterial({ map: this.faceTextures.default, transparent: true })
+        this.face.material = new THREE.MeshBasicMaterial({ map: this.faceTextures.default, transparent: true, fog: false })
 
         this.defineFaceTransitions()
     }
@@ -184,6 +184,7 @@ export default class Body {
             opacity: 0.3,
             blending: 2,
             wireframeLinewidth: 1,
+            fog: false,
         })
 
         this.debugWireframe()

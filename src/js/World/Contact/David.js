@@ -11,19 +11,31 @@ export default class David {
 
         this.setSprite()
         this.initDebug()
+        this.onOrientationChange()
+
+        //Orientation Change
+        this.sizes.on('portrait', () => this.onOrientationChange())
+        this.sizes.on('landscape', () => this.onOrientationChange())
+    }
+
+    onOrientationChange() {
+        if (this.sizes.portrait) {
+            this.sprite.scale.set(3.43, 6.56)
+            this.sprite.position.set(-0.35, 3, -0.5)
+        } else {
+            this.sprite.scale.set(2.64, 5.05)
+            this.sprite.position.set(-0.35, 2, -0.5)
+        }
     }
 
     setSprite() {
         this.texture = this.resources.items.davidImage
 
-        this.material = new THREE.SpriteMaterial({ map: this.texture, depthTest: false })
+        this.material = new THREE.SpriteMaterial({ map: this.texture, depthTest: false, fog: false })
 
         this.sprite = new THREE.Sprite(this.material)
 
         this.contactScene.model.add(this.sprite)
-
-        this.sprite.scale.set(2.64, 5.05)
-        this.sprite.position.set(-0.5, 2.2, -0.5)
     }
 
     initDebug() {

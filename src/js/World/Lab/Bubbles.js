@@ -4,7 +4,7 @@ import { gsap, Power0, Back } from 'gsap'
 
 export default class Bubbles {
 
-    count = 15
+    count = 17
 
     constructor() {
         this.experience = new Experience()

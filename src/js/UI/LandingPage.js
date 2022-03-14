@@ -36,7 +36,6 @@ export default class LandingPage extends EventEmitter {
         this.sounds = this.experience.sounds
         this.sizes = this.experience.sizes
         this.waypoints = this.experience.waypoints
-        this.fog = this.experience.world.fog
 
         this.gestures.on('scroll-down', () => this.hide())
         this.gestures.on('touch-down', () => this.hide())
@@ -96,9 +95,6 @@ export default class LandingPage extends EventEmitter {
 
                 //Logo
                 gsap.to(this.domElements.logoWhiteBackground, { y: -window.innerHeight, ease: Power2.easeInOut, duration: this.scrollAnimationDuration })
-
-                //Fog
-                setTimeout(() => gsap.to(this.experience.scene.fog, { near: (this.sizes.portrait ? 18.5 : 12), far: (this.sizes.portrait ? 23 : 16.3), duration: this.scrollAnimationDuration, ease: Power4.easeOut }), 300)
 
                 //Render Clear Color
                 setTimeout(() => this.renderer.instance.setClearColor('#EFE7DC'), 700)
@@ -171,9 +167,6 @@ export default class LandingPage extends EventEmitter {
 
             //Logo
             gsap.to(this.domElements.logoWhiteBackground, { y: 0, ease: Power2.easeInOut, duration: this.scrollAnimationDuration })
-
-            //Fog
-            setTimeout(() => this.fog.hide(), 300)
 
             //Renderer Clear color
             this.renderer.instance.setClearColor('#F5EFE6')

@@ -44,7 +44,7 @@
     transform: translateX(38px);
 }
 
-.active-menu-item::before {
+.active-menu-item::after {
     position: absolute;
     height: 26px;
     width: 26px;
@@ -97,6 +97,22 @@
 
     #legal-container {
         justify-content: center;
+    }
+
+    .active-menu-item::after {
+        position: absolute;
+        height: 3px;
+        margin: 0 auto;
+        content: '';
+        background: #FF923E;
+        width: 100%;
+        bottom: -2px;
+        left: 0;
+        transform: translateY(16px);
+    }
+
+    .active-menu-item {
+        transform: unset;
     }
 }
 

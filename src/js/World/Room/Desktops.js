@@ -20,7 +20,7 @@ export default class Desktops {
         this.desktop0 = this.room.baseModel.children.find((children) => children.name === 'desktop-plane-0')
 
         //Material
-        this.desktop0Layer0Material = new THREE.MeshBasicMaterial({ map: this.resources.items.desktop0 })
+        this.desktop0Layer0Material = new THREE.MeshBasicMaterial({ map: this.resources.items.desktop0, fog: false })
         this.desktop0.material = this.desktop0Layer0Material
 
         // overlay gradient layer 
@@ -46,7 +46,7 @@ export default class Desktops {
         this.desktop1 = this.room.baseModel.children.find((children) => children.name === 'desktop-plane-1')
 
         //Material
-        this.desktop1PlaneMaterial = new THREE.MeshBasicMaterial({ map: this.resources.items.desktop1 })
+        this.desktop1PlaneMaterial = new THREE.MeshBasicMaterial({ map: this.resources.items.desktop1, fog: false })
         this.desktop1.material = this.desktop1PlaneMaterial
 
         // notification layer 
@@ -79,7 +79,7 @@ export default class Desktops {
         const desktopMesh = desktop.clone()
 
         //Apply material
-        const desktopMaterial = new THREE.MeshBasicMaterial({ map: image, transparent: transparent })
+        const desktopMaterial = new THREE.MeshBasicMaterial({ map: image, transparent: transparent, fog: false })
         desktopMesh.material = desktopMaterial
 
         //Index

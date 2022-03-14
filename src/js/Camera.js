@@ -105,6 +105,8 @@ export default class Camera {
         if (!this.controls) {
             this.controls = new OrbitControls(this.instance, this.canvas)
             this.controls.enableDamping = true
+            this.experience.canvas.style.zIndex= 1000
+            this.controls.target.y = this.instance.position.y - 3
         }
     }
 }

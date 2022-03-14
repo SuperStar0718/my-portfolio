@@ -17,6 +17,7 @@ import ContactScene from './Contact/ContactScene.js'
 import ContactShadow from './Contact/ContactShadow.js'
 import David from './Contact/David.js'
 import SceneFog from './Fog.js'
+import ContactAnimation from './Contact/ContactAnimation.js'
 
 export default class World {
     constructor() {
@@ -60,6 +61,8 @@ export default class World {
             this.contact.david = new David()
 
             this.character = new Character()
+
+            this.contact.animation = new ContactAnimation()
         })
     }
 

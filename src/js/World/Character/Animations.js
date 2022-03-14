@@ -60,6 +60,12 @@ export default class Animations {
         this.actions.waterIdle = this.mixer.clipAction(this.resource.animations.find((animation) => animation.name === 'water-idle'))
         this.actions.waterIdle.loop = THREE.LoopPingPong
         this.actions.waterIdle.allowedOutsideLanding = true
+
+        //Contact scene action
+        this.actions.contact = this.mixer.clipAction(this.resource.animations.find((animation) => animation.name === 'contact-animation'))
+        this.actions.contact.repetitions = 1
+        this.actions.contact.clampWhenFinished = true
+        this.actions.contact.allowedOutsideLanding = true
     }
 
     play(name, transitionDuration = .5) {

@@ -53,6 +53,8 @@ export default class Sound {
 
         this.sounds.muteGroup((this.landingPage.visible ? 'lab' : 'landing'), true, 0)
         this.sounds.muteGroup((!this.landingPage.visible ? 'lab' : 'landing'), false, 0)
+
+        this.updateLocalStorage()
     }
 
     activate() {
@@ -67,9 +69,9 @@ export default class Sound {
         //Background
         this.domElements.button.style.background = this.parameters.activeColor
 
-        this.updateLocalStorage()
-
         if (!this.landingPage.visible) this.sounds.labAmbienceScroll('recent')
+
+        this.updateLocalStorage()
     }
 
     updateLocalStorage() {

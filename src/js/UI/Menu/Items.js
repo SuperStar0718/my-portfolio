@@ -170,9 +170,6 @@ export default class MenuItems {
         //Lab Background
         this.background.material.uniforms.uOffset.value = -this.background.height
 
-        //Fog
-        this.experience.world.fog.hide(0)
-
         //Logo white background
         gsap.to(this.domElements.logoWhiteBackground, { y: 0, duration: 0 })
 

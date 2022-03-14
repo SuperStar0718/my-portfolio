@@ -36,8 +36,8 @@ export default class Waypoints {
         },
         {
             name: 'contact-menu',
-            position: { x: 3, y: -22.4, z: 8.3 },
-            lookAt: { x: 2, y: -26.1, z: 0 },
+            position: { x: 3, y: -21.9, z: 8.3 },
+            lookAt: { x: 2, y: -25.6, z: 0 },
         },
     ]
 

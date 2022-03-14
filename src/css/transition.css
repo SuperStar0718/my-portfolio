@@ -86,3 +86,10 @@
     position: absolute;
     top: 0;
 }
+
+/**---------------------------------------------------------------Responsive-----------------------------------------------------*/
+@media (max-aspect-ratio: 11/10) {
+    #transition-container {
+        transform: translate(-3%, -20%) scale(1.2);
+    }  
+}

@@ -176,4 +176,18 @@ export default class Character {
             children.material = this.body.materials.wireframeMaterial
         }
     }
+
+    setAllToOriginal() {
+        this.model.children[0].children.forEach((children) => {
+            if(children.name === 'face')
+                children.visible = true
+
+            if(children.originalMaterial)
+                children.material = children.originalMaterial
+        })
+    }
+
+    setAllToWireframe() {
+
+    }
 }

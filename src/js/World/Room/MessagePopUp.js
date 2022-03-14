@@ -15,7 +15,7 @@ export default class MessagePopUp {
 
     // create and position message pop up 
     setSprite() {
-        this.material = new THREE.SpriteMaterial({ map: this.resources.items.newMessageSprite, alphaTest: 0.1, opacity: 0 })
+        this.material = new THREE.SpriteMaterial({ map: this.resources.items.newMessageSprite, alphaTest: 0.1, opacity: 0, fog: false })
 
         this.sprite = new THREE.Sprite(this.material)
 

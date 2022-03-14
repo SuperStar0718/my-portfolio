@@ -6,6 +6,7 @@ export default class Scroll {
     parameters = {
         scrollStrength: 140,
         scrollDuration: .5,
+        multiplyScrollStrengthBy: 2.5,
     }
 
     scrollY = 0
@@ -22,7 +23,6 @@ export default class Scroll {
         this.landingPage = this.experience.ui.landingPage
         this.time = this.experience.time
         this.background = this.experience.world.background
-        this.fog = this.experience.world.fog.fog
         this.gestures = this.experience.gestures
         this.transition = this.experience.ui.transition
         this.sounds = this.experience.sounds
@@ -43,8 +43,8 @@ export default class Scroll {
         this.gestures.on('scroll-up', () => this.scroll(-1))
 
         //Touch
-        this.gestures.on('touch-down', () => this.scroll(1, -this.gestures.touchDistanceY * 2))
-        this.gestures.on('touch-up', () => this.scroll(-1, this.gestures.touchDistanceY * 2))
+        this.gestures.on('touch-down', () => this.scroll(1, -this.gestures.touchDistanceY * this.parameters.multiplyScrollStrengthBy))
+        this.gestures.on('touch-up', () => this.scroll(-1, this.gestures.touchDistanceY * this.parameters.multiplyScrollStrengthBy))
 
         //Reset Y on open
         this.landingPage.on('hide', () => {
@@ -94,8 +94,7 @@ export default class Scroll {
         this.events.push({ height: height, direction: direction, task: task, played: false })
         const index = this.events.length - 1
 
-        //wheel event listeners
-        this.gestures.on('scroll-' + direction, () => {
+        const checkEvent = () => {
             if ((direction === 'up' ? height >= this.scrollY : height <= this.scrollY) && !this.events[index].played) {
                 //execute
                 this.events[index].task()
@@ -103,7 +102,11 @@ export default class Scroll {
                 //prevent multiple playing
                 this.events[index].played = true
             }
-        })
+        }
+
+        //wheel event listeners
+        this.gestures.on('scroll-' + direction, () => checkEvent())
+        this.gestures.on('touch-' + direction, () => checkEvent())
 
         //check if unique -> listen to opposite direction to make event playable again
         if (!unique) this.gestures.on('scroll-' + (direction === 'up' ? 'down' : 'up'), () => {
@@ -179,11 +182,8 @@ export default class Scroll {
             //Camera
             gsap.to(this.camera.instance.position, { y: (this.cameraRange.bottom - this.cameraRange.top) * scrollPercentage + this.cameraRange.top, duration: duration })
 
-            //Fog
-            gsap.to(this.fog, { near: ((this.sizes.portrait ? 13 : 7) * scrollPercentage) + (this.sizes.portrait ? 18.5 : 12), far: ((this.sizes.portrait ? 8.7 : 2.7) * scrollPercentage) + (this.sizes.portrait ? 23 : 16.3) })
-
             //Logo Background
-            gsap.to(this.domElements.logoWhiteBackground, { y: - this.contentScrollTo - window.innerHeight , duration: duration })
+            gsap.to(this.domElements.logoWhiteBackground, { y: - this.contentScrollTo - window.innerHeight, duration: duration })
         }
     }
 
@@ -200,7 +200,7 @@ export default class Scroll {
 
     //Re-position logo white background
     setLogoOverlayHeight() {
-        document.getElementById('logo-white-background').style.height = this.aboutContainer.height + (window.innerHeight * (this.sizes.portrait ? 0.03 : 0.12)) +'px'
+        document.getElementById('logo-white-background').style.height = this.aboutContainer.height + (window.innerHeight * (this.sizes.portrait ? 0.03 : 0.12)) + 'px'
     }
 
     resize() {

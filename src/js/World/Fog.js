@@ -1,6 +1,5 @@
 import * as THREE from 'three'
 import Experience from '../Experience'
-import { gsap } from 'gsap'
 
 export default class SceneFog {
     constructor() {
@@ -10,11 +9,20 @@ export default class SceneFog {
         this.sizes = this.experience.sizes
 
         this.setFog()
-        this.hide()
+        this.onOrientationChange()
+
+        //Orientation Change
+        this.sizes.on('portrait', () => this.onOrientationChange())
+        this.sizes.on('landscape', () => this.onOrientationChange())
+    }
+
+    onOrientationChange() {
+        this.fog.near = this.sizes.portrait ? 18 : 10
+        this.fog.far = this.sizes.portrait ? 23 : 17
     }
 
     setFog() {
-        this.fog = new THREE.Fog('#042C61', 15, 20)
+        this.fog = new THREE.Fog('#042C61', 10, 17)
 
         this.scene.fog = this.fog
 
@@ -26,9 +34,5 @@ export default class SceneFog {
             this.debugFolder.add(this.fog, 'far').min(-3).max(30).step(0.1)
             this.debugFolder.addColor(this.fog, 'color')
         }
-    }
-    
-    hide(duration = .3) {
-        gsap.to(this.fog, {near: 30, far: 30, duration: duration})
     }
 }

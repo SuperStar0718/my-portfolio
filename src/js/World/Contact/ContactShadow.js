@@ -5,7 +5,7 @@ import roomShadowFragment from '../../shaders/shadow/fragment.glsl'
 
 export default class ContactShadow {
     parameters = {
-        color: '#703c00'
+        color: '#936733'
     }
 
     constructor() {

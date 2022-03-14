@@ -18,11 +18,12 @@ export default class ContactScene {
 
         // Debug 
         if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder('Contact Scene').close()
+            this.debugFolder = this.debug.ui.addFolder('Contact Scene')
         }
 
         this.setModel()
         this.setMaterial()
+        this.onOrientationChange()
 
         //Orientation Change
         this.sizes.on('portrait', () => this.onOrientationChange())
@@ -30,14 +31,16 @@ export default class ContactScene {
     }
 
     onOrientationChange() {
-        this.model.position.y = this.sizes.portrait ? this.parameters.portraitY : this.parameters.landscapeY
+        if(this.sizes.portrait) {
+            this.model.position.y = this.parameters.portraitY
+        } else {
+            this.model.position.y = this.parameters.landscapeY
+        }
     }
 
     // Set room model 
     setModel() {
         this.model = this.resources.items.contactSceneModel.scene
-
-        this.model.position.y = this.sizes.portrait ? this.parameters.portraitY : this.parameters.landscapeY
 
         this.scene.add(this.model)
     }
@@ -48,7 +51,7 @@ export default class ContactScene {
         this.texture.flipY = false
 
         // material 
-        this.material = new THREE.MeshBasicMaterial({ map: this.texture })
+        this.material = new THREE.MeshBasicMaterial({ map: this.texture, fog: false })
 
         this.model.traverse((child) => {
             child.material = this.material

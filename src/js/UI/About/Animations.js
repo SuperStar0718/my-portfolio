@@ -21,6 +21,7 @@ export default class AboutAnimations {
         aboutGroup: document.getElementById('about-svg-about'),
         skillsHeaderRect: document.getElementById('skills-header-rect'),
         aboutHeaderRect: document.getElementById('about-header-rect'),
+        aboutSection: document.getElementById('about-section')
     }
 
     animatedSpans = {
@@ -44,6 +45,7 @@ export default class AboutAnimations {
         this.icons = this.experience.ui.about.icons
         this.scroll = this.experience.ui.scroll
         this.sounds = this.experience.sounds
+        this.character = this.experience.world.character
 
         this.addScrollEvents()
     }
@@ -155,8 +157,18 @@ export default class AboutAnimations {
 
 
     addScrollEvents() {
-        this.scroll.addEvent(window.innerHeight, 'up', () => {
+        //Hologram Animationm
+        this.scroll.addEvent(this.domElements.aboutSection.clientHeight, 'up', () => {
             this.playHologramAnimation(.1)
+        })
+
+        //Character Position
+        this.scroll.addEvent(this.domElements.aboutSection.clientHeight, 'up', () => {
+            if(this.character.model.position.y < -20) {
+                this.character.model.position.y = -14.95
+                this.character.animation.play('waterIdle', 0)
+                this.character.updateWireframe('down')
+            }
         })
     }
 
