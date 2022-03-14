@@ -28,19 +28,20 @@
 }
 
 #contact-container {
-    padding: 15px;
-    border-radius: 15px;
+    padding: 10px;
+    border-radius: 14px;
     background: white;
     box-shadow: 0px 30px 70px #93683325;
     width: 440px;
     max-width: calc(100% - 30px);
+    height: 480px;
 }
 
 #contact-container input,textarea {
     border: none;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
-    background: unset;
+    background: transparent !important;
     font-weight: 500;
     color: #111029;
     resize: none;
@@ -51,8 +52,16 @@
     border: none;
 }
 
+#contact-message-input {
+    flex: 1;
+}
+
 #contact-container textarea {
-    height: 180px;
+    height: 100%;
+}
+
+.contact-container {
+    height: 100%;
 }
 
 .input-container {
@@ -60,7 +69,7 @@
     box-sizing: border-box;
     background: #F5F5F5;
     color: #ACACAC;
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 7px;
     padding-left: 15px;
     border: 2px solid #F5F5F5;
@@ -73,31 +82,67 @@
 .input-container span {
     font-size: 12px;
     font-weight: 500;
+    margin-right: 10px;
 }
 
 #contact-name-input {
     margin-bottom: 20px;
 }
 
-#contact-mail-input {
+#contact-email-input {
     margin-bottom: 20px;
 }
 
 #contact-button-container {
     margin-top: 20px;
-    margin-bottom: 4px;
     display: flex;
     align-items: center;
 }
 
 #contact-button-container .small-button {
     margin-left: auto;
-    font-size: 15px;
-    border-radius: 22px;
+    font-size: 1rem;
 }
 
 #contact-button-container .social-icon {
     margin: 0 8px;
+}
+
+/**Errors*/
+.error-label {
+    color: rgb(216, 84, 84);
+}
+
+.error-container {
+    background: #ffdbdb;
+    border-color: #f0caca;
+}
+
+/**Result Container*/
+#contact-result-message-container {
+    margin-bottom: auto;
+}
+
+#contact-result-message-container span,h4{
+    font-size: 14px;
+    text-align: center;
+    margin: 3px;
+}
+
+#contact-result-container svg {
+    margin-top: auto;
+    margin-bottom: 50px;
+    height: 90px;
+    min-height: 90px;
+}
+
+#contact-result-container polyline,line {
+    fill: none;
+    stroke-width: 15;
+}
+
+#contact-result-button {
+    font-size: 1rem;
 }
 
 @media (max-aspect-ratio: 11/10) {

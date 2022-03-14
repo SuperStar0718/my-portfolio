@@ -27,6 +27,7 @@ export default class Transition {
     }
 
     show() {
+
         //Prevent actions while open
         this.isShowing = true
 
@@ -41,7 +42,9 @@ export default class Transition {
             this.domElements.container.classList.add('hideTopTransition')
 
             //allow actions agains
-            setTimeout(() => this.isShowing = false, this.duration * 1000)
+            setTimeout(() => {
+                this.isShowing = false
+            }, this.duration * 1000)
         }, 150)
     }
 }

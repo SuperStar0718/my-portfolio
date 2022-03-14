@@ -7,7 +7,6 @@
 @import 'eases.css';
 @import 'work.css';
 @import 'contact.css';
-@import 'footer.css';
 @import 'hover-icon.css';
 @import 'menu.css';
 
@@ -80,6 +79,10 @@ h3 {
     font-size: 1.5rem;
 }
 
+h4 {
+    font-size: 1.2rem;
+}
+
 a {
     cursor: pointer !important;
     text-decoration: none;
@@ -107,30 +110,30 @@ hr {
 
 /**Big button*/
 .big-button {
-    padding: 13px 37px;
+    padding: 13px 36px;
     border-radius: 27px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: white;
     background: #FF923E;
-    /* background: linear-gradient(to right, #fc9b51 50%, #FF923E 50%);
-    background-size: 200% 100%;
-    background-position: right bottom; */
-    transition: transform 0.125s ease-out;
+    /* background: linear-gradient(to right, #105099 50%, #FF923E 50%);
+    transition: 200ms;
+    background-size: 200% 100%; */
+    background-position: right bottom;
     border: none; 
     font-family: inherit;
+    margin-top: 5px;
 }
-
 
 /**Small Button*/
 .small-button {
-    padding: 9px 32px;
+    padding: 8px 36px;
     background: #FF923E;
     color: white;
-    border-radius: 16px;
+    border-radius: 10px;
     font-weight: 600;
-    font-size: 14px;
+    font-size: .9rem;
     cursor: pointer;
 }
 

@@ -1,4 +1,4 @@
-import { gsap, Power2 } from "gsap"
+import { gsap, Power2, Back } from "gsap"
 import Experience from "../Experience"
 
 export default class HoverIcon {
@@ -51,7 +51,7 @@ export default class HoverIcon {
         window.addEventListener('mousemove', () => {
             // update hover icon position if isHovering 
             if (this.isHovering) {
-                gsap.to(this.icon, { x: event.pageX, y: event.pageY, duration: .6, ease: Power2.easeOut })
+                gsap.to(this.icon, { x: event.pageX, y: event.pageY, duration: .5 })
             }
         })
     }
@@ -71,7 +71,7 @@ export default class HoverIcon {
             // animate 
             if (this.closeScaleAnimation) this.closeScaleAnimation.kill()
 
-            this.openScaleAnimation = gsap.fromTo(this.icon, { scale: 0 }, { scale: 1, duration: .2 })
+            this.openScaleAnimation = gsap.fromTo(this.icon, { scale: 0 }, { scale: 1, duration: .3, ease: Back.easeOut.config(1.5) })
             gsap.to(this.icon, { x: event.pageX, y: event.pageY, duration: 0 })
         }
     }

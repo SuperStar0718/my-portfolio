@@ -130,8 +130,7 @@
     <!--Hover Icon-->
     <div id="hover-icon">
         <svg viewBox="-1 0 15 8" xmlns="http://www.w3.org/2000/svg" height="32" width="32">
-            <path fill="white" id="arrow-path"
-                d="M0 4C0 4 0 3 1 3L7 3C8 3 8 3 8 2L8 1C8 1 8 0 9 0 9 0 8 0 9 0 10 0 12 2 13 3 14 4 14 4 13 5 12 6 10 8 9 8 8 8 8 7 8 7L8 6C8 5 8 5 7 5L1 5C0 5 0 4 0 4L0 4">
+            <path fill="white" id="arrow-path" d="M 8 7 L 8 5 L 0 5 L 0 3 L 8 3 L 8 1 C 8 0 9 0 13 4 C 9 8 8 8 8 7">
             </path>
         </svg>
     </div>
@@ -139,7 +138,7 @@
     <!--Landing Page-->
     <div id="landing-page" class="content-container landing-slow-transition">
         <section id="landing-page-section" class="content-width slide-out-left-transition">
-            <svg id="landing-content-svg" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+            <svg id="landing-content-svg" viewBox="0 0 500 325" xmlns="http://www.w3.org/2000/svg">
                 <text class="landing-headline" y="60" x="5">Hi, my</text>
                 <text class="landing-headline" y="135" x="5">name is David.</text>
                 <text class="landing-subheading" x="10" y="190">
@@ -147,11 +146,9 @@
                     <tspan font-weight="600" dx="7"> Creative Web Developer </tspan>
                     <tspan dx="7">living in Germany.</tspan>
                 </text>
-                <foreignObject id="landing-cta-button" x="10" y="235" width="200" height="70"
+                <foreignObject id="landing-cta-button" x="10" y="245" width="200" height="80"
                     requiredExtensions="http://www.w3.org/1999/xhtml">
-                    <button class="row big-button">
-                        <span>Contact Me</span>
-                    </button>
+                    <button class="big-button">Contact Me</button>
                 </foreignObject>
             </svg>
         </section>
@@ -355,12 +352,12 @@
             <!--Navigation-->
             <div id="work-navigation-container" class="row">
                 <div id="work-back-button" class="work-navigation-button work-disabled-navigation-button">
-                    <svg viewBox="-14 0 15 8" xmlns="http://www.w3.org/2000/svg" height="28" width="28">
+                    <svg viewBox="-14 0 15 8" xmlns="http://www.w3.org/2000/svg" height="32" width="32">
                         <use href="#arrow-path" style="transform: scaleX(-1)"></use>
                     </svg>
                 </div>
                 <div id="work-next-button" class="work-navigation-button">
-                    <svg viewBox="-1 0 15 8" xmlns="http://www.w3.org/2000/svg" height="28" width="28">
+                    <svg viewBox="-1 0 15 8" xmlns="http://www.w3.org/2000/svg" height="32" width="32">
                         <use href="#arrow-path"></use>
                     </svg>
                 </div>
@@ -374,41 +371,64 @@
                 Get in touch via the form below, or send me an
                 <a tabindex="-1" href="mailto:david.heckhoff@gmail.com">Email</a> directly.
             </span>
-            <div id="contact-container" class="column">
-                <div id="contact-name-input" class="input-container column">
-                    <span>Name :</span>
-                    <input tabindex="-1">
-                </div>
-                <div id="contact-mail-input" class="input-container column">
-                    <span>Email :</span>
-                    <input type="email" tabindex="-1">
-                </div>
-                <div id="contact-message-input" class="input-container column">
-                    <span>Message :</span>
-                    <textarea tabindex="-1"></textarea>
-                </div>
-                <div class="row" id="contact-button-container">
-                    <a tabindex="-1" class="social-icon github-icon" target="_blank"
-                        href="https://github.com/davidhckh"></a>
-                    <a tabindex="-1" class="social-icon linkedin-icon" target="_blank"
-                        href="https://www.linkedin.com/in/david-heckhoff-1ba8a622a/"></a>
-                    <div class="small-button">
-                        Submit
+            <div id="contact-container">
+                <!--Form Container-->
+                <div id="contact-form-container" class="column contact-container">
+                    <div id="contact-name-input" class="input-container column">
+                        <div class="row">
+                            <span>Name :</span>
+                            <span class="error-label hide">Please enter your name.</span>
+                        </div>
+                        <input id="contact-name-input-field" tabindex="-1">
+                    </div>
+                    <div id="contact-email-input" class="input-container column">
+                        <div class="row">
+                            <span>Email :</span>
+                            <span class="error-label hide">Please enter an valid email.</span>
+                        </div>
+                        <input id="contact-email-input-field" type="email" tabindex="-1">
+                    </div>
+                    <div id="contact-message-input" class="input-container column">
+                        <div class="row">
+                            <span>Message :</span>
+                            <span class="error-label hide">Please enter your message.</span>
+                        </div>
+                        <textarea id="contact-message-input-field" tabindex="-1"></textarea>
+                    </div>
+                    <div class="row" id="contact-button-container">
+                        <a tabindex="-1" class="social-icon github-icon" target="_blank"
+                            href="https://github.com/davidhckh"></a>
+                        <a tabindex="-1" class="social-icon linkedin-icon" target="_blank"
+                            href="https://www.linkedin.com/in/david-heckhoff-1ba8a622a/"></a>
+                        <div id="contact-submit-button" class="small-button">
+                            Submit
+                        </div>
                     </div>
                 </div>
+
+                <!--Loading Container-->
+                <div id="contact-loading-container" class="center contact-container hide">
+                    <h4>Delivering...</h4>
+                </div>
+
+                <!--Result Container-->
+                <div id="contact-result-container" class="contact-container column center hide">
+                    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                        <polyline id="contact-success-line" class="hide" stroke="#A1CC4D" points="10,70 40,100 115,20">
+                        </polyline>
+                        <line stroke="rgb(216, 84, 84)" class="contact-error-line" x1="5" y1="5" x2="115" y2="115">
+                        </line>
+                        <line stroke="rgb(216, 84, 84)" class="contact-error-line" x1="115" y1="5" x2="5" y2="115">
+                        </line>
+                    </svg>
+                    <div id="contact-result-message-container" class="center column">
+
+                    </div>
+                    <div class="small-button" id="contact-result-button"></div>
+                </div>
+
             </div>
         </section>
-
-        <!--Footer-->
-        <footer class="center hide">
-            <div class="content-width height-100">
-                <div id="back-to-top-button">
-                    <svg viewBox="-1 0 15 8" xmlns="http://www.w3.org/2000/svg" height="28" width="28">
-                        <use href="#arrow-path"></use>
-                    </svg>
-                </div>
-            </div>
-        </footer>
     </div>
 </body>
 

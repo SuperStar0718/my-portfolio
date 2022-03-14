@@ -31,7 +31,7 @@ export default class David {
     setSprite() {
         this.texture = this.resources.items.davidImage
 
-        this.material = new THREE.SpriteMaterial({ map: this.texture, depthTest: false, fog: false })
+        this.material = new THREE.SpriteMaterial({ map: this.texture, depthTest: false, fog: false, opacity: 0 })
 
         this.sprite = new THREE.Sprite(this.material)
 

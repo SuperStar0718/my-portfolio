@@ -5,6 +5,7 @@
     bottom: -100%;
     transform: rotate(15deg);
     left: -40%;
+    pointer-events: none;
 }
 
 #transition-wave-svg{
@@ -22,7 +23,7 @@
 
 @keyframes hideIntroTransition {
     0% { bottom: -100%; left: -40%; }
-    100% { bottom: -300%; left: -60%; }
+    100% { bottom: -350%; left: -60%; }
 }
 
 .hideTopTransition {

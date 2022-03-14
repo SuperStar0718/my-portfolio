@@ -13,15 +13,23 @@ export default class ContactAnimation {
     }
 
     playAnimation() {
-        this.character.model.position.y = this.experience.world.contact.scene.model.position.y
+        this.character.model.position.y = this.experience.world.contact.scene.model.position.y + 0.2
         this.character.setAllToOriginal()
         this.character.body.face.material.map = this.character.body.faceTextures.default
         this.character.animation.play('contact', 0)
 
-        this.david.material.opacity = 0
-        gsap.to(this.david.material, { opacity: 1, delay: 1.3 })
 
-        gsap.to(this.character.model.scale, { x: 0, y: 0, z: 0, duration: 1.2, delay: 1.5 })
+        gsap.to(this.david.material, { opacity: 1, duration: 1.7, delay: 1.6 })
+
+        this.character.body.head.material.transparent = true
+        this.character.body.head.material.needsUpdate = true
+        this.character.body.face.renderOrder = 1
+
+        this.character.model.children[0].children.forEach((child) => {
+            if (child.material) {
+                gsap.to(child.material, { opacity: 0, duration: 1.7, delay: 1.5 })
+            }
+        })
     }
 
     initDebug() {

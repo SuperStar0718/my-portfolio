@@ -71,6 +71,7 @@ export default class Scroll {
         this.scrollY = 0
         this.performScroll(0)
         this.experience.ui.header.show()
+        this.experience.ui.about.animations.playHologramAnimation()
     }
 
     setCameraRange() {

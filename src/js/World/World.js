@@ -30,6 +30,7 @@ export default class World {
 
         // Wait for resources
         this.resources.on('ready', () => {
+            this.sizes.portrait = false
             this.sizes.checkPortrait()
 
             // Setup
