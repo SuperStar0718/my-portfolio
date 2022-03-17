@@ -24,7 +24,7 @@ export default class David {
             this.sprite.position.set(-0.35, 3, -0.5)
         } else {
             this.sprite.scale.set(2.64, 5.05)
-            this.sprite.position.set(-0.35, 2, -0.5)
+            this.sprite.position.set(-0.55, 1.9, -0.5)
         }
     }
 

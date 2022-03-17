@@ -157,19 +157,17 @@ export default class AboutAnimations {
 
 
     addScrollEvents() {
-        //Hologram Animationm
         this.scroll.addEvent(this.domElements.aboutSection.clientHeight, 'up', () => {
             this.playHologramAnimation(.1)
+            this.resetCharacterToPosition()
+            console.log('hi')
         })
+    }
 
-        //Character Position
-        this.scroll.addEvent(this.domElements.aboutSection.clientHeight, 'up', () => {
-            if(this.character.model.position.y < -20) {
-                this.character.model.position.y = -14.95
-                this.character.animation.play('waterIdle', 0)
-                this.character.updateWireframe('down')
-            }
-        })
+    resetCharacterToPosition() {
+        this.character.model.position.y = -14.95
+        this.character.animation.play('waterIdle', 0)
+        this.character.updateWireframe('down')
     }
 
 

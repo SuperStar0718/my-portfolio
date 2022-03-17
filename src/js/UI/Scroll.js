@@ -1,11 +1,11 @@
 import Experience from '../Experience'
-import { gsap } from 'gsap'
+import { gsap, Power2 } from 'gsap'
 
 export default class Scroll {
 
     parameters = {
-        scrollStrength: 140,
-        scrollDuration: .5,
+        scrollStrength: 120,
+        scrollDuration: .7,
         multiplyScrollStrengthBy: 2.5,
     }
 
@@ -117,6 +117,10 @@ export default class Scroll {
         })
     }
 
+    resetAllEvents() {
+        this.events.forEach((event) => event.played = false)
+    }
+
     scroll(direction, strength = this.parameters.scrollStrength) {
         if (!this.landingPage.isAnimating && !this.landingPage.visible && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating && !this.transition.isShowing) {
             if (direction == -1 && this.scrollY <= 0) {
@@ -174,17 +178,17 @@ export default class Scroll {
         if (scrollPercentage > 1) scrollPercentage = 1
 
         //Scroll Container
-        gsap.to(this.domElements.scrollContainer, { y: -this.contentScrollTo, duration: duration })
+        gsap.to(this.domElements.scrollContainer, { y: -this.contentScrollTo, duration: duration, ease: Power2.easeOut })
 
         if (scrollPercentage >= 0) {
             //Background Plane
-            gsap.to(this.background.material.uniforms.uOffset, { value: (this.background.height * 1.5) * scrollPercentage, duration: duration })
+            gsap.to(this.background.material.uniforms.uOffset, { value: (this.background.height * 1.5) * scrollPercentage, duration: duration, ease: Power2.easeOut })
 
             //Camera
-            gsap.to(this.camera.instance.position, { y: (this.cameraRange.bottom - this.cameraRange.top) * scrollPercentage + this.cameraRange.top, duration: duration })
+            gsap.to(this.camera.instance.position, { y: (this.cameraRange.bottom - this.cameraRange.top) * scrollPercentage + this.cameraRange.top, duration: duration, ease: Power2.easeOut })
 
             //Logo Background
-            gsap.to(this.domElements.logoWhiteBackground, { y: - this.contentScrollTo - window.innerHeight, duration: duration })
+            gsap.to(this.domElements.logoWhiteBackground, { y: - this.contentScrollTo - window.innerHeight, duration: duration, ease: Power2.easeOut })
         }
     }
 

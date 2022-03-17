@@ -18,6 +18,7 @@ export default class Body {
         this.defineBodyParts()
         this.defineMaterials()
         this.applyMaterials()
+        this.deactiveFrustumCulling()
 
         // Setup face 
         this.setFace()
@@ -31,6 +32,7 @@ export default class Body {
     defineBodyParts() {
         // Armature 
         this.armature = this.model.children.find((child) => child.name === 'armature')
+
 
         // Define Body 
         this.armLeft = this.armature.children.find((child) => child.name === 'arm-left')
@@ -55,6 +57,14 @@ export default class Body {
         // Define head 
         this.chest = this.armature.children.find((child) => child.name === 'chest')
         this.head = this.armature.children.find((child) => child.name === 'head')
+    }
+
+    deactiveFrustumCulling() {
+        this.armature.children.forEach((child) => {
+            if (child.type === 'SkinnedMesh') {
+                child.frustumCulled = false
+            }
+        })
     }
 
     defineMaterials() {
@@ -137,34 +147,57 @@ export default class Body {
 
     defineFaceTransitions() {
         this.faceTransitions = {}
-        this.faceTransitions.smile = [
-            this.resources.items.characterSmile0Face,
-            this.resources.items.characterSmile1Face,
-            this.resources.items.characterSmile2Face
-        ]
+        this.faceTransitions.smile = {
+            allowedOutsideLanding: false,
+            faces: [
+                this.resources.items.characterSmile0Face,
+                this.resources.items.characterSmile1Face,
+                this.resources.items.characterSmile2Face
+            ]
+        }
     }
 
     updateFace(name) {
+        this.landingPage = this.experience.ui.landingPage
+
         if (name === 'default') {
-            this.faceTransitions.count = this.faceTransitions.current.length - 1
+
+            //Update count
+            this.faceTransitions.count = this.faceTransitions.current.faces.length - 1
+
+            //Interval
             const faceTransitionsTimeout = () => this.faceCall = gsap.delayedCall(.033, () => {
-                this.face.material.map = this.faceTransitions.current[this.faceTransitions.count]
-                this.faceTransitions.count--
-                if (this.faceTransitions.count == -1) {
-                    this.face.material.map = this.faceTextures.default
-                } else {
-                    faceTransitionsTimeout()
+                if (this.landingPage.visible || this.faceTransitions.current.allowedOutsideLanding) {
+                    //Update Map
+                    this.face.material.map = this.faceTransitions.current.faces[this.faceTransitions.count]
+                    //Decrease count until -1 then set to default face
+                    this.faceTransitions.count--
+
+                    if (this.faceTransitions.count == -1) {
+                        this.face.material.map = this.faceTextures.default
+                    } else {
+                        faceTransitionsTimeout()
+                    }
                 }
             })
             faceTransitionsTimeout()
+
         } else {
+            //Define
             this.faceTransitions.current = this.faceTransitions[name]
             this.faceTransitions.count = 0
+
+            //Interval
             const faceTransitionsTimeout = () => this.faceCall = gsap.delayedCall(.033, () => {
-                this.face.material.map = this.faceTransitions[name][this.faceTransitions.count]
-                this.faceTransitions.count++
-                if (this.faceTransitions.count != this.faceTransitions[name].length) {
-                    faceTransitionsTimeout()
+                if (this.landingPage.visible || this.faceTransitions.current.allowedOutsideLanding) {
+                    //Update map
+                    this.face.material.map = this.faceTransitions[name].faces[this.faceTransitions.count]
+
+                    //update count
+                    this.faceTransitions.count++
+                    if (this.faceTransitions.count != this.faceTransitions[name].faces.length) {
+                        faceTransitionsTimeout()
+                    }
                 }
             })
             faceTransitionsTimeout()

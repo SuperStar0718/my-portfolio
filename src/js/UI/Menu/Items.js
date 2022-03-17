@@ -56,6 +56,7 @@ export default class MenuItems {
         this.sections = this.experience.ui.sections
         this.sounds = this.experience.sounds
         this.sizes = this.experience.sizes
+        this.contactAnimation = this.experience.world.contact.animation
 
         //Update active item on menu open
         this.menu.on('open', () => this.updateActiveItem())
@@ -137,6 +138,8 @@ export default class MenuItems {
 
         this.waypoints.moveToWaypoint(this.sizes.portrait ? 'landing-page-portrait' : 'landing-page', false)
 
+        this.contactAnimation.resetCharacter()
+
         this.sounds.muteGroup('landing', false)
         this.sounds.muteGroup('lab', true)
 
@@ -181,17 +184,28 @@ export default class MenuItems {
     }
 
     setupScrollContainerItem(item) {
+        const section = this.sections.sections.find((section) => section.name === item.name)
+
         this.landingPage.visible = false
 
         this.waypoints.moveToWaypoint(this.sizes.portrait ? 'scroll-start-portrait' : 'scroll-start', false)
 
+        this.contactAnimation.resetCharacter()
+
         this.sounds.muteGroup('landing', true)
         this.sounds.muteGroup('lab', false)
 
+        this.scroll.resetAllEvents()
+
         //Character
-        this.character.model.position.y = -14.95
-        this.character.animation.play('waterIdle', 0)
-        this.character.updateWireframe('down')
+        if (item.name == 'contact') {
+            this.contactAnimation.playIdle()
+            setTimeout(() => this.contactAnimation.playTransition(), 1000)
+        } else if (item.name == 'work') {
+            this.contactAnimation.playIdle()
+        } else {
+            this.experience.ui.about.animations.resetCharacterToPosition()
+        }
 
         //Move Landing Page and Scroll Container to positions
         this.moveWithoutTransition(this.domElements.landingPage, 'top', '-100%')
@@ -203,7 +217,7 @@ export default class MenuItems {
         this.instantHideMenu()
 
         //set scrollY to section's Y-position and perform instant-scroll
-        this.scroll.scrollY = this.sections.sections.find((section) => section.name === item.name).y
+        this.scroll.scrollY = section.y
         this.scroll.performScroll(0)
     }
 

@@ -43,7 +43,7 @@ export default class Tube {
 
         //Positon and scale to fit into scene
         this.model.position.set(-0.08, 2.9, -0.12)
-        this.model.scale.set(0.92, 1.52, 0.92)
+        this.model.scale.set(0.92, 1.55, 0.92)
 
         this.lab.model.add(this.model)
     }

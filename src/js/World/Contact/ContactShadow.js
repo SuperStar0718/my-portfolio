@@ -44,7 +44,7 @@ export default class ContactShadow {
                 uOpacity: { value: 1 }
             },
             vertexShader: roomShadowVertex,
-            fragmentShader: roomShadowFragment
+            fragmentShader: roomShadowFragment,
         })
 
         this.model.children.find((children) => children.name === 'shadowCatcher').material = this.material

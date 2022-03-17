@@ -18,6 +18,7 @@ import ContactShadow from './Contact/ContactShadow.js'
 import David from './Contact/David.js'
 import SceneFog from './Fog.js'
 import ContactAnimation from './Contact/ContactAnimation.js'
+import ExclamationMark from './Contact/ExclamationMark.js'
 
 export default class World {
     constructor() {
@@ -60,6 +61,7 @@ export default class World {
             this.contact.scene = new ContactScene()
             this.contact.shadow = new ContactShadow()
             this.contact.david = new David()
+            this.contact.exclamationMark = new ExclamationMark()
 
             this.character = new Character()
 
@@ -68,7 +70,10 @@ export default class World {
     }
 
     update() {
-        if (this.character) this.character.update()
-        if (this.lab) if (this.lab.screen) this.lab.screen.update()
+        if (this.character)
+            this.character.update()
+
+        if (this.lab) if (this.lab.screen)
+            this.lab.screen.update()
     }
 }

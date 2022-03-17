@@ -66,6 +66,12 @@ export default class Animations {
         this.actions.contact.repetitions = 1
         this.actions.contact.clampWhenFinished = true
         this.actions.contact.allowedOutsideLanding = true
+
+        //contact scene idle action 
+        this.actions.standingIdle = this.mixer.clipAction(this.resource.animations.find((animation) => animation.name === 'standing-idle'))
+        this.actions.standingIdle.loop = THREE.LoopPingPong
+        this.actions.standingIdle.allowedOutsideLanding = true
+        this.actions.standingIdle.timeScale = 0.5
     }
 
     play(name, transitionDuration = .5) {

@@ -15,7 +15,8 @@ import SoundButton from './SoundButton'
 import AboutAnimations from './About/Animations'
 import MenuItems from './Menu/Items'
 import Sections from './Sections'
-import ContactForm from './ContactForm'
+import ContactForm from './Contact/ContactForm'
+import ContactAnimationEvents from './Contact/AnimationEvents'
 
 export default class UI {
 
@@ -32,7 +33,7 @@ export default class UI {
             this.landingPage = new LandingPage()
             this.scroll = new Scroll()
             this.sections = new Sections()
-            //this.scrollbar = new ScrollBar()
+            this.scrollbar = new ScrollBar()
             this.soundButton = new SoundButton()
 
             //Menu 
@@ -54,6 +55,7 @@ export default class UI {
             //Contact
             this.contact = {}
             this.contact.form = new ContactForm()
+            this.contact.animationEvents = new ContactAnimationEvents()
 
             this.header = new Header()
             this.hoverIcon = new HoverIcon()
@@ -79,5 +81,8 @@ export default class UI {
 
         if (this.about) if (this.about.animations)
             this.about.animations.resize()
+
+        if(this.contact) if(this.contact.animationEvents)
+            this.contact.animationEvents.resize()
     }
 }

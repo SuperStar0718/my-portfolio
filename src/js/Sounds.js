@@ -43,7 +43,7 @@ export default class Sounds {
             name: 'labAmbience',
             files: [labAmbienceSound],
             group: 'lab',
-            volume: 0.15,
+            volume: 0.2,
         },
         {
             name: 'waterSplash',
@@ -55,7 +55,7 @@ export default class Sounds {
             name: 'hologram',
             files: [hologramSound],
             group: 'lab',
-            volume: 0.6,
+            volume: 0.8,
         },
     ]
 

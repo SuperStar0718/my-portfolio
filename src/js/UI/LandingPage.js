@@ -36,6 +36,7 @@ export default class LandingPage extends EventEmitter {
         this.sounds = this.experience.sounds
         this.sizes = this.experience.sizes
         this.waypoints = this.experience.waypoints
+        this.contactAnimation = this.experience.world.contact.animation
 
         this.gestures.on('scroll-down', () => this.hide())
         this.gestures.on('touch-down', () => this.hide())
@@ -72,8 +73,11 @@ export default class LandingPage extends EventEmitter {
     hide() {
         if (this.visible && !this.isAnimating && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating && !this.transiton.isShowing) {
             this.visible = false
+
             this.lockScrolling()
+
             this.scrollIcon.hide()
+
             this.sounds.muteGroup('landing', true, 1)
             this.sounds.muteGroup('lab', false, 2)
 
@@ -108,9 +112,6 @@ export default class LandingPage extends EventEmitter {
 
                 // Update Face
                 this.character.body.face.material.map = this.character.body.faceTextures.scared
-                if (this.character.body.faceCall) {
-                    this.character.body.faceCall.kill()
-                }
 
                 //character fall down
                 gsap.to(this.character.model.position, { y: -14.95, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
@@ -118,8 +119,8 @@ export default class LandingPage extends EventEmitter {
 
                 //play water idle animation 
                 setTimeout(() => {
-                    this.character.animation.play('waterIdle', .5)
-                }, 500)
+                    this.character.animation.play('waterIdle', .9)
+                }, 650)
 
                 //Hide bubbles
                 this.experience.world.lab.bubbles.hideAllBubbles()
@@ -151,7 +152,7 @@ export default class LandingPage extends EventEmitter {
             this.lockScrolling()
 
             //Room Bounce
-            this.room.bounceIn(.47)
+            this.room.bounceIn(.45)
 
             // Landing Page Content
             this.domElements.landingPage.style.top = '0'
@@ -193,6 +194,8 @@ export default class LandingPage extends EventEmitter {
             //Start wireframe material switch
             this.character.checkForWireframe = 'up'
             gsap.delayedCall(this.scrollAnimationDuration, () => this.character.checkForWireframe = null)
+
+            this.contactAnimation.resetCharacter()
 
             this.trigger('show')
         }

@@ -33,6 +33,7 @@ export default class MenuMain extends EventEmitter {
         this.transition = this.experience.ui.transition
         this.sounds = this.experience.sounds
         this.sizes = this.experience.sizes
+        this.contactAnimation = this.experience.world.contact.animation
 
         this.menuButtonClick()
         this.hideEvents()
@@ -64,7 +65,7 @@ export default class MenuMain extends EventEmitter {
 
             //Position
             this.domElements.menuContainer.style.right = this.visible ? '0' : (this.sizes.portrait ? '-100%' : 'calc(-350px - 10vw)')
-            if (this.sizes.portrait) gsap.to(this.domElements.logoWhiteBackground, {opacity: this.visible ? 0 : 1, duration: .7})
+            if (this.sizes.portrait) gsap.to(this.domElements.logoWhiteBackground, { opacity: this.visible ? 0 : 1, duration: .7 })
 
             //Button
             this.visible ? this.crossMenuButton() : this.resetMenuButton()
@@ -148,6 +149,10 @@ export default class MenuMain extends EventEmitter {
 
         //camera
         this.waypoints.moveToWaypoint('contact-menu')
+
+        //Animation
+        this.contactAnimation.playIdle()
+        gsap.delayedCall(1, () => this.contactAnimation.playTransition())
     }
 
     //Hide Event Triggers
