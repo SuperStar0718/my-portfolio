@@ -11,7 +11,9 @@ export default class ContactAnimationEvents {
     }
 
     addScrollEvents() {
-        this.scroll.addEvent(this.sections.sections[2].y - (window.innerHeight / 2), 'down', () => this.animation.playTransition())
+        this.scroll.addEvent(this.sections.sections[2].y - (window.innerHeight / 2), 'down', () => {
+            setTimeout(() => this.animation.playTransition(), 500)
+        })
         this.scroll.addEvent(this.sections.sections[2].y - window.innerHeight, 'down', () => this.animation.playIdle())
     }
 

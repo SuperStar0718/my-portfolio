@@ -137,6 +137,7 @@ export default class Body {
         this.faceTextures = {
             default: this.resources.items.characterDefaultFace,
             scared: this.resources.items.characterScaredFace,
+            sleepy: this.resources.items.characterSleepyFace,
         }
 
         // Material 
@@ -147,6 +148,8 @@ export default class Body {
 
     defineFaceTransitions() {
         this.faceTransitions = {}
+
+        //Smile
         this.faceTransitions.smile = {
             allowedOutsideLanding: false,
             faces: [
@@ -155,13 +158,22 @@ export default class Body {
                 this.resources.items.characterSmile2Face
             ]
         }
+        
+        //Contact Transition Face
+        this.faceTransitions.contact = {
+            allowedOutsideLanding: true,
+            faces: [
+                this.resources.items.characterScaredFace,
+                this.resources.items.characterContact1Face,
+                this.resources.items.characterContact2Face,
+            ]
+        }
     }
 
     updateFace(name) {
         this.landingPage = this.experience.ui.landingPage
 
         if (name === 'default') {
-
             //Update count
             this.faceTransitions.count = this.faceTransitions.current.faces.length - 1
 

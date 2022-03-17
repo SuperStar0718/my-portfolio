@@ -10,7 +10,6 @@
 
 #work-background {
     background: #F5EFE6;
-    transform: rotate(1deg);
     width: 300%;
     height: 100%;
     position: absolute;
@@ -25,7 +24,7 @@
 #work-render-container {
     position: relative;
     width: 320px;
-    height: 550px;
+    height: 520px;
     max-width: 100%;
 }
 
@@ -41,7 +40,7 @@
 }
 
 .work-inactive-item-container {
-    opacity: 0.5; 
+     opacity: 0.5; 
     filter: grayscale(50%);
     cursor: pointer;
 }
@@ -77,8 +76,8 @@
 
 .work-item-tag {
     font-size: 10px;
-    padding: 2px 5px;
-    margin-right: 4px;
+    padding: 2px 6px;
+    margin-right: 5px;
     color: white;
     border-radius: 6px;
     margin-bottom: 4px;

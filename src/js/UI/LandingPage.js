@@ -15,7 +15,8 @@ export default class LandingPage extends EventEmitter {
         contentSvg: document.getElementById('landing-content-svg'),
         heading: document.querySelectorAll('.landing-headline'),
         subheading: document.querySelector('.landing-subheading'),
-        button: document.getElementById('landing-cta-button')
+        button: document.getElementById('landing-cta-button'),
+        aboutMeButton: document.getElementById('landing-more-about-me'),
     }
 
     constructor() {
@@ -38,14 +39,18 @@ export default class LandingPage extends EventEmitter {
         this.waypoints = this.experience.waypoints
         this.contactAnimation = this.experience.world.contact.animation
 
+        //Hide Triggers
+        this.domElements.aboutMeButton.addEventListener('click', () => this.hide())
         this.gestures.on('scroll-down', () => this.hide())
         this.gestures.on('touch-down', () => this.hide())
+
         //this.playOpeningAnimation(1)
 
         this.waypoints.moveToWaypoint(this.sizes.portrait ? 'landing-page-portrait' : 'landing-page', false)
 
         this.sizes.on('portrait', () => this.onOrientationChange())
         this.sizes.on('landscape', () => this.onOrientationChange())
+
     }
 
     onOrientationChange() {

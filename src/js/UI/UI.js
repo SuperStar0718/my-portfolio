@@ -33,7 +33,7 @@ export default class UI {
             this.landingPage = new LandingPage()
             this.scroll = new Scroll()
             this.sections = new Sections()
-            this.scrollbar = new ScrollBar()
+            //this.scrollbar = new ScrollBar()
             this.soundButton = new SoundButton()
 
             //Menu 

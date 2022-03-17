@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="/src/assets/favicon.ico">
-    <title>David | Creative Web Developer</title>
+    <title>David | Web Developer</title>
 </head>
 
 <body>
@@ -129,8 +129,8 @@
 
     <!--Hover Icon-->
     <div id="hover-icon">
-        <svg viewBox="-1 0 15 8" xmlns="http://www.w3.org/2000/svg" height="32" width="32">
-            <path fill="white" id="arrow-path" d="M 8 7 L 8 5 L 0 5 L 0 3 L 8 3 L 8 1 C 8 0 9 0 13 4 C 9 8 8 8 8 7">
+        <svg id="hover-svg" viewBox="-1 0 15 8" xmlns="http://www.w3.org/2000/svg" height="28" width="28" fill="white">
+            <path id="arrow-path" d="M 8 7 L 8 5 L 0 5 L 0 3 L 8 3 L 8 1 C 8 0 9 0 13 4 C 9 8 8 8 8 7">
             </path>
         </svg>
     </div>
@@ -138,25 +138,33 @@
     <!--Landing Page-->
     <div id="landing-page" class="content-container landing-slow-transition">
         <section id="landing-page-section" class="content-width slide-out-left-transition">
-            <svg id="landing-content-svg" viewBox="0 0 500 325" xmlns="http://www.w3.org/2000/svg">
+            <svg id="landing-content-svg" viewBox="0 0 500 310" xmlns="http://www.w3.org/2000/svg">
                 <text class="landing-headline" y="60" x="5">Hi, my</text>
                 <text class="landing-headline" y="135" x="5">name is David.</text>
-                <text class="landing-subheading" x="10" y="190">
-                    <tspan>I'm a</tspan>
-                    <tspan font-weight="600" dx="7"> Creative Web Developer </tspan>
-                    <tspan dx="7">living in Germany.</tspan>
+                <text class="landing-subheading" x="10" y="185">
+                    <tspan font-weight="400">I'm a</tspan>
+                    <tspan font-weight="600" dx="7"> Web Developer </tspan>
+                    <tspan font-weight="400" dx="7">living in Germany.</tspan>
                 </text>
-                <foreignObject id="landing-cta-button" x="10" y="245" width="200" height="80"
-                    requiredExtensions="http://www.w3.org/1999/xhtml">
-                    <button class="big-button">Contact Me</button>
-                </foreignObject>
+
+                <!--Big Button-->
+                <rect id="landing-cta-button" x="8" y="250" width="159" height="50" fill="#FF923E" rx="25"
+                    cursor="pointer"></rect>
+                <text fill="white" x="40" y="280" font-weight="500" pointer-events="none">Get in touch</text>
+
+                <!--Get in touch-->
+                <text x="196" y="280" font-weight="400" pointer-events="none" fill="#7C8594">More about me</text>
+                <use href="#arrow-path" fill="#7C8594" x="254" y="207" transform="scale(1.3)"></use>
+                <rect id="landing-more-about-me" fill="black" x="191" y="259" height="31" width="160" opacity="0"
+                    cursor="pointer"></rect>
             </svg>
         </section>
     </div>
 
+    <div id="scroll-bar"></div>
+
     <!--Scroll Container-->
     <div id="scroll-container" class="center column">
-        <div id="scroll-bar"></div>
 
         <!--About Container-->
         <section id="about-section" class="content-width">
@@ -350,15 +358,15 @@
             <!--Render Container-->
             <div id="work-render-container"></div>
             <!--Navigation-->
-            <div id="work-navigation-container" class="row">
+            <div id="work-navigation-container" class="row hide">
                 <div id="work-back-button" class="work-navigation-button work-disabled-navigation-button">
                     <svg viewBox="-14 0 15 8" xmlns="http://www.w3.org/2000/svg" height="32" width="32">
-                        <use href="#arrow-path" style="transform: scaleX(-1)"></use>
+                        <use fill="white" href="#arrow-path" style="transform: scaleX(-1)"></use>
                     </svg>
                 </div>
                 <div id="work-next-button" class="work-navigation-button">
                     <svg viewBox="-1 0 15 8" xmlns="http://www.w3.org/2000/svg" height="32" width="32">
-                        <use href="#arrow-path"></use>
+                        <use fill="white" href="#arrow-path"></use>
                     </svg>
                 </div>
             </div>
@@ -369,7 +377,7 @@
             <h2>Contact Me</h2>
             <span id="contact-get-in-touch-label">
                 Get in touch via the form below, or send me an
-                <a tabindex="-1" href="mailto:david.heckhoff@gmail.com">Email</a> directly.
+                <a tabindex="-1" href="mailto:contact@david-hckh.com">Email</a> directly.
             </span>
             <div id="contact-container">
                 <!--Form Container-->

@@ -33,9 +33,7 @@
     background: white;
     position: absolute;
     top: calc(100vh - 15px);
-    width: 110%;
-    left: -5%;
-    transform: rotate(1deg);
+    width: 100%;
 }
 
 .overlay-button {

@@ -33,6 +33,10 @@ export default class Character {
 
         this.setModel()
         this.preloadWireframe()
+
+        if (this.debug.active) {
+            this.initDebug()
+        }
     }
 
     setModel() {
@@ -69,7 +73,8 @@ export default class Character {
         })
 
         gsap.delayedCall(this.animation.actions.wave._clip.duration - .6, () => {
-            this.body.updateFace('default')
+            if (this.experience.ui.landingPage.visible)
+                this.body.updateFace('default')
         })
     }
 
@@ -93,7 +98,7 @@ export default class Character {
                     this.desktops.scrollDesktop0()
 
                     //Perform double scroll
-                    if(Math.random() <= 0.33) {
+                    if (Math.random() <= 0.33) {
                         setTimeout(() => this.desktops.scrollDesktop0(), 700)
                     }
                 }
@@ -179,15 +184,22 @@ export default class Character {
 
     setAllToOriginal() {
         this.model.children[0].children.forEach((children) => {
-            if(children.name === 'face')
+            if (children.name === 'face')
                 children.visible = true
 
-            if(children.originalMaterial)
+            if (children.originalMaterial)
                 children.material = children.originalMaterial
         })
     }
 
-    setAllToWireframe() {
+    initDebug() {
+        this.paramters = {
+            scale: 1
+        }
 
+        this.debugFolder.add(this.model.position, 'y').min(-50).max(10)
+        this.debugFolder.add(this.paramters, 'scale').min(0.5).max(3).name('Scale').onChange(() => {
+            this.model.scale.set(this.paramters.scale, this.paramters.scale, this.paramters.scale)
+        })
     }
 }

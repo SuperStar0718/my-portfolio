@@ -5,7 +5,7 @@ export default {
     react: `<div class="work-item-tag" style="background: #21BAEB;">React</div>`,
     r3f: `<div class="work-item-tag" style="background: #00156D;">R3F</div>`,
     webgl: `<div class="work-item-tag" style="background: #5A69EC;">WebGL</div>`,
-    api: `<div class="work-item-tag" style="background: #CA49F8;">APIs</div>`,
+    api: `<div class="work-item-tag" style="background: #CA49F8;">API</div>`,
     backend: `<div class="work-item-tag" style="background: #8433CC;">Backend</div>`,
     svg: `<div class="work-item-tag" style="background: #3ABC61;">SVG</div>`,
 }

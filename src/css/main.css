@@ -110,10 +110,10 @@ hr {
 
 /**Big button*/
 .big-button {
-    padding: 13px 36px;
-    border-radius: 27px;
+    padding: 15px 24px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 600;
     color: white;
     background: #FF923E;
@@ -183,7 +183,7 @@ section {
 }
 
 .content-width {
-    width: 1400px;
+    width: 1450px;
     max-width: calc(94% - 30px);
 }
 

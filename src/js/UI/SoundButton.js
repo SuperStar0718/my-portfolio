@@ -3,7 +3,7 @@ import { gsap } from 'gsap'
 
 export default class Sound {
 
-    active = true
+    active = false
 
     parameters = {
         activeColor: '#FF923E',
@@ -23,8 +23,10 @@ export default class Sound {
         this.landingPage = this.experience.ui.landingPage
 
         //Init
-        localStorage.getItem('soundActive') === 'true' || localStorage.getItem('soundActive') === true ? this.activate() : this.deactivate()
-        this.sounds.mute(!this.active)
+        //localStorage.getItem('soundActive') === 'true' || localStorage.getItem('soundActive') === true ? this.activate() : this.deactivate()
+        //this.sounds.mute(!this.active)
+
+        this.deactivate()
 
         //Event Listener
         this.domElements.button.addEventListener('click', () => {
@@ -41,6 +43,7 @@ export default class Sound {
 
     deactivate() {
         this.active = false
+
         this.sounds.mute(true)
 
         //Icon

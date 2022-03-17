@@ -23,7 +23,8 @@ export default class ScrollBar {
         if (!this.landingPage.visible) {
             const scrollPercentage = this.scroll.contentScrollTo / (this.domElements.scrollContainer.clientHeight - window.innerHeight)
             const position = this.scroll.contentScrollTo + (window.innerHeight * (this.scroll.contentScrollTo / (this.domElements.scrollContainer.clientHeight)))
-            gsap.to(this.domElements.scrollBar, { y: position + (this.height * scrollPercentage), duration: this.scroll.parameters.scrollDuration, ease: Power2.easeOut })
+            this.domElements.scrollBar.style.top = position + (this.height * scrollPercentage) + 'px'
+            // gsap.to(this.domElements.scrollBar, { y: position + (this.height * scrollPercentage), duration: this.scroll.parameters.scrollDuration, ease: Power2.easeOut })
         }
     }
 

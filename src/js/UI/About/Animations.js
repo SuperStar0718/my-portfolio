@@ -160,14 +160,15 @@ export default class AboutAnimations {
         this.scroll.addEvent(this.domElements.aboutSection.clientHeight, 'up', () => {
             this.playHologramAnimation(.1)
             this.resetCharacterToPosition()
-            console.log('hi')
         })
     }
 
     resetCharacterToPosition() {
-        this.character.model.position.y = -14.95
-        this.character.animation.play('waterIdle', 0)
-        this.character.updateWireframe('down')
+        if (!this.experience.ui.landingPage.visible) {
+            this.character.model.position.y = -14.95
+            this.character.animation.play('waterIdle', 0)
+            this.character.updateWireframe('down')
+        }
     }
 
 

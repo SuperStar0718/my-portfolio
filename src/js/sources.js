@@ -22,6 +22,9 @@ export default [
     { name: 'characterSmile1Face', type: 'texture', path: 'models/character/faces/smile/1.png' },
     { name: 'characterSmile2Face', type: 'texture', path: 'models/character/faces/smile/2.png' },
     { name: 'characterScaredFace', type: 'texture', path: 'models/character/faces/scared.png' },
+    { name: 'characterSleepyFace', type: 'texture', path: 'models/character/faces/sleepy.png' },
+    { name: 'characterContact1Face', type: 'texture', path: 'models/character/faces/contact/1.png' },
+    { name: 'characterContact2Face', type: 'texture', path: 'models/character/faces/contact/2.png' },
 
     //Destkops
     { name: 'desktop0', type: 'texture', path: 'models/room/desktops/0.png' },
@@ -45,5 +48,4 @@ export default [
     { name: 'bakedShadowContactTexture', type: 'texture', path: 'models/contact/shadow-baked.jpg' },
     { name: 'davidImage', type: 'texture', path: 'images/david.png' },
     { name: 'exclamationMarkSprite', type: 'texture', path: 'textures/sprites/exclamation-mark.png' },
-
 ]

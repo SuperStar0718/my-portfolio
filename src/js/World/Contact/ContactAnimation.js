@@ -24,7 +24,7 @@ export default class ContactAnimation {
         if (!this.played) {
             this.character.model.position.y = this.experience.world.contact.scene.model.position.y + 0.2
             this.character.setAllToOriginal()
-            this.character.body.face.material.map = this.character.body.faceTextures.default
+            this.character.body.face.material.map = this.character.body.faceTextures.sleepy
             this.character.animation.play('standingIdle', 0)
         }
     }
@@ -32,11 +32,21 @@ export default class ContactAnimation {
     playTransition() {
         if (!this.played) {
             this.timeline = gsap.timeline()
+
+            setTimeout(() => {
+                this.character.body.face.material.map = this.character.body.faceTextures.scared
+                setTimeout(() => {
+                    this.character.body.faceTransitions.current = null
+                    this.character.body.updateFace('contact')
+                }, 500)
+            }, 200)
+
             this.played = true
+
 
             this.exclamationMark.show()
 
-            gsap.delayedCall(.2, () => this.character.animation.play('contact', .3), 0)
+            gsap.delayedCall(.15, () => this.character.animation.play('contact', .15), 0)
 
             this.transtionDelay = gsap.delayedCall(1.2, () => {
                 this.startedTransition = true
@@ -78,7 +88,7 @@ export default class ContactAnimation {
             if (this.transtionDelay) this.transtionDelay.kill()
 
             //Show David if not visible yet
-            if (this.david.material.opacity != 1 && this.played) 
+            if (this.david.material.opacity != 1 && this.played)
                 gsap.to(this.david.material, { opacity: 1, duration: this.parameters.transitionDuration, ease: Power2.easeInOut }, 0)
         }
     }

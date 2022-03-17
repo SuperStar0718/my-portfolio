@@ -7,16 +7,24 @@ export default class HoverIcon {
     hoverElements = [
         {
             class: '.menu-item',
+            color: '#FF923E',
         },
         {
             class: '.work-item-gray-button',
+            color: '#105099',
         },
         {
             class: '.small-button',
+            color: '#105099',
         },
         {
             class: '#landing-cta-button',
+            color: '#105099',
         },
+        {
+            class: '#landing-more-about-me',
+            color: '#105099',
+        }
     ]
 
     constructor() {
@@ -38,6 +46,8 @@ export default class HoverIcon {
                 // Mouseeenter 
                 domElement.addEventListener('mouseenter', () => {
                     this.showIcon(event.srcElement)
+
+                    this.icon.style.background = element.color
                 })
 
                 // mouseleave 

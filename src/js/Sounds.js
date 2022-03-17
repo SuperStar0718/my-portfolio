@@ -18,7 +18,7 @@ import hologramSound from '../assets/sounds/hologram.mp3'
 
 export default class Sounds {
 
-    active = true
+    active = false
 
     items = [
         {
@@ -67,6 +67,7 @@ export default class Sounds {
         this.setMasterVolume()
         this.setupSounds()
         this.setLabAmbience()
+
         if (this.debug.active) this.initDebug()
     }
 
@@ -108,6 +109,7 @@ export default class Sounds {
                         if (this.debug.active) {
                             console.log('Couldnt play Howl: ' + item.name)
                         }
+                        console.log('Couldnt play Howl: ' + item.name)
                     },
                     onloaderror: () => {
                         if (this.debug.active) {

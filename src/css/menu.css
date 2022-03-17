@@ -41,24 +41,21 @@
 
 .active-menu-item {
     cursor: unset !important;
-    transform: translateX(38px);
+    transform: translateX(24px);
 }
 
 .active-menu-item::after {
     position: absolute;
-    height: 26px;
-    width: 26px;
+    height: 13px;
+    width: 13px;
     display: flex;
-    align-items: center;
-    justify-content: center;
     border-radius: 50%;
-    content: '>';
-    font-size: 20px;
+    content: "";
     color: white;
     background: #FF923E;
     left: -10px;
     top: 50%;
-    transform: translate(-28px, -50%);
+    transform: translate(-16px, -50%);
 }
 
 #menu-container .social-icon {

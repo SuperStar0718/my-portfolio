@@ -41,16 +41,9 @@
 
 .landing-subheading {
     font-size: 17px;
-    fill:#7C8594;
+    fill:#756969;
+    fill: #7C8594;
     transform-origin: left;
-}
-
-/**Subheader*/
-#landing-subheader {
-    margin-top: 20px;
-    margin-bottom: 50px;
-    font-size: 1.1em;
-    color: #7C8594;
 }
 
 /**Contact me button*/

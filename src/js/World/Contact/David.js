@@ -21,10 +21,10 @@ export default class David {
     onOrientationChange() {
         if (this.sizes.portrait) {
             this.sprite.scale.set(3.43, 6.56)
-            this.sprite.position.set(-0.35, 3, -0.5)
+            this.sprite.position.set(-0.15, 2.1, 0)
         } else {
             this.sprite.scale.set(2.64, 5.05)
-            this.sprite.position.set(-0.55, 1.9, -0.5)
+            this.sprite.position.set(-0.15, 2.1, 0)
         }
     }
 
