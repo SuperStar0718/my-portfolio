@@ -40,7 +40,7 @@ export default class LandingPage extends EventEmitter {
         this.contactAnimation = this.experience.world.contact.animation
 
         //Hide Triggers
-        this.domElements.aboutMeButton.addEventListener('click', () => this.hide())
+        //this.domElements.aboutMeButton.addEventListener('click', () => this.hide())
         this.gestures.on('scroll-down', () => this.hide())
         this.gestures.on('touch-down', () => this.hide())
 
@@ -113,7 +113,7 @@ export default class LandingPage extends EventEmitter {
                 this.experience.ui.about.animations.playHologramAnimation(.5)
 
                 // Character Animation
-                this.character.animation.play('fallDown', .3)
+                this.character.animation.play('fallDown', .35)
 
                 // Update Face
                 this.character.body.face.material.map = this.character.body.faceTextures.scared

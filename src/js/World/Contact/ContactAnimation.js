@@ -1,12 +1,15 @@
 import Experience from '../../Experience'
-import { gsap, Power2 } from 'gsap'
+import { gsap, Power3 } from 'gsap'
 
 export default class ContactAnimation {
 
     played = false
 
     parameters = {
-        transitionDuration: 3
+        transitionDuration: 3,
+        characterPortraitY: 1.5,
+        characterLandscapeY: 0.2,
+        characterPortraitScale: 1.7
     }
 
     constructor() {
@@ -16,13 +19,19 @@ export default class ContactAnimation {
         this.contactScene = this.experience.world.contact.scene
         this.david = this.experience.world.contact.david
         this.exclamationMark = this.experience.world.contact.exclamationMark
+        this.sizes = this.experience.sizes
 
         this.setMaterialsToHide()
     }
 
     playIdle() {
         if (!this.played) {
-            this.character.model.position.y = this.experience.world.contact.scene.model.position.y + 0.2
+            //Position
+            this.character.model.position.y = this.experience.world.contact.scene.model.position.y + this.parameters[this.sizes.portrait ? 'characterPortraitY' : 'characterLandscapeY']
+
+            //scale
+            if (this.sizes.portrait) this.character.model.scale.set(this.parameters.characterPortraitScale, this.parameters.characterPortraitScale, this.parameters.characterPortraitScale)
+
             this.character.setAllToOriginal()
             this.character.body.face.material.map = this.character.body.faceTextures.sleepy
             this.character.animation.play('standingIdle', 0)
@@ -38,27 +47,29 @@ export default class ContactAnimation {
                 setTimeout(() => {
                     this.character.body.faceTransitions.current = null
                     this.character.body.updateFace('contact')
-                }, 500)
+                }, 350)
             }, 200)
 
             this.played = true
 
-
             this.exclamationMark.show()
 
-            gsap.delayedCall(.15, () => this.character.animation.play('contact', .15), 0)
+            gsap.delayedCall(.15, () => {
+                if (this.character.animation.actions.current._clip.name === 'standing-idle')
+                    this.character.animation.play('contact', .15)
+            })
 
             this.transtionDelay = gsap.delayedCall(1.2, () => {
                 this.startedTransition = true
 
-                this.timeline.to(this.david.material, { opacity: 1, duration: this.parameters.transitionDuration, ease: Power2.easeInOut }, 0)
+                this.timeline.to(this.david.material, { opacity: 1, duration: this.parameters.transitionDuration, ease: Power3.easeIn }, 0)
 
                 this.character.body.materials.bakedMaterial.transparent = true
                 this.character.body.materials.bakedMaterial.needsUpdate = true
                 this.character.body.face.renderOrder = 1
 
                 this.materialsToHide.forEach((material) => {
-                    this.timeline.to(material, { opacity: 0, duration: this.parameters.transitionDuration, ease: Power2.easeInOut }, 0)
+                    this.timeline.to(material, { opacity: 0, duration: this.parameters.transitionDuration, ease: Power3.easeIn }, 0)
                 })
 
                 setTimeout(() => this.resetCharacter, this.parameters.transitionDuration)
@@ -72,6 +83,8 @@ export default class ContactAnimation {
             if (!this.experience.ui.landingPage.visible) {
                 this.experience.ui.about.animations.resetCharacterToPosition()
             }
+
+            this.character.model.scale.set(1, 1, 1)
 
             //Rest head
             this.character.body.materials.bakedMaterial.transparent = false

@@ -23,3 +23,8 @@
     position: fixed;
     display: none;
 }
+
+#scroll-container .scroll-icon {
+    border-color: white;
+    top: calc(100vh - 60px);
+}

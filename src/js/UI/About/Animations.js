@@ -168,6 +168,7 @@ export default class AboutAnimations {
             this.character.model.position.y = -14.95
             this.character.animation.play('waterIdle', 0)
             this.character.updateWireframe('down')
+            this.character.model.scale.set(1, 1, 1)
         }
     }
 

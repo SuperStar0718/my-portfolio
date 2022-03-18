@@ -29,7 +29,7 @@ export default class UI {
         this.resources.on('ready', () => {
             // Setup
             this.transition = new Transition()
-            this.scrollIcon = new ScrollIcon('landing-scroll-icon', 'landing-scroll-wheel')
+            this.scrollIcon = new ScrollIcon(document.querySelector('.scroll-icon'))
             this.landingPage = new LandingPage()
             this.scroll = new Scroll()
             this.sections = new Sections()
@@ -46,6 +46,7 @@ export default class UI {
             this.about.render = new SkillsRender()
             this.about.icons = new AboutIcons()
             this.about.animations = new AboutAnimations()
+            this.about.scrollIcon = new ScrollIcon(document.querySelectorAll('.scroll-icon')[1])
 
             //Work
             this.work = {}
@@ -63,7 +64,7 @@ export default class UI {
     }
 
     update() {
-        
+
     }
 
     resize() {
@@ -82,7 +83,7 @@ export default class UI {
         if (this.about) if (this.about.animations)
             this.about.animations.resize()
 
-        if(this.contact) if(this.contact.animationEvents)
+        if (this.contact) if (this.contact.animationEvents)
             this.contact.animationEvents.resize()
     }
 }

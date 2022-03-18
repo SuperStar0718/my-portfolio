@@ -5,7 +5,8 @@ export default class ContactScene {
 
     parameters = {
         portraitY: -53.5,
-        landscapeY: -28
+        landscapeY: -28,
+        portraitScale: 1.7,
     }
 
     constructor() {
@@ -31,10 +32,12 @@ export default class ContactScene {
     }
 
     onOrientationChange() {
-        if(this.sizes.portrait) {
+        if (this.sizes.portrait) {
             this.model.position.y = this.parameters.portraitY
+            this.model.scale.set(this.parameters.portraitScale, this.parameters.portraitScale, this.parameters.portraitScale)
         } else {
             this.model.position.y = this.parameters.landscapeY
+            this.model.scale.set(1, 1, 1)
         }
     }
 

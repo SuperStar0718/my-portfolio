@@ -2,20 +2,28 @@ import { gsap, Power3 } from 'gsap'
 
 export default class ScrollIcon {
 
-    constructor(containerId, wheelId) {
-        this.container = document.getElementById(containerId)
-        this.wheel = document.getElementById(wheelId)
+    visible = true
+
+    constructor(icon) {
+        this.icon = icon
 
         this.startAnimation()
     }
 
     startAnimation() {
-        gsap.fromTo(this.wheel, { y: 0 }, { y: 5, duration: 1, ease: Power3.easeIn, repeat: -1, yoyo: true })
+        gsap.fromTo(this.icon, { y: 0 }, { y: 15, duration: 1, ease: Power3.easeIn, repeat: -1, yoyo: true })
     }
 
     hide() {
-        gsap.to(this.container, { opacity: 0, duration: .3 })
+        if (this.visible) {
+            this.visible = false
 
-        setTimeout(() => gsap.killTweensOf(this.wheel), 300)
+            gsap.to(this.icon, { opacity: 0, duration: .3 })
+
+            setTimeout(() => {
+                gsap.killTweensOf(this.icon)
+                this.icon.classList.add('hide')
+            }, 300)
+        }
     }
 }

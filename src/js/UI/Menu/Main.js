@@ -75,6 +75,9 @@ export default class MenuMain extends EventEmitter {
             //Prevent too fast reopening
             this.isAnimating = true
             gsap.delayedCall(.9, () => this.isAnimating = false)
+
+            //Scroll Icons
+            this.fadeScrollIcons(!this.visible)
         }
     }
 
@@ -138,6 +141,8 @@ export default class MenuMain extends EventEmitter {
 
         //sound
         this.sounds.muteGroup('lab', false, .4)
+
+        this.experience.ui.about.animations.resetCharacterToPosition()
     }
 
     focusContactScene() {
@@ -169,6 +174,16 @@ export default class MenuMain extends EventEmitter {
             if (this.visible) {
                 this.switchVisiblity()
             }
+        })
+    }
+
+    fadeScrollIcons(visible) {
+        const icons = document.querySelectorAll('.scroll-icon')
+
+
+
+        icons.forEach((icon) => {
+            gsap.to(icon, { opacity: (visible ? 1 : 0) })
         })
     }
 

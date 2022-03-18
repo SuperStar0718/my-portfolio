@@ -1,11 +1,14 @@
 #work-section {
+    display: flex;
     flex-direction: column;
-    width: 100%;
-    margin-top: 12vh;
+    margin-top: 3vh;
     margin-bottom: 3vh;
     position: relative;
+    min-height: 94vh;
+    box-shadow: 0px 30px 70px #93683310;
+    width: 100%;
     padding: 90px 0;
-    min-height: 96vh;
+    box-sizing: border-box;
 }
 
 #work-background {
@@ -14,7 +17,6 @@
     height: 100%;
     position: absolute;
     z-index: -1;
-    box-shadow: 0px 30px 70px #93683310;
 }
 
 #work-section h2 {
@@ -23,8 +25,8 @@
 
 #work-render-container {
     position: relative;
-    width: 320px;
-    height: 520px;
+    width: 350px;
+    height: 570px;
     max-width: 100%;
 }
 
@@ -35,12 +37,13 @@
     position: absolute;
     transition: transform 400ms ease-in-out, opacity 400ms ease-in-out, filter 400ms ease-in-out, border-color 125ms ease-in;
     border: 2px solid white;
-    border-radius: 14px;
+    border-radius: 20px;
     box-shadow: 0px 30px 70px #93683325;
+    width: 100%;
 }
 
 .work-inactive-item-container {
-     opacity: 0.5; 
+    opacity: 0.5; 
     filter: grayscale(50%);
     cursor: pointer;
 }
@@ -59,7 +62,7 @@
     margin-bottom: 5px;
     object-fit: cover;
     min-height: 200px;
-    border-radius: 10px;
+    border-radius: 13px;
 }
 
 .work-item-content-container {
@@ -72,21 +75,23 @@
 .work-item-tag-container {
     margin: 10px 0;
     margin-bottom: 15px;
+    max-width: 100%;
+    flex-wrap: wrap;
 }
 
 .work-item-tag {
-    font-size: 10px;
-    padding: 2px 6px;
+    font-size: .7rem;
+    padding: 3px 8px;
     margin-right: 5px;
     color: white;
-    border-radius: 6px;
+    border-radius: 8px;
     margin-bottom: 4px;
     display: flex;
     align-items: center;
 }
 
 .work-item-content-container span{
-    font-size: 14px;
+    font-size: 1rem;
     color: #7C8594;
 }
 
@@ -105,10 +110,10 @@
     background: white;
     color: #7C8594;
     border: 2px solid rgb(240, 240, 240);
-    border-radius: 10px;
+    border-radius: 13px;
     margin-right: 8px;
     font-weight: 600;
-    font-size: .9rem;
+    font-size: 1rem;
     cursor: pointer;
 }
 
@@ -133,7 +138,7 @@
 }
 
 .work-navigation-button:hover {
-    transform: scale(0.95);
+    transform: scale(0.9);
 }
 
 .work-disabled-navigation-button {

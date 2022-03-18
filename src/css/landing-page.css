@@ -26,8 +26,8 @@
 }
 
 #landing-content-svg{
-    width: 500px;
-    max-width: 50%;
+    width: 550px;
+    max-width: 45%;
     max-height: 80%;
     position: relative;
 }
@@ -41,15 +41,12 @@
 
 .landing-subheading {
     font-size: 17px;
-    fill:#756969;
     fill: #7C8594;
     transform-origin: left;
 }
 
-/**Contact me button*/
-#landing-cta-button .big-button {
-    width: max-content;
-    transform-origin: left;
+#landing-page .scroll-icon {
+    top: calc(100vh - 60px);
 }
 
 /**---------------------------------------------------------------Responsive-----------------------------------------------------*/

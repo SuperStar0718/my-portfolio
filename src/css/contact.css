@@ -1,7 +1,9 @@
 #contact-section {
     align-items:  flex-start;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 40px 0;
+    box-sizing: border-box;
 }
 
 #contact-section h2 {
@@ -11,7 +13,7 @@
 }
 
 #contact-get-in-touch-label {
-    font-size: 15px;
+    font-size: 1rem;
     margin-bottom: 50px;
     max-width: 500px;
     color: #7C8594;
@@ -29,17 +31,17 @@
 
 #contact-container {
     padding: 10px;
-    border-radius: 14px;
+    border-radius: 20px;
     background: white;
     box-shadow: 0px 30px 70px #93683325;
-    width: 440px;
+    width: 500px;
     max-width: calc(100% - 30px);
-    height: 480px;
+    height: 540px;
 }
 
 #contact-container input,textarea {
     border: none;
-    font-size: 16px;
+    font-size: 1.1rem;
     font-family: 'Poppins', sans-serif;
     background: transparent !important;
     font-weight: 500;
@@ -69,7 +71,7 @@
     box-sizing: border-box;
     background: #F5F5F5;
     color: #ACACAC;
-    border-radius: 10px;
+    border-radius: 13px;
     padding: 7px;
     padding-left: 15px;
     border: 2px solid #F5F5F5;
@@ -80,7 +82,7 @@
 }
 
 .input-container span {
-    font-size: 12px;
+    font-size: .8rem;
     font-weight: 500;
     margin-right: 10px;
 }
@@ -123,11 +125,17 @@
     margin-bottom: auto;
 }
 
-#contact-result-message-container span,h4{
-    font-size: 14px;
+#contact-result-message-container h4{
     text-align: center;
     margin: 3px;
 }
+
+#contact-result-message-container span{
+    font-size: 1rem;
+    text-align: center;
+    margin: 3px;
+}
+
 
 #contact-result-container svg {
     margin-top: auto;

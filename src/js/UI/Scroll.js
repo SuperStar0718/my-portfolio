@@ -91,7 +91,7 @@ export default class Scroll {
         this.aboutContainer.height = this.aboutContainer.dom.clientHeight
     }
 
-    addEvent(height, direction, task, unique) {
+    addEvent(height, direction, task) {
         //Add to array
         this.events.push({ height: height, direction: direction, task: task, played: false })
         const index = this.events.length - 1
@@ -110,12 +110,15 @@ export default class Scroll {
         this.gestures.on('scroll-' + direction, () => checkEvent())
         this.gestures.on('touch-' + direction, () => checkEvent())
 
-        //check if unique -> listen to opposite direction to make event playable again
-        if (!unique) this.gestures.on('scroll-' + (direction === 'up' ? 'down' : 'up'), () => {
+        const checkReset = () => {
             if ((direction === 'up' ? height < this.scrollY : height > this.scrollY) && this.events[index].played) {
                 this.events[index].played = false
             }
-        })
+        }
+
+        //check if unique -> listen to opposite direction to make event playable again
+        this.gestures.on('scroll-' + (direction === 'up' ? 'down' : 'up'), () => checkReset())
+        this.gestures.on('touch-' + (direction === 'up' ? 'down' : 'up'), () => checkReset())
     }
 
     resetAllEvents() {
@@ -155,6 +158,9 @@ export default class Scroll {
     }
 
     performScroll(duration = this.parameters.scrollDuration) {
+        //Hide Scroll Icon
+        this.experience.ui.about.scrollIcon.hide()
+
         this.contentScrollTo = this.preventFromScrollingBottom()
 
         let scrollPercentage = 0
@@ -206,7 +212,7 @@ export default class Scroll {
 
     //Re-position logo white background
     setLogoOverlayHeight() {
-        document.getElementById('logo-white-background').style.height = this.aboutContainer.height + (window.innerHeight * (this.sizes.portrait ? 0.03 : 0.12)) + 'px'
+        document.getElementById('logo-white-background').style.height = this.aboutContainer.height + (window.innerHeight * (this.sizes.portrait ? 0.03 : 0.03)) + 'px'
     }
 
     resize() {

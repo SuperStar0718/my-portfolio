@@ -84,30 +84,6 @@
     transform-origin: top right;
 }
 
-/**Landing Scroll Icon*/
-#landing-scroll-icon {
-    width: 18px;
-    height: 31px;
-    border-radius: 15px;
-    border: 3px solid #091434;
-    position: absolute;
-    left: 0; 
-    right: 0; 
-    margin: 0 auto;
-    bottom: 15px;
-    display: flex;
-    justify-content: center;
-    transform-origin: bottom center;
-}
-
-#landing-scroll-wheel {
-    width: 4px;
-    height: 10px;
-    background: #091434;
-    border-radius: 2px;
-    margin-top: 3px;
-}
-
 /*------------------------------------------ Responsive -----------------------------*/
 @media (max-aspect-ratio: 11/10) {
     
