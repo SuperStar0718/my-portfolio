@@ -22,16 +22,6 @@ export default class Desktops {
         //Material
         this.desktop0Layer0Material = new THREE.MeshBasicMaterial({ map: this.resources.items.desktop0, fog: false })
         this.desktop0.material = this.desktop0Layer0Material
-
-        // overlay gradient layer 
-        this.addDesktopLayer(
-            'desktop0Overlay',
-            2,
-            this.desktop0,
-            this.desktop1.geometry.attributes.uv,
-            this.resources.items.desktopOverlay,
-            true
-        )
     }
 
     scrollDesktop0() {
@@ -49,49 +39,14 @@ export default class Desktops {
         this.desktop1PlaneMaterial = new THREE.MeshBasicMaterial({ map: this.resources.items.desktop1, fog: false })
         this.desktop1.material = this.desktop1PlaneMaterial
 
-        // notification layer 
-        this.addDesktopLayer(
-            'desktop1Notification',
-            1,
-            this.desktop1,
-            this.desktop1.geometry.attributes.uv,
-            this.resources.items.desktop1Notification,
-            true
-        )
-
-        //Hide
-        this.desktopLayers.desktop1Notification.material.opacity = 0
-
-        // overlay gradient layer 
-        this.addDesktopLayer(
-            'desktop1Overlay',
-            2,
-            this.desktop1,
-            this.desktop1.geometry.attributes.uv,
-            this.resources.items.desktopOverlay,
-            true
-        )
+        this.setNotification()
     }
 
-    // create new desktop layer by cloneing the original and setting its position in front of original 
-    addDesktopLayer(name, zIndex, desktop, uvs, image, transparent) {
-        //Clone Mesh
-        const desktopMesh = desktop.clone()
-
-        //Apply material
-        const desktopMaterial = new THREE.MeshBasicMaterial({ map: image, transparent: transparent, fog: false })
-        desktopMesh.material = desktopMaterial
-
-        //Index
-        desktopMesh.position.x += zIndex / 1000
-
-        //UVs
-        desktopMesh.geometry.setAttribute('uvs', uvs)
-
-        //Add to scene
-        this.room.baseModel.add(desktopMesh)
-
-        this.desktopLayers[name] = desktopMesh
+    setNotification() {
+        this.notification = this.desktop1.clone()
+        this.notification.material = new THREE.MeshBasicMaterial({ map: this.resources.items.desktop1Notification, transparent: true, fog: false, opacity: 0 })
+        this.notification.position.x += 0.01
+        this.room.baseModel.add(this.notification)
     }
 }
 

@@ -10,13 +10,13 @@ import Header from './Header'
 import AboutIcons from './About/Icons'
 import MenuMain from './Menu/Main'
 import ScrollIcon from './SrollIcon'
-import ScrollBar from './ScrollBar'
 import SoundButton from './SoundButton'
 import AboutAnimations from './About/Animations'
 import MenuItems from './Menu/Items'
 import Sections from './Sections'
 import ContactForm from './Contact/ContactForm'
 import ContactAnimationEvents from './Contact/AnimationEvents'
+import Intro from './Intro'
 
 export default class UI {
 
@@ -24,6 +24,7 @@ export default class UI {
         this.experience = new Experience()
         this.resources = this.experience.resources
         this.world = this.experience.world
+        this.sizes = this.experience.sizes
 
         // Wait for resources
         this.resources.on('ready', () => {
@@ -33,7 +34,6 @@ export default class UI {
             this.landingPage = new LandingPage()
             this.scroll = new Scroll()
             this.sections = new Sections()
-            //this.scrollbar = new ScrollBar()
             this.soundButton = new SoundButton()
 
             //Menu 
@@ -60,6 +60,8 @@ export default class UI {
 
             this.header = new Header()
             this.hoverIcon = new HoverIcon()
+
+            this.intro = new Intro()
         })
     }
 

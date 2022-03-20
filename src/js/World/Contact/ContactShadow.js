@@ -45,6 +45,7 @@ export default class ContactShadow {
             },
             vertexShader: roomShadowVertex,
             fragmentShader: roomShadowFragment,
+            precision: 'lowp',
         })
 
         this.model.children.find((children) => children.name === 'shadowCatcher').material = this.material

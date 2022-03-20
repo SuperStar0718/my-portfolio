@@ -13,7 +13,8 @@ export default class LandingPage extends EventEmitter {
         scrollContainer: document.getElementById('scroll-container'),
         logoWhiteBackground: document.getElementById('logo-white-background'),
         contentSvg: document.getElementById('landing-content-svg'),
-        heading: document.querySelectorAll('.landing-headline'),
+        heading0: document.querySelectorAll('.landing-headline')[0],
+        heading1: document.querySelectorAll('.landing-headline')[1],
         subheading: document.querySelector('.landing-subheading'),
         button: document.getElementById('landing-cta-button'),
         aboutMeButton: document.getElementById('landing-more-about-me'),
@@ -38,12 +39,14 @@ export default class LandingPage extends EventEmitter {
         this.sizes = this.experience.sizes
         this.waypoints = this.experience.waypoints
         this.contactAnimation = this.experience.world.contact.animation
+        this.intro = this.experience.ui.intro
 
         //Hide Triggers
         //this.domElements.aboutMeButton.addEventListener('click', () => this.hide())
         this.gestures.on('scroll-down', () => this.hide())
         this.gestures.on('touch-down', () => this.hide())
 
+        //this.intro.on('hide', () => this.playOpeningAnimation(1))
         //this.playOpeningAnimation(1)
 
         this.waypoints.moveToWaypoint(this.sizes.portrait ? 'landing-page-portrait' : 'landing-page', false)
@@ -60,19 +63,8 @@ export default class LandingPage extends EventEmitter {
     }
 
     playOpeningAnimation(delay = 0) {
-        gsap.fromTo(this.domElements.contentSvg, { opacity: 0 }, { opacity: 1, delay: delay, duration: .5 })
-        gsap.fromTo(this.domElements.contentSvg, { x: 270 }, { x: -50, delay: delay, ease: Back.easeOut.config(1.3), duration: 1.4 })
-
-        const aniamtedElements = [
-            this.domElements.heading,
-            this.domElements.subheading,
-            this.domElements.button,
-        ]
-
-        aniamtedElements.forEach((element) => {
-            gsap.fromTo(element, { x: 100 }, { x: 0, ease: Back.easeOut.config(2), delay: (aniamtedElements.indexOf(element) / 2.5), duration: 1.4 })
-            gsap.fromTo(element, { scaleX: 0.7 }, { scaleX: 1, ease: Back.easeOut.config(1.6), delay: (aniamtedElements.indexOf(element) / 3), duration: 1.1 })
-        })
+        gsap.fromTo(this.domElements.contentSvg, { opacity: 0 }, { opacity: 1, delay: delay, duration: .4 })
+        gsap.fromTo(this.domElements.contentSvg, { x: this.domElements.contentSvg.clientWidth * 0.6, scale: .6 }, { x: 0, scale: 1, delay: delay, duration: .6, ease: Back.easeOut.config(1.4) })
     }
 
     hide() {
@@ -119,16 +111,13 @@ export default class LandingPage extends EventEmitter {
                 this.character.body.face.material.map = this.character.body.faceTextures.scared
 
                 //character fall down
-                gsap.to(this.character.model.position, { y: -14.95, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
+                gsap.to(this.character.model.position, { y: -18.95, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
                 gsap.delayedCall(.4, () => this.sounds.play('waterSplash'))
 
                 //play water idle animation 
                 setTimeout(() => {
                     this.character.animation.play('waterIdle', .9)
                 }, 650)
-
-                //Hide bubbles
-                this.experience.world.lab.bubbles.hideAllBubbles()
 
                 //spawn bubbles
                 setTimeout(() => {
@@ -157,7 +146,7 @@ export default class LandingPage extends EventEmitter {
             this.lockScrolling()
 
             //Room Bounce
-            this.room.bounceIn(.45)
+            this.room.bounceIn(.5)
 
             // Landing Page Content
             this.domElements.landingPage.style.top = '0'

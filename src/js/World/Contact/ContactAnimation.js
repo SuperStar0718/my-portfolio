@@ -8,7 +8,7 @@ export default class ContactAnimation {
     parameters = {
         transitionDuration: 3,
         characterPortraitY: 1.5,
-        characterLandscapeY: 0.2,
+        characterLandscapeY: 0.27,
         characterPortraitScale: 1.7
     }
 
@@ -59,7 +59,7 @@ export default class ContactAnimation {
                     this.character.animation.play('contact', .15)
             })
 
-            this.transtionDelay = gsap.delayedCall(1.2, () => {
+            this.transtionDelay = gsap.delayedCall(1, () => {
                 this.startedTransition = true
 
                 this.timeline.to(this.david.material, { opacity: 1, duration: this.parameters.transitionDuration, ease: Power3.easeIn }, 0)
@@ -102,7 +102,7 @@ export default class ContactAnimation {
 
             //Show David if not visible yet
             if (this.david.material.opacity != 1 && this.played)
-                gsap.to(this.david.material, { opacity: 1, duration: this.parameters.transitionDuration, ease: Power2.easeInOut }, 0)
+                gsap.to(this.david.material, { opacity: 1, duration: this.parameters.transitionDuration, ease: Power3.easeIn }, 0)
         }
     }
 

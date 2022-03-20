@@ -1,4 +1,5 @@
-import { gsap, Power2, Back } from "gsap"
+import { gsap } from "gsap"
+import Experience from '../../Experience'
 
 export default class ContactForm {
 
@@ -29,9 +30,39 @@ export default class ContactForm {
     ]
 
     constructor() {
+        this.experience = new Experience()
+        this.sections = this.experience.ui.sections
+        this.scroll = this.experience.ui.scroll
+
         this.addSubmitButtonEventListener()
         this.addHideErrorEventListeners()
         this.addResultButtonEventListener()
+        this.initTabEvents()
+    }
+
+    initTabEvents() {
+        window.addEventListener('keydown', () => {
+            if (event.keyCode == 9) {
+                event.preventDefault()
+
+                this.fields.forEach((field) => {
+                    if (field.input === document.activeElement) {
+                        this.focusNext(this.fields.indexOf(field))
+                    }
+                })
+
+            }
+        })
+    }
+
+    focusNext(currentIndex) {
+        if (this.scroll.scrollY + (window.innerHeight / 3) >= this.sections.sections[2].y) {
+            const nextInput = this.fields[currentIndex + 1 == this.fields.length ? 0 : currentIndex + 1].input
+
+            setTimeout(() => {
+                nextInput.focus()
+            })
+        }
     }
 
     addSubmitButtonEventListener() {
@@ -55,7 +86,7 @@ export default class ContactForm {
         this.domElements.resultButton.addEventListener('click', () => {
             this.showContainer('form')
 
-            if(this.domElements.errorLines[0].classList.contains('hide')) {
+            if (this.domElements.errorLines[0].classList.contains('hide')) {
                 this.clearInputs()
             }
         })

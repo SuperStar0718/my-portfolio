@@ -26,14 +26,10 @@ export default class World {
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.debug = this.experience.debug
-        this.sizes = this.experience.sizes
 
 
         // Wait for resources
         this.resources.on('ready', () => {
-            this.sizes.portrait = false
-            this.sizes.checkPortrait()
-
             // Setup
             this.fog = new SceneFog()
             this.background = new Background()

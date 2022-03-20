@@ -9,8 +9,8 @@
 
 /**---------------------------------------------------------------Content-----------------------------------------------------*/
 #about-content-container {
-    width: 600px;
-    max-width: 45%;
+    width: 580px;
+    max-width: 48%;
     display: flex;
     flex-direction: column;
 }

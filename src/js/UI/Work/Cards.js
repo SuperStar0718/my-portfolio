@@ -3,33 +3,27 @@ import { gsap, Back} from 'gsap'
 
 export default class WorkCards {
     positionStyles = [
-        'transform: translateX(-410%) scale(0.9);',// Left
-        'transform: translateX(-310%) scale(0.9); ',
-        'transform: translateX(-210%) scale(0.9);',
-        'transform: translateX(-110%) scale(0.9); ',
+        'transform: translateX(-430%);',// Left
+        'transform: translateX(-325%); ',
+        'transform: translateX(-220%);',
+        'transform: translateX(-110%); ',
         'transform: translateX(0%);', //Active
-        'transform: translateX(110%) scale(0.9);', // Right
-        'transform: translateX(210%) scale(0.9)',
-        'transform: translateX(310%) scale(0.9); ',
-        'transform: translateX(410%) scale(0.9);',
+        'transform: translateX(110%);', // Right
+        'transform: translateX(220%)',
+        'transform: translateX(325%);',
+        'transform: translateX(430%);',
     ]
 
-    backButton = document.getElementById('work-back-button')
-    nextButton = document.getElementById('work-next-button')
-
     domElements = {
-        section: document.getElementById('work-section')
+        section: document.getElementById('work-section'),
+        backButton: document.getElementById('work-back-button'),
+        nextButton: document.getElementById('work-next-button'),
     }
 
     constructor() {
         this.experience = new Experience()
         this.gestures = this.experience.gestures
         this.render = this.experience.ui.work.render
-        this.debug = this.experience.debug
-
-        if(this.debug.active) {
-            this.initDebug()
-        }
 
         this.currentItemIndex = 2
 
@@ -40,12 +34,12 @@ export default class WorkCards {
 
     addButtonEventListeners() {
         // back button event listener
-        this.backButton.addEventListener('click', () => {
+        this.domElements.backButton.addEventListener('click', () => {
             this.moveBack()
         })
 
         // next button event listener
-        this.nextButton.addEventListener('click', () => {
+        this.domElements.nextButton.addEventListener('click', () => {
             this.moveForward()
         })
     }
@@ -107,26 +101,12 @@ export default class WorkCards {
     // disable or enable back and next navigation buttons
     updateNavigation() {
         if (this.currentItemIndex == 0) {
-            this.nextButton.classList.add('work-disabled-navigation-button')
+            this.domElements.nextButton.classList.add('work-disabled-navigation-button')
         } else if (this.currentItemIndex == 4) {
-            this.backButton.classList.add('work-disabled-navigation-button')
+            this.domElements.backButton.classList.add('work-disabled-navigation-button')
         } else {
-            this.nextButton.classList.remove('work-disabled-navigation-button')
-            this.backButton.classList.remove('work-disabled-navigation-button')
+            this.domElements.nextButton.classList.remove('work-disabled-navigation-button')
+            this.domElements.backButton.classList.remove('work-disabled-navigation-button')
         }
-    }
-
-    playOpenAnimation() {
-        gsap.fromTo(document.querySelectorAll('.work-item-container')[2], {scale: 0}, {scale: 1, ease: Back.easeOut.config(1.5)})
-    }
-
-    initDebug() {
-        this.debugFolder = this.debug.ui.addFolder('Work UI').close()
-
-        const debugObject = {
-            playOpenAnimation: () => { this.playOpenAnimation() },
-        }
-        
-        this.debugFolder.add(debugObject, 'playOpenAnimation').name('Play Open Animation')
     }
 }

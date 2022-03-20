@@ -15,7 +15,7 @@ export default class Transition {
         this.experience = new Experience()
         this.resoureces = this.experience.resources
 
-        this.hideIntro()
+        //this.hideIntro()
     }
 
     hideIntro() {
@@ -27,6 +27,7 @@ export default class Transition {
     }
 
     show() {
+        this.domElements.container.classList.remove('hide')
 
         //Prevent actions while open
         this.isShowing = true

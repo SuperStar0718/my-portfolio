@@ -10,14 +10,16 @@ export default [
     { name: 'characterModel', type: 'gltfModel', path: 'models/character/model.glb' },
 
     //Character Textures
-    { name: 'shirtMatcap', type: 'texture', path: 'textures/matcaps/shirt.png' },
-    { name: 'skinMatcap', type: 'texture', path: 'textures/matcaps/skin.png' },
-    { name: 'pantsMatcap', type: 'texture', path: 'textures/matcaps/pants.png' },
-    { name: 'whiteMatcap', type: 'texture', path: 'textures/matcaps/white.png' },
+    { name: 'shirtMatcap', type: 'texture', path: 'textures/matcaps/shirt.jpg' },
+    { name: 'skinMatcap', type: 'texture', path: 'textures/matcaps/skin.jpg' },
+    { name: 'pantsMatcap', type: 'texture', path: 'textures/matcaps/pants.jpg' },
+    { name: 'whiteMatcap', type: 'texture', path: 'textures/matcaps/white.jpg' },
     { name: 'bakedCharacterHeadTexture', type: 'texture', path: 'models/character/head-baked.jpg' },
 
     //Character Faces
     { name: 'characterDefaultFace', type: 'texture', path: 'models/character/faces/default.png' },
+    { name: 'characterBlink0Face', type: 'texture', path: 'models/character/faces/blink-0.png' },
+    { name: 'characterBlink1Face', type: 'texture', path: 'models/character/faces/blink-1.png' },
     { name: 'characterSmile0Face', type: 'texture', path: 'models/character/faces/smile/0.png' },
     { name: 'characterSmile1Face', type: 'texture', path: 'models/character/faces/smile/1.png' },
     { name: 'characterSmile2Face', type: 'texture', path: 'models/character/faces/smile/2.png' },
@@ -29,7 +31,6 @@ export default [
     //Destkops
     { name: 'desktop0', type: 'texture', path: 'models/room/desktops/0.png' },
     { name: 'desktop1', type: 'texture', path: 'models/room/desktops/1.png' },
-    { name: 'desktopOverlay', type: 'texture', path: 'models/room/desktops/overlay.png' },
     { name: 'newMessageSprite', type: 'texture', path: 'textures/sprites/new-message.png' },
     { name: 'desktop1Notification', type: 'texture', path: 'models/room/desktops/1-notification.png' },
 
@@ -38,7 +39,7 @@ export default [
     { name: 'labShadowModel', type: 'gltfModel', path: 'models/lab/shadow-model.glb' },
     { name: 'bakedShadowLabTexture', type: 'texture', path: 'models/lab/shadow-baked.jpg' },
     { name: 'bakedLabTexture', type: 'texture', path: 'models/lab/baked.jpg' },
-    { name: 'labScreenGraph', type: 'texture', path: 'models/lab/screen-graph.png' },
+    { name: 'labScreenGraph', type: 'texture', path: 'models/lab/screen-graph.jpg' },
     { name: 'bubbleSprite', type: 'texture', path: 'textures/sprites/bubble.png' },
 
     //Contact Scene

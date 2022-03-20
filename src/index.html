@@ -6,15 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="/src/assets/favicon.ico">
-    <title>David | Web Developer</title>
+    <title>David | Front-End Developer</title>
 </head>
 
 <body>
     <!--Canvas-->
     <canvas id="main-canvas"></canvas>
 
+    <!--Intro-->
+    <div id="intro-container" class="center column">
+        <!--Loading Animation-->
+        <div id="loadig-animation-container">
+            <div id="loading-mask-container">
+                <div id="loading-animation"></div>
+            </div>
+            <img id="loading-logo-outline" src="/src/assets/logo-outline.png">
+        </div>
+    </div>
+
     <!--Loading Container-->
-    <div id="transition-container">
+    <div id="transition-container" class="hide">
         <!--Top Wave-->
         <svg id="transition-wave-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" width="150vw">
             <defs>
@@ -32,12 +43,6 @@
         <svg id="transition-wave-svg-bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" width="150vw">
             <use href="#transition-wave-path"></use>
         </svg>
-    </div>
-    <div id="loadig-animation-container">
-        <div id="loading-mask-container">
-            <div id="loading-animation"></div>
-        </div>
-        <img id="loading-logo-outline" src="/src/assets/logo-outline.png">
     </div>
 
     <!--Overlay Container-->
@@ -135,10 +140,10 @@
     <div id="landing-page" class="content-container landing-slow-transition">
 
         <!--Scroll CTA-->
-        <svg class="scroll-icon" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg" fill="#091434">
+        <svg class="scroll-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#091434">
             <!-- <use fill="#091434" href="#arrow-path"></use> -->
             <path id="small-arrow-path"
-                d="M374.6 310.6l-160 160C208.4 476.9 200.2 480 192 480s-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 370.8V64c0-17.69 14.33-31.1 31.1-31.1S224 46.31 224 64v306.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0S387.1 298.1 374.6 310.6z" />
+                d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" />
         </svg>
 
         <section id="landing-page-section" class="content-width slide-out-left-transition">
@@ -147,14 +152,17 @@
                 <text class="landing-headline" y="135" x="5">name is David.</text>
                 <text class="landing-subheading" x="10" y="185">
                     <tspan font-weight="400">I'm a</tspan>
-                    <tspan font-weight="600" dx="7"> Web Developer </tspan>
+                    <tspan font-weight="600" dx="7"> Front-End Developer </tspan>
                     <tspan font-weight="400" dx="7">living in Germany.</tspan>
                 </text>
 
                 <!--Big Button-->
-                <rect id="landing-cta-button" x="8" y="250" width="165" height="50" fill="#FF923E" rx="25"
-                    cursor="pointer"></rect>
-                <text fill="white" x="42" y="280" font-weight="600" pointer-events="none">Get in touch</text>
+                <symbol id="big-button">
+                    <rect x="0" y="0" width="165" height="50" fill="#FF923E" rx="25"
+                        cursor="pointer"></rect>
+                    <text fill="white" x="34" y="30" font-weight="600" pointer-events="none">Get in touch</text>
+                </symbol>
+                <use id="landing-cta-button" href="#big-button" x="8" y="250"></use>
 
                 <!--Get in touch-->
                 <!-- <text x="196" y="280" font-weight="400" pointer-events="none" fill="#7C8594">More about me</text>
@@ -166,13 +174,11 @@
         </section>
     </div>
 
-    <div id="scroll-bar"></div>
-
     <!--Scroll Container-->
     <div id="scroll-container" class="center column">
 
         <!--Scroll Icon-->
-        <svg class="scroll-icon" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
+        <svg class="scroll-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
             <use fill="white" href="#small-arrow-path"></use>
         </svg>
 
@@ -366,8 +372,10 @@
 
                 <!--Header-->
                 <h2>Selected Work</h2>
+                
                 <!--Render Container-->
                 <div id="work-render-container"></div>
+
                 <!--Navigation-->
                 <div id="work-navigation-container" class="row">
                     <div id="work-back-button" class="work-navigation-button work-disabled-navigation-button">

@@ -31,7 +31,7 @@ export default class Lab {
     }
 
     setPosition() {
-        this.model.position.y -= 15.9
+        this.model.position.y -= 19.9
         this.model.scale.set(0.95, 0.95, 0.95)
     }
 
@@ -42,9 +42,8 @@ export default class Lab {
 
         this.material = new THREE.MeshBasicMaterial({ map: this.texture })
 
-        this.model.traverse((child) => {
-            child.material = this.material
-        })
+        const mergedScene = this.model.children.find((child) => child.name === 'merged-scene')
+        mergedScene.material = this.material
     }
 
     setBottomMaterial() {

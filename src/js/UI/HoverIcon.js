@@ -68,11 +68,9 @@ export default class HoverIcon {
 
     showIcon(element) {
         const isActiveMenuItem = element.classList.contains('active-menu-item')
-        const isActiveAboutTab = element.classList.contains('about-active-tab')
-        const isActiveWorkItemChildren = !element.parentElement.parentElement.parentElement.parentElement.classList.contains('work-inactive-item-container')
         const isTouch = this.sizes.touch
 
-        if (!isActiveMenuItem && !isActiveAboutTab && isActiveWorkItemChildren && !isTouch) {
+        if (!isActiveMenuItem && !isTouch) {
             this.currentHoverElement = element
 
             this.userLeftElement = false
@@ -81,7 +79,7 @@ export default class HoverIcon {
             // animate 
             if (this.closeScaleAnimation) this.closeScaleAnimation.kill()
 
-            this.openScaleAnimation = gsap.fromTo(this.icon, { scale: 0 }, { scale: 1, duration: .3, ease: Back.easeOut.config(1.5) })
+            this.openScaleAnimation = gsap.fromTo(this.icon, { scale: 0 }, { scale: 1, duration: .2 })
             gsap.to(this.icon, { x: event.pageX, y: event.pageY, duration: 0 })
         }
     }

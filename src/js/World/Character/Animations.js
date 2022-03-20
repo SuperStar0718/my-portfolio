@@ -33,6 +33,12 @@ export default class Animations {
     defineActions() {
         this.actions = {}
 
+        //Intro fall down action
+        this.actions.introFallDown = this.mixer.clipAction(this.resource.animations.find((animation) => animation.name === 'intro-fall-down'))
+        this.actions.introFallDown.repetitions = 1
+        this.actions.introFallDown.clampWhenFinished = true
+        this.actions.introFallDown.allowedOutsideLanding = false
+        
         // Left desktop action 
         this.actions.leftDesktopAction = this.mixer.clipAction(this.resource.animations.find((animation) => animation.name === 'left-desktop-action'))
         this.actions.leftDesktopAction.repetitions = 1
@@ -78,7 +84,7 @@ export default class Animations {
         const newAction = this.actions[name]
         const oldAction = this.actions.current
 
-        if (oldAction._clip.name != newAction._clip.name && (newAction.allowedOutsideLanding || this.experience.ui.landingPage.visible)) {
+        if (!oldAction._clip.name != newAction._clip.name && (newAction.allowedOutsideLanding || this.experience.ui.landingPage.visible)) {
             newAction.reset()
             newAction.play()
             newAction.crossFadeFrom(oldAction, transitionDuration)

@@ -34,6 +34,7 @@ export default class MenuMain extends EventEmitter {
         this.sounds = this.experience.sounds
         this.sizes = this.experience.sizes
         this.contactAnimation = this.experience.world.contact.animation
+        this.character = this.experience.world.character
 
         this.menuButtonClick()
         this.hideEvents()
@@ -142,7 +143,8 @@ export default class MenuMain extends EventEmitter {
         //sound
         this.sounds.muteGroup('lab', false, .4)
 
-        this.experience.ui.about.animations.resetCharacterToPosition()
+        if (this.character.model.position.y != -18.95)
+            this.experience.ui.about.animations.resetCharacterToPosition()
     }
 
     focusContactScene() {

@@ -27,6 +27,10 @@ export default class Room {
     setModel() {
         this.model = this.resources.items.roomModel.scene
         this.baseModel = this.model.children.find((child) => child.name === 'room-base')
+        this.shelving = this.model.children.find((child) => child.name === 'shelving')
+        this.picture = this.model.children.find((child) => child.name === 'picture')
+        this.blackboard = this.model.children.find((child) => child.name === 'blackboard')
+        this.plant = this.model.children.find((child) => child.name === 'plant')
 
         //Take desktops plane and move to base model to animate room bounce
         this.deskopPlane0 = this.model.children.find((child) => child.name === 'desktop-plane-0')
@@ -61,11 +65,18 @@ export default class Room {
         this.model.add(this.shadow.model)
     }
 
-    bounceIn(delay = 0) {
+    bounceIn(delay = 0, withDecor = false) {
         //Base Model bounce
         gsap.fromTo(this.baseModel.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1, duration: .5, ease: Back.easeOut.config(1.5), delay: delay })
 
-        gsap.fromTo(this.shadow.material.uniforms.uOpacity, { value: 0 }, { value: 1, duration: .15, delay: delay + .16 })
+        gsap.fromTo(this.shadow.material.uniforms.uOpacity, { value: 0 }, { value: 1, duration: .4, delay: delay + (withDecor ? .5 : .23), ease: Power2.easeOut })
+
+        if(withDecor) {
+            gsap.fromTo(this.shelving.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1, duration: .5, ease: Back.easeOut.config(1.5), delay: delay + .25})
+            gsap.fromTo(this.picture.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1, duration: .5, ease: Back.easeOut.config(1.5), delay: delay + .32})
+            gsap.fromTo(this.blackboard.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1, duration: .5, ease: Back.easeOut.config(1.5), delay: delay + .39})
+            gsap.fromTo(this.plant.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1, duration: .5, ease: Back.easeOut.config(1.5), delay: delay + .46})
+        }
     }
 
     bounceOut(delay = 0) {

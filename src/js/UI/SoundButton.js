@@ -23,10 +23,8 @@ export default class Sound {
         this.landingPage = this.experience.ui.landingPage
 
         //Init
-        //localStorage.getItem('soundActive') === 'true' || localStorage.getItem('soundActive') === true ? this.activate() : this.deactivate()
-        //this.sounds.mute(!this.active)
-
-        this.deactivate()
+        localStorage.getItem('soundActive') === 'true' || localStorage.getItem('soundActive') === true ? this.activate() : this.deactivate()
+        this.sounds.mute(!this.active)
 
         //Event Listener
         this.domElements.button.addEventListener('click', () => {

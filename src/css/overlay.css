@@ -11,8 +11,11 @@
 }
 
 #header-container {
+    position: absolute;
     top: 0;
+    width: 100%;
     transition: 250ms;
+    padding-top: 15px;
 }
 
 /*Header Logo*/

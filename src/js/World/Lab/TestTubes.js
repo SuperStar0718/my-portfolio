@@ -18,18 +18,12 @@ export default class TestTubes {
     }
 
     setTubes() {
-        const labModel = this.lab.model
-
-        this.all = []
-        this.all.push(labModel.children.find((child) => child.name === 'test-tube-0'))
-        this.all.push(labModel.children.find((child) => child.name === 'test-tube-1'))
-        this.all.push(labModel.children.find((child) => child.name === 'test-tube-2'))
+        this.tubes = this.lab.model.children.find((child) => child.name === 'test-tubes')
 
         //Material
         this.material = new THREE.MeshBasicMaterial({ color: this.parameters.color, transparent: true, opacity: this.parameters.opacity, blending: 5 })
 
-        //Apply to all test tubes
-        this.all.forEach((testTube) => testTube.material = this.material)
+        this.tubes.material = this.material
     }
 
     initDebug() {

@@ -22,7 +22,6 @@ export default class Header {
     show() {
         if (!this.visible) {
             this.visible = true
-
             this.domElements.header.style.top = '0'
         }
     }
@@ -30,8 +29,7 @@ export default class Header {
     hide() {
         if (this.visible && !this.landingPage.isAnimating && !this.menu.isAnimating) {
             this.visible = false
-
-            this.domElements.header.style.top = '-100px'
+            this.domElements.header.style.top = '-80px'
         }
     }
 }

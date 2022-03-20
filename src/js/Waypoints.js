@@ -21,23 +21,23 @@ export default class Waypoints {
         },
         {
             name: 'scroll-start',
-            position: { x: 5.8, y: -10, z: 8.3 },
-            lookAt: { x: -2.7, y: -13.7, z: 0 },
+            position: { x: 5.8, y: -14, z: 8.3 },
+            lookAt: { x: -2.7, y: -17.7, z: 0 },
         },
         {
             name: 'scroll-start-portrait',
-            position: { x: 10.5, y: -8.5, z: 14 },
-            lookAt: { x: 0.4, y: -15, z: 0 },
+            position: { x: 10.5, y: -12.5, z: 14 },
+            lookAt: { x: 0.4, y: -19, z: 0 },
         },
         {
             name: 'lab-menu',
-            position: { x: -6, y: -10, z: 9.3 },
-            lookAt: { x: .5, y: -13.7, z: 0 },
+            position: { x: -6, y: -14, z: 9.3 },
+            lookAt: { x: .5, y: -17.7, z: 0 },
         },
         {
             name: 'contact-menu',
-            position: { x: 3, y: -21.9, z: 8.3 },
-            lookAt: { x: 2, y: -25.6, z: 0 },
+            position: { x: 3, y: -25.9, z: 8.3 },
+            lookAt: { x: 2, y: -29.6, z: 0 },
         },
     ]
 

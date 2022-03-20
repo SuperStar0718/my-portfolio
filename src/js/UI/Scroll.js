@@ -81,7 +81,7 @@ export default class Scroll {
         const waypoint = this.waypoints.waypoints.find((waypoint) => waypoint.name === (this.sizes.portrait ? 'scroll-start-portrait' : 'scroll-start'))
 
         this.cameraRange.top = waypoint.position.y
-        this.cameraRange.bottom = this.sizes.portrait ? -50 : -22.4
+        this.cameraRange.bottom = this.sizes.portrait ? -54 : -26.4
     }
 
     setAboutContainerDetails() {
@@ -212,7 +212,7 @@ export default class Scroll {
 
     //Re-position logo white background
     setLogoOverlayHeight() {
-        document.getElementById('logo-white-background').style.height = this.aboutContainer.height + (window.innerHeight * (this.sizes.portrait ? 0.03 : 0.03)) + 'px'
+        document.getElementById('logo-white-background').style.height = this.aboutContainer.height + (window.innerHeight * (this.sizes.portrait ? 0.03 : 0.12)) + 'px'
     }
 
     resize() {

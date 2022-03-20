@@ -13,6 +13,8 @@ export default class Drop {
     setModel() {
         this.model = this.lab.model.children.find((child) => child.name === 'drop')
 
+        this.model.material = this.lab.material
+
         this.model.position.x -= 0.055
         this.model.position.y = -0.035
     }

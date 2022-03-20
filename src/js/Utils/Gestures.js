@@ -4,7 +4,9 @@ export default class Gestures extends EventEmitter {
 
     constructor() {
         super()
+    }
 
+    init() {
         this.applyEventListeners()
         this.defineCurrentHoverElement()
     }

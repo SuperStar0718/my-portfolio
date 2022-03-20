@@ -1,4 +1,5 @@
 import { gsap, Power3 } from 'gsap'
+import Experience from '../Experience'
 
 export default class ScrollIcon {
 
@@ -6,6 +7,8 @@ export default class ScrollIcon {
 
     constructor(icon) {
         this.icon = icon
+        this.experience = new Experience()
+        this.gestures = this.experience.gestures
 
         this.startAnimation()
     }

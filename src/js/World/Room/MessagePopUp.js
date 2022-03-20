@@ -34,7 +34,7 @@ export default class MessagePopUp {
         gsap.fromTo(this.sprite.position, { y: 3.3 }, { y: 4, duration: 2, ease: Power3.easeOut })
         gsap.fromTo(this.material, { opacity: 0 }, { opacity: 1, duration: .5 })
         gsap.fromTo(this.material, { opacity: 1 }, { opacity: 0, duration: .5, delay: 1.3 })
-        gsap.fromTo(this.desktops.desktopLayers.desktop1Notification.material, { opacity: 0 }, { opacity: 1, duration: .2 })
-        gsap.fromTo(this.desktops.desktopLayers.desktop1Notification.material, { opacity: 1 }, { opacity: 0, duration: 1, delay: 2 })
+        gsap.fromTo(this.desktops.notification.material, { opacity: 0 }, { opacity: 1, duration: .2 })
+        gsap.fromTo(this.desktops.notification.material, { opacity: 1 }, { opacity: 0, duration: 1, delay: 2 })
     }
 }

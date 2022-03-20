@@ -1,4 +1,4 @@
-import gsap from 'gsap'
+import { gsap, Power2 } from 'gsap'
 import Experience from '../../Experience.js'
 import Animations from './Animations.js'
 import Body from './Body.js'
@@ -29,8 +29,6 @@ export default class Character {
         this.resource = this.resources.items.characterModel
         this.faceResource = this.resources.items.characterFaceModel
 
-        setTimeout(() => this.playWaveAnimation(), 1100)
-
         this.setModel()
         this.preloadWireframe()
 
@@ -43,7 +41,7 @@ export default class Character {
         this.model = this.resource.scene
 
         this.model.rotation.y = -Math.PI / 2
-        this.model.position.y -= 5.7
+        this.model.position.y = 2
 
         this.scene.add(this.model)
 
@@ -57,24 +55,80 @@ export default class Character {
     }
 
     // ------------------------ ANIMATIONS ---------------------------------------------------------------------------------------------- 
-    // play wave animation when loading-transition is done
 
-    // change to idle afterwards using timeout
-    playWaveAnimation() {
-        // animation 
-        this.animation.play('wave')
+    /**
+     * Blink
+     */
 
-        //Idle afterwards
-        setTimeout(() => this.idle(), (this.animation.actions.wave._clip.duration - .23) * 1000)
+    initBlink() {
+        this.blink = {
+            intervalDuration: 5,
+            phases: [
+                this.resources.items.characterBlink0Face,
+                this.resources.items.characterBlink1Face,
+                this.resources.items.characterBlink0Face
+            ],
+            allowedMaps: [
+                this.body.faceTextures.default,
+                this.body.faceTextures.sleepy,
+            ]
+        }
 
-        // faces 
-        gsap.delayedCall(.1, () => {
-            this.body.updateFace('smile')
+        this.startBlinking()
+    }
+
+    startBlinking() {
+        this.blink.interval = () => gsap.delayedCall(this.blink.intervalDuration, () => {
+            this.blink.currentMap = this.body.face.material.map
+
+            if (this.blink.allowedMaps.includes(this.blink.currentMap)) {
+
+                for (let i = 0; i < this.blink.phases.length + 1; i++) {
+                    setTimeout(() => {
+                        if (this.body.face.material.map == this.blink.phases[i - 1] || i == 0) {
+                            if (i < this.blink.phases.length - 1) {
+                                this.body.face.material.map = this.blink.phases[i]
+                            } else {
+                                this.body.face.material.map = this.blink.currentMap
+                            }
+                        }
+                    }, i * 60)
+                }
+            }
+
+            //Repeat
+            this.blink.interval()
         })
+        this.blink.interval()
+    }
 
-        gsap.delayedCall(this.animation.actions.wave._clip.duration - .6, () => {
-            if (this.experience.ui.landingPage.visible)
-                this.body.updateFace('default')
+    /**
+     * Intro
+     */
+    // play wave animation when loading-transition is done
+    // change to idle afterwards
+    playIntroAnimation() {
+        //Fall down
+        gsap.fromTo(this.model.position, { y: 2 }, { y: -5.7, duration: .9, ease: Power2.easeIn, delay: .3, })
+
+        // animation
+        gsap.delayedCall(.3, () => this.animation.play('wave'))
+
+        gsap.delayedCall(1, () => {
+            //Idle afterwards
+            setTimeout(() => this.idle(), (this.animation.actions.wave._clip.duration - 1) * 1000)
+
+            // faces 
+            return
+            setTimeout(() => {
+                this.body.updateFace('smile')
+                this.initBlink()
+            }, 100)
+
+            setTimeout(() => {
+                if (this.experience.ui.landingPage.visible)
+                    this.body.updateFace('default')
+            }, (this.animation.actions.wave._clip.duration - .6) * 1000)
         })
     }
 

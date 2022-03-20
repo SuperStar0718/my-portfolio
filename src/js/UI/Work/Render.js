@@ -4,7 +4,9 @@ import Experience from '../../Experience.js'
 
 export default class WorkRender {
 
-    renderContainer = document.getElementById('work-render-container')
+    domElements = {
+        renderContainer: document.getElementById('work-render-container')
+    }
 
     constructor() {
         this.experience = new Experience()
@@ -16,7 +18,7 @@ export default class WorkRender {
 
     renderItems() {
         this.items.forEach((item) => {
-            this.renderContainer.insertAdjacentHTML('beforeend', `
+            this.domElements.renderContainer.insertAdjacentHTML('beforeend', `
             <div id="work-item-${item.id}" class="work-item-container column">
                 <img class="work-item-image" src="${item.image}">
                 <div class="work-item-content-container">

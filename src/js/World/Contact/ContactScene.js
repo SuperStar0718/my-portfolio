@@ -4,8 +4,8 @@ import Experience from '../../Experience.js'
 export default class ContactScene {
 
     parameters = {
-        portraitY: -53.5,
-        landscapeY: -28,
+        portraitY: -57.5,
+        landscapeY: -32,
         portraitScale: 1.7,
     }
 
@@ -19,7 +19,7 @@ export default class ContactScene {
 
         // Debug 
         if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder('Contact Scene')
+            this.debugFolder = this.debug.ui.addFolder('Contact Scene').close()
         }
 
         this.setModel()

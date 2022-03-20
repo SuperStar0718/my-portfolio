@@ -9,22 +9,7 @@
     transition: left .9s cubic-bezier(0.645, 0.045, 0.355, 1.000), top 700ms cubic-bezier(.6,0,.4,1)
 }
 
-#scroll-bar {
-    position: absolute;
-    top: 0;
-    right: 3px;
-    width: 8px;
-    background: #00b7ff;
-    background: #FF923E;
-    background: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    z-index: 2;
-    border-radius: 4px;
-    position: fixed;
-    display: none;
-}
-
 #scroll-container .scroll-icon {
     border-color: white;
-    top: calc(100vh - 60px);
+    top: calc(100vh - 50px);
 }

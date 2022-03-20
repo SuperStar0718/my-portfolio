@@ -23,7 +23,7 @@ export default class Body {
         // Setup face 
         this.setFace()
 
-        // Wireframe & Visibility triggers+
+        // Wireframe & Visibility triggers
         this.defineWireframe()
         this.defineWireframeAt()
     }
@@ -106,26 +106,26 @@ export default class Body {
 
     // Set wireframe distances for section 1 wireframe animation 
     defineWireframeAt() {
-        this.legRight.wireframeAt = '-5.1'
-        this.legLeft.wireframeAt = '-5.1'
-        this.shoeRight.wireframeAt = '-5'
-        this.shoeLeft.wireframeAt = '-5'
-        this.shoeWhiteRight.wireframeAt = '-5'
-        this.shoeWhiteLeft.wireframeAt = '-5'
-        this.sockRight.wireframeAt = '-5'
-        this.sockLeft.wireframeAt = '-5'
-        this.pantsBottomRight.wireframeAt = '-5.2'
-        this.pantsBottomLeft.wireframeAt = '-5.2'
-        this.pantsRight.wireframeAt = '-6'
-        this.pantsLeft.wireframeAt = '-6'
-        this.chest.wireframeAt = '-7'
-        this.shoulderRight.wireframeAt = '-7'
-        this.shoulderLeft.wireframeAt = '-7'
-        this.throat.wireframeAt = '-7.2'
-        this.head.wireframeAt = '-7.5'
-        this.face.wireframeAt = '-7.5'
-        this.armRight.wireframeAt = '-7.55'
-        this.armLeft.wireframeAt = '-7.5'
+        this.legRight.wireframeAt = '-9.1'
+        this.legLeft.wireframeAt = '-9.1'
+        this.shoeRight.wireframeAt = '-9'
+        this.shoeLeft.wireframeAt = '-9'
+        this.shoeWhiteRight.wireframeAt = '-9'
+        this.shoeWhiteLeft.wireframeAt = '-9'
+        this.sockRight.wireframeAt = '-9'
+        this.sockLeft.wireframeAt = '-9'
+        this.pantsBottomRight.wireframeAt = '-9.2'
+        this.pantsBottomLeft.wireframeAt = '-9.2'
+        this.pantsRight.wireframeAt = '-10'
+        this.pantsLeft.wireframeAt = '-10'
+        this.chest.wireframeAt = '-11'
+        this.shoulderRight.wireframeAt = '-11'
+        this.shoulderLeft.wireframeAt = '-11'
+        this.throat.wireframeAt = '-11.2'
+        this.head.wireframeAt = '-11.5'
+        this.face.wireframeAt = '-11.5'
+        this.armRight.wireframeAt = '-11.55'
+        this.armLeft.wireframeAt = '-11.5'
     }
 
     // ------------------------ FACE ---------------------------------------------------------------------------------------------- 

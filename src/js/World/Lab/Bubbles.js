@@ -90,10 +90,6 @@ export default class Bubbles {
         })
     }
 
-    hideAllBubbles() {
-        this.sprites.forEach((sprite) => sprite.material.opacity = 0)
-    }
-
     initDebug() {
         this.debugFolder = this.lab.debugFolder.addFolder('Bubbles').close()
 

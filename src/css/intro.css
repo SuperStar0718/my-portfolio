@@ -1,0 +1,41 @@
+#intro-container {
+    z-index: 999;
+    background: #F5EFE6;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+
+/**----------------------------------- LOGO --------------------------------*/
+#loadig-animation-container {
+    height: 130px;
+    width: 130px;
+    position: relative;
+    z-index: 999;
+}
+
+#loading-mask-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    mask-image: url('../assets/logo-mask.png');
+    -webkit-mask-image: url('../assets/logo-mask.png');
+    mask-size: 100%;
+    -webkit-mask-size: 100%;  
+    width: 100%;
+    height: 130px;
+}
+
+#loading-animation {
+    background: #091434;
+    transition: 0.5s;
+    width: 100%;
+}
+
+#loading-logo-outline {
+    height: 130px;
+    width: 130px;
+    position: absolute;
+    top: 0;
+}
