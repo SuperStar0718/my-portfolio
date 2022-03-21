@@ -7,6 +7,7 @@ export default class Animations {
         this.resources = this.experience.resources
         this.time = this.experience.time
         this.debug = this.experience.debug
+        this.chair = this.experience.world.landingPage.room.chair
 
         this.resource = this.resources.items.characterModel
 
@@ -28,6 +29,21 @@ export default class Animations {
         this.defineActions()
 
         this.actions.current = this.actions.idle
+
+        document.addEventListener('visibilitychange', () => {
+            return
+            console.log(document.hidden)
+            this.pause(document.hidden)
+        })
+    }
+
+    pause(state = true) {
+        this.mixer.timeScale = state ? 0 : 1
+        //console.log(this.mixer._actions)
+        this.mixer._actions.forEach((action) => {
+            action.paused = state
+        })
+        
     }
 
     defineActions() {
@@ -109,7 +125,7 @@ export default class Animations {
     }
 
     update() {
-        if (this.mixer) {
+        if (this.mixer && !document.hidden) {
             this.mixer.update(this.time.delta * 0.001)
         }
     }

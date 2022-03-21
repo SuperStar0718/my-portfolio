@@ -42,12 +42,8 @@ export default class LandingPage extends EventEmitter {
         this.intro = this.experience.ui.intro
 
         //Hide Triggers
-        //this.domElements.aboutMeButton.addEventListener('click', () => this.hide())
         this.gestures.on('scroll-down', () => this.hide())
         this.gestures.on('touch-down', () => this.hide())
-
-        //this.intro.on('hide', () => this.playOpeningAnimation(1))
-        //this.playOpeningAnimation(1)
 
         this.waypoints.moveToWaypoint(this.sizes.portrait ? 'landing-page-portrait' : 'landing-page', false)
 
@@ -169,15 +165,15 @@ export default class LandingPage extends EventEmitter {
             // character position
             gsap.to(this.character.model.position, { y: -5.7, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
 
+            // character animation
+            gsap.delayedCall(.1, () => this.character.animation.play('idle', .4))
+
             //Restart calls
             if (this.character.scrollIntervalCall)
                 this.character.scrollIntervalCall.restart(true)
 
             if (this.character.leftDesktopIntervalCall)
                 this.character.leftDesktopIntervalCall.restart(true)
-
-            // character animation
-            this.character.animation.play('idle', .5)
 
             // Set mouse position back to initial one
             this.experience.world.landingPage.mouse.moveToIdleStartPositon()

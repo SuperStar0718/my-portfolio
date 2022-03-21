@@ -3,15 +3,15 @@ import { gsap, Back} from 'gsap'
 
 export default class WorkCards {
     positionStyles = [
-        'transform: translateX(-430%);',// Left
-        'transform: translateX(-325%); ',
-        'transform: translateX(-220%);',
-        'transform: translateX(-110%); ',
+        'transform: translateX(-410%) scale(0.9);',// Left
+        'transform: translateX(-310%) scale(0.9); ',
+        'transform: translateX(-210%) scale(0.9);',
+        'transform: translateX(-110%) scale(0.9); ',
         'transform: translateX(0%);', //Active
-        'transform: translateX(110%);', // Right
-        'transform: translateX(220%)',
-        'transform: translateX(325%);',
-        'transform: translateX(430%);',
+        'transform: translateX(110%) scale(0.9);', // Right
+        'transform: translateX(210%) scale(0.9)',
+        'transform: translateX(310%) scale(0.9);',
+        'transform: translateX(410%) scale(0.9);',
     ]
 
     domElements = {

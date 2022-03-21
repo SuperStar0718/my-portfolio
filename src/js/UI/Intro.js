@@ -22,7 +22,7 @@ export default class Intro {
         this.gestures = this.experience.gestures
         this.character = this.experience.world.character
 
-        setTimeout(() => this.playIntro(), 700)
+        setTimeout(() => this.playIntro(), 1000)
     }
 
     onButtonClick() {
@@ -43,7 +43,7 @@ export default class Intro {
         this.landingPage.playOpeningAnimation(.62)
 
         this.room.bounceIn(.45, true)
-        
+
         this.character.playIntroAnimation()
 
         this.finish()

@@ -1,4 +1,4 @@
-import { gsap, Power2 } from 'gsap'
+import { gsap, Power2, Power1 } from 'gsap'
 import Experience from '../../Experience.js'
 import Animations from './Animations.js'
 import Body from './Body.js'
@@ -19,6 +19,7 @@ export default class Character {
         this.messagePopUp = this.experience.world.landingPage.messagePopUp
         this.desktops = this.experience.world.landingPage.desktops
         this.sounds = this.experience.sounds
+        this.chair = this.experience.world.landingPage.room.chair
 
         // debug 
         if (this.debug.active) {
@@ -40,8 +41,8 @@ export default class Character {
     setModel() {
         this.model = this.resource.scene
 
-        this.model.rotation.y = -Math.PI / 2
         this.model.position.y = 2
+        this.model.rotation.y = -Math.PI / 2
 
         this.scene.add(this.model)
 
@@ -109,26 +110,32 @@ export default class Character {
     // change to idle afterwards
     playIntroAnimation() {
         //Fall down
-        gsap.fromTo(this.model.position, { y: 2 }, { y: -5.7, duration: .9, ease: Power2.easeIn, delay: .3, })
+        gsap.fromTo(this.model.position, { y: 2 }, { y: -5.7, duration: 1.1, ease: Power2.easeIn })
 
-        // animation
-        gsap.delayedCall(.3, () => this.animation.play('wave'))
+        //chair
+        gsap.to(this.chair.rotation, { x: .07, z: -.07, delay: 1.1, ease: Power1.easeOut, duration: .18, yoyo: true, repeat: 1 })
+
+        //Character animation
+        gsap.delayedCall(.05, () => this.animation.play('wave'))
+
+        gsap.delayedCall(this.animation.actions.wave._clip.duration, () => this.idle())
+
+        this.body.face.material.map = this.body.faceTextures.scared
+
 
         gsap.delayedCall(1, () => {
-            //Idle afterwards
-            setTimeout(() => this.idle(), (this.animation.actions.wave._clip.duration - 1) * 1000)
-
             // faces 
-            return
-            setTimeout(() => {
-                this.body.updateFace('smile')
-                this.initBlink()
-            }, 100)
+            gsap.delayedCall(.5, () => {
+                if (this.experience.ui.landingPage.visible)
+                    this.body.updateFace('smile')
 
-            setTimeout(() => {
+                this.initBlink()
+            })
+
+            gsap.delayedCall(this.animation.actions.wave._clip.duration - 1.5, () => {
                 if (this.experience.ui.landingPage.visible)
                     this.body.updateFace('default')
-            }, (this.animation.actions.wave._clip.duration - .6) * 1000)
+            })
         })
     }
 
