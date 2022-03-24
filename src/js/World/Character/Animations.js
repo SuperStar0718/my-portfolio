@@ -29,21 +29,6 @@ export default class Animations {
         this.defineActions()
 
         this.actions.current = this.actions.idle
-
-        document.addEventListener('visibilitychange', () => {
-            return
-            console.log(document.hidden)
-            this.pause(document.hidden)
-        })
-    }
-
-    pause(state = true) {
-        this.mixer.timeScale = state ? 0 : 1
-        //console.log(this.mixer._actions)
-        this.mixer._actions.forEach((action) => {
-            action.paused = state
-        })
-        
     }
 
     defineActions() {
@@ -54,7 +39,7 @@ export default class Animations {
         this.actions.introFallDown.repetitions = 1
         this.actions.introFallDown.clampWhenFinished = true
         this.actions.introFallDown.allowedOutsideLanding = false
-        
+
         // Left desktop action 
         this.actions.leftDesktopAction = this.mixer.clipAction(this.resource.animations.find((animation) => animation.name === 'left-desktop-action'))
         this.actions.leftDesktopAction.repetitions = 1
@@ -101,9 +86,12 @@ export default class Animations {
         const oldAction = this.actions.current
 
         if (!oldAction._clip.name != newAction._clip.name && (newAction.allowedOutsideLanding || this.experience.ui.landingPage.visible)) {
-            newAction.reset()
-            newAction.play()
-            newAction.crossFadeFrom(oldAction, transitionDuration)
+
+            newAction
+                .reset()
+                .play()
+
+            oldAction.crossFadeTo(newAction, transitionDuration)
 
             this.actions.current = newAction
         } else if (this.debug.active) {
@@ -118,6 +106,7 @@ export default class Animations {
             playLeftDesktopAction: () => { this.play('leftDesktopAction') },
             playWaterIdle: () => { this.play('waterIdle') },
         }
+        
         this.debugFolder.add(debugObject, 'playIdle').name('Play Idle')
         this.debugFolder.add(debugObject, 'playOpening').name('Play Wave')
         this.debugFolder.add(debugObject, 'playLeftDesktopAction').name('Play Left Desktop')
@@ -125,8 +114,8 @@ export default class Animations {
     }
 
     update() {
-        if (this.mixer && !document.hidden) {
-            this.mixer.update(this.time.delta * 0.001)
+        if (this.mixer) {
+            if (this.time.delta < 100) this.mixer.update(this.time.delta * 0.001)
         }
     }
 }

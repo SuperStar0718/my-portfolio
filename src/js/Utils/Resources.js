@@ -27,8 +27,6 @@ export default class Resources extends EventEmitter {
         this.loaders = {}
         this.loaders.gltfLoader = new GLTFLoader()
         this.loaders.textureLoader = new THREE.TextureLoader()
-        this.loaders.cubeTextureLoader = new THREE.CubeTextureLoader()
-        this.loaders.imageLoader = new THREE.ImageLoader()
     }
 
     startLoading() {
@@ -51,14 +49,6 @@ export default class Resources extends EventEmitter {
 
                         //Push texture to init on render
                         this.textures.push(file)
-                    }
-                )
-            }
-            else if (source.type === 'image') {
-                this.loaders.imageLoader.load(
-                    source.path,
-                    (file) => {
-                        this.sourceLoaded(source, file)
                     }
                 )
             }

@@ -113,6 +113,7 @@ export default class MenuMain extends EventEmitter {
         this.initials.cameraY = this.camera.instance.position.y
         this.initials.scrollY = this.scroll.contentScrollTo
         this.initials.logoBackgroundY = - this.scroll.contentScrollTo - window.innerHeight
+        this.initials.backgroundY = this.labBackground.material.uniforms.uOffset
     }
 
     returnToInitialPosition() {
@@ -121,6 +122,7 @@ export default class MenuMain extends EventEmitter {
         gsap.to(this.camera.instance.position, { y: this.initials.cameraY, duration: .9, ease: Power2.easeInOut })
 
         gsap.to(this.domElements.scrollContainer, { y: -this.initials.scrollY, duration: .9, ease: Power2.easeInOut })
+        gsap.to(this.domElements.logoWhiteBackground, { y: this.initials.logoBackgroundY, duration: .9, ease: Power2.easeInOut })
         gsap.to(this.domElements.logoWhiteBackground, { y: this.initials.logoBackgroundY, duration: .9, ease: Power2.easeInOut })
 
         //Lab Sounds
@@ -182,11 +184,12 @@ export default class MenuMain extends EventEmitter {
     fadeScrollIcons(visible) {
         const icons = document.querySelectorAll('.scroll-icon')
 
+        for (let i = 0; i < icons.length; i++) {
+            const icon = icons[i]
 
-
-        icons.forEach((icon) => {
-            gsap.to(icon, { opacity: (visible ? 1 : 0) })
-        })
+            if (!(this.landingPage.visible && i == 1) || !this.landingPage.visible)
+                gsap.to(icon, { opacity: (visible ? 1 : 0) })
+        }
     }
 
     // Menu Button Animation

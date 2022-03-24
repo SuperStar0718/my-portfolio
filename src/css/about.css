@@ -15,8 +15,12 @@
     flex-direction: column;
 }
 
+#about-content-container span {
+    color: #34bfff;
+}
+
 #skills-svg {
-    margin-top: 12vh;
+    margin-top: 100px;
     width: 100%;
 }
 
@@ -93,7 +97,7 @@
 /**Bar*/
 .about-skill-bar-container {
     width: 100%;
-    height: 12px;
+    height: 11px;
     background: #00b7ff33 !important;
     overflow: auto;
 }
@@ -104,6 +108,18 @@
     width: 30%;
 }
 
+/**About Content*/
+#about-svg-about image {
+    height: 64px;
+    width: 64px;
+    image-rendering: pixelated;
+}
+
+.about-pixel-mask-rect {
+    width: 64px;
+    fill: white;
+}
+
 /**Others*/
 #about-others-header {
     font-size: 17px;
@@ -111,7 +127,7 @@
 }
 
 /**---------------------------------------------------------------Responsive-----------------------------------------------------*/
-@media (max-aspect-ratio: 11/10) {
+@media (max-aspect-ratio: 12/10) {
     #about-section {
         justify-content: center;
     }

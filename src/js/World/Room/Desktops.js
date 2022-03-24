@@ -39,6 +39,8 @@ export default class Desktops {
         this.desktop1PlaneMaterial = new THREE.MeshBasicMaterial({ map: this.resources.items.desktop1, fog: false })
         this.desktop1.material = this.desktop1PlaneMaterial
 
+        this.desktop1.scale.x = 1.01
+
         this.setNotification()
     }
 

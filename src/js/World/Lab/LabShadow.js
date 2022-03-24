@@ -44,7 +44,6 @@ export default class LabShadow {
             },
             vertexShader: shadowVertex,
             fragmentShader: shadowFragment,
-            precision: 'lowp',
         })
         
         this.model.children.find((children) => children.name === 'shadowCatcher').material = this.material

@@ -5,7 +5,7 @@ import roomShadowFragment from '../../shaders/shadow/fragment.glsl'
 
 export default class RoomShadow {
     parameters = {
-        color: '#c39d6f'
+        color: '#c4a37e'
     }
 
     constructor() {
@@ -41,7 +41,6 @@ export default class RoomShadow {
             },
             vertexShader: roomShadowVertex,
             fragmentShader: roomShadowFragment,
-            precision: 'lowp',
         })
 
         this.model.children.find((children) => children.name === 'shadowCatcher').material = this.material

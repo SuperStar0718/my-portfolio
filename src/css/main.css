@@ -16,6 +16,7 @@
 {
     margin: 0;
     padding: 0;
+    /* cursor:none !important; */
 }
 
 html, body {
@@ -40,7 +41,7 @@ body
 }
 
 .content-width {
-    width: 1450px;
+    width: 1350px;
     max-width: calc(84% - 30px);
 }
 
@@ -85,7 +86,8 @@ h1 {
 }
 
 h2 {
-    font-size: 3rem;
+    font-size: 3.2rem;
+    line-height: 70px;
 }
 
 h3 {
@@ -95,6 +97,11 @@ h3 {
 h4 {
     font-size: 1.4rem;
     font-weight: 600;
+}
+
+span {
+    color: #7C8594;
+    font-size: 1rem;
 }
 
 a {
@@ -151,17 +158,6 @@ hr {
     cursor: pointer;
 }
 
-/**Scroll Icon*/
-.scroll-icon {
-    position: absolute;
-    left: 0; 
-    right: 0; 
-    margin: 0 auto;
-    transform-origin: bottom center;
-    height: 30px;
-    width: 30px;
-}
-
 /****************************icons**************************/
 .social-icon {
     background-size: cover!important;
@@ -208,7 +204,7 @@ section {
 }
 
 /*------------------------------------------ Responsive -----------------------------*/
-@media (max-aspect-ratio: 11/10) {
+@media (max-aspect-ratio: 12/10) {
     .content-width {
         max-width: calc(100% - 30px);
     }

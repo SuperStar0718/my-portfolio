@@ -52,7 +52,7 @@
 }
 
 /**---------------------------------------------------------------Responsive-----------------------------------------------------*/
-@media (max-aspect-ratio: 11/10) {
+@media (max-aspect-ratio: 12/10) {
     #transition-container {
         transform: translate(0, -20%) scale(1.2);
     }  

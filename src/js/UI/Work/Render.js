@@ -29,7 +29,11 @@ export default class WorkRender {
                     <span>${item.description}</span>
                 </div>
                 <div class="work-item-button-container row">
-                    <div id="work-item-gray-button-${item.id}" class="work-item-gray-button center">Github</div>
+                    <div id="work-item-gray-button-${item.id}" class="work-item-gray-button center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"  class="code-icon">
+                            <use href="#code-path"/>
+                        </svg>
+                    </div>
                     <div id="work-item-orange-button-${item.id}" class="work-item-orange-button small-button center">Live View</div>
                 </div>
             </div>

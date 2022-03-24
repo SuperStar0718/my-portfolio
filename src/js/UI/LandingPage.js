@@ -7,6 +7,7 @@ export default class LandingPage extends EventEmitter {
     scrollAnimationDuration = .8
     visible = true
     isAnimating = false
+    reopeningEnabled = true
 
     domElements = {
         landingPage: document.getElementById('landing-page'),
@@ -64,12 +65,12 @@ export default class LandingPage extends EventEmitter {
     }
 
     hide() {
-        if (this.visible && !this.isAnimating && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating && !this.transiton.isShowing) {
+        if (this.visible && !this.isAnimating && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating && !this.transiton.isShowing && this.reopeningEnabled) {
             this.visible = false
 
-            this.lockScrolling()
+            this.scrollIcon.kill()
 
-            this.scrollIcon.hide()
+            this.lockScrolling()
 
             this.sounds.muteGroup('landing', true, 1)
             this.sounds.muteGroup('lab', false, 2)
@@ -80,6 +81,9 @@ export default class LandingPage extends EventEmitter {
             setTimeout(() => {
                 // Landing Page Content
                 this.domElements.landingPage.style.top = '-100%'
+
+                //Show Scroll Icon in Scroll Container
+                gsap.delayedCall(.7, () => this.experience.ui.scrollScrollIcon.fade(true))
 
                 //Scroll Container
                 this.domElements.scrollContainer.style.top = '0'
@@ -128,18 +132,22 @@ export default class LandingPage extends EventEmitter {
                 gsap.delayedCall(this.scrollAnimationDuration, () => this.character.checkForWireframe = null)
 
                 this.trigger('hide')
+                this.lockReopening()
             }, 200)
         }
     }
 
     show() {
-        if (this.domElements.scrollContainer.scrollTop == 0 && !this.visible && !this.isAnimating && !this.transiton.isShowing) {
+        if (this.domElements.scrollContainer.scrollTop == 0 && !this.visible && !this.isAnimating && !this.transiton.isShowing && this.reopeningEnabled) {
             this.visible = true
             this.sounds.muteGroup('landing', false, 1)
             this.sounds.muteGroup('lab', true, 1)
 
             //Lock scrolling depending on last scroll top
             this.lockScrolling()
+
+            //Hide Scroll Container Scroll Icon
+            this.experience.ui.scrollScrollIcon.fade(false)
 
             //Room Bounce
             this.room.bounceIn(.5)
@@ -166,7 +174,7 @@ export default class LandingPage extends EventEmitter {
             gsap.to(this.character.model.position, { y: -5.7, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
 
             // character animation
-            gsap.delayedCall(.1, () => this.character.animation.play('idle', .4))
+            this.character.animation.play('idle', .5)
 
             //Restart calls
             if (this.character.scrollIntervalCall)
@@ -188,12 +196,18 @@ export default class LandingPage extends EventEmitter {
             this.contactAnimation.resetCharacter()
 
             this.trigger('show')
+            this.lockReopening()
         }
     }
 
     lockScrolling() {
         //Deactivate to prevent too fast scrolling
         this.isAnimating = true
-        setTimeout(() => this.isAnimating = false, this.scrollAnimationDuration * 1000 + 200)
+        gsap.delayedCall(this.scrollAnimationDuration, () => this.isAnimating = false)
+    }
+
+    lockReopening() {
+        this.reopeningEnabled = false
+        gsap.delayedCall(this.scrollAnimationDuration + .5, () => this.reopeningEnabled = true)
     }
 }

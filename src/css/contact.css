@@ -13,10 +13,8 @@
 }
 
 #contact-get-in-touch-label {
-    font-size: 1rem;
     margin-bottom: 50px;
     max-width: 500px;
-    color: #7C8594;
 }
 
 #contact-get-in-touch-label a{
@@ -35,7 +33,7 @@
     background: white;
     box-shadow: 0px 30px 70px #93683325;
     width: 500px;
-    max-width: calc(100% - 30px);
+    max-width: 50%;
     height: 540px;
 }
 
@@ -153,12 +151,16 @@
     font-size: 1rem;
 }
 
-@media (max-aspect-ratio: 11/10) {
+@media (max-aspect-ratio: 12/10) {
     #contact-section {
         margin-top: 10vh;
         align-items:  center;
         justify-content: flex-start;
         height: fit-content;
         margin-bottom: 500px;
+    }
+
+    #contact-container {
+        max-width: calc(100% - 30px);
     }
 }

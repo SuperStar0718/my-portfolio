@@ -16,7 +16,7 @@ export default class MenuItems {
         {
             name: 'home',
             elements: [
-                document.querySelectorAll('.menu-item')[0]
+                document.querySelectorAll('.menu-item')[0],
             ],
         },
         {
@@ -122,7 +122,7 @@ export default class MenuItems {
 
     setupItem(item) {
         //Hide Scroll Icon on Landing Page
-        this.scrollIcon.hide()
+        this.scrollIcon.kill()
 
         //Hover Icon
         this.experience.ui.hoverIcon.hideIcon()

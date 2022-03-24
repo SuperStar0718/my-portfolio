@@ -64,6 +64,5 @@ export default class Experience {
         this.camera.update()
         this.world.update()
         this.renderer.update()
-        this.ui.update()
     }
 }

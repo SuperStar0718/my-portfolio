@@ -5,7 +5,7 @@ export default class TestTubes {
 
     parameters = {
         color: '#004961',
-        opacity: 0.1,
+        opacity: 0.05,
     }
 
     constructor() {

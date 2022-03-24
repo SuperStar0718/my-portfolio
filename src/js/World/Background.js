@@ -47,7 +47,6 @@ export default class Background {
             depthWrite: false,
             vertexShader: backgroundVertex,
             fragmentShader: backgroundFragment,
-            precision: 'lowp',
         })
 
         // Mesh

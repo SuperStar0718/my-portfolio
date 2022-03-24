@@ -26,7 +26,7 @@ export default class Camera {
     }
 
     setInstance() {
-        this.instance = new THREE.PerspectiveCamera(38, this.sizes.width / this.sizes.height, 0.1, 40)
+        this.instance = new THREE.PerspectiveCamera(38, this.sizes.width / this.sizes.height, 0.1, 100)
 
         //Parallax Group
         this.cameraParallaxGroup = new THREE.Group()
@@ -66,8 +66,8 @@ export default class Camera {
             const parallaxY = -this.cursor.y * this.parallax.intensity
             const deltaTime = this.time.delta / 1000
 
-            const byX = (parallaxX - this.cameraParallaxGroup.position.x) * 5 * deltaTime
-            const byY = (parallaxY - this.cameraParallaxGroup.position.y) * 5 * deltaTime
+            const byX = (parallaxX - this.cameraParallaxGroup.position.x) * 4 * deltaTime
+            const byY = (parallaxY - this.cameraParallaxGroup.position.y) * 4 * deltaTime
 
             if (byX < 0.05 && byX > -0.05) this.cameraParallaxGroup.position.x += byX
             if (byY < 0.05 && byY > -0.05) this.cameraParallaxGroup.position.y += byY
@@ -88,7 +88,10 @@ export default class Camera {
 
             this.debugFolder.add(this.instance.position, 'x').min(-5).max(15).step(0.01).onChange(() => logPosition())
             this.debugFolder.add(this.instance.position, 'y').min(-5).max(15).step(0.01).onChange(() => logPosition())
-            this.debugFolder.add(this.instance.position, 'z').min(-15).max(25).step(0.01).onChange(() => logPosition())
+
+
+            this.debugFolder.add(this.instance, 'near').min(0.01).max(20).step(0.1).onChange(() => this.instance.updateProjectionMatrix())
+            this.debugFolder.add(this.instance, 'far').min(0.01).max(2000).step(1).onChange(() => this.instance.updateProjectionMatrix())
 
             const updateLookAt = () => {
                 this.instance.lookAt(this.lookAtStartParameters)

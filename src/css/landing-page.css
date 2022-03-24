@@ -2,7 +2,6 @@
     height: 100%;
     width: 100%;
     box-sizing: border-box;
-    padding: 80px 0;
     top: 0;
     position: absolute;
 }
@@ -45,12 +44,8 @@
     transform-origin: left;
 }
 
-#landing-page .scroll-icon {
-    top: calc(100vh - 50px);
-}
-
 /**---------------------------------------------------------------Responsive-----------------------------------------------------*/
-@media (max-aspect-ratio: 11/10) {
+@media (max-aspect-ratio: 12/10) {
     #landing-content-svg {
         max-width: 94%;
     }
@@ -58,12 +53,22 @@
     #landing-page {
         align-items: flex-start;
         padding: 65px 0;
+        background-image: linear-gradient(180deg, #F5EFE6 45%, transparent 55%);
     }
 
     #landing-page-section {
-        max-height: 37vh;
+        max-height: 40vh;
         justify-content: center;
         align-items: center;
+    }
+
+    #landing-page-section {
+        position: unset;
+    }
+
+    #landing-page .scroll-icon {
+        bottom: unset;
+        top: calc(100vh - 50px);
     }
 }
 

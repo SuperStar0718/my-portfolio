@@ -76,7 +76,7 @@
     text-decoration: underline;
 }
 
-@media (max-aspect-ratio: 11/10) {
+@media (max-aspect-ratio: 12/10) {
     #menu-container {
         right: -100%;
         width: 100% !important;

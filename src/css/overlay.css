@@ -87,8 +87,20 @@
     transform-origin: top right;
 }
 
+/**Scroll Icon*/
+.scroll-icon {
+    position: absolute;
+    left: 0; 
+    right: 0; 
+    bottom: 25px;
+    margin: 0 auto;
+    transform-origin: bottom center;
+    height: 30px;
+    width: 30px;
+}
+
 /*------------------------------------------ Responsive -----------------------------*/
-@media (max-aspect-ratio: 11/10) {
+@media (max-aspect-ratio: 12/10) {
     
 }
 

@@ -27,7 +27,7 @@ export default class Header {
     }
 
     hide() {
-        if (this.visible && !this.landingPage.isAnimating && !this.menu.isAnimating) {
+        if (this.visible && !this.landingPage.isAnimating && !this.menu.isAnimating && !this.landingPage.visible) {
             this.visible = false
             this.domElements.header.style.top = '-80px'
         }

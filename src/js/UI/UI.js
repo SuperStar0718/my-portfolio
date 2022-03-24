@@ -7,7 +7,6 @@ import WorkRender from './Work/Render'
 import SkillsRender from './About/Render'
 import HoverIcon from './HoverIcon'
 import Header from './Header'
-import AboutIcons from './About/Icons'
 import MenuMain from './Menu/Main'
 import ScrollIcon from './SrollIcon'
 import SoundButton from './SoundButton'
@@ -31,6 +30,7 @@ export default class UI {
             // Setup
             this.transition = new Transition()
             this.scrollIcon = new ScrollIcon(document.querySelector('.scroll-icon'))
+            this.scrollScrollIcon = new ScrollIcon(document.querySelectorAll('.scroll-icon')[1], true)
             this.landingPage = new LandingPage()
             this.scroll = new Scroll()
             this.sections = new Sections()
@@ -44,9 +44,7 @@ export default class UI {
             //About
             this.about = {}
             this.about.render = new SkillsRender()
-            this.about.icons = new AboutIcons()
             this.about.animations = new AboutAnimations()
-            this.about.scrollIcon = new ScrollIcon(document.querySelectorAll('.scroll-icon')[1])
 
             //Work
             this.work = {}

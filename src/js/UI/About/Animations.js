@@ -42,12 +42,26 @@ export default class AboutAnimations {
     constructor() {
         this.experience = new Experience()
         this.skills = this.experience.ui.about.render.skills
-        this.icons = this.experience.ui.about.icons
         this.scroll = this.experience.ui.scroll
         this.sounds = this.experience.sounds
         this.character = this.experience.world.character
 
         this.addScrollEvents()
+        this.setupLines()
+    }
+
+    setupLines() {
+        const lines = document.querySelectorAll('.about-box-line')
+        this.lines = []
+
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i]
+            const length = line.getTotalLength()
+
+            this.lines.push({ line: line, length: length })
+
+            line.style.strokeDasharray = length
+        }
     }
 
     playHologramAnimation(delay = 0) {
@@ -76,10 +90,10 @@ export default class AboutAnimations {
 
     animateInfoBox() {
         // Lines
-        this.fillLine(document.querySelectorAll('.about-box-line')[0], .25)
-        this.fillLine(document.querySelectorAll('.about-box-line')[1], .25)
-        this.fillLine(document.querySelectorAll('.about-box-line')[2], .45)
-        this.fillLine(document.querySelectorAll('.about-box-line')[3], .45)
+        this.fillLine(0, .25)
+        this.fillLine(1, .25)
+        this.fillLine(2, .45)
+        this.fillLine(3, .45)
 
         // Span Headers
         gsap.fromTo(document.getElementById('about-header-name'), { opacity: 0 }, { opacity: 1, duration: .2, delay: .2 })
@@ -106,8 +120,8 @@ export default class AboutAnimations {
 
     animateSkillsBox() {
         //Lines
-        this.fillLine(document.querySelectorAll('.about-box-line')[4], 0)
-        this.fillLine(document.querySelectorAll('.about-box-line')[5], 0)
+        this.fillLine(4, 0)
+        this.fillLine(5, 0)
 
         //Skill Bars
         for (let i = 0; i < this.skills.length; i++) {
@@ -126,8 +140,8 @@ export default class AboutAnimations {
 
     animateAboutBox() {
         //Lines
-        this.fillLine(document.querySelectorAll('.about-box-line')[6], 0)
-        this.fillLine(document.querySelectorAll('.about-box-line')[7], 0)
+        this.fillLine(6, 0)
+        this.fillLine(7, 0)
 
         // Background
         gsap.fromTo(document.getElementById('about-about-background'), { opacity: 0 }, { opacity: 1, duration: 0.7, ease: Power2.easeIn })
@@ -149,10 +163,11 @@ export default class AboutAnimations {
             gsap.fromTo(allText[i], { opacity: 0 }, { opacity: 1, duration: .5, delay: i / 10 })
         }
 
-        //Pixels
-        this.icons.playPixelAnimation(0, 0)
-        this.icons.playPixelAnimation(1, .15)
-        this.icons.playPixelAnimation(2, .3)
+        //Pixel Icons
+        const rects = document.querySelectorAll('.about-pixel-mask-rect')
+        for (let i = 0; i < rects.length; i++) {
+            gsap.fromTo(rects[i], { height: 0 }, { height: 64, delay: i / 10 })
+        }
     }
 
 
@@ -181,17 +196,11 @@ export default class AboutAnimations {
         gsap.fromTo(this.domElements.aboutGroup, { opacity: 0 }, { opacity: 1, duration: .2, delay: delay + this.parameters.aboutAdditionalDelay })
     }
 
-    fillLine(line, delay = 0) {
-        //check if line is rendered
-        if (line.getClientRects().length != 0) {
-            const lineLength = line.getTotalLength()
+    fillLine(index, delay = 0) {
+        const lineArray = this.lines[index]
 
-            //adapt strok dasharray
-            line.style.strokeDasharray = lineLength
-
-            //fill animation
-            gsap.fromTo(line.style, { strokeDashoffset: lineLength }, { strokeDashoffset: 0, duration: .6, delay: delay })
-        }
+        //fill animation
+        gsap.fromTo(lineArray.line, { strokeDashoffset: lineArray.length }, { strokeDashoffset: 0, duration: .6, delay: delay })
     }
 
     animateSpan(span, delay, speed = 50) {

@@ -1,4 +1,4 @@
-import { gsap, Power2, Back } from "gsap"
+import { gsap } from "gsap"
 import Experience from "../Experience"
 
 export default class HoverIcon {
@@ -60,9 +60,8 @@ export default class HoverIcon {
         // mouse move 
         window.addEventListener('mousemove', () => {
             // update hover icon position if isHovering 
-            if (this.isHovering) {
-                gsap.to(this.icon, { x: event.pageX, y: event.pageY, duration: .5 })
-            }
+            //if (this.isHovering) 
+                gsap.to(this.icon, { x: event.pageX, y: event.pageY, duration: .4 })
         })
     }
 

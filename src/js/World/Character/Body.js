@@ -138,6 +138,7 @@ export default class Body {
             default: this.resources.items.characterDefaultFace,
             scared: this.resources.items.characterScaredFace,
             sleepy: this.resources.items.characterSleepyFace,
+            hurt: this.resources.items.characterHurtFace
         }
 
         // Material 
@@ -226,9 +227,9 @@ export default class Body {
         this.materials.wireframeMaterial = new THREE.MeshBasicMaterial({
             color: this.wireframeParameters.color,
             wireframe: true,
-            opacity: 0.3,
+            opacity: 0.24,
             blending: 2,
-            wireframeLinewidth: 1,
+            wireframeLinewidth: 0.01,
             fog: false,
         })
 

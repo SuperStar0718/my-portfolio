@@ -145,7 +145,8 @@ export default class Sounds {
         const item = this.items.find((item) => item.name === name)
 
         //Play random
-        item.howls[Math.floor(Math.random() * item.howls.length)].play()
+        if (this.active)
+            item.howls[Math.floor(Math.random() * item.howls.length)].play()
     }
 
     mute(boolean) {

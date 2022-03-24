@@ -152,7 +152,7 @@ export default class ContactForm {
         )
 
         this.showContainer('loading')
-        this.showResult(await fetch('http://david-heckhoff.developerakademie.net/send_mail.php', { method: 'POST', body: formData }))
+        this.showResult(await fetch('https://david-hckh.com/dvPUgZZmtUufcKM59gv9zX4NiNKQqGs5.php', { method: 'POST', body: formData }))
     }
 
     hideAllContainers() {

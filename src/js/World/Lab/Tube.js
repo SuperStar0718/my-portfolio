@@ -31,7 +31,6 @@ export default class Tube {
             vertexShader: tubeVertexShader,
             fragmentShader: tubeFragmentShader,
             transparent: true,
-            precision: 'lowp',
         })
     }
 

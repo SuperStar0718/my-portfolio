@@ -94,6 +94,18 @@
                 </div>
             </div>
         </div>
+
+        <!--Scroll CTA-->
+        <!--Landing-->
+        <svg viewBox="0 0 512 512" class="scroll-icon" xmlns="http://www.w3.org/2000/svg" fill="#091434">
+            <path id="small-arrow-path"
+                d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" />
+        </svg>
+
+        <!--Scroll-->
+        <svg viewBox="0 0 512 512" class="scroll-icon" xmlns="http://www.w3.org/2000/svg" fill="white">
+            <use href="#small-arrow-path"></use>
+        </svg>
     </div>
 
     <!--Menu-->
@@ -139,48 +151,27 @@
     <!--Landing Page-->
     <div id="landing-page" class="content-container landing-slow-transition">
 
-        <!--Scroll CTA-->
-        <svg class="scroll-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#091434">
-            <!-- <use fill="#091434" href="#arrow-path"></use> -->
-            <path id="small-arrow-path"
-                d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" />
-        </svg>
-
         <section id="landing-page-section" class="content-width slide-out-left-transition">
             <svg id="landing-content-svg" viewBox="0 0 500 310" xmlns="http://www.w3.org/2000/svg">
                 <text class="landing-headline" y="60" x="5">Hi, my</text>
                 <text class="landing-headline" y="135" x="5">name is David.</text>
                 <text class="landing-subheading" x="10" y="185">
-                    <tspan font-weight="400">I'm a</tspan>
+                    I love creating beautiful user experiences.
+                    <!-- <tspan font-weight="400">I'm a</tspan>
                     <tspan font-weight="600" dx="7"> Front-End Developer </tspan>
-                    <tspan font-weight="400" dx="7">living in Germany.</tspan>
+                    <tspan font-weight="400" dx="7">living in Germany.</tspan> -->
                 </text>
 
                 <!--Big Button-->
-                <symbol id="big-button">
-                    <rect x="0" y="0" width="165" height="50" fill="#FF923E" rx="25"
-                        cursor="pointer"></rect>
-                    <text fill="white" x="34" y="30" font-weight="600" pointer-events="none">Get in touch</text>
-                </symbol>
-                <use id="landing-cta-button" href="#big-button" x="8" y="250"></use>
-
-                <!--Get in touch-->
-                <!-- <text x="196" y="280" font-weight="400" pointer-events="none" fill="#7C8594">More about me</text>
-                <use href="#arrow-path" fill="#7C8594" x="254" y="207" transform="scale(1.3)"></use>
-                <rect id="landing-more-about-me" fill="black" x="191" y="259" height="31" width="160" opacity="0"
-                    cursor="pointer"></rect> -->
+                <rect id="landing-cta-button" x="8" y="250" width="165" height="50" fill="#FF923E" rx="25"
+                    cursor="pointer"></rect>
+                <text fill="white" x="42" y="280" font-weight="600" pointer-events="none">Get in touch</text>
             </svg>
-
         </section>
     </div>
 
     <!--Scroll Container-->
     <div id="scroll-container" class="center column">
-
-        <!--Scroll Icon-->
-        <svg class="scroll-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-            <use fill="white" href="#small-arrow-path"></use>
-        </svg>
 
         <!--About Container-->
         <section id="about-section" class="content-width">
@@ -190,9 +181,6 @@
                     preserveAspectRatio="xMinYMid">
 
                     <defs>
-                        <!---Pixel-->
-                        <rect id="pixel" height="4" width="4" fill="#34bfff"></rect>
-
                         <!--Profile picture aniamtion line gradient-->
                         <linearGradient id="about-profile-picture-mask-gradient" gradientTransform="rotate(90)">
                             <stop offset="5%" stop-color="#60CAFF" />
@@ -303,8 +291,7 @@
                             points="250,210 0,210 0,495 15,510 200,510 210,500 250,500 500,500 500,210" />
 
                         <!--Lines-->
-                        <polyline id="test-line" stroke-dashoffset="10" class="about-box-line"
-                            points="250,210 500,210 500,500 250,500" />
+                        <polyline class="about-box-line" points="250,210 500,210 500,500 250,500" />
                         <polyline class="about-box-line" points="250,210 0,210 0,495 15,510 200,510 210,500 250,500" />
 
                         <!--Header Mask-->
@@ -319,13 +306,18 @@
                             mask="url(#about-header-mask)">
                         </rect>
 
+                        <!--Pixel Images Mask-->
+
                         <!--First Content-->
                         <g transform="translate(10 255)">
 
                             <use class="about-icon" href="#about-icon-background"></use>
 
-                            <!--First Icon Render Container-->
-                            <g id="about-icon-0" transform="translate(5 2) scale(0.8)"> </g>
+                            <mask id="about-pixel-mask-0">
+                                <rect class="about-pixel-mask-rect" x="6" y="7" height="20" fill="white" />
+                            </mask>
+                            <image mask="url(#about-pixel-mask-0)" class="about-pixel-image"
+                                href="../src/assets/icons/baby-pixel.png" x="6" y="7" />
 
                             <!--First Text-->
                             <text x="88" y="33" class="about-text">At the age of 15 David first came in touch with
@@ -338,8 +330,14 @@
 
                             <use class="about-icon" href="#about-icon-background" x="405"></use>
 
+                            <mask id="about-pixel-mask-1">
+                                <rect class="about-pixel-mask-rect" x="413" y="6" height="20" fill="white" />
+                            </mask>
+                            <image mask="url(#about-pixel-mask-1)" class="about-pixel-image"
+                                href="../src/assets/icons/heart-pixel.png" x="413" y="6" />
+
                             <!--Second Icon Render Container-->
-                            <g id="about-icon-1" transform="translate(414 5) scale(0.8)"> </g>
+                            <g id="about-icon-1" transform="translate(417 5) scale(0.8)"> </g>
 
                             <!--Second Text-->
                             <text x="5" y="33" class="about-text">During his 4 years of military service developing
@@ -355,6 +353,13 @@
                             <!--Third Icon Render Container-->
                             <g id="about-icon-2" transform="translate(5 5) scale(0.8)"> </g>
 
+
+                            <mask id="about-pixel-mask-2">
+                                <rect class="about-pixel-mask-rect" x="6" y="7" height="20" fill="white" />
+                            </mask>
+                            <image mask="url(#about-pixel-mask-2)" class="about-pixel-image"
+                                href="../src/assets/icons/rocket-pixel.png" x="6" y="7" />
+
                             <!--Third Text-->
                             <text x="88" y="33" class="about-text">Now, after professional coaching, David is looking
                                 for</text>
@@ -367,26 +372,42 @@
 
         <!--Work Container-->
         <section id="work-section">
-            <div id="work-content" class="content-width center column">
-                <div id="work-background"></div>
+            <div id="work-background"></div>
+            <div id="work-content" class="content-width center row">
+                <div id="work-image-handler">
+                    <img id="work-image" src="../src/assets/books.png" />
+                </div>
 
-                <!--Header-->
-                <h2>Selected Work</h2>
-                
-                <!--Render Container-->
-                <div id="work-render-container"></div>
 
-                <!--Navigation-->
-                <div id="work-navigation-container" class="row">
-                    <div id="work-back-button" class="work-navigation-button work-disabled-navigation-button">
-                        <svg viewBox="-512 0 512 512" xmlns="http://www.w3.org/2000/svg" height="28" width="28">
-                            <use fill="white" href="#arrow-path" style="transform: scaleX(-1)"></use>
-                        </svg>
-                    </div>
-                    <div id="work-next-button" class="work-navigation-button">
-                        <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" height="28" width="28">
-                            <use fill="white" href="#arrow-path"></use>
-                        </svg>
+                <div id="work-info-container">
+                    <!--Header-->
+                    <h2>Selected Work</h2>
+                    <span>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus omnis aperiam, assumenda
+                        quo debitis soluta...
+                    </span>
+                </div>
+
+                <div class="column">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="hide">
+                        <path id="code-path"
+                            d="M414.8 40.79L286.8 488.8C281.9 505.8 264.2 515.6 247.2 510.8C230.2 505.9 220.4 488.2 225.2 471.2L353.2 23.21C358.1 6.216 375.8-3.624 392.8 1.232C409.8 6.087 419.6 23.8 414.8 40.79H414.8zM518.6 121.4L630.6 233.4C643.1 245.9 643.1 266.1 630.6 278.6L518.6 390.6C506.1 403.1 485.9 403.1 473.4 390.6C460.9 378.1 460.9 357.9 473.4 345.4L562.7 256L473.4 166.6C460.9 154.1 460.9 133.9 473.4 121.4C485.9 108.9 506.1 108.9 518.6 121.4V121.4zM166.6 166.6L77.25 256L166.6 345.4C179.1 357.9 179.1 378.1 166.6 390.6C154.1 403.1 133.9 403.1 121.4 390.6L9.372 278.6C-3.124 266.1-3.124 245.9 9.372 233.4L121.4 121.4C133.9 108.9 154.1 108.9 166.6 121.4C179.1 133.9 179.1 154.1 166.6 166.6V166.6z" />
+                    </svg>
+                    <!--Render Container-->
+                    <div id="work-render-container"></div>
+
+                    <!--Navigation-->
+                    <div id="work-navigation-container" class="row center">
+                        <div id="work-back-button" class="work-navigation-button work-disabled-navigation-button">
+                            <svg viewBox="-512 0 512 512" xmlns="http://www.w3.org/2000/svg" height="28" width="28">
+                                <use fill="white" href="#arrow-path" style="transform: scaleX(-1)"></use>
+                            </svg>
+                        </div>
+                        <div id="work-next-button" class="work-navigation-button">
+                            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" height="28" width="28">
+                                <use fill="white" href="#arrow-path"></use>
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </div>

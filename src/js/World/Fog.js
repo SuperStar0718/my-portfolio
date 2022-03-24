@@ -4,7 +4,7 @@ import Experience from '../Experience'
 export default class SceneFog {
     constructor() {
         this.experience = new Experience()
-        this.scene = this.experience.world.scene
+        this.scene = this.experience.scene
         this.debug = this.experience.debug
         this.sizes = this.experience.sizes
 

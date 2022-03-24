@@ -13,32 +13,30 @@ export default class Sizes extends EventEmitter {
         this.debug = this.experience.debug
 
         // Setup
-        this.width = window.innerWidth
-        this.height = window.innerHeight
-        this.pixelRatio = Math.min(window.devicePixelRatio, 2)
-
-        this.checkTouchDevice()
-        this.checkPortrait()
+        this.resize()
 
         // Resize event
         window.addEventListener('resize', () => {
-            this.checkTouchDevice()
-            this.checkPortrait()
-
-            this.width = window.innerWidth
-            this.height = window.innerHeight
-            this.pixelRatio = Math.min(window.devicePixelRatio, 2)
-
-            this.trigger('resize')
+            this.resize()
+            setTimeout(() => this.trigger('resize'))
         })
     }
 
+    resize() {
+        this.checkTouchDevice()
+        this.checkPortrait()
+
+        this.width = window.innerWidth
+        this.height = window.innerHeight
+        this.pixelRatio = Math.min(window.devicePixelRatio, 2)
+    }
+
     checkPortrait() {
-        const isPortrait = window.innerWidth / window.innerHeight <= 1.1
+        const isPortrait = window.innerWidth / window.innerHeight <= 1.2
 
         if (isPortrait !== this.portrait) {
             this.portrait = isPortrait
-            this.trigger(this.portrait ? 'portrait' : 'landscape')
+            setTimeout(() => this.trigger(this.portrait ? 'portrait' : 'landscape'))
         }
     }
 

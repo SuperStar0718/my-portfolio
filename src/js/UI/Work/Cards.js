@@ -25,7 +25,7 @@ export default class WorkCards {
         this.gestures = this.experience.gestures
         this.render = this.experience.ui.work.render
 
-        this.currentItemIndex = 2
+        this.currentItemIndex = 4
 
         this.addButtonEventListeners()
         this.initSwipes()

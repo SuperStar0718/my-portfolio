@@ -4,7 +4,7 @@ import { gsap, Back, Power2 } from 'gsap'
 export default class Intro {
 
     parameters = {
-        timeTillFinish: 1
+        timeTillFinish: 1.5
     }
 
     domElements = {
@@ -52,7 +52,6 @@ export default class Intro {
     //Show overlay and enable gestures
     finish() {
         gsap.fromTo(this.domElements.overlay, { opacity: 0 }, { opacity: 1, delay: this.parameters.timeTillFinish, duration: .8 })
-        gsap.fromTo(this.domElements.scrollIcon, { opacity: 0 }, { opacity: 1, delay: this.parameters.timeTillFinish, duration: .8 })
 
         gsap.delayedCall(this.parameters.timeTillFinish, () => {
             this.domElements.container.classList.add('hide')

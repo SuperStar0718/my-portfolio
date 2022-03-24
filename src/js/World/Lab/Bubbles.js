@@ -69,7 +69,7 @@ export default class Bubbles {
                 })
 
             // Opening
-            bubble.material.opacity = 1
+            bubble.material.opacity = 0.5
 
             const scale = Math.random() * 0.12 + 0.2
             gsap.fromTo(bubble.scale, { x: 0, y: 0, z: 0 }, { x: scale, y: scale, z: scale, duration: .5, ease: Back.easeIn.config(1.5) })

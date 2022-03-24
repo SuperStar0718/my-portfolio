@@ -1,11 +1,12 @@
 import Experience from '../Experience'
 import { gsap, Power2 } from 'gsap'
+import EventEmitter from '../Utils/EventEmitter'
 
 export default class Scroll {
 
     parameters = {
-        scrollStrength: 120,
-        scrollDuration: .7,
+        scrollStrength: 110,
+        scrollDuration: .8,
         multiplyScrollStrengthBy: 2.5,
     }
 
@@ -17,6 +18,7 @@ export default class Scroll {
     }
 
     constructor() {
+
         this.experience = new Experience()
         this.camera = this.experience.camera
         this.sizes = this.experience.sizes
@@ -27,6 +29,7 @@ export default class Scroll {
         this.transition = this.experience.ui.transition
         this.sounds = this.experience.sounds
         this.waypoints = this.experience.waypoints
+        this.scrollIcon = this.experience.ui.scrollScrollIcon
 
         //Hide scroll container
         this.domElements.scrollContainer.style.top = '100%'
@@ -137,6 +140,8 @@ export default class Scroll {
                     this.scrollY += direction * strength
 
                     this.performScroll()
+
+                    if(this.scrollIcon.visible) this.scrollIcon.kill()
                 }
             }
 
@@ -158,9 +163,6 @@ export default class Scroll {
     }
 
     performScroll(duration = this.parameters.scrollDuration) {
-        //Hide Scroll Icon
-        this.experience.ui.about.scrollIcon.hide()
-
         this.contentScrollTo = this.preventFromScrollingBottom()
 
         let scrollPercentage = 0
@@ -189,7 +191,7 @@ export default class Scroll {
 
         if (scrollPercentage >= 0) {
             //Background Plane
-            gsap.to(this.background.material.uniforms.uOffset, { value: (this.background.height * 1.5) * scrollPercentage, duration: duration, ease: Power2.easeOut })
+            gsap.to(this.background.material.uniforms.uOffset, { value: (this.background.height * 1.4) * scrollPercentage, duration: duration, ease: Power2.easeOut })
 
             //Camera
             gsap.to(this.camera.instance.position, { y: (this.cameraRange.bottom - this.cameraRange.top) * scrollPercentage + this.cameraRange.top, duration: duration, ease: Power2.easeOut })

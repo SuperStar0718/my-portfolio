@@ -34,14 +34,10 @@ export default class Room {
         this.chair = this.model.children.find((child) => child.name === 'chair')
 
         this.baseModel.add(this.chair)
-        this.chair.position.z += 2.22
 
         //Take desktops plane and move to base model to animate room bounce
         this.deskopPlane0 = this.model.children.find((child) => child.name === 'desktop-plane-0')
         this.deskopPlane1 = this.model.children.find((child) => child.name === 'desktop-plane-1')
-
-        this.deskopPlane0.position.z += 2.229
-        this.deskopPlane1.position.z += 2.229
 
         this.baseModel.add(this.deskopPlane0)
         this.baseModel.add(this.deskopPlane1)

@@ -51,8 +51,8 @@ export default class Character {
     }
 
     preloadWireframe() {
-        this.body.head.material = this.body.materials.wireframeMaterial
-        setTimeout(() => this.body.head.material = this.body.materials.bakedMaterial)
+        this.setAllToWireframe()
+        setTimeout(() => this.setAllToOriginal())
     }
 
     // ------------------------ ANIMATIONS ---------------------------------------------------------------------------------------------- 
@@ -110,24 +110,27 @@ export default class Character {
     // change to idle afterwards
     playIntroAnimation() {
         //Fall down
-        gsap.fromTo(this.model.position, { y: 2 }, { y: -5.7, duration: 1.1, ease: Power2.easeIn })
+        gsap.fromTo(this.model.position, { y: 2 }, {
+            y: -5.7, duration: 1.1, ease: Power2.easeIn, onComplete: () => {
+                //hurt Face
+                //this.body.face.material.map = this.body.faceTextures.hurt
+                gsap.delayedCall(0, () => this.body.face.material.map = this.body.faceTextures.default)
 
-        //chair
-        gsap.to(this.chair.rotation, { x: .07, z: -.07, delay: 1.1, ease: Power1.easeOut, duration: .18, yoyo: true, repeat: 1 })
+                //chair rotation
+                gsap.to(this.chair.rotation, { x: .1, z: -.1, ease: Power1.easeOut, duration: .18, yoyo: true, repeat: 1 })
+            }
+        })
 
         //Character animation
         gsap.delayedCall(.05, () => this.animation.play('wave'))
-
         gsap.delayedCall(this.animation.actions.wave._clip.duration, () => this.idle())
 
         this.body.face.material.map = this.body.faceTextures.scared
 
-
         gsap.delayedCall(1, () => {
             // faces 
-            gsap.delayedCall(.5, () => {
-                if (this.experience.ui.landingPage.visible)
-                    this.body.updateFace('smile')
+            gsap.delayedCall(.65, () => {
+                this.body.updateFace('smile')
 
                 this.initBlink()
             })
@@ -141,7 +144,8 @@ export default class Character {
 
     // play idle animation and start scroll and left desktop action interval
     idle() {
-        this.animation.play('idle')
+        if (this.animation.actions.current._clip.name === 'wave')
+            this.animation.play('idle')
 
         // start intervals 
         this.scrollInterval()
@@ -250,6 +254,17 @@ export default class Character {
 
             if (children.originalMaterial)
                 children.material = children.originalMaterial
+        })
+    }
+
+    setAllToWireframe() {
+        this.model.children[0].children.forEach((children) => {
+            if (children.name != 'face') {
+                if (!children.originalMaterial)
+                    children.originalMaterial = children.material
+
+                children.material = this.body.materials.wireframeMaterial
+            }
         })
     }
 
