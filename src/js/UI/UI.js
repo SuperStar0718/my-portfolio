@@ -29,8 +29,8 @@ export default class UI {
         this.resources.on('ready', () => {
             // Setup
             this.transition = new Transition()
-            this.scrollIcon = new ScrollIcon(document.querySelector('.scroll-icon'))
-            this.scrollScrollIcon = new ScrollIcon(document.querySelectorAll('.scroll-icon')[1], true)
+            this.scrollIcon = new ScrollIcon(0)
+            this.scrollScrollIcon = new ScrollIcon(1)
             this.landingPage = new LandingPage()
             this.scroll = new Scroll()
             this.sections = new Sections()

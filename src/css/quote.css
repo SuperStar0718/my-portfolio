@@ -1,0 +1,11 @@
+#quote-container {
+    height: 250px;
+    width: 90%;
+    background: #1076B8;
+    position: absolute;
+    top: -150px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 25px;
+}

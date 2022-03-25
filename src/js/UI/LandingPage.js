@@ -116,7 +116,7 @@ export default class LandingPage extends EventEmitter {
 
                 //play water idle animation 
                 setTimeout(() => {
-                    this.character.animation.play('waterIdle', .9)
+                    this.character.animation.play('waterIdle', 1)
                 }, 650)
 
                 //spawn bubbles

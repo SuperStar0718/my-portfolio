@@ -17,6 +17,7 @@ export default class MenuItems {
             name: 'home',
             elements: [
                 document.querySelectorAll('.menu-item')[0],
+                document.getElementById('logo-click-container')
             ],
         },
         {
@@ -108,7 +109,7 @@ export default class MenuItems {
         //Clear all active items to make elements outside of menu clickable
         if (!this.menu.visible) this.clearAllActiveItems()
 
-        if (!this.transition.isShowing && !item.elements[0].classList.contains('active-menu-item')) {
+        if (!this.transition.isShowing && !item.elements[0].classList.contains('active-menu-item') && !(this.landingPage.visible && item.name == 'home')) {
             //start transition
             this.transition.show()
             setTimeout(() => {
@@ -142,6 +143,8 @@ export default class MenuItems {
 
         this.sounds.muteGroup('landing', false)
         this.sounds.muteGroup('lab', true)
+
+        this.experience.ui.scrollScrollIcon.fade(false)
 
         //Room
         this.room.baseModel.scale.set(1, 1, 1)

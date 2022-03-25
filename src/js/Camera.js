@@ -55,23 +55,21 @@ export default class Camera {
         if (this.controls)
             this.controls.update()
 
-        if (!this.sizes.touch)
+        if (!this.sizes.touch && this.parallax.enabled)
             this.updateParallax()
     }
 
     // update parallax animation using cursor movement 
     updateParallax() {
-        if (this.parallax.enabled && !this.sizes.mobile) {
-            const parallaxX = this.cursor.x * this.parallax.intensity
-            const parallaxY = -this.cursor.y * this.parallax.intensity
-            const deltaTime = this.time.delta / 1000
+        const parallaxX = this.cursor.x * this.parallax.intensity
+        const parallaxY = -this.cursor.y * this.parallax.intensity
+        const deltaTime = this.time.delta / 1000
 
-            const byX = (parallaxX - this.cameraParallaxGroup.position.x) * 4 * deltaTime
-            const byY = (parallaxY - this.cameraParallaxGroup.position.y) * 4 * deltaTime
+        const byX = (parallaxX - this.cameraParallaxGroup.position.x) * 4 * deltaTime
+        const byY = (parallaxY - this.cameraParallaxGroup.position.y) * 4 * deltaTime
 
-            if (byX < 0.05 && byX > -0.05) this.cameraParallaxGroup.position.x += byX
-            if (byY < 0.05 && byY > -0.05) this.cameraParallaxGroup.position.y += byY
-        }
+        if (byX < 0.05 && byX > -0.05) this.cameraParallaxGroup.position.x += byX
+        if (byY < 0.05 && byY > -0.05) this.cameraParallaxGroup.position.y += byY
     }
 
     // Debug 
@@ -108,7 +106,7 @@ export default class Camera {
         if (!this.controls) {
             this.controls = new OrbitControls(this.instance, this.canvas)
             this.controls.enableDamping = true
-            this.experience.canvas.style.zIndex= 1000
+            this.experience.canvas.style.zIndex = 1000
             this.controls.target.y = this.instance.position.y - 3
         }
     }

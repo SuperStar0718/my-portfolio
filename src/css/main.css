@@ -10,6 +10,7 @@
 @import 'hover-icon.css';
 @import 'menu.css';
 @import 'intro.css';
+@import 'quote.css';
 
 /**---------------------------------------------------------------Main Stylings-----------------------------------------------------*/
 *
@@ -41,8 +42,8 @@ body
 }
 
 .content-width {
-    width: 1350px;
-    max-width: calc(84% - 30px);
+    width: 1400px;
+    max-width: calc(100% - 60px);
 }
 
 .hide {
@@ -78,11 +79,13 @@ body
 }
 
 h1 {
-    font-size: 4rem;
+    font-size: 4.3rem;
     position: relative;
     left: -5px;
     font-family: 'Poppins', sans-serif;
-    line-height: 75px;
+    line-height: 1.16667;
+    font-weight: 600;
+    letter-spacing: -0.5px;
 }
 
 h2 {
@@ -92,11 +95,18 @@ h2 {
 
 h3 {
     font-size: 1.6rem;
+    font-weight: 600;
 }
 
 h4 {
     font-size: 1.4rem;
     font-weight: 600;
+}
+
+h5 {
+    color: #FF923E;
+    font-size: 1.2rem;
+    font-weight: 500;
 }
 
 span {
@@ -116,6 +126,20 @@ hr {
     background-color: rgb(240, 240, 240);
     margin: 25px 0;
     border: none;
+}
+
+.section-subheader-container {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.section-subheader-container hr {
+    width: 40px;
+    background-color: #FF923E;
+    margin: 0; 
+    margin-right: 20px;
 }
 
 /*Selection*/

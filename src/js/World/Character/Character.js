@@ -117,7 +117,7 @@ export default class Character {
                 gsap.delayedCall(0, () => this.body.face.material.map = this.body.faceTextures.default)
 
                 //chair rotation
-                gsap.to(this.chair.rotation, { x: .1, z: -.1, ease: Power1.easeOut, duration: .18, yoyo: true, repeat: 1 })
+                gsap.to(this.chair.rotation, { x: .12, z: -.12, ease: Power1.easeOut, duration: .18, yoyo: true, repeat: 1 })
             }
         })
 
@@ -129,7 +129,7 @@ export default class Character {
 
         gsap.delayedCall(1, () => {
             // faces 
-            gsap.delayedCall(.65, () => {
+            gsap.delayedCall(.5, () => {
                 this.body.updateFace('smile')
 
                 this.initBlink()

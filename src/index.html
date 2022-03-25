@@ -29,9 +29,13 @@
         <!--Top Wave-->
         <svg id="transition-wave-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" width="150vw">
             <defs>
+
                 <path fill="#FF923E" id="transition-wave-path"
-                    d="M0,128L30,144C60,160,120,192,180,197.3C240,203,300,181,360,192C420,203,480,245,540,240C600,235,660,181,720,181.3C780,181,840,235,900,250.7C960,267,1020,245,1080,224C1140,203,1200,181,1260,165.3C1320,149,1380,139,1410,133.3L1440,128L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z">
+                    d="M0,128L34.3,117.3C68.6,107,137,85,206,117.3C274.3,149,343,235,411,261.3C480,288,549,256,617,208C685.7,160,754,96,823,112C891.4,128,960,224,1029,250.7C1097.1,277,1166,235,1234,202.7C1302.9,171,1371,149,1406,138.7L1440,128L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z">
                 </path>
+
+
+
             </defs>
             <use href="#transition-wave-path"></use>
         </svg>
@@ -49,22 +53,21 @@
     <div id="overlay-container" class="content-width">
         <div id="header-container">
             <!--Logo-->
-            <div id="logo-transform-container">
-                <svg id="header-logo-svg" viewBox="0 0 56 60" xmlns="http://www.w3.org/2000/svg" height="60" width="56">
-                    <defs>
-                        <path id="logo-path" fill="none" stroke="#fff" stroke-width="1px"
-                            d="M3 14 24 2C28 0 28 0 32 2L53 14C56 16 56 17 56 19L56 43C56 46 55 47 51 49L32 59C28 61 28 61 24 59L5 49C1 47 0 46 0 43L0 19C0 17 0 16 3 14M28 4 5 17 28 28 51 17 28 4M53 20 30 31 30 56 53 44 53 20M40 42 33 35C33 35 32 34 33 33 34 32 35 33 36 34L36 34 43 41C44 42 44 42 43 43L35 51C35 51 34 52 33 51 32 50 33 49 33 49L40 42M16 42 23 35C23 35 24 34 23 33 22 32 21 33 20 34L13 41C12 42 12 42 13 43L21 51C21 51 22 52 23 51 24 50 23 49 23 49L16 42">
-                        </path>
+            <svg id="header-logo-svg" viewBox="0 0 56 60" xmlns="http://www.w3.org/2000/svg" height="60" width="56">
+                <defs>
+                    <path id="logo-path" fill="none" stroke="#fff" stroke-width="1px"
+                        d="M3 14 24 2C28 0 28 0 32 2L53 14C56 16 56 17 56 19L56 43C56 46 55 47 51 49L32 59C28 61 28 61 24 59L5 49C1 47 0 46 0 43L0 19C0 17 0 16 3 14M28 4 5 17 28 28 51 17 28 4M53 20 30 31 30 56 53 44 53 20M40 42 33 35C33 35 32 34 33 33 34 32 35 33 36 34L36 34 43 41C44 42 44 42 43 43L35 51C35 51 34 52 33 51 32 50 33 49 33 49L40 42M16 42 23 35C23 35 24 34 23 33 22 32 21 33 20 34L13 41C12 42 12 42 13 43L21 51C21 51 22 52 23 51 24 50 23 49 23 49L16 42">
+                    </path>
 
-                        <clipPath id="logo-clip-path" transform="scale(0.87)">
-                            <use fill="white" href="#logo-path"></use>
-                        </clipPath>
-                    </defs>
-                </svg>
-            </div>
+                    <clipPath id="logo-clip-path" transform="scale(0.87)">
+                        <use fill="white" href="#logo-path"></use>
+                    </clipPath>
+                </defs>
+            </svg>
             <div id="logo-dark-background">
                 <div id="logo-white-background"></div>
             </div>
+            <div id="logo-click-container"></div>
 
             <!--Sound Button-->
             <div id="sound-button-scale-container">
@@ -97,15 +100,21 @@
 
         <!--Scroll CTA-->
         <!--Landing-->
-        <svg viewBox="0 0 512 512" class="scroll-icon" xmlns="http://www.w3.org/2000/svg" fill="#091434">
-            <path id="small-arrow-path"
-                d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" />
-        </svg>
+        <div class="scroll-container">
+            <div class="scroll-border-container">
+                <div class="scroll-wheel"></div>
+            </div>
+            <img class="scroll-touch-icon hide" src="/src/assets/touch-icon.png" />
+        </div>
 
         <!--Scroll-->
-        <svg viewBox="0 0 512 512" class="scroll-icon" xmlns="http://www.w3.org/2000/svg" fill="white">
-            <use href="#small-arrow-path"></use>
-        </svg>
+        <div class="scroll-container" style="opacity: 0">
+            <div class="scroll-border-container" style="border-color: rgba(255, 255, 255, 0.8); ">
+                <div class="scroll-wheel" style="background: rgba(255, 255, 255, 0.8);"></div>
+            </div>
+            <img class="scroll-touch-icon hide" src="/src/assets/touch-icon.png"
+                style="opacity: 0.8; filter: brightness(100)" />
+        </div>
     </div>
 
     <!--Menu-->
@@ -177,7 +186,7 @@
         <section id="about-section" class="content-width">
             <div id="about-content-container">
                 <!--Header Container SVG-->
-                <svg id="skills-svg" viewBox="-2 -2 506 800" xmlns="http://www.w3.org/2000/svg"
+                <svg id="skills-svg" viewBox="-2 -2 506 720" xmlns="http://www.w3.org/2000/svg"
                     preserveAspectRatio="xMinYMid">
 
                     <defs>
@@ -370,23 +379,29 @@
             </div>
         </section>
 
+
         <!--Work Container-->
         <section id="work-section">
             <div id="work-background"></div>
-            <div id="work-content" class="content-width center row">
-                <div id="work-image-handler">
+
+            <div id="work-content" class="content-width column">
+                <!-- <div id="work-image-handler">
                     <img id="work-image" src="../src/assets/books.png" />
-                </div>
+                </div> -->
 
-
-                <div id="work-info-container">
-                    <!--Header-->
-                    <h2>Selected Work</h2>
-                    <span>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus omnis aperiam, assumenda
-                        quo debitis soluta...
-                    </span>
+                <!-- <div id="quote-container">
+            
+                </div> -->
+                <div class="section-subheader-container">
+                    <hr>
+                    <h5>Portfolio</h5>
                 </div>
+                <h1>
+                    Some things
+                    <br>
+                    I've worked on.
+                </h1>
+
 
                 <div class="column">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="hide">
@@ -415,11 +430,14 @@
 
         <!--Contact Container-->
         <section id="contact-section" class="content-width column">
-            <h2>Contact Me</h2>
-            <span id="contact-get-in-touch-label">
-                Get in touch via the form below, or send me an
-                <a tabindex="-1" href="mailto:contact@david-hckh.com">Email</a> directly.
-            </span>
+            <div class="section-subheader-container">
+                <hr>
+                <h5>Say hello 👋</h5>
+            </div>
+            <h1>
+                Contact me.
+            </h1>
+
             <div id="contact-container">
                 <!--Form Container-->
                 <div id="contact-form-container" class="column contact-container">
@@ -449,6 +467,7 @@
                             href="https://github.com/davidhckh"></a>
                         <a tabindex="-1" class="social-icon linkedin-icon" target="_blank"
                             href="https://www.linkedin.com/in/david-heckhoff-1ba8a622a/"></a>
+                        <a tabindex="-1" class="social-icon mail-icon" href="mailto:david.heckhoff@gmail.com"></a>
                         <div id="contact-submit-button" class="small-button">
                             Submit
                         </div>

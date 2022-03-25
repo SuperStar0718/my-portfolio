@@ -4,7 +4,7 @@ import { gsap, Back, Power2 } from 'gsap'
 export default class Intro {
 
     parameters = {
-        timeTillFinish: 1.5
+        timeTillFinish: 1.2
     }
 
     domElements = {
@@ -22,7 +22,7 @@ export default class Intro {
         this.gestures = this.experience.gestures
         this.character = this.experience.world.character
 
-        setTimeout(() => this.playIntro(), 1000)
+        setTimeout(() => this.playIntro(), 1200)
     }
 
     onButtonClick() {

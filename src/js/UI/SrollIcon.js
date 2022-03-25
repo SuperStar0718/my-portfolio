@@ -5,19 +5,40 @@ export default class ScrollIcon {
 
     visible = true
 
-    constructor(icon, scrollContainerIcon) {
-        this.icon = icon
+    constructor(index) {
+        this.icon = document.querySelectorAll('.scroll-container')[index]
+        this.border = document.querySelectorAll('.scroll-border-container')[index]
+        this.wheel = document.querySelectorAll('.scroll-wheel')[index]
+        this.touchIcon = document.querySelectorAll('.scroll-touch-icon')[index]
+
         this.experience = new Experience()
         this.gestures = this.experience.gestures
+        this.sizes = this.experience.sizes
 
-        this.startAnimation()
+        this.sizes.on('touch', () => this.setupTouchIcon())
+        this.sizes.on('no-touch', () => this.setupScrollIcon())
 
-        if (scrollContainerIcon)
-            this.icon.style.opacity = 0
+        this.sizes.touch ? this.setupTouchIcon() : this.setupScrollIcon()
     }
 
-    startAnimation() {
-        gsap.fromTo(this.icon, { y: 0 }, { y: 15, duration: 1, ease: Power3.easeIn, repeat: -1, yoyo: true })
+    setupScrollIcon() {
+        console.log('hi')
+    }
+
+    setupTouchIcon() {
+        this.border.classList.add('hide')
+        this.touchIcon.classList.remove('hide')
+
+        gsap.killTweensOf(this.wheel)
+        gsap.fromTo(this.touchIcon, { y: 0 }, { y: 6, duration: 1, ease: Power3.easeOut, repeat: -1, yoyo: true })
+    }
+
+    setupScrollIcon() {
+        this.border.classList.remove('hide')
+        this.touchIcon.classList.add('hide')
+
+        gsap.killTweensOf(this.touchIcon)
+        gsap.fromTo(this.wheel, { y: 0 }, { y: 6, duration: 1, ease: Power3.easeIn, repeat: -1, yoyo: true })
     }
 
     fade(visible) {
@@ -32,7 +53,7 @@ export default class ScrollIcon {
             this.visible = false
 
             setTimeout(() => {
-                gsap.killTweensOf(this.icon)
+                gsap.killTweensOf(this.wheel)
                 this.icon.classList.add('hide')
             }, 300)
         }

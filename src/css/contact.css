@@ -2,32 +2,12 @@
     align-items:  flex-start;
     justify-content: center;
     min-height: 100vh;
-    padding: 40px 0;
+    padding: 50px 0;
     box-sizing: border-box;
 }
 
-#contact-section h2 {
-    margin-bottom: 10px;
-    width: 500px;
-    max-width: 100%;
-}
-
-#contact-get-in-touch-label {
-    margin-bottom: 50px;
-    max-width: 500px;
-}
-
-#contact-get-in-touch-label a{
-    color: #FF923E;
-    font-weight: 500;
-    cursor: pointer;
-}
-
-#contact-get-in-touch-label a:hover {
-    opacity: 0.5
-}
-
 #contact-container {
+    margin-top: 40px;
     padding: 10px;
     border-radius: 20px;
     background: white;
