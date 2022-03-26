@@ -4,7 +4,7 @@ import EventEmitter from '../Utils/EventEmitter'
 
 export default class LandingPage extends EventEmitter {
 
-    scrollAnimationDuration = .8
+    scrollAnimationDuration = .7
     visible = true
     isAnimating = false
     reopeningEnabled = true
@@ -92,7 +92,7 @@ export default class LandingPage extends EventEmitter {
                 this.waypoints.moveToWaypoint((this.sizes.portrait ? 'scroll-start-portrait' : 'scroll-start'), true, this.scrollAnimationDuration)
 
                 //Background
-                gsap.to(this.background.material.uniforms.uOffset, { value: 0, ease: Power2.easeInOut, duration: this.scrollAnimationDuration })
+                gsap.to(this.background.material.uniforms.uOffset, { value: -.75, ease: Power2.easeInOut, duration: this.scrollAnimationDuration })
 
                 //Logo
                 gsap.to(this.domElements.logoWhiteBackground, { y: -window.innerHeight, ease: Power2.easeInOut, duration: this.scrollAnimationDuration })
@@ -162,7 +162,7 @@ export default class LandingPage extends EventEmitter {
             this.waypoints.moveToWaypoint((this.sizes.portrait ? 'landing-page-portrait' : 'landing-page'), true, this.scrollAnimationDuration)
 
             //Background
-            gsap.to(this.background.material.uniforms.uOffset, { value: -this.background.height, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
+            gsap.to(this.background.material.uniforms.uOffset, { value: -2.75, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
 
             //Logo
             gsap.to(this.domElements.logoWhiteBackground, { y: 0, ease: Power2.easeInOut, duration: this.scrollAnimationDuration })

@@ -41,7 +41,7 @@ export default class Background {
         // Material
         this.material = new THREE.ShaderMaterial({
             uniforms: {
-                uOffset: { value: -this.height }
+                uOffset: { value: -2.75 }
             },
             vertexColors: true,
             depthWrite: false,

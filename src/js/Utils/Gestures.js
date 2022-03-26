@@ -62,24 +62,23 @@ export default class Gestures extends EventEmitter {
         this.touchDistanceY = this.mTouchEndY - this.mTouchStartY
         this.touchDistanceX = this.mTouchEndX - this.mTouchStartX
 
-        const minimumTouchDistance = 10
-
-        if (this.touchDistanceY < -minimumTouchDistance || this.touchDistanceY > minimumTouchDistance) {
-            if (this.mTouchEndY < this.mTouchStartY) {
-                this.trigger('touch-down')
-            } else if (this.mTouchEndY > this.mTouchStartY) {
-                this.trigger('touch-up')
-            }
-        }
-
+        const minimumVerticalTouchDistance = 10
+        const minimumHorizontalTouchDistance = 100
 
         //check if minimum is reached for left and right
-        if (this.touchDistanceX < -minimumTouchDistance || this.touchDistanceX > minimumTouchDistance) {
+        if (this.touchDistanceX < -minimumHorizontalTouchDistance || this.touchDistanceX > minimumHorizontalTouchDistance) {
             //Check if scroll right or left
             if (this.mTouchEndX < this.mTouchStartX) {
                 this.trigger('swipe-right')
             } else if (this.mTouchEndX > this.mTouchStartX) {
                 this.trigger('swipe-left')
+            }
+        // else scroll down
+        } else if (this.touchDistanceY < -minimumVerticalTouchDistance || this.touchDistanceY > minimumVerticalTouchDistance) {
+            if (this.mTouchEndY < this.mTouchStartY) {
+                this.trigger('touch-down')
+            } else if (this.mTouchEndY > this.mTouchStartY) {
+                this.trigger('touch-up')
             }
         }
     }
