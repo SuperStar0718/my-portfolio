@@ -85,5 +85,8 @@ export default class UI {
 
         if (this.contact) if (this.contact.animationEvents)
             this.contact.animationEvents.resize()
+
+        if(this.hoverIcon)
+            this.hoverIcon.resize()
     }
 }

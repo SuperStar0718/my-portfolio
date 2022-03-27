@@ -182,7 +182,7 @@ export default class MenuMain extends EventEmitter {
     }
 
     fadeScrollIcons(visible) {
-        const icons = document.querySelectorAll('.scroll-icon')
+        const icons = document.querySelectorAll('.scroll-container')
 
         for (let i = 0; i < icons.length; i++) {
             const icon = icons[i]

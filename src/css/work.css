@@ -72,6 +72,7 @@
 
 .work-inactive-item-container * {
     cursor: unset !important;
+    pointer-events: none;
 }
 
 .work-inactive-item-container:hover {
@@ -130,12 +131,17 @@
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
+    transition: 125ms;
 }
 
 .work-item-gray-button .code-icon {
     fill: white;
     height: 28px;
     width: 28px;
+}
+
+.work-item-gray-button:hover {
+    transform: scale(.95);
 }
 
 /**---------------------------------------------------------------Navigation-----------------------------------------------------*/
@@ -159,7 +165,7 @@
 }
 
 .work-navigation-button:hover {
-    transform: scale(1.1);
+    transform: scale(0.95);
 }
 
 .work-disabled-navigation-button {
@@ -175,6 +181,16 @@
 @media (max-aspect-ratio: 12/10) {
     #work-section {
         margin-top: 3vh;
+    }
+
+    #work-content {
+        align-items:  center;
+        justify-content: center;
+    }
+
+    #work-header-container {
+        width: 580px;
+        max-width: 100%;
     }
 }
 

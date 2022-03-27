@@ -1,15 +1,14 @@
 #hover-icon {
     position: absolute;
-    height: 55px; 
-    width: 55px;
     border-radius: 50%;
-    background: #105099;
+    border-style: solid;
     top: 0;
     left: 0;
-    z-index: 1000;
-    transform: translate(-50%, -50%) scale(0.3);
+    z-index:  997;
+    transform: translate(-50%, -50%);
     pointer-events: none;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: height 125ms, width 125ms, border-color 125ms, border-width 125ms;
 }

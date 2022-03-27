@@ -88,11 +88,6 @@ h1 {
     letter-spacing: -0.5px;
 }
 
-h2 {
-    font-size: 3.2rem;
-    line-height: 70px;
-}
-
 h3 {
     font-size: 1.6rem;
     font-weight: 600;
@@ -184,7 +179,7 @@ hr {
 }
 
 .small-button:hover {
-    transform: scale(0.95);
+    transform: scale(0.97);
 }
 
 /****************************icons**************************/
@@ -201,7 +196,7 @@ hr {
 
 .social-icon:hover {
     filter: unset;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .github-icon {
@@ -240,7 +235,13 @@ section {
 }
 
 @media(max-width: 800px), (max-height: 800px) {
-    h2 {
-        font-size: 2.6rem;
+    h1 {
+        font-size: 3.8rem;
+    }
+}
+
+@media(max-width: 480px), (max-height: 480px) {
+    h1 {
+        font-size: 3rem;
     }
 }

@@ -1,38 +1,79 @@
-import { gsap } from "gsap"
+import { gsap, Power3 } from "gsap"
 import Experience from "../Experience"
 
 export default class HoverIcon {
 
-    icon = document.getElementById('hover-icon')
+    domElements = {
+        icon: document.getElementById('hover-icon'),
+        content: document.getElementById('hover-content'),
+        colorSwitchContainer: document.getElementById('hover-icon-color-switch'),
+        aboutSection: document.getElementById('about-section')
+    }
+
     hoverElements = [
         {
             class: '.menu-item',
+            type: 'circle',
             color: '#FF923E',
         },
         {
             class: '.work-item-gray-button',
-            color: '#105099',
+            type: 'pointer',
+            color: '#091434',
         },
         {
             class: '.small-button',
-            color: '#105099',
+            type: 'pointer',
+            color: '#091434',
         },
         {
             class: '#landing-cta-button',
-            color: '#105099',
+            type: 'pointer',
+            color: '#091434',
         },
         {
-            class: '#landing-more-about-me',
-            color: '#105099',
-        }
+            class: '#landing-cta-button',
+            type: 'pointer',
+            color: '#091434',
+        },
+        {
+            class: '#logo-click-container',
+            type: 'pointer',
+            color: '#CCCCCC',
+        },
+        {
+            class: '.overlay-button',
+            type: 'pointer',
+            color: '#091434',
+        },
+        {
+            class: '.social-icon',
+            type: 'pointer',
+            color: '#CCCCCC',
+        },
+        {
+            class: '.work-navigation-button',
+            type: 'pointer',
+            color: '#091434',
+        },
     ]
+
+    currentBaseColor = '#FF923E'
 
     constructor() {
         this.experience = new Experience()
         this.resources = this.experience.resources
         this.sizes = this.experience.sizes
+        this.scroll = this.experience.ui.scroll
 
+        this.setupDefault()
+        this.setHoverColorSwitchHeight()
         this.applyEventListeners()
+        this.applyColorSwitchEventListeners()
+
+        this.sizes.touch ? this.domElements.icon.classList.add('hide') : this.domElements.icon.classList.remove('hide')
+        this.sizes.on('touch', () => this.domElements.icon.classList.add('hide'))
+        this.sizes.on('no-touch', () => this.domElements.icon.classList.remove('hide'))
     }
 
     // Apply Mouseenter, mouseleave and mousemove event listeners
@@ -45,57 +86,68 @@ export default class HoverIcon {
 
                 // Mouseeenter 
                 domElement.addEventListener('mouseenter', () => {
-                    this.showIcon(event.srcElement)
-
-                    this.icon.style.background = element.color
+                    if(!this.sizes.touch) element.type == 'pointer' ? this.setupPointer(element) : this.setupCircle(element, domElement)
                 })
 
                 // mouseleave 
                 domElement.addEventListener('mouseleave', () => {
-                    this.hideIcon(event.srcElement)
+                    if(!this.sizes.touch) this.setupDefault()
                 })
             }
         })
 
         // mouse move 
         window.addEventListener('mousemove', () => {
-            // update hover icon position if isHovering 
-            //if (this.isHovering) 
-                gsap.to(this.icon, { x: event.pageX, y: event.pageY, duration: .4 })
+            if(!this.sizes.touch) gsap.to(this.domElements.icon, { x: event.pageX, y: event.pageY, duration: .3, ease: Power3.easeOut })
         })
     }
 
-    showIcon(element) {
-        const isActiveMenuItem = element.classList.contains('active-menu-item')
-        const isTouch = this.sizes.touch
+    applyColorSwitchEventListeners() {
+        this.domElements.colorSwitchContainer.addEventListener('mouseenter', () => this.updateBaseColor('#34bfff'))
+        this.domElements.colorSwitchContainer.addEventListener('mouseleave', () => this.updateBaseColor('#FF923E'))
+        this.domElements.aboutSection.addEventListener('mouseenter', () => this.updateBaseColor('#34bfff'))
+        this.domElements.aboutSection.addEventListener('mouseleave', () => this.updateBaseColor('#FF923E'))
+    }
 
-        if (!isActiveMenuItem && !isTouch) {
-            this.currentHoverElement = element
-
-            this.userLeftElement = false
-            this.isHovering = true
-
-            // animate 
-            if (this.closeScaleAnimation) this.closeScaleAnimation.kill()
-
-            this.openScaleAnimation = gsap.fromTo(this.icon, { scale: 0 }, { scale: 1, duration: .2 })
-            gsap.to(this.icon, { x: event.pageX, y: event.pageY, duration: 0 })
+    updateBaseColor(color) {
+        if (!document.hidden) {
+            this.currentBaseColor = color
+            this.domElements.icon.style.borderColor = this.currentBaseColor
         }
     }
 
-    hideIcon(element) {
-        // animate
-        if (this.openScaleAnimation) this.openScaleAnimation.kill()
+    setupDefault() {
+        this.domElements.icon.style.borderWidth = '7px'
+        this.domElements.icon.style.height = '0'
+        this.domElements.icon.style.width = '0'
+        this.domElements.icon.style.borderColor = this.currentBaseColor
+        this.domElements.content.classList.add('hide')
+    }
 
-        this.closeScaleAnimation = gsap.to(this.icon, { scale: 0, duration: .2 })
+    setupPointer(element) {
+        this.domElements.icon.style.borderWidth = '4px'
+        this.domElements.icon.style.height = '12px'
+        this.domElements.icon.style.width = '12px'
+        this.domElements.icon.style.borderColor = element.color
+        this.domElements.icon.style.background = 'transparent'
+        this.domElements.content.classList.add('hide')
+    }
 
-        this.userLeftElement = true
+    setupCircle(element, domElement) {
+        if (!domElement.classList.contains('active-menu-item')) {
+            this.domElements.icon.style.borderWidth = '0'
+            this.domElements.icon.style.height = '55px'
+            this.domElements.icon.style.width = '55px'
+            this.domElements.icon.style.background = element.color
+            this.domElements.content.classList.remove('hide')
+        }
+    }
 
-        // update hovering state 
-        gsap.delayedCall(.2, () => {
-            if (this.currentHoverElement == element && this.userLeftElement) {
-                this.isHovering = false
-            }
-        })
+    setHoverColorSwitchHeight() {
+        this.domElements.colorSwitchContainer.style.height = this.scroll.aboutContainer.height + (window.innerHeight * (this.sizes.portrait ? 0.03 : 0.12)) + 'px'
+    }
+
+    resize() {
+        this.setHoverColorSwitchHeight()
     }
 }

@@ -4,7 +4,7 @@ import Experience from '../../Experience.js'
 export default class ContactScene {
 
     parameters = {
-        portraitY: -57.5,
+        portraitY: -58.5,
         landscapeY: -32,
         portraitScale: 1.7,
     }

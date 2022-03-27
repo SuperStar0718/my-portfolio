@@ -7,7 +7,7 @@ export default class ContactAnimation {
 
     parameters = {
         transitionDuration: 3,
-        characterPortraitY: 1.5,
+        characterPortraitY: .5,
         characterLandscapeY: 0.27,
         characterPortraitScale: 1.7
     }

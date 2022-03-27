@@ -15,6 +15,7 @@
     width: 500px;
     max-width: 50%;
     height: 540px;
+    box-sizing: border-box;
 }
 
 #contact-container input,textarea {
@@ -137,10 +138,15 @@
         align-items:  center;
         justify-content: flex-start;
         height: fit-content;
-        margin-bottom: 500px;
+        margin-bottom: 80vh;
+    }
+
+    #contact-header-container {
+        width: 580px;
+        max-width: 100%;
     }
 
     #contact-container {
-        max-width: calc(100% - 30px);
+        max-width: 100%;
     }
 }

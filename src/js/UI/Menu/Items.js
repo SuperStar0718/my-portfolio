@@ -126,7 +126,7 @@ export default class MenuItems {
         this.scrollIcon.kill()
 
         //Hover Icon
-        this.experience.ui.hoverIcon.hideIcon()
+        this.experience.ui.hoverIcon.setupDefault()
 
         if (item.onOpen) item.onOpen()
 

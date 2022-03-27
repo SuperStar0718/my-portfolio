@@ -44,6 +44,16 @@
     transform-origin: left;
 }
 
+#landing-cta-button {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 125ms;
+}
+
+#landing-cta-button:hover {
+    transform: scale(0.97);
+}
+
 /**---------------------------------------------------------------Responsive-----------------------------------------------------*/
 @media (max-aspect-ratio: 12/10) {
     #landing-content-svg {

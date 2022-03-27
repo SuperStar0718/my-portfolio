@@ -1,6 +1,11 @@
 import Experience from "../../Experience";
 
 export default class ContactAnimationEvents {
+
+    domElements = {
+        scrollContainer: document.getElementById('scroll-container')
+    }
+
     constructor() {
         this.experience = new Experience()
         this.scroll = this.experience.ui.scroll
@@ -11,10 +16,14 @@ export default class ContactAnimationEvents {
     }
 
     addScrollEvents() {
-        this.scroll.addEvent(this.sections.sections[2].y - (window.innerHeight / 2), 'down', () => {
+        this.scroll.addEvent(this.domElements.scrollContainer.clientHeight - (window.innerHeight * 2), 'down', () => {
+            this.animation.playIdle()
+        })
+
+        //Play transition
+        this.scroll.addEvent(this.domElements.scrollContainer.clientHeight - (window.innerHeight * 1.5), 'down', () => {
             setTimeout(() => this.animation.playTransition(), 500)
         })
-        this.scroll.addEvent(this.sections.sections[2].y - window.innerHeight, 'down', () => this.animation.playIdle())
     }
 
     resize() {

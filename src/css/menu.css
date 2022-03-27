@@ -41,13 +41,13 @@
 
 .active-menu-item {
     cursor: unset !important;
-    transform: translateX(24px);
+    transform: translateX(28px);
 }
 
 .active-menu-item::after {
     position: absolute;
-    height: 13px;
-    width: 13px;
+    height: 14px;
+    width: 14px;
     display: flex;
     border-radius: 50%;
     content: "";

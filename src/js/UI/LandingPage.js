@@ -131,6 +131,9 @@ export default class LandingPage extends EventEmitter {
                 this.character.checkForWireframe = 'down'
                 gsap.delayedCall(this.scrollAnimationDuration, () => this.character.checkForWireframe = null)
 
+                //update cursor color
+                gsap.delayedCall(.5, () => this.experience.ui.hoverIcon.updateBaseColor('#34bfff'))
+
                 this.trigger('hide')
                 this.lockReopening()
             }, 200)
@@ -194,6 +197,9 @@ export default class LandingPage extends EventEmitter {
             gsap.delayedCall(this.scrollAnimationDuration, () => this.character.checkForWireframe = null)
 
             this.contactAnimation.resetCharacter()
+
+            //update cursor color
+            this.experience.ui.hoverIcon.updateBaseColor('#FF923')
 
             this.trigger('show')
             this.lockReopening()
