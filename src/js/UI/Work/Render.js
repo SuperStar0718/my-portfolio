@@ -20,7 +20,7 @@ export default class WorkRender {
         this.items.forEach((item) => {
             this.domElements.renderContainer.insertAdjacentHTML('beforeend', `
             <div id="work-item-${item.id}" class="work-item-container column">
-                <img class="work-item-image" src="${item.image}">
+                <img class="work-item-image" src="${item.image}" alt="${item.alt}"/>
                 <div class="work-item-content-container">
                     <h3>${item.name}</h3>
                     <div class="work-item-tag-container row">
@@ -29,12 +29,13 @@ export default class WorkRender {
                     <span>${item.description}</span>
                 </div>
                 <div class="work-item-button-container row">
-                    <div id="work-item-gray-button-${item.id}" class="work-item-gray-button center">
+                    <div id="work-item-gray-button-${item.id}" class="work-item-gray-button center gray-hover" ${item.liveview ? '' : 'style="width: 100%"'}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"  class="code-icon">
                             <use href="#code-path"/>
                         </svg>
+                        ${item.liveview ? '' : '<span>Source Code</span>'}
                     </div>
-                    <div id="work-item-orange-button-${item.id}" class="work-item-orange-button small-button center">Live View</div>
+                    ${item.liveview ? `<div id="work-item-orange-button-${item.id}" class="work-item-orange-button small-button center orange-hover">Live View</div>` : ''}
                 </div>
             </div>
             `)
@@ -60,24 +61,20 @@ export default class WorkRender {
 
         // Inactive Container click
         container.addEventListener('click', () => {
-            if (container.classList.contains('work-inactive-item-container')) {
-                this.experience.ui.work.cards.currentItemIndex = -item.id + 4
-                this.experience.ui.work.cards.updatePositions()
-            }
+            this.experience.ui.work.cards.currentItemIndex = -item.id + 4
+            this.experience.ui.work.cards.updatePositions()
         })
 
         // Gray button click
         document.getElementById('work-item-gray-button-' + item.id).addEventListener('click', () => {
-            if (!container.classList.contains('work-inactive-item-container')) {
-                window.open(item.github, '_blank').focus()
-            }
+            window.open(item.github, '_blank').focus()
         })
 
         // orange button click
-        document.getElementById('work-item-orange-button-' + item.id).addEventListener('click', () => {
-            if (!container.classList.contains('work-inactive-item-container')) {
+        if (item.liveview) {
+            document.getElementById('work-item-orange-button-' + item.id).addEventListener('click', () => {
                 window.open(item.liveview, '_blank').focus()
-            }
-        })
+            })
+        }
     }
 } 

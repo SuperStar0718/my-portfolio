@@ -56,6 +56,11 @@ export default class HoverIcon {
             type: 'pointer',
             color: '#091434',
         },
+        {
+            class: '.work-item-container',
+            type: 'pointer',
+            color: '#091434',
+        },
     ]
 
     currentBaseColor = '#FF923E'
@@ -70,6 +75,9 @@ export default class HoverIcon {
         this.setHoverColorSwitchHeight()
         this.applyEventListeners()
         this.applyColorSwitchEventListeners()
+
+        //Fade In
+        gsap.fromTo(this.domElements.icon, {opacity: 0}, {opacity: 1, delay: 1.6})
 
         this.sizes.touch ? this.domElements.icon.classList.add('hide') : this.domElements.icon.classList.remove('hide')
         this.sizes.on('touch', () => this.domElements.icon.classList.add('hide'))
@@ -86,7 +94,7 @@ export default class HoverIcon {
 
                 // Mouseeenter 
                 domElement.addEventListener('mouseenter', () => {
-                    if(!this.sizes.touch) element.type == 'pointer' ? this.setupPointer(element) : this.setupCircle(element, domElement)
+                    if(!this.sizes.touch) element.type == 'pointer' ? this.setupPointer(element, domElement) : this.setupCircle(element, domElement)
                 })
 
                 // mouseleave 
@@ -124,13 +132,18 @@ export default class HoverIcon {
         this.domElements.content.classList.add('hide')
     }
 
-    setupPointer(element) {
-        this.domElements.icon.style.borderWidth = '4px'
-        this.domElements.icon.style.height = '12px'
-        this.domElements.icon.style.width = '12px'
-        this.domElements.icon.style.borderColor = element.color
-        this.domElements.icon.style.background = 'transparent'
-        this.domElements.content.classList.add('hide')
+    setupPointer(element, domElement) {
+        const isInactiveWorkItem = element.class == '.work-item-container' ? domElement.classList.contains('work-inactive-item-container') : true
+        const isntDisabledWorkNavigationButton = !domElement.classList.contains('work-disabled-navigation-button')
+
+        if(isInactiveWorkItem && isntDisabledWorkNavigationButton) {
+            this.domElements.icon.style.borderWidth = '5px'
+            this.domElements.icon.style.height = '18px'
+            this.domElements.icon.style.width = '18px'
+            this.domElements.icon.style.borderColor = element.color
+            this.domElements.icon.style.background = 'transparent'
+            this.domElements.content.classList.add('hide')
+        }
     }
 
     setupCircle(element, domElement) {

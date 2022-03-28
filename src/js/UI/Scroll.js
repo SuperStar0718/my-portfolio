@@ -6,7 +6,7 @@ export default class Scroll {
     parameters = {
         scrollStrength: 110,
         scrollDuration: .8,
-        multiplyScrollStrengthBy: 2.5,
+        multiplyScrollStrengthBy: 4,
     }
 
     scrollY = 0

@@ -5,7 +5,6 @@ export default class Sections {
     domElements = {
         aboutContainer: document.getElementById('about-section'),
         workContainer: document.getElementById('work-section'),
-        contactContainer: document.getElementById('')
     }
 
     sections = [

@@ -32,23 +32,10 @@
     height: 570px;
     max-width: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
     margin: 0 auto;
     margin-top: 100px;
 }
-
-/* #work-image-handler {
-    height: 100%;
-}
-
-#work-image {
-    position: absolute;
-    height: 350px;
-    transform: translateY(-250px);
-    top: 0;
-    left: 0;
-} */
 
 /**Cards*/
 .work-item-container {
@@ -60,14 +47,12 @@
     border-radius: 20px;
     box-shadow: 0px 30px 70px #93683325;
     width: 100%;
-    overflow: hidden;
 }
 
 .work-inactive-item-container {
-    opacity: 0.5; 
-    filter: grayscale(50%);
+    opacity: 0.4 !important; 
+    filter: grayscale(50%) !important;
     cursor: pointer;
-    /* height: 403px; */
 }
 
 .work-inactive-item-container * {
@@ -91,7 +76,6 @@
 .work-item-content-container {
     padding: 8px 16px;
     box-sizing: border-box;
-    padding-top: 8px;
     flex: 1;
 }
 
@@ -120,18 +104,16 @@
 .work-item-orange-button {
     width: 100%;
     padding: 9px !important; 
+    margin-left: 8px;
 }
 
 .work-item-gray-button {
     padding: 8px 14px;
     color: white;
-    background: #a7adb8;
     border-radius: 13px;
-    margin-right: 8px;
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
-    transition: 125ms;
 }
 
 .work-item-gray-button .code-icon {
@@ -140,8 +122,9 @@
     width: 28px;
 }
 
-.work-item-gray-button:hover {
-    transform: scale(.95);
+.work-item-gray-button span {
+    color: white;
+    margin-left: 10px;
 }
 
 /**---------------------------------------------------------------Navigation-----------------------------------------------------*/
@@ -152,29 +135,23 @@
 .work-navigation-button {
     height: 54px;
     width: 54px;
-    background: #FF923E;
     border-radius: 50%;
     margin: 20px;
     margin-bottom: 0;
     cursor: pointer;
     box-shadow: 0px 30px 70px #93683325;
-    transition: 0.125s ease-out;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.work-navigation-button:hover {
-    transform: scale(0.95);
-}
-
 .work-disabled-navigation-button {
-    background: #a7adb8;
+    background: #a7adb8 !important;
     cursor: unset !important;
 }
 
 .work-disabled-navigation-button:hover {
-    transform: unset !important;
+    background: #a7adb8 !important;
 }
 
 /**---------------------------------------------------------------Responsive-----------------------------------------------------*/

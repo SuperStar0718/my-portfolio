@@ -63,7 +63,7 @@ export default class Gestures extends EventEmitter {
         this.touchDistanceX = this.mTouchEndX - this.mTouchStartX
 
         const minimumVerticalTouchDistance = 10
-        const minimumHorizontalTouchDistance = 100
+        const minimumHorizontalTouchDistance = 50
 
         //check if minimum is reached for left and right
         if (this.touchDistanceX < -minimumHorizontalTouchDistance || this.touchDistanceX > minimumHorizontalTouchDistance) {

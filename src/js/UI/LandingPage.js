@@ -168,6 +168,7 @@ export default class LandingPage extends EventEmitter {
             gsap.to(this.background.material.uniforms.uOffset, { value: -2.75, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
 
             //Logo
+            gsap.killTweensOf(this.domElements.logoWhiteBackground)
             gsap.to(this.domElements.logoWhiteBackground, { y: 0, ease: Power2.easeInOut, duration: this.scrollAnimationDuration })
 
             //Renderer Clear color

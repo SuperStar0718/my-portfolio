@@ -16,16 +16,6 @@
     transform: rotate(180deg) translateY(20px);
 }
 
-.hideIntroTransition {
-    animation: hideIntroTransition ease-in .8s;
-    animation-fill-mode: forwards; 
-}
-
-@keyframes hideIntroTransition {
-    0% { bottom: -100%; left: -40%; }
-    100% { bottom: -350%; left: -60%; }
-}
-
 .hideTopTransition {
     animation: hideTopTransition ease-in .7s;
     animation-fill-mode: forwards; 
@@ -42,7 +32,7 @@
 }
 
 @keyframes showTransition {
-    0% { bottom: -300%; left: -60%; }
+    0% { bottom: -350%; left: -60%; }
     100% { bottom: -100%; left: -40%;}
 }
 

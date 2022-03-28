@@ -102,8 +102,10 @@ export default class WorkCards {
     updateNavigation() {
         if (this.currentItemIndex == 0) {
             this.domElements.nextButton.classList.add('work-disabled-navigation-button')
+            this.experience.ui.hoverIcon.setupDefault()
         } else if (this.currentItemIndex == 4) {
             this.domElements.backButton.classList.add('work-disabled-navigation-button')
+            this.experience.ui.hoverIcon.setupDefault()
         } else {
             this.domElements.nextButton.classList.remove('work-disabled-navigation-button')
             this.domElements.backButton.classList.remove('work-disabled-navigation-button')
