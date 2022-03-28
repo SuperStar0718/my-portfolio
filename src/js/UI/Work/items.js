@@ -5,7 +5,7 @@ export default [
         description: 'Group managment tool to optimize workflows',
         image: 'images/projects/join.png',
         tags: ['javascript', 'backend', 'html', 'css'],
-        liveview: 'https://www.google.com/',
+        liveview: 'https://join.david-hckh.com/',
         github: 'https://github.com/davidhckh/join',
         alt: 'Group management tool to optimize workflows portfolio project',
     },

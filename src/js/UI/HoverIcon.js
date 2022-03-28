@@ -61,6 +61,11 @@ export default class HoverIcon {
             type: 'pointer',
             color: '#091434',
         },
+        {
+            class: '.menu-legal-link',
+            type: 'pointer',
+            color: '#091434',
+        },
     ]
 
     currentBaseColor = '#FF923E'
