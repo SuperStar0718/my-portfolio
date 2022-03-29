@@ -1,6 +1,7 @@
 import Experience from '../Experience'
-import { gsap, Power2, Power4, Back } from 'gsap'
+import { gsap, Power2, Back } from 'gsap'
 import EventEmitter from '../Utils/EventEmitter'
+import { WebGLMultisampleRenderTarget } from 'three'
 
 export default class LandingPage extends EventEmitter {
 
@@ -26,21 +27,16 @@ export default class LandingPage extends EventEmitter {
 
         this.experience = new Experience()
         this.gestures = this.experience.gestures
-        this.camera = this.experience.camera
         this.room = this.experience.world.landingPage.room
-        this.roomShadow = this.experience.world.landingPage.roomShadow.model
         this.background = this.experience.world.background
         this.renderer = this.experience.renderer
-        this.about = this.experience.ui.about
         this.character = this.experience.world.character
-        this.waypoints = this.experience.waypoints
         this.scrollIcon = this.experience.ui.scrollIcon
         this.transiton = this.experience.ui.transition
         this.sounds = this.experience.sounds
         this.sizes = this.experience.sizes
         this.waypoints = this.experience.waypoints
         this.contactAnimation = this.experience.world.contact.animation
-        this.intro = this.experience.ui.intro
 
         //Hide Triggers
         this.gestures.on('scroll-down', () => this.hide())
@@ -54,13 +50,15 @@ export default class LandingPage extends EventEmitter {
     }
 
     onOrientationChange() {
-        if (this.visible) {
+        if (this.visible)
             this.waypoints.moveToWaypoint(this.sizes.portrait ? 'landing-page-portrait' : 'landing-page', false)
-        }
     }
 
     playOpeningAnimation(delay = 0) {
+        //content opacity
         gsap.fromTo(this.domElements.contentSvg, { opacity: 0 }, { opacity: 1, delay: delay, duration: .4 })
+
+        //content position and scale
         gsap.fromTo(this.domElements.contentSvg, { x: this.domElements.contentSvg.clientWidth * 0.6, scale: .6 }, { x: 0, scale: 1, delay: delay, duration: .6, ease: Back.easeOut.config(1.4) })
     }
 
@@ -78,7 +76,7 @@ export default class LandingPage extends EventEmitter {
             //Room Bounce
             this.room.bounceOut()
 
-            setTimeout(() => {
+            gsap.delayedCall(.2, () => {
                 // Landing Page Content
                 this.domElements.landingPage.style.top = '-100%'
 
@@ -98,7 +96,7 @@ export default class LandingPage extends EventEmitter {
                 gsap.to(this.domElements.logoWhiteBackground, { y: -window.innerHeight, ease: Power2.easeInOut, duration: this.scrollAnimationDuration })
 
                 //Render Clear Color
-                setTimeout(() => this.renderer.instance.setClearColor('#EFE7DC'), 700)
+                gsap.delayedCall(.7, () => this.renderer.instance.setClearColor('#EFE7DC'))
 
                 //About hologram animation
                 this.experience.ui.about.animations.hologramPlayed = false
@@ -115,17 +113,15 @@ export default class LandingPage extends EventEmitter {
                 gsap.delayedCall(.4, () => this.sounds.play('waterSplash'))
 
                 //play water idle animation 
-                setTimeout(() => {
-                    this.character.animations.play('waterIdle', 1)
-                }, 650)
+                gsap.delayedCall(.65, () => this.character.animations.play('waterIdle', 1))
 
                 //spawn bubbles
-                setTimeout(() => {
+                gsap.delayedCall(.05, () => {
                     const totalBubbles = 12
                     for (let i = 0; i < totalBubbles; i++) {
                         this.experience.world.lab.bubbles.spawnBubble(Math.random() * 1.8 + 1.2, 'back')
                     }
-                }, 50)
+                })
 
                 //Start wireframe material switch
                 this.character.body.checkForWireframe = 'down'
@@ -136,13 +132,15 @@ export default class LandingPage extends EventEmitter {
 
                 this.trigger('hide')
                 this.lockReopening()
-            }, 200)
+            })
         }
     }
 
     show() {
         if (this.domElements.scrollContainer.scrollTop == 0 && !this.visible && !this.isAnimating && !this.transiton.isShowing && this.reopeningEnabled) {
             this.visible = true
+
+            //sounds
             this.sounds.muteGroup('landing', false, 1)
             this.sounds.muteGroup('lab', true, 1)
 
@@ -168,7 +166,6 @@ export default class LandingPage extends EventEmitter {
             gsap.to(this.background.material.uniforms.uOffset, { value: -2.75, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
 
             //Logo
-            gsap.killTweensOf(this.domElements.logoWhiteBackground)
             gsap.to(this.domElements.logoWhiteBackground, { y: 0, ease: Power2.easeInOut, duration: this.scrollAnimationDuration })
 
             //Renderer Clear color
@@ -179,13 +176,6 @@ export default class LandingPage extends EventEmitter {
 
             // character animation
             this.character.animations.play('idle', .5)
-
-            //Restart calls
-            if (this.character.scrollIntervalCall)
-                this.character.intervals.scrollIntervalCall.restart(true)
-
-            if (this.character.leftDesktopIntervalCall)
-                this.character.intervals.leftDesktopIntervalCall.restart(true)
 
             // Set mouse position back to initial one
             this.experience.world.landingPage.mouse.moveToIdleStartPositon()
@@ -200,7 +190,7 @@ export default class LandingPage extends EventEmitter {
             this.contactAnimation.resetCharacter()
 
             //update cursor color
-            this.experience.ui.hoverIcon.updateBaseColor('#FF923')
+            this.experience.ui.hoverIcon.updateBaseColor('#FF923E')
 
             this.trigger('show')
             this.lockReopening()

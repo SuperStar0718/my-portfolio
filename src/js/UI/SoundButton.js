@@ -24,6 +24,7 @@ export default class Sound {
         //Event Listener
         this.domElements.button.addEventListener('click', () => this.active ? this.deactivate() : this.activate())
 
+        //Kill animation on hover
         this.domElements.button.addEventListener('mouseenter', () => this.killAnimation())
 
         // M Key
@@ -36,8 +37,12 @@ export default class Sound {
 
     startAnimation() {
         this.animationElements = document.querySelectorAll('.sound-button-animation')
+
         for (let i = 0; i < this.animationElements.length; i++) {
+            //scale
             gsap.fromTo(this.animationElements[i], { scale: 1 }, { scale: 2, repeat: -1, duration: 1, repeatDelay: .7, delay: i / 2, ease: Linear.easeNone })
+
+            //opacity
             gsap.fromTo(this.animationElements[i], { opacity: .175 }, { opacity: 0, repeat: -1, duration: 1, repeatDelay: .7, delay: i / 2, ease: Power4.easeIn })
         }
     }
@@ -45,6 +50,8 @@ export default class Sound {
     killAnimation() {
         this.animationElements.forEach((element) => {
             gsap.killTweensOf(element)
+
+            //hide animation elements
             gsap.to(element, {opacity: 0, duration: .1})
             gsap.to(element, {scale: 0, duration: 0, delay: .1})
         })

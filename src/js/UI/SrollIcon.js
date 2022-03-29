@@ -12,7 +12,6 @@ export default class ScrollIcon {
         this.touchIcon = document.querySelectorAll('.scroll-touch-icon')[index]
 
         this.experience = new Experience()
-        this.gestures = this.experience.gestures
         this.sizes = this.experience.sizes
 
         this.sizes.on('touch', () => this.setupTouchIcon())
@@ -21,22 +20,22 @@ export default class ScrollIcon {
         this.sizes.touch ? this.setupTouchIcon() : this.setupScrollIcon()
     }
 
-    setupScrollIcon() {
-        console.log('hi')
-    }
-
     setupTouchIcon() {
+        //update classes
         this.border.classList.add('hide')
         this.touchIcon.classList.remove('hide')
 
+        //update animation
         gsap.killTweensOf(this.wheel)
         gsap.fromTo(this.touchIcon, { y: 0 }, { y: 6, duration: 1, ease: Power3.easeOut, repeat: -1, yoyo: true })
     }
 
     setupScrollIcon() {
+        //update classes
         this.border.classList.remove('hide')
         this.touchIcon.classList.add('hide')
 
+        //update animation
         gsap.killTweensOf(this.touchIcon)
         gsap.fromTo(this.wheel, { y: 0 }, { y: 6, duration: 1, ease: Power3.easeIn, repeat: -1, yoyo: true })
     }
@@ -52,10 +51,10 @@ export default class ScrollIcon {
 
             this.visible = false
 
-            setTimeout(() => {
+            gsap.delayedCall(.3, () => {
                 gsap.killTweensOf(this.wheel)
                 this.icon.classList.add('hide')
-            }, 300)
+            })
         }
     }
 }

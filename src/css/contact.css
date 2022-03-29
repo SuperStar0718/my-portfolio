@@ -139,6 +139,7 @@
         justify-content: flex-start;
         height: fit-content;
         margin-bottom: 80vh;
+        padding: 0;
     }
 
     #contact-header-container {

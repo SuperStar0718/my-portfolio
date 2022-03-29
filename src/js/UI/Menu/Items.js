@@ -100,9 +100,7 @@ export default class MenuItems {
     clearAllActiveItems() {
         const allItems = document.querySelectorAll('.menu-item')
 
-        allItems.forEach((item) => {
-            item.classList.remove('active-menu-item')
-        })
+        allItems.forEach((item) => item.classList.remove('active-menu-item'))
     }
 
     openItem(item) {
@@ -112,12 +110,12 @@ export default class MenuItems {
         if (!this.transition.isShowing && !item.elements[0].classList.contains('active-menu-item') && !(this.landingPage.visible && item.name == 'home')) {
             //start transition
             this.transition.show()
-            setTimeout(() => {
+            gsap.delayedCall(.7, () => {
                 this.transition.hide()
 
                 //setup item
                 this.setupItem(item)
-            }, 700)
+            })
         }
     }
 
@@ -171,6 +169,7 @@ export default class MenuItems {
         this.moveWithoutTransition(this.domElements.scrollContainer, 'top', '100%')
         gsap.to(this.domElements.scrollContainer, { y: 0, duration: 0 })
 
+        //clearColor
         this.renderer.instance.setClearColor('#F5EFE6')
 
         //Lab Background
@@ -195,6 +194,7 @@ export default class MenuItems {
 
         this.contactAnimation.resetCharacter()
 
+        //mute groups
         this.sounds.muteGroup('landing', true)
         this.sounds.muteGroup('lab', false)
 
@@ -202,8 +202,10 @@ export default class MenuItems {
 
         //Character
         if (item.name == 'contact') {
-            this.contactAnimation.playIdle()
-            setTimeout(() => this.contactAnimation.playTransition(), 1000)
+            if (!this.sizes.portrait) {
+                this.contactAnimation.playIdle()
+                gsap.delayedCall(1, () => this.contactAnimation.playTransition())
+            }
         } else if (item.name == 'work') {
             this.contactAnimation.playIdle()
         } else {
@@ -233,6 +235,8 @@ export default class MenuItems {
         //Content positions
         this.moveWithoutTransition(this.domElements.scrollContainer, 'left', '0')
         this.moveWithoutTransition(this.domElements.landingPageContent, 'left', '0')
+
+        //Menu position
         this.moveWithoutTransition(this.domElements.menuContainer, 'right', this.sizes.portrait ? '-100%' : 'calc(-350px - 10vw)')
 
         //Logo white background

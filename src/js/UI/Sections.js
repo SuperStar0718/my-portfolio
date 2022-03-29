@@ -12,19 +12,19 @@ export default class Sections {
             name: 'about',
             y: 0,
             container: document.getElementById('about-section'),
-            offset: 0,
+            offset: () => 0,
         },
         {
             name: 'work',
             y: 0,
             container: document.getElementById('work-section'),
-            offset: 20,
+            offset: () => 20,
         },
         {
             name: 'contact',
             y: 0,
             container: document.getElementById('contact-section'),
-            offset: 0,
+            offset: () => this.sizes.portrait ? -80 : 0,
         }
     ]
 
@@ -38,7 +38,6 @@ export default class Sections {
     }
 
     setSectionsY() {
-        this.setContactOffset()
         this.sections.forEach((section) => {
             //Reset Y
             section.y = 0
@@ -54,13 +53,8 @@ export default class Sections {
             section.y += this.getMarginTop(section.container)
             
             //Add offset
-            section.y += section.offset
+            section.y += section.offset()
         })
-    }
-
-    setContactOffset() {
-        const contactSection = this.sections.find((section) => section.name === 'contact') 
-        contactSection.offset = this.sizes.portrait ? -80 : 0
     }
 
     getAbsoluteHeight(element) {

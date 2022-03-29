@@ -19,7 +19,6 @@ export default class ContactAnimationEvents {
     constructor() {
         this.experience = new Experience()
         this.scroll = this.experience.ui.scroll
-        this.sections = this.experience.ui.sections
         this.animation = this.experience.world.contact.animation
         this.sizes = this.experience.sizes
 
@@ -27,7 +26,7 @@ export default class ContactAnimationEvents {
     }
 
     addScrollEvents() {
-
+        //Play idle
         this.scroll.addEvent(this.sizes.portrait ? this.portraitTriggers.idle() : this.landscapeTriggers.idle(), 'down', () => {
             this.animation.playIdle()
         })

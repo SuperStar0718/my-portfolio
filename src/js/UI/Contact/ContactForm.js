@@ -40,6 +40,7 @@ export default class ContactForm {
         this.initTabEvents()
     }
 
+    //Focus next on tab press
     initTabEvents() {
         window.addEventListener('keydown', () => {
             if (event.keyCode == 9) {
@@ -56,12 +57,12 @@ export default class ContactForm {
     }
 
     focusNext(currentIndex) {
+        //check if contact form is visible
         if (this.scroll.scrollY + (window.innerHeight / 3) >= this.sections.sections[2].y) {
+            //get next input
             const nextInput = this.fields[currentIndex + 1 == this.fields.length ? 0 : currentIndex + 1].input
 
-            setTimeout(() => {
-                nextInput.focus()
-            })
+            setTimeout(() => nextInput.focus())
         }
     }
 
@@ -82,34 +83,29 @@ export default class ContactForm {
         })
     }
 
-    addResultButtonEventListener() {
-        this.domElements.resultButton.addEventListener('click', () => {
-            this.showContainer('form')
-
-            if (this.domElements.errorLines[0].classList.contains('hide')) {
-                this.clearInputs()
-            }
-        })
-    }
-
     hideAllErrors() {
         this.fields.forEach((field) => this.hideError(field))
     }
 
     hideError(field) {
+        //get error label
         const errorLabel = document.querySelectorAll('.error-label')[this.fields.indexOf(field)]
-        errorLabel.classList.add('hide')
 
+        //update error classes
+        errorLabel.classList.add('hide')
         field.container.classList.remove('error-container')
     }
 
     showError(field) {
+        //get error label
         const errorLabel = document.querySelectorAll('.error-label')[this.fields.indexOf(field)]
-        errorLabel.classList.remove('hide')
 
+        //update error classes
+        errorLabel.classList.remove('hide')
         field.container.classList.add('error-container')
     }
 
+    //mimimum length of name is 4
     checkNameInput() {
         const field = this.fields[0]
 
@@ -130,6 +126,7 @@ export default class ContactForm {
         }
     }
 
+    //minimum length of message is 10
     checkMessageInput() {
         const field = this.fields[2]
 
@@ -142,7 +139,11 @@ export default class ContactForm {
 
     async sendMail() {
         const formData = new FormData()
+
+        //name
         formData.append('name', this.fields[0].input.value)
+
+        //message
         formData.append('message',
             `Email: ${this.fields[1].input.value}
             
@@ -151,7 +152,10 @@ export default class ContactForm {
             ${this.fields[2].input.value}`
         )
 
+        //container
         this.showContainer('loading')
+
+        //await fetch than show result
         this.showResult(await fetch('https://david-hckh.com/dvPUgZZmtUufcKM59gv9zX4NiNKQqGs5.php', { method: 'POST', body: formData }))
     }
 
@@ -164,7 +168,10 @@ export default class ContactForm {
     showContainer(name) {
         this.hideAllContainers()
 
+        //Fade in new container
         gsap.fromTo(this.domElements[name + 'Container'], { opacity: 0 }, { opacity: 1, duration: .2 })
+
+        //shown new container
         this.domElements[name + 'Container'].classList.remove('hide')
     }
 
@@ -173,16 +180,30 @@ export default class ContactForm {
 
         this.showContainer('result')
 
+        //text
         this.domElements.resultMessage.innerHTML = statusCode == 2 ?
             `<h4>Your message has been sent.</h4><span>I'll get back to you as soon as possible.</span>` :
             `<h4>Oops. An error occurred.</h4><span>Please try again.</span>`
 
+        //button text
         this.domElements.resultButton.innerHTML = statusCode == 2 ? 'Cool!' : 'Try again'
 
+        //icon
         statusCode == 2 ? this.showSuccessIcon() : this.showErrorIcon()
     }
 
+    addResultButtonEventListener() {
+        this.domElements.resultButton.addEventListener('click', () => {
+            this.showContainer('form')
+
+            //clear inputs if now error occurred
+            if (this.domElements.errorLines[0].classList.contains('hide'))
+                this.clearInputs()
+        })
+    }
+
     showSuccessIcon() {
+        //Update visiblity
         this.domElements.successLine.classList.remove('hide')
         this.domElements.errorLines.forEach((line) => line.classList.add('hide'))
 
@@ -190,6 +211,7 @@ export default class ContactForm {
     }
 
     showErrorIcon() {
+        //Update visiblity
         this.domElements.successLine.classList.add('hide')
         this.domElements.errorLines.forEach((line) => line.classList.remove('hide'))
 
@@ -216,5 +238,4 @@ export default class ContactForm {
             gsap.fromTo(line.style, { strokeDashoffset: lineLength }, { strokeDashoffset: 0, duration: duration, delay: delay })
         }
     }
-
 }

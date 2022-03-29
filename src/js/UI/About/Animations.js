@@ -24,21 +24,6 @@ export default class AboutAnimations {
         aboutSection: document.getElementById('about-section')
     }
 
-    animatedSpans = {
-        infoGermany: {
-            domElement: document.getElementById('about-header-germany'),
-            text: 'Germany'
-        },
-        infoDavid: {
-            domElement: document.getElementById('about-header-david'),
-            text: 'David'
-        },
-        info23: {
-            domElement: document.getElementById('about-header-23'),
-            text: '23'
-        },
-    }
-
     constructor() {
         this.experience = new Experience()
         this.skills = this.experience.ui.about.render.skills
@@ -55,11 +40,14 @@ export default class AboutAnimations {
         this.lines = []
 
         for (let i = 0; i < lines.length; i++) {
+            //get line length
             const line = lines[i]
             const length = line.getTotalLength()
 
+            //push to lines
             this.lines.push({ line: line, length: length })
 
+            //set stroke dash array
             line.style.strokeDasharray = length
         }
     }
@@ -81,29 +69,28 @@ export default class AboutAnimations {
             this.domElements.profilePictureGradient.style.transform = 'translateY(0)'
 
             gsap.delayedCall(delay, () => {
-                this.animateInfoBox()
+                this.animateHeaderBox()
                 gsap.delayedCall(this.parameters.skillsAdditionalDelay, () => this.animateSkillsBox())
                 gsap.delayedCall(this.parameters.aboutAdditionalDelay, () => this.animateAboutBox())
             })
         }
     }
 
-    animateInfoBox() {
+    animateHeaderBox() {
         // Lines
         this.fillLine(0, .25)
         this.fillLine(1, .25)
         this.fillLine(2, .45)
         this.fillLine(3, .45)
 
-        // Span Headers
-        gsap.fromTo(document.getElementById('about-header-name'), { opacity: 0 }, { opacity: 1, duration: .2, delay: .2 })
-        gsap.fromTo(document.getElementById('about-header-age'), { opacity: 0 }, { opacity: 1, duration: .2, delay: .35 })
-        gsap.fromTo(document.getElementById('about-header-from'), { opacity: 0 }, { opacity: 1, duration: .2, delay: .5 })
-
         // Spans
-        this.animateSpan(this.animatedSpans.infoDavid, 0.3)
-        this.animateSpan(this.animatedSpans.info23, 0.45)
-        this.animateSpan(this.animatedSpans.infoGermany, 0.6)
+        const upperTexts = document.querySelectorAll('.about-header-upper-text')
+        const lowerTexts = document.querySelectorAll('.about-header-lower-text')
+
+        for(let i = 0; i < upperTexts.length; i++) {
+            gsap.fromTo(upperTexts[i], { opacity: 0 }, { opacity: 1, duration: .4, delay: .4 + i / 10 })
+            gsap.fromTo(lowerTexts[i], { opacity: 0 }, { opacity: 1, duration: .4, delay: .4 + i / 10 })
+        }
 
         // Backgrounds
         gsap.fromTo(document.getElementById('about-header-background'), { opacity: 0 }, { opacity: 1, duration: 0.7, ease: Power2.easeIn, delay: .35 })
@@ -187,7 +174,6 @@ export default class AboutAnimations {
         }
     }
 
-
     // ------------------------ Animations ---------------------------------------------------------------------------------------------- 
 
     fadeInHologramUI(delay) {
@@ -201,24 +187,6 @@ export default class AboutAnimations {
 
         //fill animation
         gsap.fromTo(lineArray.line, { strokeDashoffset: lineArray.length }, { strokeDashoffset: 0, duration: .6, delay: delay })
-    }
-
-    animateSpan(span, delay, speed = 50) {
-        let currentString = ''
-        span.domElement.innerHTML = ''
-
-        setTimeout(() => {
-            const newCharacterInterval = setInterval(() => {
-                // add new letter to current string
-                currentString += span.text.charAt(currentString.length)
-
-                //update inner html to current string
-                span.domElement.innerHTML = currentString
-
-                // clear interval 
-                if (currentString.length == span.text.length) clearInterval(newCharacterInterval)
-            }, speed)
-        }, delay * 1000)
     }
 
     resize() {

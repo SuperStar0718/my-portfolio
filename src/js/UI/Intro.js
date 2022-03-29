@@ -22,6 +22,7 @@ export default class Intro {
         this.gestures = this.experience.gestures
         this.character = this.experience.world.character
 
+        //Play Intro
         gsap.delayedCall(1.2, () => this.playIntro())
     }
 

@@ -1,4 +1,4 @@
-# Three.js Journey
+# Portfolio 2022
 
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).

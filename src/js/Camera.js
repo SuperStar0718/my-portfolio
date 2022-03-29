@@ -7,7 +7,7 @@ export default class Camera {
 
     parallax = {
         intensity: 0.35,
-        speed: 4,
+        speed: 5,
         enabled: true
     }
 

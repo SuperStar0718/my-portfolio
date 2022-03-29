@@ -10,6 +10,7 @@ export default class Scroll {
     }
 
     scrollY = 0
+    events = []
 
     domElements = {
         scrollContainer: document.getElementById('scroll-container'),
@@ -17,7 +18,6 @@ export default class Scroll {
     }
 
     constructor() {
-
         this.experience = new Experience()
         this.camera = this.experience.camera
         this.sizes = this.experience.sizes
@@ -33,8 +33,6 @@ export default class Scroll {
         //Hide scroll container
         this.domElements.scrollContainer.style.top = '100%'
         setTimeout(() => this.domElements.scrollContainer.classList.add('scroll-container-transitions'))
-
-        this.events = []
 
         this.setCameraRange()
         this.setAboutContainerDetails()
@@ -63,15 +61,18 @@ export default class Scroll {
     onOrientationChange() {
         this.setCameraRange()
 
-        if (!this.landingPage.visible) {
+        if (!this.landingPage.visible)
             this.moveToTop()
-        }
     }
 
     moveToTop() {
         this.waypoints.moveToWaypoint((this.sizes.portrait ? 'scroll-start-portrait' : 'scroll-start'), false)
+
+        //Scroll
         this.scrollY = 0
         this.performScroll(0)
+
+        //reset
         this.experience.ui.header.show()
         this.experience.ui.about.animations.playHologramAnimation()
         this.experience.ui.about.animations.resetCharacterToPosition()
@@ -88,9 +89,10 @@ export default class Scroll {
 
     setAboutContainerDetails() {
         this.aboutContainer = {}
-        this.aboutContainer.dom = document.getElementById('about-section')
-        this.aboutContainer.offset = this.aboutContainer.dom.clientHeight - window.innerHeight
-        this.aboutContainer.height = this.aboutContainer.dom.clientHeight
+
+        this.aboutContainer.domElement = document.getElementById('about-section')
+        this.aboutContainer.offset = this.aboutContainer.domElement.clientHeight - window.innerHeight
+        this.aboutContainer.height = this.aboutContainer.domElement.clientHeight
     }
 
     addEvent(height, direction, task) {
@@ -113,9 +115,8 @@ export default class Scroll {
         this.gestures.on('touch-' + direction, () => checkEvent())
 
         const checkReset = () => {
-            if ((direction === 'up' ? height < this.scrollY : height > this.scrollY) && this.events[index].played) {
+            if ((direction === 'up' ? height < this.scrollY : height > this.scrollY) && this.events[index].played)
                 this.events[index].played = false
-            }
         }
 
         //check if unique -> listen to opposite direction to make event playable again
@@ -140,7 +141,8 @@ export default class Scroll {
 
                     this.performScroll()
 
-                    if(this.scrollIcon.visible) this.scrollIcon.kill()
+                    if (this.scrollIcon.visible)
+                        this.scrollIcon.kill()
                 }
             }
 
@@ -225,6 +227,7 @@ export default class Scroll {
         this.setAboutContainerDetails()
         this.setLogoOverlayHeight()
 
-        if (!this.landingPage.visible) this.performScroll(0)
+        if (!this.landingPage.visible)
+            this.performScroll(0)
     }
 }

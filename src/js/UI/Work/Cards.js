@@ -1,5 +1,5 @@
 import Experience from '../../Experience.js'
-import { gsap, Back} from 'gsap'
+import { gsap, Back } from 'gsap'
 
 export default class WorkCards {
     positionStyles = [
@@ -20,12 +20,12 @@ export default class WorkCards {
         nextButton: document.getElementById('work-next-button'),
     }
 
+    currentItemIndex = 2
+
     constructor() {
         this.experience = new Experience()
         this.gestures = this.experience.gestures
         this.render = this.experience.ui.work.render
-
-        this.currentItemIndex = 2
 
         this.addButtonEventListeners()
         this.initSwipes()
@@ -34,20 +34,17 @@ export default class WorkCards {
 
     addButtonEventListeners() {
         // back button event listener
-        this.domElements.backButton.addEventListener('click', () => {
-            this.moveBack()
-        })
+        this.domElements.backButton.addEventListener('click', () => this.moveBack())
 
         // next button event listener
-        this.domElements.nextButton.addEventListener('click', () => {
-            this.moveForward()
-        })
+        this.domElements.nextButton.addEventListener('click', () => this.moveForward())
     }
 
     initSwipes() {
         this.gestures.on('swipe-right', () => this.swipe('right'))
         this.gestures.on('swipe-left', () => this.swipe('left'))
 
+        //Check if the current element is focused during swipe
         this.domElements.section.addEventListener('touchend', () => {
             setTimeout(() => this.isCurrentSwipeElement = false)
         })
@@ -57,9 +54,8 @@ export default class WorkCards {
     }
 
     swipe(direction) {
-        if(this.isCurrentSwipeElement) {
+        if (this.isCurrentSwipeElement) 
             direction == 'right' ? this.moveForward() : this.moveBack()
-        }
     }
 
     moveBack() {
@@ -93,8 +89,8 @@ export default class WorkCards {
 
         //prevent too fast switching
         this.itemsAreMoving = true
-        setTimeout(() => this.itemsAreMoving = false, 400)
-
+        gsap.delayedCall(.4, () => this.itemsAreMoving = false)
+        
         this.updateNavigation()
     }
 

@@ -44,17 +44,17 @@ export default class MenuMain extends EventEmitter {
     }
 
     onOrientationChange() {
+        //always clsoe on orientation change
         if (this.visible)
             this.switchVisiblity(true, true)
 
+        //Menu position
         this.domElements.menuContainer.style.right = this.sizes.portrait ? '-100%' : 'calc(-350px - 10vw)'
     }
 
     menuButtonClick() {
         //Button Event Listener
-        this.domElements.menuButton.addEventListener('click', () => {
-            this.switchVisiblity()
-        })
+        this.domElements.menuButton.addEventListener('click', () => this.switchVisiblity())
     }
 
     switchVisiblity(withCamera = true, force = false) {
@@ -71,7 +71,9 @@ export default class MenuMain extends EventEmitter {
             //Button
             this.visible ? this.crossMenuButton() : this.resetMenuButton()
 
-            if (withCamera && !this.sizes.portrait) this.landingPage.visible ? this.landingPageTransition() : this.scrollContainerTransition()
+            //start transition
+            if (withCamera && !this.sizes.portrait)
+                this.landingPage.visible ? this.landingPageTransition() : this.scrollContainerTransition()
 
             //Prevent too fast reopening
             this.isAnimating = true
@@ -100,10 +102,11 @@ export default class MenuMain extends EventEmitter {
 
             this.domElements.scrollContainer.style.left = '0'
         } else {
-            //Show Menu
+            //Is lab or contact scene? focues depdening on result
             const labScene = this.scroll.scrollY <= this.domElements.aboutSection.clientHeight + (window.innerHeight * 0.12)
-            this.setInitialPositions()
             labScene ? this.focusLabScene() : this.focusContactScene()
+
+            this.setInitialPositions()
 
             this.domElements.scrollContainer.style.left = '-100%'
         }
@@ -117,10 +120,11 @@ export default class MenuMain extends EventEmitter {
     }
 
     returnToInitialPosition() {
-        //Waypoint
+        //camera
         this.waypoints.moveToWaypoint('scroll-start')
         gsap.to(this.camera.instance.position, { y: this.initials.cameraY, duration: .9, ease: Power2.easeInOut })
 
+        //return elements to positon
         gsap.to(this.domElements.scrollContainer, { y: -this.initials.scrollY, duration: .9, ease: Power2.easeInOut })
         gsap.to(this.domElements.logoWhiteBackground, { y: this.initials.logoBackgroundY, duration: .9, ease: Power2.easeInOut })
         gsap.to(this.labBackground.material.uniforms.uOffset, { value: this.initials.backgroundY, duration: .9, ease: Power2.easeInOut })
@@ -145,6 +149,7 @@ export default class MenuMain extends EventEmitter {
         //sound
         this.sounds.muteGroup('lab', false, .4)
 
+        //rest character if needed
         if (this.character.body.model.position.y != -18.95)
             this.experience.ui.about.animations.resetCharacterToPosition()
     }
@@ -175,9 +180,8 @@ export default class MenuMain extends EventEmitter {
                 this.switchVisiblity(false)
         })
         this.gestures.on('scroll', () => {
-            if (this.visible) {
+            if (this.visible)
                 this.switchVisiblity()
-            }
         })
     }
 
