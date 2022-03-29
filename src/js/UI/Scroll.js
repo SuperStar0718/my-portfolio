@@ -190,7 +190,7 @@ export default class Scroll {
 
         if (scrollPercentage >= 0) {
             //Background Plane
-            gsap.to(this.background.material.uniforms.uOffset, { value: (this.background.height * 1.4) * scrollPercentage, duration: duration, ease: Power2.easeOut })
+            gsap.to(this.background.material.uniforms.uOffset, { value: ((this.background.height * 1.9) * scrollPercentage) - .75, duration: duration, ease: Power2.easeOut })
 
             //Camera
             gsap.to(this.camera.instance.position, { y: (this.cameraRange.bottom - this.cameraRange.top) * scrollPercentage + this.cameraRange.top, duration: duration, ease: Power2.easeOut })

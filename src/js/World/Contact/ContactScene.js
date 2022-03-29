@@ -32,6 +32,7 @@ export default class ContactScene {
     }
 
     onOrientationChange() {
+        //Position and scale depening on orientation
         if (this.sizes.portrait) {
             this.model.position.y = this.parameters.portraitY
             this.model.scale.set(this.parameters.portraitScale, this.parameters.portraitScale, this.parameters.portraitScale)

@@ -7,6 +7,7 @@ export default class Camera {
 
     parallax = {
         intensity: 0.35,
+        speed: 4,
         enabled: true
     }
 
@@ -37,8 +38,6 @@ export default class Camera {
     // set cursor for parallax effect 
     setCursor() {
         this.cursor = {}
-        this.cursor.x = 0
-        this.cursor.y = 0
 
         window.addEventListener('mousemove', (event) => {
             this.cursor.x = event.clientX / this.sizes.width - 0.5
@@ -65,9 +64,10 @@ export default class Camera {
         const parallaxY = -this.cursor.y * this.parallax.intensity
         const deltaTime = this.time.delta / 1000
 
-        const byX = (parallaxX - this.cameraParallaxGroup.position.x) * 4 * deltaTime
-        const byY = (parallaxY - this.cameraParallaxGroup.position.y) * 4 * deltaTime
+        const byX = (parallaxX - this.cameraParallaxGroup.position.x) * this.parallax.speed * deltaTime
+        const byY = (parallaxY - this.cameraParallaxGroup.position.y) * this.parallax.speed * deltaTime
 
+        //Update camera position
         if (byX < 0.05 && byX > -0.05) this.cameraParallaxGroup.position.x += byX
         if (byY < 0.05 && byY > -0.05) this.cameraParallaxGroup.position.y += byY
     }

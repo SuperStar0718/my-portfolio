@@ -179,11 +179,11 @@ export default class AboutAnimations {
     }
 
     resetCharacterToPosition() {
-        if (!this.experience.ui.landingPage.visible && this.character.model.position.y != -18.95 && !this.experience.ui.landingPage.isAnimating) {
-            this.character.model.position.y = -18.95
-            this.character.animation.play('waterIdle', 0)
-            this.character.updateWireframe('down')
-            this.character.model.scale.set(1, 1, 1)
+        if (!this.experience.ui.landingPage.visible && this.character.body.model.position.y != -18.95 && !this.experience.ui.landingPage.isAnimating) {
+            this.character.body.model.position.y = -18.95
+            this.character.animations.play('waterIdle', 0)
+            this.character.body.updateWireframe('down')
+            this.character.body.model.scale.set(1, 1, 1)
         }
     }
 

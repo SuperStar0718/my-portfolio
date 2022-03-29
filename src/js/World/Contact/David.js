@@ -18,6 +18,7 @@ export default class David {
         this.sizes.on('landscape', () => this.onOrientationChange())
     }
 
+    //position and scale depening on orientation
     onOrientationChange() {
         if (this.sizes.portrait) {
             this.sprite.scale.set(2.64, 5.05)

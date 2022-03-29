@@ -5,7 +5,7 @@ import shadowFragment from '../../shaders/shadow/fragment.glsl'
 
 export default class LabShadow {
     parameters = {
-        color: '#002152'
+        color: '#00204d'
     }
 
     constructor() {

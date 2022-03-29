@@ -17,9 +17,11 @@ export default class Lab {
         }
 
         this.setModel()
-        this.setPosition()
         this.setMaterial()
         this.setBottomMaterial()
+
+        //set position with delay to prerender model
+        setTimeout(() => this.setPosition())
     }
 
     setModel() {
@@ -32,7 +34,7 @@ export default class Lab {
 
     setPosition() {
         this.model.position.y -= 19.9
-        this.model.scale.set(0.95, 0.95, 0.95)
+        this.model.scale.set(0.97, 0.97, 0.97)
     }
 
     // Set room baked material 

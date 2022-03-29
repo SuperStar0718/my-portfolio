@@ -1,24 +1,17 @@
 import * as THREE from 'three'
 import Experience from '../../Experience'
+import { gsap, Power2, Power1 } from 'gsap'
 
 export default class Animations {
-    constructor(model) {
+    constructor() {
         this.experience = new Experience()
         this.resources = this.experience.resources
         this.time = this.experience.time
         this.debug = this.experience.debug
         this.chair = this.experience.world.landingPage.room.chair
-
         this.resource = this.resources.items.characterModel
-
-        this.model = model
-
-        // debug 
-        if (this.debug.active) {
-            this.debugFolder = this.debug.ui.folders.find((folder) => folder._title === 'Character').addFolder('Animations').close()
-
-            this.debugAnimations()
-        }
+        this.model = this.resource.scene
+        this.face = this.experience.world.character.face
 
         this.setAnimations()
     }
@@ -33,12 +26,6 @@ export default class Animations {
 
     defineActions() {
         this.actions = {}
-
-        //Intro fall down action
-        this.actions.introFallDown = this.mixer.clipAction(this.resource.animations.find((animation) => animation.name === 'intro-fall-down'))
-        this.actions.introFallDown.repetitions = 1
-        this.actions.introFallDown.clampWhenFinished = true
-        this.actions.introFallDown.allowedOutsideLanding = false
 
         // Left desktop action 
         this.actions.leftDesktopAction = this.mixer.clipAction(this.resource.animations.find((animation) => animation.name === 'left-desktop-action'))
@@ -87,35 +74,60 @@ export default class Animations {
 
         if (!oldAction._clip.name != newAction._clip.name && (newAction.allowedOutsideLanding || this.experience.ui.landingPage.visible)) {
 
-            newAction
-                .reset()
-                .play()
-
+            //transition
+            newAction.reset().play()
             oldAction.crossFadeTo(newAction, transitionDuration)
 
+            //update current
             this.actions.current = newAction
         } else if (this.debug.active) {
             console.log('Illegal animation.')
         }
     }
 
-    debugAnimations() {
-        const debugObject = {
-            playIdle: () => { this.play('idle') },
-            playOpening: () => { this.play('wave') },
-            playLeftDesktopAction: () => { this.play('leftDesktopAction') },
-            playWaterIdle: () => { this.play('waterIdle') },
-        }
-        
-        this.debugFolder.add(debugObject, 'playIdle').name('Play Idle')
-        this.debugFolder.add(debugObject, 'playOpening').name('Play Wave')
-        this.debugFolder.add(debugObject, 'playLeftDesktopAction').name('Play Left Desktop')
-        this.debugFolder.add(debugObject, 'playWaterIdle').name('Play Water Idle')
+    /**
+    * Intro
+    */
+    // play wave animation when loading-transition is done
+    // change to idle afterwards
+    playIntroAnimation() {
+        //Fall down
+        gsap.fromTo(this.model.position, { y: 2 }, {
+            y: -5.7, duration: 1.1, ease: Power2.easeIn, onComplete: () => {
+                //Face
+                this.face.material.map = this.face.textures.default
+
+                //chair rotation
+                gsap.to(this.chair.rotation, { x: .12, z: -.12, ease: Power1.easeOut, duration: .18, yoyo: true, repeat: 1 })
+            }
+        })
+
+        //Face
+        this.face.material.map = this.face.textures.scared
+
+        //When arrived at chair
+        gsap.delayedCall(1, () => {
+            // faces 
+            gsap.delayedCall(.5, () => {
+                this.face.updateFace('smile')
+
+                this.experience.world.character.intervals.initBlink()
+            })
+
+            gsap.delayedCall(this.actions.wave._clip.duration - 1.5, () => {
+                if (this.experience.ui.landingPage.visible)
+                    this.face.updateFace('default')
+            })
+        })
+
+        //Character animation, idle afterwards
+        gsap.delayedCall(0, () => this.play('wave'))
+        gsap.delayedCall(this.actions.wave._clip.duration, () => this.experience.world.character.intervals.idle())
     }
 
     update() {
         if (this.mixer) {
-            if (this.time.delta < 100) this.mixer.update(this.time.delta * 0.001)
+            if (this.time.delta < 50) this.mixer.update(this.time.delta * 0.001)
         }
     }
 }

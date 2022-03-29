@@ -1,5 +1,5 @@
 import Experience from '../Experience'
-import { gsap, Back, Power2 } from 'gsap'
+import { gsap, Back } from 'gsap'
 
 export default class Intro {
 
@@ -22,7 +22,7 @@ export default class Intro {
         this.gestures = this.experience.gestures
         this.character = this.experience.world.character
 
-        setTimeout(() => this.playIntro(), 1200)
+        gsap.delayedCall(1.2, () => this.playIntro())
     }
 
     onButtonClick() {
@@ -43,8 +43,8 @@ export default class Intro {
         this.landingPage.playOpeningAnimation(.62)
 
         this.room.bounceIn(.45, true)
-
-        this.character.playIntroAnimation()
+        
+        this.character.animations.playIntroAnimation()
 
         this.finish()
     }

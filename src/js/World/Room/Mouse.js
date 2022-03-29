@@ -2,6 +2,12 @@ import Experience from "../../Experience"
 import * as THREE from 'three'
 
 export default class Mouse {
+
+    parameters = {
+        leftBorder: 0.2,
+        rightBorder: 0.6,
+    }
+
     constructor() {
         this.experience = new Experience()
         this.room = this.experience.world.landingPage.room
@@ -34,13 +40,10 @@ export default class Mouse {
     }
 
     updateMouseSync() {
-        const mouseBone = this.experience.world.character.model.children[0].children[0].children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0]
+        const mouseBone = this.experience.world.character.body.model.children[0].children[0].children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0]
         let position = mouseBone.getWorldPosition(new THREE.Vector3())
 
-        const leftBorder = 0.2
-        const rightBorder = 0.6
-
-        if (position.y < 1.63 - 5.7 && position.y > 1.58 - 5.7 && position.x > leftBorder && position.x < rightBorder) {
+        if (position.y < 1.63 - 5.7 && position.y > 1.58 - 5.7 && position.x > this.parameters.leftBorder && position.x < this.parameters.rightBorder) {
             this.model.position.z = -position.x - 1.849
             this.model.position.x = position.z + 0.92
         }

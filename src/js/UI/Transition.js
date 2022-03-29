@@ -1,5 +1,4 @@
-import { gsap, Back } from 'gsap'
-import Experience from '../Experience'
+import { gsap } from 'gsap'
 
 export default class Transition {
 
@@ -9,21 +8,6 @@ export default class Transition {
     domElements = {
         container: document.getElementById('transition-container'),
         logo: document.getElementById('loadig-animation-container'),
-    }
-
-    constructor() {
-        this.experience = new Experience()
-        this.resoureces = this.experience.resources
-
-        //this.hideIntro()
-    }
-
-    hideIntro() {
-        setTimeout(() => {
-            gsap.to(this.domElements.logo, { scale: 0, duration: .6, ease: Back.easeIn.config(1.7) })
-
-            this.domElements.container.classList.add('hideIntroTransition')
-        }, 300)
     }
 
     show() {
@@ -38,14 +22,12 @@ export default class Transition {
     }
 
     hide() {
-        setTimeout(() => {
+        gsap.delayedCall(.15, () => {
             this.domElements.container.classList.remove('showTransition')
             this.domElements.container.classList.add('hideTopTransition')
 
             //allow actions agains
-            setTimeout(() => {
-                this.isShowing = false
-            }, this.duration * 1000)
-        }, 150)
+            gsap.delayedCall(this.duration, () => this.isShowing = false)
+        })
     }
 }

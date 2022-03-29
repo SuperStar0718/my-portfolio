@@ -105,18 +105,18 @@ export default class LandingPage extends EventEmitter {
                 this.experience.ui.about.animations.playHologramAnimation(.5)
 
                 // Character Animation
-                this.character.animation.play('fallDown', .35)
+                this.character.animations.play('fallDown', .35)
 
                 // Update Face
-                this.character.body.face.material.map = this.character.body.faceTextures.scared
+                this.character.face.material.map = this.character.face.textures.scared
 
                 //character fall down
-                gsap.to(this.character.model.position, { y: -18.95, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
+                gsap.to(this.character.body.model.position, { y: -18.95, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
                 gsap.delayedCall(.4, () => this.sounds.play('waterSplash'))
 
                 //play water idle animation 
                 setTimeout(() => {
-                    this.character.animation.play('waterIdle', 1)
+                    this.character.animations.play('waterIdle', 1)
                 }, 650)
 
                 //spawn bubbles
@@ -128,8 +128,8 @@ export default class LandingPage extends EventEmitter {
                 }, 50)
 
                 //Start wireframe material switch
-                this.character.checkForWireframe = 'down'
-                gsap.delayedCall(this.scrollAnimationDuration, () => this.character.checkForWireframe = null)
+                this.character.body.checkForWireframe = 'down'
+                gsap.delayedCall(this.scrollAnimationDuration, () => this.character.body.checkForWireframe = null)
 
                 //update cursor color
                 gsap.delayedCall(.5, () => this.experience.ui.hoverIcon.updateBaseColor('#34bfff'))
@@ -175,27 +175,27 @@ export default class LandingPage extends EventEmitter {
             this.renderer.instance.setClearColor('#F5EFE6')
 
             // character position
-            gsap.to(this.character.model.position, { y: -5.7, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
+            gsap.to(this.character.body.model.position, { y: -5.7, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
 
             // character animation
-            this.character.animation.play('idle', .5)
+            this.character.animations.play('idle', .5)
 
             //Restart calls
             if (this.character.scrollIntervalCall)
-                this.character.scrollIntervalCall.restart(true)
+                this.character.intervals.scrollIntervalCall.restart(true)
 
             if (this.character.leftDesktopIntervalCall)
-                this.character.leftDesktopIntervalCall.restart(true)
+                this.character.intervals.leftDesktopIntervalCall.restart(true)
 
             // Set mouse position back to initial one
             this.experience.world.landingPage.mouse.moveToIdleStartPositon()
 
             // update face
-            this.character.body.face.material.map = this.character.body.faceTextures.default
+            this.character.face.material.map = this.character.face.textures.default
 
             //Start wireframe material switch
-            this.character.checkForWireframe = 'up'
-            gsap.delayedCall(this.scrollAnimationDuration, () => this.character.checkForWireframe = null)
+            this.character.body.checkForWireframe = 'up'
+            gsap.delayedCall(this.scrollAnimationDuration, () => this.character.body.checkForWireframe = null)
 
             this.contactAnimation.resetCharacter()
 

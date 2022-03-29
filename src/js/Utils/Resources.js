@@ -65,7 +65,6 @@ export default class Resources extends EventEmitter {
 
         if (this.loaded === this.toLoad) {
             this.trigger('ready')
-
             this.initTextures()
         }
     }

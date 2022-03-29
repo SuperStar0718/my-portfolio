@@ -22,7 +22,7 @@ export default class SceneFog {
     }
 
     setFog() {
-        this.fog = new THREE.Fog('#042C61', 10, 17)
+        this.fog = new THREE.Fog('#002C6A', 10, 17)
 
         this.scene.fog = this.fog
 

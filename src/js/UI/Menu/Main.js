@@ -145,7 +145,7 @@ export default class MenuMain extends EventEmitter {
         //sound
         this.sounds.muteGroup('lab', false, .4)
 
-        if (this.character.model.position.y != -18.95)
+        if (this.character.body.model.position.y != -18.95)
             this.experience.ui.about.animations.resetCharacterToPosition()
     }
 

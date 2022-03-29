@@ -27,53 +27,60 @@ export default class ContactAnimation {
     playIdle() {
         if (!this.played) {
             //Position
-            this.character.model.position.y = this.experience.world.contact.scene.model.position.y + this.parameters[this.sizes.portrait ? 'characterPortraitY' : 'characterLandscapeY']
+            this.character.body.model.position.y = this.experience.world.contact.scene.model.position.y + this.parameters[this.sizes.portrait ? 'characterPortraitY' : 'characterLandscapeY']
 
             //scale
             if (this.sizes.portrait) this.character.model.scale.set(this.parameters.characterPortraitScale, this.parameters.characterPortraitScale, this.parameters.characterPortraitScale)
 
-            this.character.setAllToOriginal()
-            this.character.body.face.material.map = this.character.body.faceTextures.sleepy
-            this.character.animation.play('standingIdle', 0)
+            this.character.body.setAllToOriginal()
+            this.character.face.material.map = this.character.face.textures.sleepy
+            this.character.animations.play('standingIdle', 0)
         }
     }
 
     playTransition() {
         if (!this.played) {
-            this.timeline = gsap.timeline()
-
-            setTimeout(() => {
-                this.character.body.face.material.map = this.character.body.faceTextures.scared
-                setTimeout(() => {
-                    this.character.body.faceTransitions.current = null
-                    this.character.body.updateFace('contact')
-                }, 350)
-            }, 200)
-
             this.played = true
 
-            this.exclamationMark.show()
+            this.timeline = gsap.timeline()
 
-            gsap.delayedCall(.15, () => {
-                if (this.character.animation.actions.current._clip.name === 'standing-idle')
-                    this.character.animation.play('contact', .15)
+            //Faces
+            gsap.delayedCall(.2, () => {
+                //Scared face
+                this.character.face.material.map = this.character.face.textures.scared
+
+                gsap.delayedCall(.35, () => {
+                    this.character.face.faceTransitions.current = null
+                    //contact face
+                    this.character.face.updateFace('contact')
+                })
             })
 
+            //Character animation
+            gsap.delayedCall(.15, () => {
+                if (this.character.animations.actions.current._clip.name === 'standing-idle')
+                    this.character.animations.play('contact', .15)
+            })
+
+            //start transition
             this.transtionDelay = gsap.delayedCall(1, () => {
                 this.startedTransition = true
 
+                //fade out david
                 this.timeline.to(this.david.material, { opacity: 1, duration: this.parameters.transitionDuration, ease: Power3.easeIn }, 0)
 
+                //prepare head
                 this.character.body.materials.bakedMaterial.transparent = true
                 this.character.body.materials.bakedMaterial.needsUpdate = true
-                this.character.body.face.renderOrder = 1
+                this.character.face.model.renderOrder = 1
 
+                //Fade out
                 this.materialsToHide.forEach((material) => {
                     this.timeline.to(material, { opacity: 0, duration: this.parameters.transitionDuration, ease: Power3.easeIn }, 0)
                 })
-
-                setTimeout(() => this.resetCharacter, this.parameters.transitionDuration)
             })
+
+            this.exclamationMark.show()
         }
     }
 
@@ -84,12 +91,12 @@ export default class ContactAnimation {
                 this.experience.ui.about.animations.resetCharacterToPosition()
             }
 
-            this.character.model.scale.set(1, 1, 1)
+            this.character.body.model.scale.set(1, 1, 1)
 
-            //Rest head
+            //Reset head
             this.character.body.materials.bakedMaterial.transparent = false
             this.character.body.materials.bakedMaterial.needsUpdate = true
-            this.character.body.face.renderOrder = 0
+            this.character.face.model.renderOrder = 0
 
             //Show all materials
             this.materialsToHide.forEach((material) => {
@@ -107,13 +114,14 @@ export default class ContactAnimation {
     }
 
     setMaterialsToHide() {
+        //Charactrers materials to hide when transitioning
         this.materialsToHide = [
             this.character.body.materials.shirtMaterial,
             this.character.body.materials.skinMaterial,
             this.character.body.materials.pantsMaterial,
             this.character.body.materials.whiteMaterial,
             this.character.body.materials.bakedMaterial,
-            this.character.body.face.material
+            this.character.face.material
         ]
     }
 } 

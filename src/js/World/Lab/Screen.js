@@ -24,7 +24,6 @@ export default class LabScreen {
 
     setMaterial() {
         this.texture = this.resources.items.labScreenGraph
-        this.texture.flipY = true
         this.texture.wrapS = THREE.RepeatWrapping
 
         this.material = new THREE.MeshBasicMaterial({ map: this.texture })

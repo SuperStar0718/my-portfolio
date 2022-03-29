@@ -20,19 +20,19 @@ export default class Background {
         this.colors = {}
 
         this.colors.topLeft = {}
-        this.colors.topLeft.value = '#000b38'
+        this.colors.topLeft.value = '#000e2e'
         this.colors.topLeft.instance = new THREE.Color(this.colors.topLeft.value)
 
         this.colors.topRight = {}
-        this.colors.topRight.value = '#032a59'
+        this.colors.topRight.value = '#002757'
         this.colors.topRight.instance = new THREE.Color(this.colors.topRight.value)
 
         this.colors.bottomLeft = {}
-        this.colors.bottomLeft.value = '#06346f'
+        this.colors.bottomLeft.value = '#004db3'
         this.colors.bottomLeft.instance = new THREE.Color(this.colors.bottomLeft.value)
 
         this.colors.bottomRight = {}
-        this.colors.bottomRight.value = '#1280c4'
+        this.colors.bottomRight.value = '#009dff'
         this.colors.bottomRight.instance = new THREE.Color(this.colors.bottomRight.value)
 
         // Geometry

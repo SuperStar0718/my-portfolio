@@ -10,7 +10,6 @@ import Drop from './Lab/Drop.js'
 import Bubbles from './Lab/Bubbles'
 import TestTubes from './Lab/TestTubes.js'
 import Background from './Background'
-import Character from './Character/Character.js'
 import Mouse from './Room/Mouse'
 import MessagePopUp from './Room/MessagePopUp.js'
 import ContactScene from './Contact/ContactScene.js'
@@ -19,6 +18,10 @@ import David from './Contact/David.js'
 import SceneFog from './Fog.js'
 import ContactAnimation from './Contact/ContactAnimation.js'
 import ExclamationMark from './Contact/ExclamationMark.js'
+import Body from './Character/Body.js'
+import CharacterFace from './Character/Face.js'
+import CharacterIntervals from './Character/Intervals.js'
+import Animations from './Character/Animations.js'
 
 export default class World {
     constructor() {
@@ -56,15 +59,27 @@ export default class World {
             this.contact.david = new David()
             this.contact.exclamationMark = new ExclamationMark()
 
-            this.character = new Character()
+            this.character = {}
+            this.character.body = new Body()
+            this.character.face = new CharacterFace()
+            this.character.animations = new Animations()
+            this.character.intervals = new CharacterIntervals()
 
             this.contact.animation = new ContactAnimation()
         })
     }
 
     update() {
-        if (this.character)
-            this.character.update()
+        if (this.character) {
+            if (this.character.animations)
+                this.character.animations.update()
+
+            if (this.character.intervals)
+                this.character.intervals.update()
+
+            if (this.character.body)
+                this.character.body.update()
+        }
 
         if (this.lab) if (this.lab.screen)
             this.lab.screen.update()

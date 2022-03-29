@@ -1,9 +1,12 @@
 import EventEmitter from '../Utils/EventEmitter.js'
+import Experience from '../Experience'
 
 export default class Gestures extends EventEmitter {
 
     constructor() {
         super()
+
+        this.experience = new Experience()
     }
 
     init() {
@@ -48,10 +51,7 @@ export default class Gestures extends EventEmitter {
     //Touch
     touchStart() {
         this.mTouchStartY = event.changedTouches[0].clientY
-        this.mTouchEndY = 0
-
         this.mTouchStartX = event.changedTouches[0].clientX
-        this.mTouchEndX = 0
     }
 
     //Swipe gesutres -> left, right, top, bottom
@@ -62,18 +62,19 @@ export default class Gestures extends EventEmitter {
         this.touchDistanceY = this.mTouchEndY - this.mTouchStartY
         this.touchDistanceX = this.mTouchEndX - this.mTouchStartX
 
+        //parameters
         const minimumVerticalTouchDistance = 10
         const minimumHorizontalTouchDistance = 50
 
         //check if minimum is reached for left and right
-        if (this.touchDistanceX < -minimumHorizontalTouchDistance || this.touchDistanceX > minimumHorizontalTouchDistance) {
+        if (this.touchDistanceX < -minimumHorizontalTouchDistance || this.touchDistanceX > minimumHorizontalTouchDistance && this.experience.ui.work.cards.isCurrentSwipeElement) {
             //Check if scroll right or left
             if (this.mTouchEndX < this.mTouchStartX) {
                 this.trigger('swipe-right')
             } else if (this.mTouchEndX > this.mTouchStartX) {
                 this.trigger('swipe-left')
             }
-        // else scroll down
+            // else scroll down
         } else if (this.touchDistanceY < -minimumVerticalTouchDistance || this.touchDistanceY > minimumVerticalTouchDistance) {
             if (this.mTouchEndY < this.mTouchStartY) {
                 this.trigger('touch-down')

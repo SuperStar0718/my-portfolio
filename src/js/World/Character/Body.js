@@ -1,34 +1,41 @@
 import Experience from "../../Experience"
 import * as THREE from 'three'
-import { gsap } from 'gsap'
 
 export default class Body {
-    constructor(model) {
+    constructor() {
         this.experience = new Experience()
         this.resources = this.experience.resources
         this.debug = this.experience.debug
+        this.scene = this.experience.scene
 
-        this.model = model
-
-        if (this.debug.active) {
-            this.debugFolder = this.debug.ui.folders.find((folder) => folder._title === 'Character').addFolder('Wireframe')
-        }
-
+        if (this.debug.active) 
+            this.debugFolder = this.debug.ui.addFolder('Character').close()
+        
         // Setup main 
+        this.setModel()
         this.defineBodyParts()
         this.defineMaterials()
         this.applyMaterials()
         this.deactiveFrustumCulling()
 
-        // Setup face 
-        this.setFace()
-
         // Wireframe & Visibility triggers
         this.defineWireframe()
         this.defineWireframeAt()
+        this.preloadWireframe()
+
+        if (this.debug.active)
+            this.initDebug()
     }
 
-    // ------------------------ MAIN ---------------------------------------------------------------------------------------------- 
+    setModel() {
+        this.model = this.resources.items.characterModel.scene
+
+        this.model.position.y = 2
+        this.model.rotation.y = -Math.PI / 2
+
+        this.scene.add(this.model)
+    }
+
     defineBodyParts() {
         // Armature 
         this.armature = this.model.children.find((child) => child.name === 'armature')
@@ -123,98 +130,8 @@ export default class Body {
         this.shoulderLeft.wireframeAt = '-11'
         this.throat.wireframeAt = '-11.2'
         this.head.wireframeAt = '-11.5'
-        this.face.wireframeAt = '-11.5'
         this.armRight.wireframeAt = '-11.55'
         this.armLeft.wireframeAt = '-11.5'
-    }
-
-    // ------------------------ FACE ---------------------------------------------------------------------------------------------- 
-    setFace() {
-        // Define model 
-        this.face = this.armature.children.find((child) => child.name === 'face')
-
-        // Define textures 
-        this.faceTextures = {
-            default: this.resources.items.characterDefaultFace,
-            scared: this.resources.items.characterScaredFace,
-            sleepy: this.resources.items.characterSleepyFace,
-            hurt: this.resources.items.characterHurtFace
-        }
-
-        // Material 
-        this.face.material = new THREE.MeshBasicMaterial({ map: this.faceTextures.default, transparent: true, fog: false })
-
-        this.defineFaceTransitions()
-    }
-
-    defineFaceTransitions() {
-        this.faceTransitions = {}
-
-        //Smile
-        this.faceTransitions.smile = {
-            allowedOutsideLanding: false,
-            faces: [
-                this.resources.items.characterSmile0Face,
-                this.resources.items.characterSmile1Face,
-                this.resources.items.characterSmile2Face
-            ]
-        }
-        
-        //Contact Transition Face
-        this.faceTransitions.contact = {
-            allowedOutsideLanding: true,
-            faces: [
-                this.resources.items.characterScaredFace,
-                this.resources.items.characterContact1Face,
-                this.resources.items.characterContact2Face,
-            ]
-        }
-    }
-
-    updateFace(name) {
-        this.landingPage = this.experience.ui.landingPage
-
-        if (name === 'default') {
-            //Update count
-            this.faceTransitions.count = this.faceTransitions.current.faces.length - 1
-
-            //Interval
-            const faceTransitionsTimeout = () => this.faceCall = gsap.delayedCall(.033, () => {
-                if (this.landingPage.visible || this.faceTransitions.current.allowedOutsideLanding) {
-                    //Update Map
-                    this.face.material.map = this.faceTransitions.current.faces[this.faceTransitions.count]
-                    //Decrease count until -1 then set to default face
-                    this.faceTransitions.count--
-
-                    if (this.faceTransitions.count == -1) {
-                        this.face.material.map = this.faceTextures.default
-                    } else {
-                        faceTransitionsTimeout()
-                    }
-                }
-            })
-            faceTransitionsTimeout()
-
-        } else {
-            //Define
-            this.faceTransitions.current = this.faceTransitions[name]
-            this.faceTransitions.count = 0
-
-            //Interval
-            const faceTransitionsTimeout = () => this.faceCall = gsap.delayedCall(.033, () => {
-                if (this.landingPage.visible || this.faceTransitions.current.allowedOutsideLanding) {
-                    //Update map
-                    this.face.material.map = this.faceTransitions[name].faces[this.faceTransitions.count]
-
-                    //update count
-                    this.faceTransitions.count++
-                    if (this.faceTransitions.count != this.faceTransitions[name].faces.length) {
-                        faceTransitionsTimeout()
-                    }
-                }
-            })
-            faceTransitionsTimeout()
-        }
     }
 
     // ------------------------ Wireframe ---------------------------------------------------------------------------------------------- 
@@ -232,20 +149,95 @@ export default class Body {
             wireframeLinewidth: 0.01,
             fog: false,
         })
-
-        this.debugWireframe()
     }
 
-    debugWireframe() {
-        if (this.debug.active) {
-            this.debugFolder.addColor(this.wireframeParameters, 'color').onChange(() => { this.materials.wireframeMaterial.color = new THREE.Color(this.wireframeParameters.color) })
-            this.debugFolder.add(this.materials.wireframeMaterial, 'opacity').min(0).max(1).step(0.01)
-            this.debugFolder.add(this.materials.wireframeMaterial, 'wireframeLinewidth').min(0.01).max(5).step(0.1)
-            this.debugFolder.add(this.materials.wireframeMaterial, 'blending').min(0).max(5).step(1)
-            this.debugFolder.add(this.materials.wireframeMaterial, 'depthTest')
-            this.debugFolder.add(this.materials.wireframeMaterial, 'transparent').onChange(() => this.materials.wireframeMaterial.needsUpdate = true)
+    preloadWireframe() {
+        this.setAllToWireframe()
+        setTimeout(() => this.setAllToOriginal())
+    }
 
-            this.debugFolder.close()
+    setAllToOriginal() {
+        this.model.children[0].children.forEach((children) => {
+            if (children.name === 'face')
+                children.visible = true
+
+            if (children.originalMaterial)
+                children.material = children.originalMaterial
+        })
+    }
+
+    setAllToWireframe() {
+        this.model.children[0].children.forEach((children) => {
+            if (children.name != 'face') {
+                if (!children.originalMaterial)
+                    children.originalMaterial = children.material
+
+                children.material = this.materials.wireframeMaterial
+            }
+        })
+    }
+
+    // ------------------------ Scene 1 Transition Materials ---------------------------------------------------------------------------------------------- 
+    update() {
+        // Check for wireframe material 
+        if (this.checkForWireframe)
+            this.updateWireframe(this.checkForWireframe)
+    }
+
+    updateWireframe(direction) {
+        // check each children of model 
+        this.model.children[0].children.forEach((children) => {
+            if (children.wireframeAt) {
+                if (direction == 'up' && this.model.position.y > children.wireframeAt - 5.7) {
+                    this.updateToOriginalMaterial(children)
+                } else if (this.model.position.y < children.wireframeAt - 5.7) {
+                    this.updateToWireframeMaterial(children)
+                }
+            }
+        })
+    }
+
+    updateToOriginalMaterial(children) {
+        if (children.name === 'face') {
+            // Show face and update
+            children.visible = true
+        } else {
+            // update children to original material 
+            children.material = children.originalMaterial
         }
+    }
+
+    updateToWireframeMaterial(children) {
+        if (children.name === 'face') {
+            // hide face 
+            children.visible = false
+        } else {
+            // set original material to retrieve for scroll back up 
+            if (!children.originalMaterial) {
+                children.originalMaterial = children.material
+            }
+
+            children.material = this.materials.wireframeMaterial
+        }
+    }
+
+    initDebug() {
+        this.paramters = {
+            scale: 1
+        }
+
+        this.debugFolder.add(this.model.position, 'y').min(-50).max(10)
+        this.debugFolder.add(this.paramters, 'scale').min(0.5).max(3).name('Scale').onChange(() => {
+            this.model.scale.set(this.paramters.scale, this.paramters.scale, this.paramters.scale)
+        })
+
+        //Wireframe
+        this.wireframeDebugFolder = this.debugFolder.addFolder('Wireframe')
+        this.wireframeDebugFolder.addColor(this.wireframeParameters, 'color').onChange(() => { this.materials.wireframeMaterial.color = new THREE.Color(this.wireframeParameters.color) })
+        this.wireframeDebugFolder.add(this.materials.wireframeMaterial, 'opacity').min(0).max(1).step(0.01)
+        this.wireframeDebugFolder.add(this.materials.wireframeMaterial, 'wireframeLinewidth').min(0.01).max(5).step(0.1)
+        this.wireframeDebugFolder.add(this.materials.wireframeMaterial, 'blending').min(0).max(5).step(1)
+        this.wireframeDebugFolder.add(this.materials.wireframeMaterial, 'depthTest')
+        this.wireframeDebugFolder.add(this.materials.wireframeMaterial, 'transparent').onChange(() => this.materials.wireframeMaterial.needsUpdate = true)
     }
 }

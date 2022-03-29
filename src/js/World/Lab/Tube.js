@@ -7,7 +7,7 @@ export default class Tube {
 
     parameters = {
         uColorTop: '#0047d6',
-        uColorBottom: '#00ffff',
+        uColorBottom: '#70ffff',
         uOpacity: 0.25,
     }
 

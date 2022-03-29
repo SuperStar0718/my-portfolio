@@ -51,6 +51,7 @@ export default class Waypoints {
     }
 
     setupWaypoints() {
+        //Move to each waypoint and save position in JSON
         this.waypoints.forEach((waypoint) => {
             this.camera.position.set(waypoint.position.x, waypoint.position.y, waypoint.position.z)
             this.camera.lookAt(waypoint.lookAt.x, waypoint.lookAt.y, waypoint.lookAt.z)
@@ -72,6 +73,7 @@ export default class Waypoints {
 
         if (withAnimation) {
             // move with animation
+            
             //position
             gsap.to(this.camera.position, {
                 x: waypoint.position.x,

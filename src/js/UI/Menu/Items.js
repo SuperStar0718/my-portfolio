@@ -151,17 +151,17 @@ export default class MenuItems {
         this.room.shadow.material.uniforms.uOpacity.value = 1
 
         //Character
-        this.character.model.position.y = -5.7
-        this.character.animation.play('idle', 0)
-        this.character.updateWireframe('up')
-        this.character.body.face.material.map = this.character.body.faceTextures.default
+        this.character.body.model.position.y = -5.7
+        this.character.animations.play('idle', 0)
+        this.character.body.updateWireframe('up')
+        this.character.face.material.map = this.character.face.textures.default
 
         //Restart calls
-        if (this.character.scrollIntervalCall)
-            this.character.scrollIntervalCall.restart(true)
+        if (this.character.intervals.scrollIntervalCall)
+            this.character.intervals.scrollIntervalCall.restart(true)
 
-        if (this.character.leftDesktopIntervalCall)
-            this.character.leftDesktopIntervalCall.restart(true)
+        if (this.character.intervals.leftDesktopIntervalCall)
+            this.character.intervals.leftDesktopIntervalCall.restart(true)
 
         //Character Mouse
         this.experience.world.landingPage.mouse.moveToIdleStartPositon()
