@@ -45,29 +45,16 @@ export default class Sections {
             //Get height of all sections and apply
             for (let i = 0; i < this.sections.length; i++) {
                 if (i < this.sections.indexOf(section)) {
-                    section.y += this.getAbsoluteHeight(this.sections[i].container)
+                    section.y += this.sizes.getAbsoluteHeight(this.sections[i].container)
                 }
             }
 
             //Add sections margin-top
-            section.y += this.getMarginTop(section.container)
+            section.y += this.sizes.getMarginTop(section.container)
             
             //Add offset
             section.y += section.offset()
         })
-    }
-
-    getAbsoluteHeight(element) {
-        const styles = window.getComputedStyle(element)
-        const margin = parseFloat(styles['marginTop']) + parseFloat(styles['marginBottom'])
-
-        return Math.ceil(element.offsetHeight + margin)
-    }
-
-    getMarginTop(element) {
-        const styles = window.getComputedStyle(element)
-
-        return Math.ceil(parseFloat(styles['marginTop']))
     }
 
     resize() {

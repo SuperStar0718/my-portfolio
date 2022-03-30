@@ -108,13 +108,13 @@ export default class Animations {
         //When arrived at chair
         gsap.delayedCall(1, () => {
             // faces 
-            gsap.delayedCall(.5, () => {
+            gsap.delayedCall(.37, () => {
                 this.face.updateFace('smile')
 
                 this.experience.world.character.intervals.initBlink()
             })
 
-            gsap.delayedCall(this.actions.wave._clip.duration - 1.5, () => {
+            gsap.delayedCall(this.actions.wave._clip.duration - 1.7, () => {
                 if (this.experience.ui.landingPage.visible)
                     this.face.updateFace('default')
             })

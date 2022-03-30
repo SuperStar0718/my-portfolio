@@ -1,4 +1,5 @@
-import Experience from "../../Experience";
+import Experience from "../../Experience"
+import { gsap } from 'gsap'
 
 export default class ContactAnimationEvents {
 
@@ -33,7 +34,7 @@ export default class ContactAnimationEvents {
 
         //Play transition
         this.scroll.addEvent(this.sizes.portrait ? this.portraitTriggers.transition() : this.landscapeTriggers.transition(), 'down', () => {
-            setTimeout(() => this.animation.playTransition(), 500)
+            gsap.delayedCall(.5, () => this.animation.playTransition())
         })
     }
 

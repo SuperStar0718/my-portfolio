@@ -49,4 +49,17 @@ export default class Sizes extends EventEmitter {
             setTimeout(() => this.trigger(this.touch ? 'touch' : 'no-touch'))
         }
     }
+
+    getAbsoluteHeight(element) {
+        const styles = window.getComputedStyle(element)
+        const margin = parseFloat(styles['marginTop']) + parseFloat(styles['marginBottom'])
+
+        return Math.ceil(element.offsetHeight + margin)
+    }
+
+    getMarginTop(element) {
+        const styles = window.getComputedStyle(element)
+
+        return Math.ceil(parseFloat(styles['marginTop']))
+    }
 }

@@ -58,5 +58,7 @@ export default class Intro {
             this.domElements.container.classList.add('hide')
             this.gestures.init()
         })
+
+        this.domElements.container.style.cursor = 'unset'
     }
 }

@@ -14,8 +14,9 @@ import AboutAnimations from './About/Animations'
 import MenuItems from './Menu/Items'
 import Sections from './Sections'
 import ContactForm from './Contact/ContactForm'
-import ContactAnimationEvents from './Contact/AnimationEvents'
+import ContactAnimationEvents from './Contact/ScrollEvents'
 import Intro from './Intro'
+import WorkScrollEvents from './Work/ScrollEvents'
 
 export default class UI {
 
@@ -50,6 +51,7 @@ export default class UI {
             this.work = {}
             this.work.render = new WorkRender()
             this.work.cards = new WorkCards()
+            this.work.scrollEvents = new WorkScrollEvents()
 
             //Contact
             this.contact = {}
@@ -86,7 +88,10 @@ export default class UI {
         if (this.contact) if (this.contact.animationEvents)
             this.contact.animationEvents.resize()
 
-        if(this.hoverIcon)
+        if (this.hoverIcon)
             this.hoverIcon.resize()
+
+        if (this.work) if (this.work.scrollEvents)
+            this.work.scrollEvents.resize()
     }
 }
