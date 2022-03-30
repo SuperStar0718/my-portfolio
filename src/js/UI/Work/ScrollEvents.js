@@ -12,22 +12,22 @@ export default class WorkScrollEvents {
     }
 
     events = [
-        {
+        { //Small Header
             landscapeTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7),
             portraitTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7),
             event: () => gsap.to(this.domElements.smallHeader, { y: 0, duration: .4 })
         },
-        {
+        { //Header 0
             landscapeTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader),
             portraitTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader),
             event: () => gsap.to(this.domElements.header0, { y: 0, duration: .6 })
         },
-        {
+        { //Header 1
             landscapeTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header0),
             portraitTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header0),
             event: () => gsap.to(this.domElements.header1, { y: 0, duration: .8 })
         },
-        {
+        { //Cards
             landscapeTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header0) + this.sizes.getAbsoluteHeight(this.domElements.header1),
             portraitTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header0) + this.sizes.getAbsoluteHeight(this.domElements.header1),
             event: () => {
@@ -67,10 +67,10 @@ export default class WorkScrollEvents {
         this.events.forEach((event) => {
             //add event
             this.scroll.addEvent(this.sizes.portrait ? event.portraitTrigger() : event.landscapeTrigger(), 'down', () => {
-                //play and prevent repetitions
+                //play event and prevent replays
                 if (!event.played) {
-                    event.event()
                     event.played = true
+                    event.event()
                 }
             })
         })

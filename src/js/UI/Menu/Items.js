@@ -1,7 +1,8 @@
 import Experience from '../../Experience'
 import { gsap } from 'gsap'
+import EventEmitter from '../../Utils/EventEmitter'
 
-export default class MenuItems {
+export default class MenuItems extends EventEmitter {
 
     domElements = {
         scrollContainer: document.getElementById('scroll-container'),
@@ -43,6 +44,8 @@ export default class MenuItems {
     ]
 
     constructor() {
+        super()
+
         this.experience = new Experience()
         this.transition = this.experience.ui.transition
         this.scrollIcon = this.experience.ui.scrollIcon
@@ -198,8 +201,6 @@ export default class MenuItems {
         this.sounds.muteGroup('landing', true)
         this.sounds.muteGroup('lab', false)
 
-        this.scroll.resetAllEvents()
-
         //Character
         if (item.name == 'contact') {
             if (!this.sizes.portrait) {
@@ -224,6 +225,8 @@ export default class MenuItems {
         //set scrollY to section's Y-position and perform instant-scroll
         this.scroll.scrollY = section.y
         this.scroll.performScroll(0)
+
+        this.trigger('scroll-item')
     }
 
     instantHideMenu() {
