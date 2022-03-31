@@ -54,7 +54,7 @@ export default class Intro {
     finish() {
         gsap.fromTo(this.domElements.overlay, { opacity: 0 }, { opacity: 1, delay: this.parameters.timeTillFinish, duration: .8 })
 
-        gsap.delayedCall(this.parameters.timeTillFinish, () => {
+        gsap.delayedCall(this.parameters.timeTillFinish + 0.1, () => {
             this.domElements.container.classList.add('hide')
             this.gestures.init()
         })

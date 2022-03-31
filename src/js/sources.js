@@ -5,6 +5,9 @@ export default [
     { name: 'roomShadowModel', type: 'gltfModel', path: 'models/room/shadow-model.glb' },
     { name: 'bakedRoomTexture', type: 'texture', path: 'models/room/baked.jpg' },
     { name: 'bakedShadowRoomTexture', type: 'texture', path: 'models/room/shadow-baked.jpg' },
+    { name: 'tone0Texture', type: 'texture', path: 'textures/sprites/tone-0.png' },
+    { name: 'tone1Texture', type: 'texture', path: 'textures/sprites/tone-1.png' },
+    { name: 'tone2Texture', type: 'texture', path: 'textures/sprites/tone-2.png' },
 
     //Character
     { name: 'characterModel', type: 'gltfModel', path: 'models/character/model.glb' },

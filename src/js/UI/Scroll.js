@@ -113,7 +113,6 @@ export default class Scroll {
         //wheel event listeners
         this.gestures.on('scroll-' + direction, () => checkEvent())
         this.gestures.on('touch-' + direction, () => checkEvent())
-        this.experience.ui.menu.items.on('scroll-item', () => checkEvent())
 
         const checkReset = () => {
             if ((direction === 'up' ? height < this.scrollY : height > this.scrollY) && this.events[index].played)
@@ -123,7 +122,10 @@ export default class Scroll {
         //check if unique -> listen to opposite direction to make event playable again
         this.gestures.on('scroll-' + (direction === 'up' ? 'down' : 'up'), () => checkReset())
         this.gestures.on('touch-' + (direction === 'up' ? 'down' : 'up'), () => checkReset())
-        this.experience.ui.menu.items.on('scroll-item', () => checkReset())
+    }
+
+    resetAllEvents() {
+        this.events.forEach((event) => event.played = false)
     }
 
     scroll(direction, strength = this.parameters.scrollStrength) {

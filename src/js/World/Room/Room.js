@@ -32,7 +32,9 @@ export default class Room {
         this.blackboard = this.model.children.find((child) => child.name === 'blackboard')
         this.plant = this.model.children.find((child) => child.name === 'plant')
         this.chair = this.model.children.find((child) => child.name === 'chair')
+        this.speaker = this.model.children.find((child) => child.name === 'speaker')
 
+        this.baseModel.add(this.speaker)
         this.baseModel.add(this.chair)
 
         //Take desktops plane and move to base model to animate room bounce

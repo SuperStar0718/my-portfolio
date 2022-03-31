@@ -1,8 +1,7 @@
 import Experience from '../../Experience'
 import { gsap } from 'gsap'
-import EventEmitter from '../../Utils/EventEmitter'
 
-export default class MenuItems extends EventEmitter {
+export default class MenuItems {
 
     domElements = {
         scrollContainer: document.getElementById('scroll-container'),
@@ -44,8 +43,6 @@ export default class MenuItems extends EventEmitter {
     ]
 
     constructor() {
-        super()
-
         this.experience = new Experience()
         this.transition = this.experience.ui.transition
         this.scrollIcon = this.experience.ui.scrollIcon
@@ -199,19 +196,23 @@ export default class MenuItems extends EventEmitter {
 
         //mute groups
         this.sounds.muteGroup('landing', true)
-        this.sounds.muteGroup('lab', false)
 
-        //Character
         if (item.name == 'contact') {
             if (!this.sizes.portrait) {
                 this.contactAnimation.playIdle()
                 gsap.delayedCall(1, () => this.contactAnimation.playTransition())
             }
+
+            this.experience.ui.contact.animationEvents.resetPositions()
+            this.experience.ui.work.scrollEvents.resetPositions()
         } else if (item.name == 'work') {
             this.contactAnimation.playIdle()
+            this.experience.ui.work.scrollEvents.resetPositions()
         } else {
             this.experience.ui.about.animations.resetCharacterToPosition()
         }
+
+        this.scroll.resetAllEvents()
 
         //Move Landing Page and Scroll Container to positions
         this.moveWithoutTransition(this.domElements.landingPage, 'top', '-100%')
@@ -225,8 +226,6 @@ export default class MenuItems extends EventEmitter {
         //set scrollY to section's Y-position and perform instant-scroll
         this.scroll.scrollY = section.y
         this.scroll.performScroll(0)
-
-        this.trigger('scroll-item')
     }
 
     instantHideMenu() {

@@ -22,7 +22,7 @@
 }
 
 @keyframes hideTopTransition {
-    0% { bottom: -100%; left: -40%; }
+    0% { bottom: -120%; left: -40%; }
     100% { bottom: 100%; left: 40%; }
 }
 
@@ -32,12 +32,12 @@
 }
 
 @keyframes showTransition {
-    0% { bottom: -350%; left: -60%; }
-    100% { bottom: -100%; left: -40%;}
+    0% { bottom: -400%; left: -60%; }
+    100% { bottom: -120%; left: -40%;}
 }
 
 #transition-push {
-    height: 170vh;
+    height: 200vh;
     background: #FF923E;
 }
 

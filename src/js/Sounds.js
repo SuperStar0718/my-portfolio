@@ -10,6 +10,8 @@ import notificationSound from '../assets/sounds/notification.mp3'
 
 import longKeyboardSound from '../assets/sounds/long-keyboard.mp3'
 
+import roomAmbienceSound from '../assets/sounds/room-ambience.mp3'
+
 import labAmbienceSound from '../assets/sounds/lab-ambience.mp3'
 
 import waterSplashSound from '../assets/sounds/water-splash.mp3'
@@ -28,6 +30,12 @@ export default class Sounds {
             volume: 1,
         },
         {
+            name: 'roomAmbience',
+            files: [roomAmbienceSound],
+            group: 'landing',
+            volume: .15,
+        },
+        {
             name: 'notification',
             files: [notificationSound],
             group: 'landing',
@@ -43,13 +51,13 @@ export default class Sounds {
             name: 'labAmbience',
             files: [labAmbienceSound],
             group: 'lab',
-            volume: 0.2,
+            volume: .15,
         },
         {
             name: 'waterSplash',
             files: [waterSplashSound],
             group: 'lab',
-            volume: 1,
+            volume: .5,
         },
         {
             name: 'hologram',
@@ -66,9 +74,22 @@ export default class Sounds {
         this.setMute()
         this.setMasterVolume()
         this.setupSounds()
+
+        document.addEventListener('visibilitychange', () => this.pauseAll(document.hidden))
+
+        this.setRoomAmbience()
         this.setLabAmbience()
 
         if (this.debug.active) this.initDebug()
+    }
+
+    setRoomAmbience() {
+        this.roomAmbience = this.items.find((item) => item.name === 'roomAmbience').howls[0]
+
+        this.roomAmbience._loop = true
+        this.roomAmbience.name = 'roomAmbience'
+
+        this.roomAmbience.play()
     }
 
     setLabAmbience() {
@@ -91,7 +112,7 @@ export default class Sounds {
         this.items.forEach((item) => {
             if (item.group === 'lab') {
                 item.howls.forEach((howl) => {
-                    gsap.to(howl, { volume: item.volume * vPercentage })
+                    gsap.to(howl, { volume: item.volume * vPercentage, duration: .2 })
                 })
             }
         })
@@ -122,19 +143,35 @@ export default class Sounds {
         })
     }
 
-    muteGroup(name, mute, duration = .3) {
+    pauseAll(paused) {
+        this.items.forEach((item) => {
+            item.howls.forEach((howl) => {
+                if (item.name != 'labAmbience' && item.name != 'roomAmbience') {
+                    if (paused) {
+                        howl.pause()
+                    } else {
+                        if ((howl.seek() != 0 && howl.seek() != howl.duration()))
+                            howl.play()
+                    }
+                }
+            })
+        })
+    }
+
+    muteGroup(name, mute) {
         this.items.forEach((item) => {
             if (item.group === name) {
                 item.howls.forEach((howl) => {
                     //Fade Out
-                    gsap.to(howl, { volume: mute ? 0 : item.volume, duration: duration })
+                    gsap.to(howl, { volume: mute ? 0 : item.volume, duration: 1 })
 
                     //Stop
                     if (mute) {
-                        setTimeout(() => {
-                            if (howl.name !== 'labAmbience')
+                        gsap.delayedCall(1, () => {
+                            if (howl.name !== 'labAmbience' && howl.name !== 'roomAmbience') {
                                 howl.stop()
-                        }, duration * 1000)
+                            }
+                        })
                     }
                 })
             }

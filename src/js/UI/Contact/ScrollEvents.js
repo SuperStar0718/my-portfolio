@@ -30,8 +30,8 @@ export default class ContactAnimationEvents {
             event: () => gsap.to(this.domElements.smallHeader, { y: 0, duration: .4 })
         },
         { //Header
-            landscapeTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) ,
-            portraitTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) ,
+            landscapeTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader),
+            portraitTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader),
             event: () => gsap.to(this.domElements.header, { y: 0, duration: .6 })
         },
         { //Form
@@ -52,9 +52,15 @@ export default class ContactAnimationEvents {
     }
 
     setupPositions() {
-        gsap.to(this.domElements.smallHeader, { y: 100, duration: 0 })
-        gsap.to(this.domElements.header, { y: 100, duration: 0 })
-        gsap.to(this.domElements.form, { y: 100, duration: 0 })
+        gsap.to(this.domElements.smallHeader, { y: 200, duration: 0 })
+        gsap.to(this.domElements.header, { y: 200, duration: 0 })
+        gsap.to(this.domElements.form, { y: 200, duration: 0 })
+    }
+
+    resetPositions() {
+        gsap.to(this.domElements.smallHeader, { y: 0, duration: 0 })
+        gsap.to(this.domElements.header, { y: 0, duration: 0 })
+        gsap.to(this.domElements.form, { y: 0, duration: 0 })
     }
 
     addScrollEvents() {
@@ -73,6 +79,6 @@ export default class ContactAnimationEvents {
     }
 
     resize() {
-        this.addScrollEvents()
+        setTimeout(() => this.addScrollEvents())
     }
 }

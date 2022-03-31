@@ -63,6 +63,20 @@ export default class WorkScrollEvents {
         gsap.to(this.domElements.cards[4], { y: 200, duration: 0 })
     }
 
+    resetPositions() {
+        //Header
+        gsap.to(this.domElements.smallHeader, { y: 0, duration: 0 })
+        gsap.to(this.domElements.header0, { y: 0, duration: 0 })
+        gsap.to(this.domElements.header1, { y: 0, duration: 0 })
+
+        //Cards
+        gsap.to(this.domElements.cards[0], { y: 0, duration: 0 })
+        gsap.to(this.domElements.cards[1], { y: 0, duration: 0 })
+        gsap.to(this.domElements.cards[2], { y: 0, duration: 0 })
+        gsap.to(this.domElements.cards[3], { y: 0, duration: 0 })
+        gsap.to(this.domElements.cards[4], { y: 0, duration: 0 })
+    }
+
     addScrollEvents() {
         this.events.forEach((event) => {
             //add event

@@ -70,8 +70,8 @@ export default class LandingPage extends EventEmitter {
 
             this.lockScrolling()
 
-            this.sounds.muteGroup('landing', true, 1)
-            this.sounds.muteGroup('lab', false, 2)
+            this.sounds.muteGroup('landing', true)
+            this.sounds.muteGroup('lab', false)
 
             //Room Bounce
             this.room.bounceOut()
