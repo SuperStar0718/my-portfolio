@@ -10,6 +10,8 @@ export default class WorkRender {
 
     constructor() {
         this.experience = new Experience()
+        this.sounds = this.experience.sounds
+
         this.items = items
         this.tags = tags
 
@@ -61,8 +63,11 @@ export default class WorkRender {
 
         // Inactive Container click
         container.addEventListener('click', () => {
-            this.experience.ui.work.cards.currentItemIndex = -item.id + 4
-            this.experience.ui.work.cards.updatePositions()
+            if (container.classList.contains('work-inactive-item-container')) {
+                this.experience.ui.work.cards.currentItemIndex = -item.id + 4
+                this.experience.ui.work.cards.updatePositions()
+                this.sounds.play('buttonClick')
+            }
         })
 
         // Gray button click

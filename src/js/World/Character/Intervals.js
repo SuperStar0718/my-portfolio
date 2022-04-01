@@ -85,9 +85,12 @@ export default class CharacterIntervals {
                     this.desktops.scrollDesktop0()
 
                     //Perform double scroll
-                    if (Math.random() <= 0.33) {
-                        setTimeout(() => this.desktops.scrollDesktop0(), 700)
-                    }
+                    if (Math.random() <= 0.33)
+                        gsap.delayedCall(.7, () => {
+                            if (!this.isLeft && !this.experience.ui.landingPage.isAnimating)
+                                this.desktops.scrollDesktop0()
+                        })
+
                 }
             }
             //Repeat
@@ -98,7 +101,9 @@ export default class CharacterIntervals {
     // play left desktop action, show message pop up in room and repeat interval afterwards 
     leftDesktopInterval() {
         this.leftDesktopIntervalCall = gsap.delayedCall(this.leftDesktopIntervalDuration + this.animation.actions.leftDesktopAction._clip.duration + (Math.random() * 4), () => {
-            if (this.experience.ui.landingPage.visible) {
+            if (this.experience.ui.landingPage.visible && !this.experience.ui.landingPage.isAnimating) {
+                this.isLeft = true
+
                 //Animation
                 gsap.delayedCall(.18, () => this.animation.play('leftDesktopAction', .3))
 
@@ -106,11 +111,17 @@ export default class CharacterIntervals {
                 this.messagePopUp.show()
 
                 //Type sound
-                setTimeout(() => this.sounds.play('longKeyboard'), 1700)
+                gsap.delayedCall(1.7, () => {
+                    if (!this.experience.ui.landingPage.isAnimating && this.experience.ui.landingPage.visible)
+                        this.sounds.play('longKeyboard')
+                })
 
                 // play idle afterwards 
                 gsap.delayedCall(this.animation.actions.leftDesktopAction._clip.duration, () => {
-                    this.animation.play('idle', .35)
+                    if (!this.experience.ui.landingPage.isAnimating) {
+                        this.isLeft = false
+                        this.animation.play('idle', .35)
+                    }
                 })
             }
             this.leftDesktopInterval()

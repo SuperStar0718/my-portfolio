@@ -18,6 +18,15 @@ import waterSplashSound from '../assets/sounds/water-splash.mp3'
 
 import hologramSound from '../assets/sounds/hologram.mp3'
 
+import transition0Sound from '../assets/sounds/transition-0.mp3'
+import transition1Sound from '../assets/sounds/transition-1.mp3'
+
+import waterUpSound from '../assets/sounds/water-up.mp3'
+
+import gaspSound from '../assets/sounds/gasp.mp3'
+
+import buttonClickSound from '../assets/sounds/button-click.mp3'
+
 export default class Sounds {
 
     active = false
@@ -57,13 +66,43 @@ export default class Sounds {
             name: 'waterSplash',
             files: [waterSplashSound],
             group: 'lab',
-            volume: .5,
+            volume: .4,
         },
         {
             name: 'hologram',
             files: [hologramSound],
             group: 'lab',
             volume: 0.8,
+        },
+        {
+            name: 'transition0',
+            files: [transition0Sound],
+            group: 'general',
+            volume: .5,
+        },
+        {
+            name: 'transition1',
+            files: [transition1Sound],
+            group: 'general',
+            volume: .5,
+        },
+        {
+            name: 'waterUp',
+            files: [waterUpSound],
+            group: 'general',
+            volume: .7,
+        },
+        {
+            name: 'gasp',
+            files: [gaspSound],
+            group: 'general',
+            volume: .2,
+        },
+        {
+            name: 'buttonClick',
+            files: [buttonClickSound],
+            group: 'general',
+            volume: 1,
         },
     ]
 
@@ -103,19 +142,21 @@ export default class Sounds {
     }
 
     labAmbienceScroll(percentage) {
-        let vPercentage = percentage === 'recent' ? (this.labAmbience.recentVolumePercentage) : (1 - percentage)
+        if(this.active) {
+            let vPercentage = percentage === 'recent' ? (this.labAmbience.recentVolumePercentage) : (1 - percentage)
 
-        if (vPercentage < 0) vPercentage = 0
-
-        this.labAmbience.recentVolumePercentage = vPercentage
-
-        this.items.forEach((item) => {
-            if (item.group === 'lab') {
-                item.howls.forEach((howl) => {
-                    gsap.to(howl, { volume: item.volume * vPercentage, duration: .2 })
-                })
-            }
-        })
+            if (vPercentage < 0) vPercentage = 0
+    
+            this.labAmbience.recentVolumePercentage = vPercentage
+    
+            this.items.forEach((item) => {
+                if (item.group === 'lab') {
+                    item.howls.forEach((howl) => {
+                        gsap.to(howl, { volume: item.volume * vPercentage, duration: .2 })
+                    })
+                }
+            })
+        }
     }
 
     setupSounds() {

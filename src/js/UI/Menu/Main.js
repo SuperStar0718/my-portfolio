@@ -54,7 +54,13 @@ export default class MenuMain extends EventEmitter {
 
     menuButtonClick() {
         //Button Event Listener
-        this.domElements.menuButton.addEventListener('click', () => this.switchVisiblity())
+        this.domElements.menuButton.addEventListener('click', () => {
+            //sound
+            if (!this.isAnimating)
+                this.sounds.play('buttonClick')
+
+            this.switchVisiblity()
+        })
     }
 
     switchVisiblity(withCamera = true, force = false) {

@@ -20,6 +20,7 @@ export default class ContactAnimation {
         this.david = this.experience.world.contact.david
         this.exclamationMark = this.experience.world.contact.exclamationMark
         this.sizes = this.experience.sizes
+        this.sounds = this.experience.sounds
 
         this.setMaterialsToHide()
     }
@@ -58,8 +59,10 @@ export default class ContactAnimation {
 
             //Character animation
             gsap.delayedCall(.15, () => {
-                if (this.character.animations.actions.current._clip.name === 'standing-idle')
+                if (this.character.animations.actions.current._clip.name === 'standing-idle') {
+                    this.sounds.play('gasp')
                     this.character.animations.play('contact', .15)
+                }
             })
 
             //start transition

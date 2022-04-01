@@ -70,6 +70,7 @@ export default class MenuItems {
             //Apply event listeners to all items (ex.: landing-cta-button + home-menu-button)
             item.elements.forEach((element) => {
                 element.addEventListener('click', () => {
+                    this.sounds.play('buttonClick')
                     this.openItem(item)
                 })
             })
@@ -122,6 +123,10 @@ export default class MenuItems {
     setupItem(item) {
         //Hide Scroll Icon on Landing Page
         this.scrollIcon.kill()
+
+        this.cards = this.experience.ui.work.cards
+        this.cards.currentItemIndex = 2
+        this.cards.updatePositions()
 
         //Hover Icon
         this.experience.ui.hoverIcon.setupDefault()

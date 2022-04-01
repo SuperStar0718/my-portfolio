@@ -33,6 +33,7 @@ export default class ContactForm {
         this.experience = new Experience()
         this.sections = this.experience.ui.sections
         this.scroll = this.experience.ui.scroll
+        this.sounds = this.experience.sounds
 
         this.addSubmitButtonEventListener()
         this.addHideErrorEventListeners()
@@ -68,6 +69,8 @@ export default class ContactForm {
 
     addSubmitButtonEventListener() {
         this.domElements.submitButton.addEventListener('click', () => {
+            this.sounds.play('buttonClick')
+
             this.hideAllErrors()
 
             //Start form validation
@@ -194,6 +197,8 @@ export default class ContactForm {
 
     addResultButtonEventListener() {
         this.domElements.resultButton.addEventListener('click', () => {
+            this.sounds.play('buttonClick')
+
             this.showContainer('form')
 
             //clear inputs if now error occurred

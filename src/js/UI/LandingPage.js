@@ -110,7 +110,7 @@ export default class LandingPage extends EventEmitter {
 
                 //character fall down
                 gsap.to(this.character.body.model.position, { y: -18.95, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
-                gsap.delayedCall(.4, () => this.sounds.play('waterSplash'))
+                gsap.delayedCall(.05, () => this.sounds.play('waterSplash'))
 
                 //play water idle animation 
                 gsap.delayedCall(.65, () => this.character.animations.play('waterIdle', 1))
@@ -191,6 +191,8 @@ export default class LandingPage extends EventEmitter {
 
             //update cursor color
             this.experience.ui.hoverIcon.updateBaseColor('#FF923E')
+
+            this.sounds.play('waterUp')
 
             this.trigger('show')
             this.lockReopening()

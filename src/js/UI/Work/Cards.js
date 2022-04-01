@@ -26,6 +26,7 @@ export default class WorkCards {
         this.experience = new Experience()
         this.gestures = this.experience.gestures
         this.render = this.experience.ui.work.render
+        this.sounds = this.experience.sounds
 
         this.addButtonEventListeners()
         this.initSwipes()
@@ -54,7 +55,7 @@ export default class WorkCards {
     }
 
     swipe(direction) {
-        if (this.isCurrentSwipeElement) 
+        if (this.isCurrentSwipeElement)
             direction == 'right' ? this.moveForward() : this.moveBack()
     }
 
@@ -62,6 +63,7 @@ export default class WorkCards {
         if (this.currentItemIndex != 4 && !this.itemsAreMoving) {
             this.currentItemIndex++
             this.updatePositions()
+            this.sounds.play('buttonClick')
         }
     }
 
@@ -69,6 +71,7 @@ export default class WorkCards {
         if (this.currentItemIndex != 0 && !this.itemsAreMoving) {
             this.currentItemIndex--
             this.updatePositions()
+            this.sounds.play('buttonClick')
         }
     }
 
@@ -90,7 +93,7 @@ export default class WorkCards {
         //prevent too fast switching
         this.itemsAreMoving = true
         gsap.delayedCall(.4, () => this.itemsAreMoving = false)
-        
+
         this.updateNavigation()
     }
 
