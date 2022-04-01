@@ -1,5 +1,5 @@
 import Experience from '../Experience'
-import { gsap, Power2 } from 'gsap'
+import { gsap, Power0, Power2 } from 'gsap'
 
 export default class Scroll {
 
@@ -56,6 +56,24 @@ export default class Scroll {
         //Orientation Change
         this.sizes.on('portrait', () => this.onOrientationChange())
         this.sizes.on('landscape', () => this.onOrientationChange())
+
+        this.stopScrollOnTouchStart()
+    }
+
+    stopScrollOnTouchStart() {
+        this.gestures.on('touch-start', () => {
+            if(!this.landingPage.visible) {
+                gsap.killTweensOf(this.domElements.scrollContainer)
+                gsap.killTweensOf(this.domElements.logoWhiteBackground)
+                gsap.killTweensOf(this.camera.instance.position)
+                gsap.killTweensOf(this.background.material.uniforms.uOffset)
+    
+                const style = window.getComputedStyle(this.domElements.scrollContainer)
+                const matrix = new WebKitCSSMatrix(style.transform)
+                
+                this.scrollY = -matrix.m42
+            }
+        })
     }
 
     onOrientationChange() {
@@ -200,6 +218,10 @@ export default class Scroll {
             //Logo Background
             gsap.to(this.domElements.logoWhiteBackground, { y: - this.contentScrollTo - window.innerHeight, duration: duration, ease: Power2.easeOut })
         }
+    }
+
+    getEase() {
+        return this.sizes.touch ? Power0.easeNone : Power2.easeOut
     }
 
     checkLandingPageOpening() {

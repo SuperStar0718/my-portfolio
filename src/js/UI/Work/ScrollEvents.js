@@ -15,27 +15,27 @@ export default class WorkScrollEvents {
         { //Small Header
             landscapeTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7),
             portraitTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7),
-            event: () => gsap.to(this.domElements.smallHeader, { y: 0, duration: .4 })
+            event: () => gsap.to(this.domElements.smallHeader, { opacity: 1, duration: .4 })
         },
         { //Header 0
             landscapeTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader),
             portraitTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader),
-            event: () => gsap.to(this.domElements.header0, { y: 0, duration: .6 })
+            event: () => gsap.to(this.domElements.header0, { opacity: 1, duration: .6 })
         },
         { //Header 1
             landscapeTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header0),
             portraitTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header0),
-            event: () => gsap.to(this.domElements.header1, { y: 0, duration: .8 })
+            event: () => gsap.to(this.domElements.header1, { opacity: 1, duration: .8 })
         },
         { //Cards
             landscapeTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header0) + this.sizes.getAbsoluteHeight(this.domElements.header1),
             portraitTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header0) + this.sizes.getAbsoluteHeight(this.domElements.header1),
             event: () => {
-                gsap.to(this.domElements.cards[0], { y: 0, duration: .3 })
-                gsap.to(this.domElements.cards[1], { y: 0, duration: .25 })
-                gsap.to(this.domElements.cards[2], { y: 0, duration: .2 })
-                gsap.to(this.domElements.cards[3], { y: 0, duration: .25 })
-                gsap.to(this.domElements.cards[4], { y: 0, duration: .3 })
+                gsap.to(this.domElements.cards[0], { opacity: .4, duration: .3 })
+                gsap.to(this.domElements.cards[1], { opacity: .4, duration: .25 })
+                gsap.to(this.domElements.cards[2], { opacity: 1, duration: .2 })
+                gsap.to(this.domElements.cards[3], { opacity: .4, duration: .25 })
+                gsap.to(this.domElements.cards[4], { opacity: .4, duration: .3 })
             }
         },
     ]
@@ -51,30 +51,30 @@ export default class WorkScrollEvents {
 
     setupPositions() {
         //Header
-        gsap.to(this.domElements.smallHeader, { y: 100, duration: 0 })
-        gsap.to(this.domElements.header0, { y: 100, duration: 0 })
-        gsap.to(this.domElements.header1, { y: 100, duration: 0 })
+        gsap.to(this.domElements.smallHeader, { opacity: 0, duration: 0 })
+        gsap.to(this.domElements.header0, { opacity: 0, duration: 0 })
+        gsap.to(this.domElements.header1, { opacity: 0, duration: 0 })
 
         //Cards
-        gsap.to(this.domElements.cards[0], { y: 200, duration: 0 })
-        gsap.to(this.domElements.cards[1], { y: 150, duration: 0 })
-        gsap.to(this.domElements.cards[2], { y: 100, duration: 0 })
-        gsap.to(this.domElements.cards[3], { y: 150, duration: 0 })
-        gsap.to(this.domElements.cards[4], { y: 200, duration: 0 })
+        gsap.to(this.domElements.cards[0], { opacity: 0, duration: 0 })
+        gsap.to(this.domElements.cards[1], { opacity: 0, duration: 0 })
+        gsap.to(this.domElements.cards[2], { opacity: 0, duration: 0 })
+        gsap.to(this.domElements.cards[3], { opacity: 0, duration: 0 })
+        gsap.to(this.domElements.cards[4], { opacity: 0, duration: 0 })
     }
 
     resetPositions() {
         //Header
-        gsap.to(this.domElements.smallHeader, { y: 0, duration: 0 })
-        gsap.to(this.domElements.header0, { y: 0, duration: 0 })
-        gsap.to(this.domElements.header1, { y: 0, duration: 0 })
+        gsap.to(this.domElements.smallHeader, { opacity: 1, duration: 0 })
+        gsap.to(this.domElements.header0, { opacity: 1, duration: 0 })
+        gsap.to(this.domElements.header1, { opacity: 1, duration: 0 })
 
         //Cards
-        gsap.to(this.domElements.cards[0], { y: 0, duration: 0 })
-        gsap.to(this.domElements.cards[1], { y: 0, duration: 0 })
-        gsap.to(this.domElements.cards[2], { y: 0, duration: 0 })
-        gsap.to(this.domElements.cards[3], { y: 0, duration: 0 })
-        gsap.to(this.domElements.cards[4], { y: 0, duration: 0 })
+        gsap.to(this.domElements.cards[0], { opacity: 1, duration: 0 })
+        gsap.to(this.domElements.cards[1], { opacity: 1, duration: 0 })
+        gsap.to(this.domElements.cards[2], { opacity: 1, duration: 0 })
+        gsap.to(this.domElements.cards[3], { opacity: 1, duration: 0 })
+        gsap.to(this.domElements.cards[4], { opacity: 1, duration: 0 })
     }
 
     addScrollEvents() {

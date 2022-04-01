@@ -52,6 +52,8 @@ export default class Gestures extends EventEmitter {
     touchStart() {
         this.mTouchStartY = event.changedTouches[0].clientY
         this.mTouchStartX = event.changedTouches[0].clientX
+
+        this.trigger('touch-start')
     }
 
     //Swipe gesutres -> left, right, top, bottom
@@ -64,7 +66,7 @@ export default class Gestures extends EventEmitter {
 
         //parameters
         const minimumVerticalTouchDistance = 10
-        const minimumHorizontalTouchDistance = 50
+        const minimumHorizontalTouchDistance = 80
 
         //check if minimum is reached for left and right
         if (this.touchDistanceX < -minimumHorizontalTouchDistance || this.touchDistanceX > minimumHorizontalTouchDistance && this.experience.ui.work.cards.isCurrentSwipeElement) {

@@ -36,7 +36,7 @@ export default class Intro {
     }
 
     playIntro() {
-        this.domElements.container.style.backgroundColor = 'transparent'
+        gsap.delayedCall(.1, () => this.domElements.container.style.backgroundColor = 'transparent')
 
         //Intro Container
         gsap.to(this.domElements.logo, { scale: 0, duration: .6, ease: Back.easeIn.config(2.5) })
@@ -54,7 +54,7 @@ export default class Intro {
     finish() {
         gsap.fromTo(this.domElements.overlay, { opacity: 0 }, { opacity: 1, delay: this.parameters.timeTillFinish, duration: .8 })
 
-        gsap.delayedCall(this.parameters.timeTillFinish + 0.1, () => {
+        gsap.delayedCall(this.parameters.timeTillFinish, () => {
             this.domElements.container.classList.add('hide')
             this.gestures.init()
         })

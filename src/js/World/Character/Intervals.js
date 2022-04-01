@@ -102,30 +102,42 @@ export default class CharacterIntervals {
     leftDesktopInterval() {
         this.leftDesktopIntervalCall = gsap.delayedCall(this.leftDesktopIntervalDuration + this.animation.actions.leftDesktopAction._clip.duration + (Math.random() * 4), () => {
             if (this.experience.ui.landingPage.visible && !this.experience.ui.landingPage.isAnimating) {
+                this.leftDesktopIntervals = []
+
                 this.isLeft = true
 
                 //Animation
-                gsap.delayedCall(.18, () => this.animation.play('leftDesktopAction', .3))
+                this.leftDesktopIntervals.push(
+                    gsap.delayedCall(.18, () => this.animation.play('leftDesktopAction', .3))
+                )
 
                 //Pop Up Animation
                 this.messagePopUp.show()
 
                 //Type sound
-                gsap.delayedCall(1.7, () => {
-                    if (!this.experience.ui.landingPage.isAnimating && this.experience.ui.landingPage.visible)
-                        this.sounds.play('longKeyboard')
-                })
+                this.leftDesktopIntervals.push(
+                    gsap.delayedCall(1.7, () => {
+                        if (!this.experience.ui.landingPage.isAnimating)
+                            this.sounds.play('longKeyboard')
+                    })
+                )
 
                 // play idle afterwards 
-                gsap.delayedCall(this.animation.actions.leftDesktopAction._clip.duration, () => {
-                    if (!this.experience.ui.landingPage.isAnimating) {
-                        this.isLeft = false
-                        this.animation.play('idle', .35)
-                    }
-                })
+                this.leftDesktopIntervals.push(
+                    gsap.delayedCall(this.animation.actions.leftDesktopAction._clip.duration, () => {
+                        if (!this.experience.ui.landingPage.isAnimating) {
+                            this.isLeft = false
+                            this.animation.play('idle', .35)
+                        }
+                    }))
             }
             this.leftDesktopInterval()
         })
+    }
+
+    killLeftDesktopIntervals() {
+        if(this.leftDesktopIntervals)
+            this.leftDesktopIntervals.forEach(interval => interval.kill())
     }
 
     update() {

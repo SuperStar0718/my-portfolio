@@ -1,7 +1,6 @@
 import Experience from '../Experience'
 import { gsap, Power2, Back } from 'gsap'
 import EventEmitter from '../Utils/EventEmitter'
-import { WebGLMultisampleRenderTarget } from 'three'
 
 export default class LandingPage extends EventEmitter {
 
@@ -67,6 +66,8 @@ export default class LandingPage extends EventEmitter {
             this.visible = false
 
             this.scrollIcon.kill()
+
+            this.experience.world.character.intervals.killLeftDesktopIntervals()
 
             this.lockScrolling()
 
@@ -202,7 +203,7 @@ export default class LandingPage extends EventEmitter {
     lockScrolling() {
         //Deactivate to prevent too fast scrolling
         this.isAnimating = true
-        gsap.delayedCall(this.scrollAnimationDuration, () => this.isAnimating = false)
+        gsap.delayedCall(this.scrollAnimationDuration + .1, () => this.isAnimating = false)
     }
 
     lockReopening() {
