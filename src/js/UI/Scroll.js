@@ -5,8 +5,8 @@ export default class Scroll {
 
     parameters = {
         scrollStrength: 110,
-        scrollDuration: .8,
-        multiplyScrollStrengthBy: 4,
+        scrollDuration: () => this.sizes.touch ? .5 : .8,
+        multiplyTouchStrengthBy: 3,
     }
 
     scrollY = 0
@@ -43,8 +43,8 @@ export default class Scroll {
         this.gestures.on('scroll-up', () => this.scroll(-1))
 
         //Touch
-        this.gestures.on('touch-down', () => this.scroll(1, -this.gestures.touchDistanceY * this.parameters.multiplyScrollStrengthBy))
-        this.gestures.on('touch-up', () => this.scroll(-1, this.gestures.touchDistanceY * this.parameters.multiplyScrollStrengthBy))
+        this.gestures.on('touch-down', () => this.scroll(1, -this.gestures.touchDistanceY * this.parameters.multiplyTouchStrengthBy))
+        this.gestures.on('touch-up', () => this.scroll(-1, this.gestures.touchDistanceY * this.parameters.multiplyTouchStrengthBy))
 
         //Reset Y on open
         this.landingPage.on('hide', () => {
@@ -62,15 +62,15 @@ export default class Scroll {
 
     stopScrollOnTouchStart() {
         this.gestures.on('touch-start', () => {
-            if(!this.landingPage.visible) {
+            if (!this.landingPage.visible) {
                 gsap.killTweensOf(this.domElements.scrollContainer)
                 gsap.killTweensOf(this.domElements.logoWhiteBackground)
                 gsap.killTweensOf(this.camera.instance.position)
                 gsap.killTweensOf(this.background.material.uniforms.uOffset)
-    
+
                 const style = window.getComputedStyle(this.domElements.scrollContainer)
                 const matrix = new WebKitCSSMatrix(style.transform)
-                
+
                 this.scrollY = -matrix.m42
             }
         })
@@ -119,12 +119,14 @@ export default class Scroll {
         const index = this.events.length - 1
 
         const checkEvent = () => {
-            if ((direction === 'up' ? height >= this.scrollY : height <= this.scrollY) && !this.events[index].played) {
-                //execute
-                this.events[index].task()
+            if (this.events[index]) {
+                if ((direction === 'up' ? height >= this.scrollY : height <= this.scrollY) && !this.events[index].played) {
+                    //execute
+                    this.events[index].task()
 
-                //prevent multiple playing
-                this.events[index].played = true
+                    //prevent multiple playing
+                    this.events[index].played = true
+                }
             }
         }
 
@@ -133,8 +135,10 @@ export default class Scroll {
         this.gestures.on('touch-' + direction, () => checkEvent())
 
         const checkReset = () => {
-            if ((direction === 'up' ? height < this.scrollY : height > this.scrollY) && this.events[index].played)
-                this.events[index].played = false
+            if (this.events[index]) {
+                if ((direction === 'up' ? height < this.scrollY : height > this.scrollY) && this.events[index].played)
+                    this.events[index].played = false
+            }
         }
 
         //check if unique -> listen to opposite direction to make event playable again
@@ -181,7 +185,7 @@ export default class Scroll {
         }
     }
 
-    performScroll(duration = this.parameters.scrollDuration) {
+    performScroll(duration = this.parameters.scrollDuration()) {
         this.contentScrollTo = this.preventFromScrollingBottom()
 
         let scrollPercentage = 0
@@ -238,7 +242,7 @@ export default class Scroll {
     //Re-position logo white background
     setLogoOverlayHeight() {
         const whiteBackground = document.getElementById('logo-white-background')
-        whiteBackground.style.height = this.aboutContainer.height + (window.innerHeight * (this.sizes.portrait ? 0.03 : 0.12)) + 'px'
+        whiteBackground.style.height = this.aboutContainer.height + (window.innerHeight * (this.sizes.portrait ? 0.03 : 0.15)) + 'px'
         whiteBackground.style.marginTop = window.innerHeight - 15 + 'px'
     }
 

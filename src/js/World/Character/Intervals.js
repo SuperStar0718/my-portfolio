@@ -67,7 +67,7 @@ export default class CharacterIntervals {
         this.animation = this.experience.world.character.animations
 
         if (this.animation.actions.current._clip.name === 'wave')
-            this.animation.play('idle')
+            this.animation.play('idle', .4)
 
         // start intervals 
         this.scrollInterval()
@@ -136,8 +136,10 @@ export default class CharacterIntervals {
     }
 
     killLeftDesktopIntervals() {
-        if(this.leftDesktopIntervals)
-            this.leftDesktopIntervals.forEach(interval => interval.kill())
+        if(this.leftDesktopIntervals) {
+            this.leftDesktopIntervals.forEach(interval => interval.kill(true) )
+            this.leftDesktopIntervals = []
+        }
     }
 
     update() {

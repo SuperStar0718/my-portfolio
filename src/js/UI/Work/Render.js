@@ -31,19 +31,37 @@ export default class WorkRender {
                     <span>${item.description}</span>
                 </div>
                 <div class="work-item-button-container row">
-                    <div id="work-item-gray-button-${item.id}" class="work-item-gray-button center gray-hover" ${item.liveview ? '' : 'style="width: 100%"'}>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"  class="code-icon">
-                            <use href="#code-path"/>
-                        </svg>
-                        ${item.liveview ? '' : '<span>Source Code</span>'}
-                    </div>
-                    ${item.liveview ? `<div id="work-item-orange-button-${item.id}" class="work-item-orange-button small-button center orange-hover">Live View</div>` : ''}
+                    ${this.renderButtons(item)}
                 </div>
             </div>
             `)
 
             this.addEventListenersToCard(item)
         })
+    }
+
+    renderButtons(item) {
+        let content = ''
+
+        if (item.github) {
+            content = `
+                <div id="work-item-gray-button-${item.id}" class="work-item-gray-button center gray-hover" ${item.liveview ? '' : 'style="width: 100%"'}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"  class="code-icon">
+                        <use href="#code-path"/>
+                    </svg>
+                 ${item.liveview ? '' : '<span>Source Code</span>'}
+                </div>
+                 ${item.liveview ? `<div id="work-item-orange-button-${item.id}" class="work-item-orange-button small-button center orange-hover">Live View</div>` : ''}
+            `
+        } else {
+            content = `
+                <div id="work-item-gray-button-${item.id}" class="work-item-gray-button center" style="width: 100%; background: #a7adb8; cursor: unset;">
+                    Work in progress
+                </div>
+            `
+        }
+
+        return content
     }
 
     renderTags(tags) {
@@ -70,16 +88,18 @@ export default class WorkRender {
             }
         })
 
-        // Gray button click
-        document.getElementById('work-item-gray-button-' + item.id).addEventListener('click', () => {
-            window.open(item.github, '_blank').focus()
-        })
-
-        // orange button click
-        if (item.liveview) {
-            document.getElementById('work-item-orange-button-' + item.id).addEventListener('click', () => {
-                window.open(item.liveview, '_blank').focus()
+        if (item.github) {
+            // Gray button click
+            document.getElementById('work-item-gray-button-' + item.id).addEventListener('click', () => {
+                window.open(item.github, '_blank').focus()
             })
+
+            // orange button click
+            if (item.liveview) {
+                document.getElementById('work-item-orange-button-' + item.id).addEventListener('click', () => {
+                    window.open(item.liveview, '_blank').focus()
+                })
+            }
         }
     }
 } 

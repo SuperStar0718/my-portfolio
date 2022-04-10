@@ -61,7 +61,7 @@ export default class ContactAnimation {
             gsap.delayedCall(.15, () => {
                 if (this.character.animations.actions.current._clip.name === 'standing-idle') {
                     this.sounds.play('gasp')
-                    this.character.animations.play('contact', .15)
+                    this.character.animations.play('contact', .1)
                 }
             })
 
@@ -82,8 +82,6 @@ export default class ContactAnimation {
                     this.timeline.to(material, { opacity: 0, duration: this.parameters.transitionDuration, ease: Power3.easeIn }, 0)
                 })
             })
-
-            this.exclamationMark.show()
         }
     }
 

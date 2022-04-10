@@ -33,6 +33,8 @@
     font-weight: 600;
     font-size: 1.8rem;
     width: fit-content;
+    color: #091434;
+    cursor: pointer;
 }
 
 .active-menu-item {

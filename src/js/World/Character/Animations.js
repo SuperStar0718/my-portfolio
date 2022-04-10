@@ -12,6 +12,7 @@ export default class Animations {
         this.resource = this.resources.items.characterModel
         this.model = this.resource.scene
         this.face = this.experience.world.character.face
+        this.sounds = this.experience.sounds
 
         this.setAnimations()
     }
@@ -98,7 +99,9 @@ export default class Animations {
                 this.face.material.map = this.face.textures.default
 
                 //chair rotation
-                gsap.to(this.chair.rotation, { x: .12, z: -.12, ease: Power1.easeOut, duration: .18, yoyo: true, repeat: 1 })
+                this.sounds.play('chairImpact')
+                gsap.delayedCall(.2, () => this.sounds.play('chairDown'))
+                gsap.to(this.chair.rotation, { x: .12, z: -.12, ease: Power1.easeOut, duration: .16, yoyo: true, repeat: 1 })
             }
         })
 
@@ -126,8 +129,7 @@ export default class Animations {
     }
 
     update() {
-        if (this.mixer) {
-            if (this.time.delta < 50) this.mixer.update(this.time.delta * 0.001)
-        }
+        if (this.mixer && this.time.delta < 50)
+            this.mixer.update(this.time.delta * 0.001)
     }
 }

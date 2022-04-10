@@ -1,7 +1,7 @@
 export default [
     {
-        name: 'WebGL',
-        width: '60%',
+        name: 'ThreeJS',
+        width: '65%',
     },
     {
         name: 'JavaScript',

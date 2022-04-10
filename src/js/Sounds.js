@@ -27,16 +27,20 @@ import gaspSound from '../assets/sounds/gasp.mp3'
 
 import buttonClickSound from '../assets/sounds/button-click.mp3'
 
-export default class Sounds {
+import chairImpactSound from '../assets/sounds/chair-impact.mp3'
+import chairDownSound from '../assets/sounds/chair-down.mp3'
 
-    active = false
+import pop0Sound from '../assets/sounds/pop-0.mp3'
+import pop1Sound from '../assets/sounds/pop-1.mp3'
+
+export default class Sounds {
 
     items = [
         {
             name: 'mouseWheel',
             files: [mouseWheel0Sound, mouseWheel1Sound, mouseWheel2Sound],
             group: 'landing',
-            volume: 1,
+            volume: .7,
         },
         {
             name: 'roomAmbience',
@@ -48,13 +52,14 @@ export default class Sounds {
             name: 'notification',
             files: [notificationSound],
             group: 'landing',
-            volume: 1,
+            volume: .25,
+            rate: 1,
         },
         {
             name: 'longKeyboard',
             files: [longKeyboardSound],
             group: 'landing',
-            volume: 1,
+            volume: .7,
         },
         {
             name: 'labAmbience',
@@ -66,7 +71,7 @@ export default class Sounds {
             name: 'waterSplash',
             files: [waterSplashSound],
             group: 'lab',
-            volume: .4,
+            volume: .3,
         },
         {
             name: 'hologram',
@@ -90,7 +95,7 @@ export default class Sounds {
             name: 'waterUp',
             files: [waterUpSound],
             group: 'general',
-            volume: .7,
+            volume: .5,
         },
         {
             name: 'gasp',
@@ -104,11 +109,31 @@ export default class Sounds {
             group: 'general',
             volume: 1,
         },
+        {
+            name: 'chairDown',
+            files: [chairDownSound],
+            group: 'landing',
+            volume: .4,
+        },
+        {
+            name: 'chairImpact',
+            files: [chairImpactSound],
+            group: 'landing',
+            volume: .4,
+        },
+        {
+            name: 'pop',
+            files: [pop0Sound, pop1Sound],
+            group: 'landing',
+            volume: .3,
+        },
     ]
 
     constructor() {
         this.experience = new Experience()
         this.debug = this.experience.debug
+
+        this.active = false
 
         this.setMute()
         this.setMasterVolume()
@@ -119,7 +144,8 @@ export default class Sounds {
         this.setRoomAmbience()
         this.setLabAmbience()
 
-        if (this.debug.active) this.initDebug()
+        if (this.debug.active)
+            this.initDebug()
     }
 
     setRoomAmbience() {
@@ -127,8 +153,6 @@ export default class Sounds {
 
         this.roomAmbience._loop = true
         this.roomAmbience.name = 'roomAmbience'
-
-        this.roomAmbience.play()
     }
 
     setLabAmbience() {
@@ -142,13 +166,13 @@ export default class Sounds {
     }
 
     labAmbienceScroll(percentage) {
-        if(this.active) {
+        if (this.active) {
             let vPercentage = percentage === 'recent' ? (this.labAmbience.recentVolumePercentage) : (1 - percentage)
 
             if (vPercentage < 0) vPercentage = 0
-    
+
             this.labAmbience.recentVolumePercentage = vPercentage
-    
+
             this.items.forEach((item) => {
                 if (item.group === 'lab') {
                     item.howls.forEach((howl) => {
@@ -167,6 +191,7 @@ export default class Sounds {
                 const howl = new Howl({
                     src: file,
                     volume: item.volume,
+                    rate: item.rate ? item.rate : 1,
                     onplayerror: () => {
                         if (this.debug.active) {
                             console.log('Couldnt play Howl: ' + item.name)
@@ -245,7 +270,7 @@ export default class Sounds {
 
     setMasterVolume() {
         // Set up
-        this.masterVolume = 0.5
+        this.masterVolume = 0.6
         Howler.volume(this.masterVolume)
 
         window.requestAnimationFrame(() => {

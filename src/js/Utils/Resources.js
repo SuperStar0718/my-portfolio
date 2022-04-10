@@ -2,10 +2,12 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import EventEmitter from './EventEmitter.js'
 import Experience from '../Experience.js'
+import { gsap } from 'gsap'
 
 export default class Resources extends EventEmitter {
 
     loadingAnimation = document.getElementById('loading-animation')
+    loadingRect = document.getElementById('loading-rect')
 
     constructor(sources) {
         super()
@@ -19,6 +21,7 @@ export default class Resources extends EventEmitter {
 
         this.textures = []
 
+        gsap.to(this.loadingRect, { y: 61, duration: 0 })
         this.setLoaders()
         this.startLoading()
     }
@@ -71,7 +74,7 @@ export default class Resources extends EventEmitter {
 
     // update loading bar height
     updateLoadingAnimation() {
-        this.loadingAnimation.style.height = this.loaded / this.toLoad * 100 + '%'
+        gsap.to(this.loadingRect, { y: 61 - (61 * (this.loaded / this.toLoad)) })
     }
 
     //pre-render textures

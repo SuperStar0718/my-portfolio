@@ -1,5 +1,5 @@
 import Experience from '../Experience'
-import { gsap, Back } from 'gsap'
+import { gsap, Back, Linear, Power4 } from 'gsap'
 
 export default class Intro {
 
@@ -11,52 +11,144 @@ export default class Intro {
         container: document.getElementById('intro-container'),
         overlay: document.getElementById('overlay-container'),
         landingPage: document.getElementById('landing-page'),
-        logo: document.getElementById('loadig-animation-container'),
+        logo: document.getElementById('intro-svg'),
         scrollIcon: document.querySelector('.scroll-icon')
     }
 
     constructor() {
         this.experience = new Experience()
-        this.room = this.experience.world.landingPage.room
-        this.landingPage = this.experience.ui.landingPage
-        this.gestures = this.experience.gestures
-        this.character = this.experience.world.character
+        this.resources = this.experience.resources
 
-        //Play Intro
-        gsap.delayedCall(1.2, () => this.playIntro())
+        //Init on resources ready
+        this.resources.on('ready', () => {
+            this.resourcesReady = true
+
+            this.room = this.experience.world.landingPage.room
+            this.landingPage = this.experience.ui.landingPage
+            this.gestures = this.experience.gestures
+            this.character = this.experience.world.character
+            this.sounds = this.experience.sounds
+            this.tones = this.experience.world.landingPage.tones
+            this.hoverIcon = this.experience.ui.hoverIcon
+            this.soundButton = this.experience.ui.soundButton
+
+            //Play Intro
+            gsap.delayedCall(1.2, () => {
+                this.close()
+
+                if (this.clicked && localStorage.getItem('soundActive') != 'false')
+                    this.soundButton.activate(false)
+            })
+        })
+
+        //Setup CTA
+        if (localStorage.getItem('soundActive') != 'false') {
+            this.setupClickCTA()
+        } else {
+            this.killAnimation()
+        }
+
+        this.onWindowClick()
     }
 
-    onButtonClick() {
-        this.domElements.button.addEventListener('click', () => {
-            if (!this.buttonPressed) {
-                this.playIntro()
-                this.buttonPressed = true
+    onWindowClick() {
+        window.addEventListener('click', () => {
+            if (!this.clicked) {
+                this.clicked = true
+
+                this.closeClickCTA()
+
+                if (this.resourcesReady && this.clicked && localStorage.getItem('soundActive') != 'false')
+                    this.soundButton.activate(false)
             }
         })
     }
 
+    setupClickCTA() {
+        document.querySelector('body').style.cursor = 'pointer'
+        document.getElementById('hover-icon').classList.add('clickCTA')
+        this.startAnimation()
+    }
+
+    startAnimation() {
+        this.animationElements = document.querySelectorAll('.hover-spread')
+
+        for (let i = 0; i < this.animationElements.length; i++) {
+            //scale
+            gsap.fromTo(this.animationElements[i], { scale: 1 }, { scale: 5, repeat: -1, duration: 1, repeatDelay: .4, delay: i / 2, ease: Linear.easeNone })
+
+            //opacity
+            gsap.fromTo(this.animationElements[i], { opacity: .175 }, { opacity: 0, repeat: -1, duration: 1, repeatDelay: .4, delay: i / 2, ease: Power4.easeIn })
+        }
+    }
+
+    killAnimation() {
+        this.animationElements = document.querySelectorAll('.hover-spread')
+
+        this.animationElements.forEach((element) => {
+            gsap.killTweensOf(element)
+
+            //hide animation elements
+            gsap.to(element, { opacity: 0 })
+            gsap.to(element, { scale: 0 })
+        })
+    }
+
+    closeClickCTA() {
+        document.querySelector('body').style.cursor = ''
+        document.getElementById('hover-icon').classList.remove('clickCTA')
+
+        this.killAnimation()
+    }
+
+    close() {
+        if (!this.closed) {
+            this.closed = true
+
+            this.domElements.container.style.cursor = 'unset '
+
+            this.playIntro()
+
+            gsap.delayedCall(.5, () => {
+                this.sounds.roomAmbience.play()
+
+                gsap.delayedCall(1, () => this.tones.startAnimations())
+            })
+
+            this.hoverIcon.setupDefault()
+
+            gsap.to(this.hoverIcon.domElements.icon, { scale: 1, duration: .3, delay: .5 })
+        }
+    }
+
     playIntro() {
+        //Background
         gsap.delayedCall(.1, () => this.domElements.container.style.backgroundColor = 'transparent')
 
-        //Intro Container
+        //Logo
         gsap.to(this.domElements.logo, { scale: 0, duration: .6, ease: Back.easeIn.config(2.5) })
 
+        //Landing Page Content
         this.landingPage.playOpeningAnimation(.62)
 
+        //Room Bounce In
         this.room.bounceIn(.45, true)
-        
+
+        //Character + Chair Animation
         this.character.animations.playIntroAnimation()
 
-        this.finish()
+        gsap.delayedCall(this.parameters.timeTillFinish, () => this.finish())
     }
 
     //Show overlay and enable gestures
     finish() {
-        gsap.fromTo(this.domElements.overlay, { opacity: 0 }, { opacity: 1, delay: this.parameters.timeTillFinish, duration: .8 })
+        //Fade in overlay
+        gsap.fromTo(this.domElements.overlay, { opacity: 0 }, { opacity: 1})
 
-        gsap.delayedCall(this.parameters.timeTillFinish, () => {
-            this.domElements.container.classList.add('hide')
-            this.gestures.init()
-        })
+        //Hide Intro Container
+        this.domElements.container.classList.add('hide')
+
+        //Enable gestures
+        this.gestures.init()
     }
 }

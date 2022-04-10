@@ -1,9 +1,9 @@
 #transition-container {
     position: absolute;
-    z-index: 998;
+    z-index: 1000;
     width: 200vw;
     bottom: -100%;
-    transform: rotate(15deg);
+    transform: rotate(20deg);
     left: -40%;
     pointer-events: none;
 }
@@ -44,6 +44,6 @@
 /**---------------------------------------------------------------Responsive-----------------------------------------------------*/
 @media (max-aspect-ratio: 12/10) {
     #transition-container {
-        transform: translate(0, -20%) scale(1.2);
+        transform: translate(0, -20%) scale(1.2) rotate(10deg);
     }  
 }

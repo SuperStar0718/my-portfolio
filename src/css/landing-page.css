@@ -19,7 +19,6 @@
     max-width: 45%;
     max-height: 80%;
     position: relative;
-    margin-bottom: 40px;
 }
 
 .landing-headline {
@@ -56,17 +55,3 @@
         position: unset;
     }
 }
-
-/**Adapt so smaller overlay*/
-@media (max-width: 800px), (max-height: 800px) {
-    #landing-page {
-        padding: 65px 0;
-    }
-}
-
-@media (max-width: 550px), (max-height: 550px) {
-    #landing-page {
-        padding: 50px 0;
-    }
-}
-    

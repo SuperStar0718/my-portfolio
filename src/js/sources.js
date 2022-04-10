@@ -51,5 +51,4 @@ export default [
     { name: 'contactShadowModel', type: 'gltfModel', path: 'models/contact/shadow-model.glb' },
     { name: 'bakedShadowContactTexture', type: 'texture', path: 'models/contact/shadow-baked.jpg' },
     { name: 'davidImage', type: 'texture', path: 'images/david.png' },
-    { name: 'exclamationMarkSprite', type: 'texture', path: 'textures/sprites/exclamation-mark.png' },
 ]

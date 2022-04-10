@@ -36,6 +36,7 @@ export default class LandingPage extends EventEmitter {
         this.sizes = this.experience.sizes
         this.waypoints = this.experience.waypoints
         this.contactAnimation = this.experience.world.contact.animation
+        this.intervals = this.experience.world.character.intervals
 
         //Hide Triggers
         this.gestures.on('scroll-down', () => this.hide())
@@ -67,7 +68,7 @@ export default class LandingPage extends EventEmitter {
 
             this.scrollIcon.kill()
 
-            this.experience.world.character.intervals.killLeftDesktopIntervals()
+            this.intervals.killLeftDesktopIntervals()
 
             this.lockScrolling()
 
@@ -81,9 +82,6 @@ export default class LandingPage extends EventEmitter {
                 // Landing Page Content
                 this.domElements.landingPage.style.top = '-100%'
 
-                //Show Scroll Icon in Scroll Container
-                gsap.delayedCall(.7, () => this.experience.ui.scrollScrollIcon.fade(true))
-
                 //Scroll Container
                 this.domElements.scrollContainer.style.top = '0'
 
@@ -95,6 +93,9 @@ export default class LandingPage extends EventEmitter {
 
                 //Logo
                 gsap.to(this.domElements.logoWhiteBackground, { y: -window.innerHeight, ease: Power2.easeInOut, duration: this.scrollAnimationDuration })
+
+                //Show Scroll Icon in Scroll Container
+                gsap.delayedCall(.7, () => this.experience.ui.scrollScrollIcon.fade(true))
 
                 //Render Clear Color
                 gsap.delayedCall(.7, () => this.renderer.instance.setClearColor('#EFE7DC'))
@@ -128,9 +129,6 @@ export default class LandingPage extends EventEmitter {
                 this.character.body.checkForWireframe = 'down'
                 gsap.delayedCall(this.scrollAnimationDuration, () => this.character.body.checkForWireframe = null)
 
-                //update cursor color
-                gsap.delayedCall(.5, () => this.experience.ui.hoverIcon.updateBaseColor('#34bfff'))
-
                 this.trigger('hide')
                 this.lockReopening()
             })
@@ -140,6 +138,8 @@ export default class LandingPage extends EventEmitter {
     show() {
         if (this.domElements.scrollContainer.scrollTop == 0 && !this.visible && !this.isAnimating && !this.transiton.isShowing && this.reopeningEnabled) {
             this.visible = true
+
+            this.intervals.killLeftDesktopIntervals()
 
             //sounds
             this.sounds.muteGroup('landing', false, 1)
@@ -176,7 +176,7 @@ export default class LandingPage extends EventEmitter {
             gsap.to(this.character.body.model.position, { y: -5.7, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
 
             // character animation
-            this.character.animations.play('idle', .5)
+            this.character.animations.play('idle', .7)
 
             // Set mouse position back to initial one
             this.experience.world.landingPage.mouse.moveToIdleStartPositon()
@@ -190,9 +190,6 @@ export default class LandingPage extends EventEmitter {
 
             this.contactAnimation.resetCharacter()
 
-            //update cursor color
-            this.experience.ui.hoverIcon.updateBaseColor('#FF923E')
-
             this.sounds.play('waterUp')
 
             this.trigger('show')
@@ -203,7 +200,7 @@ export default class LandingPage extends EventEmitter {
     lockScrolling() {
         //Deactivate to prevent too fast scrolling
         this.isAnimating = true
-        gsap.delayedCall(this.scrollAnimationDuration + .1, () => this.isAnimating = false)
+        gsap.delayedCall(this.scrollAnimationDuration + .2, () => this.isAnimating = false)
     }
 
     lockReopening() {

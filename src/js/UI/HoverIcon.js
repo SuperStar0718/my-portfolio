@@ -47,11 +47,6 @@ export default class HoverIcon {
             color: '#091434',
         },
         {
-            class: '.social-icon',
-            type: 'pointer',
-            color: '#CCCCCC',
-        },
-        {
             class: '.work-navigation-button',
             type: 'pointer',
             color: '#091434',
@@ -62,7 +57,7 @@ export default class HoverIcon {
             color: '#091434',
         },
         {
-            class: '.menu-legal-link',
+            class: 'a',
             type: 'pointer',
             color: '#091434',
         },
@@ -83,21 +78,12 @@ export default class HoverIcon {
         this.applyEventListeners()
         this.applyColorSwitchEventListeners()
 
-        //Fade In
-        gsap.fromTo(this.domElements.icon, { opacity: 0 }, { opacity: 1, delay: 1.6 })
-
         //Visbility on touch devices
         this.sizes.touch ? this.domElements.icon.classList.add('hide') : this.domElements.icon.classList.remove('hide')
         this.sizes.on('touch', () => this.domElements.icon.classList.add('hide'))
         this.sizes.on('no-touch', () => this.domElements.icon.classList.remove('hide'))
 
     }
-
-    setCursorLeavesDoc() {
-        document.addEventListener('mouseleave', () => this.cursorIsInsideDoc = false)
-        document.addEventListener('mouseenter', () => this.cursorIsInsideDoc = true)
-    }
-
     // Apply Mouseenter, mouseleave and mousemove event listeners
     applyEventListeners() {
         this.hoverElements.forEach((element) => {
@@ -127,16 +113,35 @@ export default class HoverIcon {
             gsap.to(this.domElements.icon, { x: event.pageX, y: event.pageY, duration: .4, ease: Power3.easeOut })
     }
 
-    applyColorSwitchEventListeners() {
-        //Color switch container (margin left and right of about section)
-        this.domElements.colorSwitchContainer.addEventListener('mouseenter', () => this.updateBaseColor('#34bfff'))
-        this.domElements.colorSwitchContainer.addEventListener('mouseleave', () => this.updateBaseColor('#FF923E'))
-        this.domElements.colorSwitchContainer.addEventListener('mousemove', () => this.updateBaseColor('#34bfff'))
+    setCursorLeavesDoc() {
+        document.addEventListener('mouseleave', () => this.cursorIsInsideDoc = false)
+        document.addEventListener('mouseenter', () => this.cursorIsInsideDoc = true)
+    }
 
-        //about section
-        this.domElements.aboutSection.addEventListener('mouseenter', () => this.updateBaseColor('#34bfff'))
-        this.domElements.aboutSection.addEventListener('mouseleave', () => this.updateBaseColor('#FF923E'))
-        this.domElements.aboutSection.addEventListener('mousemove', () => this.updateBaseColor('#34bfff'))
+    applyColorSwitchEventListeners() {
+        //About (Blue) Color
+        const setupAboutColor = () => {
+            this.updateBaseColor('#34bfff')
+            this.isHoveringAboutSection = true
+        }
+
+        //Default (orange) color
+        const setupDefaultColor = () => {
+            this.isHoveringAboutSection = false
+            this.updateBaseColor('#FF923E')
+        }
+
+        this.domElements.colorSwitchContainer.addEventListener('mousemove', () => setupAboutColor())
+        this.domElements.colorSwitchContainer.addEventListener('mousenter', () => setupAboutColor())
+        this.domElements.aboutSection.addEventListener('mousemove', () => setupAboutColor())
+        this.domElements.aboutSection.addEventListener('mouseenter', () => setupAboutColor())
+        this.domElements.colorSwitchContainer.addEventListener('mouseleave', () => setupDefaultColor())
+        this.domElements.aboutSection.addEventListener('mouseleave', () => setupDefaultColor())
+
+        window.addEventListener('mousemove', () => {
+            if (!this.isHoveringAboutSection)
+                setupDefaultColor()
+        })
     }
 
     updateBaseColor(color) {
@@ -164,8 +169,9 @@ export default class HoverIcon {
 
         const isInactiveWorkItem = element.class == '.work-item-container' ? domElement.classList.contains('work-inactive-item-container') : true
         const isntDisabledWorkNavigationButton = !domElement.classList.contains('work-disabled-navigation-button')
+        const hasGrayHover = element.class == '.work-item-gray-button' ? domElement.classList.contains('gray-hover') : true
 
-        if (isInactiveWorkItem && isntDisabledWorkNavigationButton) {
+        if (isInactiveWorkItem && isntDisabledWorkNavigationButton && hasGrayHover) {
             setTimeout(() => {
                 this.currentIcon = 'pointer'
 
@@ -180,19 +186,19 @@ export default class HoverIcon {
     }
 
     setupCircle(element, domElement) {
-        if (!domElement.classList.contains('active-menu-item')) {
+        if (element == 'force' ? true : !domElement.classList.contains('active-menu-item')) {
             this.currentIcon = 'circle'
 
             this.domElements.icon.style.borderWidth = '0'
             this.domElements.icon.style.height = '55px'
             this.domElements.icon.style.width = '55px'
-            this.domElements.icon.style.background = element.color
+            this.domElements.icon.style.background = element == 'force' ? '#FF923E' : element.color
             this.domElements.content.classList.remove('hide')
         }
     }
 
     setHoverColorSwitchHeight() {
-        this.domElements.colorSwitchContainer.style.height = this.scroll.aboutContainer.height + (window.innerHeight * (this.sizes.portrait ? 0.03 : 0.12)) + 'px'
+        this.domElements.colorSwitchContainer.style.height = this.scroll.aboutContainer.height + (window.innerHeight * (this.sizes.portrait ? 0.03 : 0.15)) + 'px'
     }
 
     resize() {

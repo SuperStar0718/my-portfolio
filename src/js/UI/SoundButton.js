@@ -1,9 +1,7 @@
 import Experience from "../Experience"
-import { gsap, Linear, Power4 } from 'gsap'
+import { gsap } from 'gsap'
 
 export default class Sound {
-
-    active = false
 
     domElements = {
         body: document.getElementById('sound-body-path'),
@@ -19,86 +17,67 @@ export default class Sound {
         this.transition = this.experience.ui.transition
 
         //Init
-        this.deactivate()
-        this.startAnimation()
+        this.deactivate(false)
 
         //Event Listener
         this.domElements.button.addEventListener('click', () => {
-            this.active ? this.deactivate() : this.activate()
-            this.sounds.play('buttonClick')
+            if (!this.transition.isShowing) {
+                this.active ? this.deactivate() : this.activate()
+                this.sounds.play('buttonClick')
+            }
         })
-
-        //Kill animation on hover
-        this.domElements.button.addEventListener('mouseenter', () => this.killAnimation())
 
         // M Key
         window.addEventListener('keydown', () => {
-            if (event.key === 'm') {
+            if (event.key === 'm' && !this.transition.isShowing)
                 this.active ? this.deactivate() : this.activate()
-            }
         })
     }
 
-    startAnimation() {
-        this.animationElements = document.querySelectorAll('.sound-button-animation')
+    deactivate(updateLocalStorage = true) {
+        this.active = false
 
-        for (let i = 0; i < this.animationElements.length; i++) {
-            //scale
-            gsap.fromTo(this.animationElements[i], { scale: 1 }, { scale: 2, repeat: -1, duration: 1, repeatDelay: .7, delay: i / 2, ease: Linear.easeNone })
+        this.sounds.mute(true)
 
-            //opacity
-            gsap.fromTo(this.animationElements[i], { opacity: .175 }, { opacity: 0, repeat: -1, duration: 1, repeatDelay: .7, delay: i / 2, ease: Power4.easeIn })
-        }
+        //Icon
+        gsap.to(this.domElements.body, { x: 2, duration: .2 })
+        gsap.to(this.domElements.volume0, { opacity: 0, duration: 0 })
+        gsap.to(this.domElements.volume1, { opacity: 0, duration: 0 })
+
+        //Background
+        this.domElements.button.classList.add('gray-hover')
+        this.domElements.button.classList.remove('orange-hover')
+
+        this.sounds.muteGroup((this.landingPage.visible ? 'lab' : 'landing'), true, 0)
+        this.sounds.muteGroup((!this.landingPage.visible ? 'lab' : 'landing'), false, 0)
+
+        if (updateLocalStorage)
+            this.updateLocalStorage()
     }
 
-    killAnimation() {
-        this.animationElements.forEach((element) => {
-            gsap.killTweensOf(element)
+    activate(updateLocalStorage = true) {
+        this.active = true
+        this.sounds.mute(false)
 
-            //hide animation elements
-            gsap.to(element, { opacity: 0, duration: .1 })
-            gsap.to(element, { scale: 0, duration: 0, delay: .1 })
-        })
+        //Icon
+        gsap.to(this.domElements.body, { x: 0, duration: .2 })
+        gsap.to(this.domElements.volume0, { opacity: 1, duration: 0 })
+        gsap.to(this.domElements.volume1, { opacity: 1, duration: 0, delay: .1 })
+
+        //Background
+        this.domElements.button.classList.remove('gray-hover')
+        this.domElements.button.classList.add('orange-hover')
+
+        if (!this.landingPage.visible) this.sounds.labAmbienceScroll('recent')
+
+        if (!this.experience.ui.landingPage.visible)
+            this.experience.ui.scroll.performScroll()
+
+        if (updateLocalStorage)
+            this.updateLocalStorage()
     }
 
-    deactivate() {
-        if (!this.transition.isShowing) {
-            this.active = false
-
-            this.sounds.mute(true)
-
-            //Icon
-            gsap.to(this.domElements.body, { x: 2, duration: .2 })
-            gsap.to(this.domElements.volume0, { opacity: 0, duration: 0 })
-            gsap.to(this.domElements.volume1, { opacity: 0, duration: 0 })
-
-            //Background
-            this.domElements.button.classList.add('gray-hover')
-            this.domElements.button.classList.remove('orange-hover')
-
-            this.sounds.muteGroup((this.landingPage.visible ? 'lab' : 'landing'), true, 0)
-            this.sounds.muteGroup((!this.landingPage.visible ? 'lab' : 'landing'), false, 0)
-        }
-    }
-
-    activate() {
-        if (!this.transition.isShowing) {
-            this.active = true
-            this.sounds.mute(false)
-
-            //Icon
-            gsap.to(this.domElements.body, { x: 0, duration: .2 })
-            gsap.to(this.domElements.volume0, { opacity: 1, duration: 0 })
-            gsap.to(this.domElements.volume1, { opacity: 1, duration: 0, delay: .1 })
-
-            //Background
-            this.domElements.button.classList.remove('gray-hover')
-            this.domElements.button.classList.add('orange-hover')
-
-            if (!this.landingPage.visible) this.sounds.labAmbienceScroll('recent')
-
-            if (!this.experience.ui.landingPage.visible)
-                this.experience.ui.scroll.performScroll()
-        }
+    updateLocalStorage() {
+        localStorage.setItem('soundActive', this.active)
     }
 }

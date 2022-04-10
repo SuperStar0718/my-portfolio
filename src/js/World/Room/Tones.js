@@ -9,8 +9,9 @@ export default class Tones {
         this.resources = this.experience.resources
 
         this.setSprites()
+    }
 
-        //Inite animations
+    startAnimations() {
         this.moveSprite(0)
         gsap.delayedCall(1.5, () => this.moveSprite(1))
         gsap.delayedCall(3, () => this.moveSprite(2))

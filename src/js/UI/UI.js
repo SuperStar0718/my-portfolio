@@ -60,9 +60,9 @@ export default class UI {
 
             this.header = new Header()
             this.hoverIcon = new HoverIcon()
-
-            this.intro = new Intro()
         })
+
+        this.intro = new Intro()
     }
 
     update() {

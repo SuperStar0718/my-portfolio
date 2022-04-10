@@ -1,6 +1,14 @@
 export default [
     {
         id: 0,
+        name: 'IUCN Redlist',
+        description: 'A redesign of the <a href="https://www.iucnredlist.org/" target="_blank">IUCN</a> Redlist website',
+        image: 'images/projects/iucn.png',
+        tags: ['react', 'r3f', 'api', 'javascript', 'html', 'css'],
+        alt: 'work in progress portfolio project',
+    },
+    {
+        id: 1,
         name: 'Join',
         description: 'Group managment tool to optimize workflows',
         image: 'images/projects/join.png',
@@ -10,7 +18,7 @@ export default [
         alt: 'Group management tool to optimize workflows portfolio project',
     },
     {
-        id: 1,
+        id: 2,
         name: 'Sharkie',
         description: 'JavaScript based jump-and-run game',
         image: 'images/projects/sharkie.png',
@@ -18,16 +26,6 @@ export default [
         liveview: 'https://sharkie-game.vercel.app/',
         github: 'https://github.com/davidhckh/sharkie-game',
         alt: 'javascript based jump-and-run game portfolio project',
-    },
-    {
-        id: 2,
-        name: 'The Essence of a Peng...',
-        description: 'Work in progress',
-        image: 'images/projects/penguin.png',
-        tags: ['react', 'r3f', 'svg', 'javascript', 'html', 'css'],
-        liveview: 'https://www.google.com/',
-        github: 'https://github.com/davidhckh',
-        alt: 'work in progress portfolio project',
     },
     {
         id: 3,

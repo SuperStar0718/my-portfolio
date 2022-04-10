@@ -124,9 +124,11 @@ export default class MenuItems {
         //Hide Scroll Icon on Landing Page
         this.scrollIcon.kill()
 
-        this.cards = this.experience.ui.work.cards
-        this.cards.currentItemIndex = 2
-        this.cards.updatePositions()
+        if(item.name != 'about' && item.name != 'home') {
+            this.cards = this.experience.ui.work.cards
+            this.cards.currentItemIndex = 2
+            this.cards.updatePositions()
+        }
 
         //Hover Icon
         this.experience.ui.hoverIcon.setupDefault()
@@ -163,8 +165,7 @@ export default class MenuItems {
         if (this.character.intervals.scrollIntervalCall)
             this.character.intervals.scrollIntervalCall.restart(true)
 
-        if (this.character.intervals.leftDesktopIntervalCall)
-            this.character.intervals.leftDesktopIntervalCall.restart(true)
+        this.character.intervals.killLeftDesktopIntervals()
 
         //Character Mouse
         this.experience.world.landingPage.mouse.moveToIdleStartPositon()

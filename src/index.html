@@ -15,13 +15,15 @@
 
     <!--Intro-->
     <div id="intro-container" class="center column">
-        <!--Loading Animation-->
-        <div id="loadig-animation-container">
-            <div id="loading-mask-container">
-                <div id="loading-animation"></div>
-            </div>
-            <img id="loading-logo-outline" src="/src/assets/logo-outline.png">
-        </div>
+        <svg id="intro-svg" viewBox="0 0 56 61" xmlns="http://www.w3.org/2000/svg" height="120" width="120">
+            <mask id="intro-mask">
+                <rect fill="black" height="61" width="61"></rect>
+                <rect fill="white" height="61" width="61" id="loading-rect"></rect>
+            </mask>
+            <use href="#logo-path" fill="#091434" opacity=".1">
+            </use>
+            <use href="#logo-path" fill="#091434" mask="url(#intro-mask)"></use>
+        </svg>
     </div>
 
     <!--Loading Container-->
@@ -30,7 +32,7 @@
         <svg id="transition-wave-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <defs>
                 <path fill="#FF923E" id="transition-wave-path"
-                    d="M0,128L34.3,117.3C68.6,107,137,85,206,117.3C274.3,149,343,235,411,261.3C480,288,549,256,617,208C685.7,160,754,96,823,112C891.4,128,960,224,1029,250.7C1097.1,277,1166,235,1234,202.7C1302.9,171,1371,149,1406,138.7L1440,128L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z">
+                    d="M0,128L21.8,138.7C43.6,149,87,171,131,154.7C174.5,139,218,85,262,69.3C305.5,53,349,75,393,101.3C436.4,128,480,160,524,186.7C567.3,213,611,235,655,213.3C698.2,192,742,128,785,122.7C829.1,117,873,171,916,186.7C960,203,1004,181,1047,160C1090.9,139,1135,117,1178,96C1221.8,75,1265,53,1309,53.3C1352.7,53,1396,75,1418,85.3L1440,96L1440,320L1418.2,320C1396.4,320,1353,320,1309,320C1265.5,320,1222,320,1178,320C1134.5,320,1091,320,1047,320C1003.6,320,960,320,916,320C872.7,320,829,320,785,320C741.8,320,698,320,655,320C610.9,320,567,320,524,320C480,320,436,320,393,320C349.1,320,305,320,262,320C218.2,320,175,320,131,320C87.3,320,44,320,22,320L0,320Z">
                 </path>
             </defs>
             <use href="#transition-wave-path"></use>
@@ -49,14 +51,14 @@
     <div id="overlay-container" class="content-width">
         <div id="header-container">
             <!--Logo-->
-            <svg id="header-logo-svg" viewBox="0 0 56 60" xmlns="http://www.w3.org/2000/svg" height="60" width="56">
+            <svg id="header-logo-svg" viewBox="0 0 56 61" xmlns="http://www.w3.org/2000/svg" height="60" width="56">
                 <defs>
-                    <path id="logo-path" fill="none" stroke="#fff" stroke-width="1px"
+                    <path id="logo-path"
                         d="M3 14 24 2C28 0 28 0 32 2L53 14C56 16 56 17 56 19L56 43C56 46 55 47 51 49L32 59C28 61 28 61 24 59L5 49C1 47 0 46 0 43L0 19C0 17 0 16 3 14M28 4 5 17 28 28 51 17 28 4M53 20 30 31 30 56 53 44 53 20M40 42 33 35C33 35 32 34 33 33 34 32 35 33 36 34L36 34 43 41C44 42 44 42 43 43L35 51C35 51 34 52 33 51 32 50 33 49 33 49L40 42M16 42 23 35C23 35 24 34 23 33 22 32 21 33 20 34L13 41C12 42 12 42 13 43L21 51C21 51 22 52 23 51 24 50 23 49 23 49L16 42">
                     </path>
 
-                    <clipPath id="logo-clip-path" transform="scale(0.87)">
-                        <use fill="white" href="#logo-path"></use>
+                    <clipPath id="logo-clip-path">
+                        <use fill="white" href="#logo-path" transform="scale(0.87)"></use>
                     </clipPath>
                 </defs>
             </svg>
@@ -83,8 +85,6 @@
                             </path>
                         </g>
                     </svg>
-                    <div class="sound-button-animation"></div>
-                    <div class="sound-button-animation"></div>
                 </div>
             </div>
 
@@ -122,12 +122,12 @@
             <!--Menu Items-->
             <div id="menu-items-container">
                 <div class="column menu-items-column-container">
-                    <a tabindex="-1" class="menu-item active-menu-item">Home</a>
-                    <a tabindex="-1" class="menu-item">About</a>
+                    <span class="menu-item active-menu-item">Home</span>
+                    <span class="menu-item">About</span>
                 </div>
                 <div class="column menu-items-column-container">
-                    <a tabindex="-1" class="menu-item">Work</a>
-                    <a tabindex="-1" class="menu-item">Contact</a>
+                    <span class="menu-item">Work</span>
+                    <span class="menu-item">Contact</span>
                 </div>
             </div>
             <!--Social Link-->
@@ -154,6 +154,8 @@
             <path id="arrow-path"
                 d="M502.6 278.6l-128 128c-12.51 12.51-32.76 12.49-45.25 0c-12.5-12.5-12.5-32.75 0-45.25L402.8 288H32C14.31 288 0 273.7 0 255.1S14.31 224 32 224h370.8l-73.38-73.38c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l128 128C515.1 245.9 515.1 266.1 502.6 278.6z" />
         </svg>
+        <div class="hover-spread"></div>
+        <div class="hover-spread"></div>
     </div>
 
     <!--Landing Page-->

@@ -8,6 +8,7 @@
     left: 0;
     z-index: 3;
     pointer-events: none;
+    opacity: 0;
 }
 
 #header-container {
@@ -50,10 +51,11 @@
 
 #logo-click-container {
     height: 53px;
-    width: 48px;
+    width: 49px;
     position: absolute;
     cursor: pointer;
     pointer-events: auto;
+    transform-origin: top left;
 }
 
 /**Sound button*/
@@ -70,16 +72,6 @@
 #sound-button-scale-container {
     transform-origin: top right;
     position: relative;
-}
-
-.sound-button-animation {
-    position: absolute;
-    background: #FF923E;
-    opacity: 0.15;
-    z-index: -10;
-    height: 100%;
-    width: 100%;
-    border-radius: 15px;
 }
 
 /**Menu Button*/
@@ -136,11 +128,9 @@
 /*------------------------------------------ Responsive -----------------------------*/
 /**Scale down buttons*/
 @media (max-width: 800px), (max-height: 800px) {
-    #logo-clip-path{
-        transform: scale(0.8);
-    }
 
-    #scroll-icon, #menu-button-scale-container, #sound-button-scale-container, .scroll-container {
+
+    #scroll-icon, #menu-button-scale-container, #sound-button-scale-container, .scroll-container, #logo-clip-path, #logo-click-container {
         transform: scale(0.9);
     }
 
@@ -150,11 +140,7 @@
 }
 
 @media (max-width: 550px), (max-height: 550px) {
-    #logo-clip-path{
-        transform: scale(0.72);
-    }
-
-    #scroll-icon, #menu-button-scale-container, #sound-button-scale-container, .scroll-container {
+    #scroll-icon, #menu-button-scale-container, #sound-button-scale-container, .scroll-container, #logo-clip-path, #logo-click-container {
         transform: scale(0.8);
     }
 
