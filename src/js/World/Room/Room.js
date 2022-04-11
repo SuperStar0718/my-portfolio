@@ -81,11 +81,6 @@ export default class Room {
             gsap.fromTo(this.picture.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1, duration: .5, ease: Back.easeOut.config(1.5), delay: delay + .32 })
             gsap.fromTo(this.blackboard.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1, duration: .5, ease: Back.easeOut.config(1.5), delay: delay + .39 })
             gsap.fromTo(this.plant.scale, { x: 0, y: 0, z: 0 }, { x: 1, y: 1, z: 1, duration: .5, ease: Back.easeOut.config(1.5), delay: delay + .46 })
-
-            //Sound
-            gsap.delayedCall(delay + .1, () => this.sounds.play('pop'))
-            gsap.delayedCall(delay + .35, () => this.sounds.play('pop'))
-            gsap.delayedCall(delay + .49, () => this.sounds.play('pop'))
         }
     }
 

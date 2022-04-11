@@ -30,9 +30,6 @@ import buttonClickSound from '../assets/sounds/button-click.mp3'
 import chairImpactSound from '../assets/sounds/chair-impact.mp3'
 import chairDownSound from '../assets/sounds/chair-down.mp3'
 
-import pop0Sound from '../assets/sounds/pop-0.mp3'
-import pop1Sound from '../assets/sounds/pop-1.mp3'
-
 export default class Sounds {
 
     items = [
@@ -120,12 +117,6 @@ export default class Sounds {
             files: [chairImpactSound],
             group: 'landing',
             volume: .4,
-        },
-        {
-            name: 'pop',
-            files: [pop0Sound, pop1Sound],
-            group: 'landing',
-            volume: .3,
         },
     ]
 

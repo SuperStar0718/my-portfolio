@@ -94,18 +94,31 @@ export default class HoverIcon {
 
                 // Mouseeenter 
                 domElement.addEventListener('mouseenter', () => {
-                    if (!this.sizes.touch) element.type == 'pointer' ? this.setupPointer(element, domElement) : this.setupCircle(element, domElement)
+                    if (!this.sizes.touch)
+                        element.type == 'pointer' ? this.setupPointer(element, domElement) : this.setupCircle(element, domElement)
+
+                    this.isHoveringCursorElement = true
                 })
 
                 // mouseleave 
                 domElement.addEventListener('mouseleave', () => {
-                    if (!this.sizes.touch) this.setupDefault()
+                    if (!this.sizes.touch) {
+                        this.setupDefault()
+                        this.isHoveringCursorElement = false
+                    }
                 })
             }
         })
 
         // mouse move 
-        window.addEventListener('mousemove', () => this.updatePosition())
+        window.addEventListener('mousemove', () => {
+            this.updatePosition()
+
+            if (!this.isHoveringCursorElement && this.currentIcon != 'default') {
+                console.log('setted up default')
+                this.setupDefault()
+            }
+        })
     }
 
     updatePosition() {
