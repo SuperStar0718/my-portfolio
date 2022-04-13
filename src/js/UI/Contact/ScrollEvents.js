@@ -27,17 +27,17 @@ export default class ContactAnimationEvents {
         { //Small Header
             landscapeTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7),
             portraitTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7),
-            event: () => gsap.to(this.domElements.smallHeader, { y: 0, duration: .4 })
+            event: () => gsap.to(this.domElements.smallHeader, { y: 0, duration: .3 })
         },
         { //Header
             landscapeTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader),
             portraitTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader),
-            event: () => gsap.to(this.domElements.header, { y: 0, duration: .6 })
+            event: () => gsap.to(this.domElements.header, { y: 0, duration: .5 })
         },
         { //Form
             landscapeTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header),
             portraitTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header),
-            event: () => gsap.to(this.domElements.form, { y: 0, duration: .8 })
+            event: () => gsap.to(this.domElements.form, { y: 0, duration: .7 })
         },
     ]
 

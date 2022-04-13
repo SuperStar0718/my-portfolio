@@ -13,6 +13,7 @@ export default class Header {
         this.landingPage = this.experience.ui.landingPage
         this.menu = this.experience.ui.menu.main
         this.gestures = this.experience.gestures
+        this.scroll = this.experience.ui.scroll
 
         //Trigger Events
         this.gestures.on('scroll-up', () => this.show())

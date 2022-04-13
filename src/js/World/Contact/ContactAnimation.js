@@ -66,7 +66,7 @@ export default class ContactAnimation {
             })
 
             //start transition
-            this.transtionDelay = gsap.delayedCall(1, () => {
+            this.transtionDelay = gsap.delayedCall(.3, () => {
                 this.startedTransition = true
 
                 //fade out david

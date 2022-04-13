@@ -114,10 +114,8 @@ export default class HoverIcon {
         window.addEventListener('mousemove', () => {
             this.updatePosition()
 
-            if (!this.isHoveringCursorElement && this.currentIcon != 'default') {
-                console.log('setted up default')
+            if (!this.isHoveringCursorElement && this.currentIcon != 'default')
                 this.setupDefault()
-            }
         })
     }
 

@@ -261,7 +261,7 @@ export default class Sounds {
 
     setMasterVolume() {
         // Set up
-        this.masterVolume = 0.6
+        this.masterVolume = 0.5
         Howler.volume(this.masterVolume)
 
         window.requestAnimationFrame(() => {
