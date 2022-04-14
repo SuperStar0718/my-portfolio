@@ -5,7 +5,7 @@ export default class Scroll {
 
     parameters = {
         scrollStrength: 110,
-        scrollDuration: () => this.sizes.touch ? .5 : .8,
+        scrollDuration: () => this.sizes.touch ? .45 : .8,
         multiplyTouchStrengthBy: 3,
     }
 
