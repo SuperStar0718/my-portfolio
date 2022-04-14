@@ -39,13 +39,12 @@
 @media (max-aspect-ratio: 12/10) {
     #landing-content-svg {
         max-width: 94%;
-        margin-bottom: 0;
     }
 
     #landing-page {
         align-items: flex-start;
-        padding: 65px 0;
-        background-image: linear-gradient(180deg, #F5EFE6 40%, transparent 45%);
+        padding-top: 45px;
+        background-image: linear-gradient(180deg, #F5EFE6 45%, transparent 50%);
     }
 
     #landing-page-section {

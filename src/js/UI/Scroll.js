@@ -224,10 +224,6 @@ export default class Scroll {
         }
     }
 
-    getEase() {
-        return this.sizes.touch ? Power0.easeNone : Power2.easeOut
-    }
-
     checkLandingPageOpening() {
         //open landing if user isnt scrolling too fast
         if (this.time.current - this.lastWheelUp > 200) {
