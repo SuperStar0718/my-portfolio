@@ -1,5 +1,5 @@
 import Experience from '../Experience'
-import { gsap, Power0, Power2 } from 'gsap'
+import { gsap, Power2 } from 'gsap'
 
 export default class Scroll {
 

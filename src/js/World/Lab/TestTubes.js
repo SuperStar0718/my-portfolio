@@ -18,6 +18,7 @@ export default class TestTubes {
     }
 
     setTubes() {
+        //Model
         this.tubes = this.lab.model.children.find((child) => child.name === 'test-tubes')
 
         //Material

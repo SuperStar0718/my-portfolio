@@ -40,6 +40,7 @@ export default class Mouse {
     }
 
     updateMouseSync() {
+        //Get mouse bone position
         const mouseBone = this.experience.world.character.body.model.children[0].children[0].children[0].children[0].children[0].children[2].children[0].children[0].children[0].children[0]
         let position = mouseBone.getWorldPosition(new THREE.Vector3())
 

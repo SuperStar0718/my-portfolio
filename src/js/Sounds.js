@@ -50,7 +50,6 @@ export default class Sounds {
             files: [notificationSound],
             group: 'landing',
             volume: .25,
-            rate: 1,
         },
         {
             name: 'longKeyboard',
@@ -130,6 +129,7 @@ export default class Sounds {
         this.setMasterVolume()
         this.setupSounds()
 
+        //Pause on document hidden
         document.addEventListener('visibilitychange', () => this.pauseAll(document.hidden))
 
         this.setRoomAmbience()
@@ -149,6 +149,7 @@ export default class Sounds {
     setLabAmbience() {
         this.labAmbience = this.items.find((item) => item.name === 'labAmbience').howls[0]
 
+        //Settings
         this.labAmbience._loop = true
         this.labAmbience._volume = 0
         this.labAmbience.name = 'labAmbience'
@@ -160,13 +161,16 @@ export default class Sounds {
         if (this.active) {
             let vPercentage = percentage === 'recent' ? (this.labAmbience.recentVolumePercentage) : (1 - percentage)
 
-            if (vPercentage < 0) vPercentage = 0
+            if (vPercentage < 0)
+                vPercentage = 0
 
+            //Update recent volume
             this.labAmbience.recentVolumePercentage = vPercentage
 
             this.items.forEach((item) => {
                 if (item.group === 'lab') {
                     item.howls.forEach((howl) => {
+                        //Transition volume smoothly
                         gsap.to(howl, { volume: item.volume * vPercentage, duration: .2 })
                     })
                 }
@@ -179,23 +183,9 @@ export default class Sounds {
             item.howls = []
 
             item.files.forEach((file) => {
-                const howl = new Howl({
-                    src: file,
-                    volume: item.volume,
-                    rate: item.rate ? item.rate : 1,
-                    onplayerror: () => {
-                        if (this.debug.active) {
-                            console.log('Couldnt play Howl: ' + item.name)
-                        }
-                        console.log('Couldnt play Howl: ' + item.name)
-                    },
-                    onloaderror: () => {
-                        if (this.debug.active) {
-                            console.log('Couldnt load Howl: ' + item.name)
-                        }
-                    },
-                })
-                item.howls.push(howl)
+                item.howls.push(
+                    new Howl({ src: file, volume: item.volume, })
+                )
             })
         })
     }
@@ -205,8 +195,10 @@ export default class Sounds {
             item.howls.forEach((howl) => {
                 if (item.name != 'labAmbience' && item.name != 'roomAmbience') {
                     if (paused) {
+                        //Pause
                         howl.pause()
                     } else {
+                        //Resume
                         if ((howl.seek() != 0 && howl.seek() != howl.duration()))
                             howl.play()
                     }
@@ -225,9 +217,8 @@ export default class Sounds {
                     //Stop
                     if (mute) {
                         gsap.delayedCall(1, () => {
-                            if (howl.name !== 'labAmbience' && howl.name !== 'roomAmbience') {
+                            if (howl.name !== 'labAmbience' && howl.name !== 'roomAmbience')
                                 howl.stop()
-                            }
                         })
                     }
                 })

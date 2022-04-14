@@ -112,9 +112,9 @@ export default class MenuMain extends EventEmitter {
             const labScene = this.scroll.scrollY <= this.domElements.aboutSection.clientHeight + (window.innerHeight * 0.12)
             labScene ? this.focusLabScene() : this.focusContactScene()
 
-            this.setInitialPositions()
-
             this.domElements.scrollContainer.style.left = '-100%'
+
+            this.setInitialPositions()
         }
     }
 

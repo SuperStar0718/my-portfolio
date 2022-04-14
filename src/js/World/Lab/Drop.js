@@ -20,7 +20,7 @@ export default class Drop {
     }
 
     dropInterval() {
-        setTimeout(() => {
+        gsap.delayedCall(4, () => {
             //Animate
             gsap.fromTo(this.model.position, { y: 2.1 }, { y: -0.02, duration: 1.7, ease: Power3.easeIn })
             gsap.fromTo(this.model.scale, { y: 0 }, { y: 1, duration: .6, delay: .1 })
@@ -30,6 +30,6 @@ export default class Drop {
 
             //Restart
             this.dropInterval()
-        }, 2500 + Math.random() * 4000)
+        })
     }
 }

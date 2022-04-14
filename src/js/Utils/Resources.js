@@ -21,7 +21,9 @@ export default class Resources extends EventEmitter {
 
         this.textures = []
 
+        //Move loading rect to bottom
         gsap.to(this.loadingRect, { y: 61, duration: 0 })
+
         this.setLoaders()
         this.startLoading()
     }
@@ -77,7 +79,6 @@ export default class Resources extends EventEmitter {
         gsap.to(this.loadingRect, { y: 61 - (61 * (this.loaded / this.toLoad)) })
     }
 
-    //pre-render textures
     initTextures() {
         this.textures.forEach((texture) => {
             this.experience.renderer.instance.initTexture(texture)

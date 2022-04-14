@@ -44,6 +44,7 @@ export default class Desktops {
         this.setNotification()
     }
 
+    //Create Notification Mesh
     setNotification() {
         this.notification = this.desktop1.clone()
         this.notification.material = new THREE.MeshBasicMaterial({ map: this.resources.items.desktop1Notification, transparent: true, fog: false, opacity: 0 })

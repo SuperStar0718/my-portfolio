@@ -6,7 +6,7 @@ import { Vector3 } from 'three'
 export default class Camera {
 
     parallax = {
-        intensity: 0.35,
+        intensity: 0.4,
         speed: 5,
         enabled: true
     }

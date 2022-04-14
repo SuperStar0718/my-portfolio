@@ -49,12 +49,14 @@ export default class Lab {
     }
 
     setBottomMaterial() {
-        this.bottomMaterial = new THREE.MeshBasicMaterial({color: 'gray'})
-
+        //Model
         this.bottom = this.model.children.find((child) => child.name === 'bottom')
+
+        //Material
+        this.bottomMaterial = new THREE.MeshBasicMaterial({color: 'gray'})
+        this.bottom.material = this.bottomMaterial
 
         this.bottom.position.y -= 0.005
         
-        this.bottom.material = this.bottomMaterial
     }
 }

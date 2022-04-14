@@ -51,6 +51,7 @@ export default class Intro {
         this.onWindowClick()
     }
 
+    //Hide Click CTA and enable sounds
     onWindowClick() {
         window.addEventListener('click', () => {
             if (!this.clicked) {
@@ -70,6 +71,7 @@ export default class Intro {
         this.startAnimation()
     }
 
+    //Click CTA Animation
     startAnimation() {
         this.animationElements = document.querySelectorAll('.hover-spread')
 
@@ -82,6 +84,7 @@ export default class Intro {
         }
     }
 
+    //Kill CTA Animation
     killAnimation() {
         this.animationElements = document.querySelectorAll('.hover-spread')
 
@@ -101,23 +104,26 @@ export default class Intro {
         this.killAnimation()
     }
 
+    //Hide Loading Container
     close() {
         if (!this.closed) {
             this.closed = true
 
             this.domElements.container.style.cursor = 'unset '
 
-            this.playIntro()
 
+            //Start sounds
             gsap.delayedCall(.5, () => {
                 this.sounds.roomAmbience.play()
 
                 gsap.delayedCall(1, () => this.tones.startAnimations())
             })
 
+            //Update Hover Icon
+            gsap.to(this.hoverIcon.domElements.icon, { scale: 1, duration: .3, delay: .5 })
             this.hoverIcon.setupDefault()
 
-            gsap.to(this.hoverIcon.domElements.icon, { scale: 1, duration: .3, delay: .5 })
+            this.playIntro()
         }
     }
 
@@ -143,7 +149,7 @@ export default class Intro {
     //Show overlay and enable gestures
     finish() {
         //Fade in overlay
-        gsap.fromTo(this.domElements.overlay, { opacity: 0 }, { opacity: 1})
+        gsap.fromTo(this.domElements.overlay, { opacity: 0 }, { opacity: 1, duration: 1})
 
         //Hide Intro Container
         this.domElements.container.classList.add('hide')

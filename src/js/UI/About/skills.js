@@ -1,11 +1,11 @@
 export default [
     {
         name: 'ThreeJS + R3F',
-        width: '65%',
+        width: '60%',
     },
     {
         name: 'ReactJS',
-        width: '50%',
+        width: '65%',
     },
     {
         name: 'JavaScript',

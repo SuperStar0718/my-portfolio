@@ -26,6 +26,7 @@ export default class Transition {
         this.domElements.container.classList.remove('hideIntroTransition')
         this.domElements.container.classList.add('showTransition')
 
+        //sound
         gsap.delayedCall(.3, () => this.sounds.play('transition0'))
     }
 
@@ -34,9 +35,10 @@ export default class Transition {
             this.domElements.container.classList.remove('showTransition')
             this.domElements.container.classList.add('hideTopTransition')
 
-            //allow actions agains
+            //allow actions again
             gsap.delayedCall(this.duration, () => this.isShowing = false)
 
+            //sound
             gsap.delayedCall(.2, () => this.sounds.play('transition1'))
         })
     }

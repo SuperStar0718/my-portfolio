@@ -18,9 +18,8 @@ export default class ContactScene {
         this.sizes = this.experience.sizes
 
         // Debug 
-        if (this.debug.active) {
+        if (this.debug.active)
             this.debugFolder = this.debug.ui.addFolder('Contact Scene').close()
-        }
 
         this.setModel()
         this.setMaterial()
@@ -57,8 +56,6 @@ export default class ContactScene {
         // material 
         this.material = new THREE.MeshBasicMaterial({ map: this.texture, fog: false })
 
-        this.model.traverse((child) => {
-            child.material = this.material
-        })
+        this.model.children[0].material = this.material
     }
 }

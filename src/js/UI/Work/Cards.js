@@ -1,5 +1,5 @@
 import Experience from '../../Experience.js'
-import { gsap, Back } from 'gsap'
+import { gsap } from 'gsap'
 
 export default class WorkCards {
     positionStyles = [

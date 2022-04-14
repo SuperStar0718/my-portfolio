@@ -81,7 +81,8 @@ export default class World {
                 this.character.body.update()
         }
 
-        if (this.lab) if (this.lab.screen)
-            this.lab.screen.update()
+        if (this.lab)
+            if (this.lab.screen)
+                this.lab.screen.update()
     }
 }

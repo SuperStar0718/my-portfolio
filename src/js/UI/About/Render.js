@@ -5,11 +5,11 @@ export default class SkillsRender {
     domElements = {
         skillsRenderContainer: document.getElementById('about-skills-render-container'),
     }
-    
+
     constructor() {
         this.skills = skills
 
-        this.renderSkills() 
+        this.renderSkills()
     }
 
     renderSkills() {
@@ -24,5 +24,4 @@ export default class SkillsRender {
             `)
         })
     }
-
 }

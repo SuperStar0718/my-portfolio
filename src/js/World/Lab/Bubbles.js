@@ -87,9 +87,8 @@ export default class Bubbles {
             // Fade Out
             gsap.to(bubble.material, { opacity: 0, duration: .2, delay: moveDuration - .2, ease: easeToUse })
         } else {
-            if (this.debug.active) {
+            if (this.debug.active)
                 console.log('No available bubbles')
-            }
         }
     }
 
@@ -108,6 +107,7 @@ export default class Bubbles {
         const debugObject = {
             spawnBubble: () => { this.spawnBubble() },
         }
+
         this.debugFolder.add(debugObject, 'spawnBubble').name('Spawn Bubble')
     }
 }

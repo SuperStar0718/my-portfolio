@@ -35,6 +35,7 @@ export default class AboutAnimations {
         this.setupLines()
     }
 
+    //Setup SVG Lines to be drawn later
     setupLines() {
         const lines = document.querySelectorAll('.about-box-line')
         this.lines = []
@@ -156,7 +157,6 @@ export default class AboutAnimations {
             gsap.fromTo(rects[i], { height: 0 }, { height: 64, delay: i / 10 })
         }
     }
-
 
     addScrollEvents() {
         this.scroll.addEvent(this.domElements.aboutSection.clientHeight, 'up', () => {
