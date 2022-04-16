@@ -21,7 +21,7 @@ export default class David {
     //position and scale depening on orientation
     onOrientationChange() {
         if (this.sizes.portrait) {
-            this.sprite.scale.set(2.64, 5.05)
+            this.sprite.scale.set(2.58, 5.05)
             this.sprite.position.set(-0.05, 2.7, 0)
         } else {
             this.sprite.scale.set(2.64, 5.05)
