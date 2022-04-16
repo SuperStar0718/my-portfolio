@@ -1,7 +1,7 @@
 #menu-container {
     position: absolute;
-    right: calc(-350px - 10vw);
-    width: calc(350px + 10vw);
+    right: 0;
+    width: calc(350px + calc((100vw - 90rem) / 2));
     height: 100%;
     background: white;
     z-index: 2;
@@ -38,7 +38,7 @@
 }
 
 .active-menu-item {
-    position: relative; 
+    position: relative;
 }
 
 .active-menu-item {
@@ -70,7 +70,7 @@
     color: gray;
 }
 
-#legal-container :first-child{
+#legal-container :first-child {
     margin-right: 20px;
 }
 
@@ -125,7 +125,7 @@
 
     #menu-container .social-icon {
         height: 24px;
-        width:  24px;
+        width: 24px;
     }
 
     #menu-container hr {

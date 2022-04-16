@@ -8,7 +8,7 @@
     pointer-events: none;
 }
 
-#transition-wave-svg{
+#transition-wave-svg {
     transform: translateY(20px);
 }
 
@@ -18,22 +18,36 @@
 
 .hideTopTransition {
     animation: hideTopTransition ease-in .7s;
-    animation-fill-mode: forwards; 
+    animation-fill-mode: forwards;
 }
 
 @keyframes hideTopTransition {
-    0% { bottom: -120%; left: -40%; }
-    100% { bottom: 100%; left: 40%; }
+    0% {
+        bottom: -120%;
+        left: -40%;
+    }
+
+    100% {
+        bottom: 100%;
+        left: 40%;
+    }
 }
 
 .showTransition {
     animation: showTransition ease-in .7s;
-    animation-fill-mode: forwards; 
+    animation-fill-mode: forwards;
 }
 
 @keyframes showTransition {
-    0% { bottom: -400%; left: -60%; }
-    100% { bottom: -120%; left: -40%;}
+    0% {
+        bottom: -400%;
+        left: -60%;
+    }
+
+    100% {
+        bottom: -120%;
+        left: -40%;
+    }
 }
 
 #transition-push {
@@ -45,5 +59,5 @@
 @media (max-aspect-ratio: 12/10) {
     #transition-container {
         transform: translate(0, -20%) scale(1.2) rotate(10deg);
-    }  
+    }
 }

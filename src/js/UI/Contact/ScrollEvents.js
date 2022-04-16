@@ -27,17 +27,17 @@ export default class ContactAnimationEvents {
         { //Small Header
             landscapeTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7),
             portraitTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7),
-            event: () => gsap.to(this.domElements.smallHeader, { y: 0, duration: .3 })
+            event: () => gsap.to(this.domElements.smallHeader, { y: 0, opacity: 1, duration: .3 })
         },
         { //Header
             landscapeTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader),
             portraitTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader),
-            event: () => gsap.to(this.domElements.header, { y: 0, duration: .5 })
+            event: () => gsap.to(this.domElements.header, { y: 0, opacity: 1, duration: .5 })
         },
         { //Form
             landscapeTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header),
             portraitTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header),
-            event: () => gsap.to(this.domElements.form, { y: 0, duration: .7 })
+            event: () => gsap.to(this.domElements.form, { y: 0, opacity: 1, duration: .7 })
         },
     ]
 
@@ -52,15 +52,15 @@ export default class ContactAnimationEvents {
     }
 
     setupPositions() {
-        gsap.to(this.domElements.smallHeader, { y: 200, duration: 0 })
-        gsap.to(this.domElements.header, { y: 200, duration: 0 })
-        gsap.to(this.domElements.form, { y: 200, duration: 0 })
+        gsap.to(this.domElements.smallHeader, { y: 200, opacity: 0, duration: 0 })
+        gsap.to(this.domElements.header, { y: 200, opacity: 0, duration: 0 })
+        gsap.to(this.domElements.form, { y: 200, opacity: 0, duration: 0 })
     }
 
     resetPositions() {
-        gsap.to(this.domElements.smallHeader, { y: 0, duration: 0 })
-        gsap.to(this.domElements.header, { y: 0, duration: 0 })
-        gsap.to(this.domElements.form, { y: 0, duration: 0 })
+        gsap.to(this.domElements.smallHeader, { y: 0, opacity: 1, duration: 0 })
+        gsap.to(this.domElements.header, { y: 0, opacity: 1, duration: 0 })
+        gsap.to(this.domElements.form, { y: 0, opacity: 1, duration: 0 })
     }
 
     addScrollEvents() {

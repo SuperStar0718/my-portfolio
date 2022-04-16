@@ -48,7 +48,8 @@
 }
 
 /**Render Result*/
-#about-skills-render-container :nth-child(even), #about-others-render-container :nth-child(odd){
+#about-skills-render-container :nth-child(even),
+#about-others-render-container :nth-child(odd) {
     background: #2d88dd18;
 }
 
@@ -101,7 +102,8 @@
         align-items: flex-start;
     }
 
-    #skills-svg{
+    #skills-svg {
         margin-top: 63vh;
+        margin-bottom: 90px;
     }
 }

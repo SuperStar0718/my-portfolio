@@ -4,7 +4,7 @@
     border-style: solid;
     top: 0;
     left: 0;
-    z-index:  999;
+    z-index: 999;
     transform: translate(-50%, -50%) scale(0);
     pointer-events: none;
     display: flex;

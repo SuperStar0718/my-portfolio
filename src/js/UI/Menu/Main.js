@@ -36,20 +36,13 @@ export default class MenuMain extends EventEmitter {
         this.contactAnimation = this.experience.world.contact.animation
         this.character = this.experience.world.character
 
+        this.setWidth()
+        this.updatePositon()
         this.menuButtonClick()
         this.hideEvents()
 
-        this.sizes.on('portrait', () => this.onOrientationChange())
-        this.sizes.on('landscape', () => this.onOrientationChange())
-    }
-
-    onOrientationChange() {
-        //always clsoe on orientation change
-        if (this.visible)
-            this.switchVisiblity(true, true)
-
-        //Menu position
-        this.domElements.menuContainer.style.right = this.sizes.portrait ? '-100%' : 'calc(-350px - 10vw)'
+        //Add slide out transition
+        window.requestAnimationFrame(() => this.domElements.menuContainer.classList.add('slide-out-left-transition'))
     }
 
     menuButtonClick() {
@@ -63,15 +56,16 @@ export default class MenuMain extends EventEmitter {
         })
     }
 
-    switchVisiblity(withCamera = true, force = false) {
+    switchVisiblity(withCamera = true, force = false, returnToInitials = true) {
         if ((!this.isAnimating && !this.landingPage.isAnimating && !this.transition.isShowing) || force) {
             //Trigger Event
             this.trigger(this.visible ? 'hide' : 'open')
 
             this.visible = !this.visible
 
-            //Position
-            this.domElements.menuContainer.style.right = this.visible ? '0' : (this.sizes.portrait ? '-100%' : 'calc(-350px - 10vw)')
+            this.updatePositon()
+
+            //Logo
             if (this.sizes.portrait) gsap.to(this.domElements.logoWhiteBackground, { opacity: this.visible ? 0 : 1, duration: .7 })
 
             //Button
@@ -79,7 +73,7 @@ export default class MenuMain extends EventEmitter {
 
             //start transition
             if (withCamera && !this.sizes.portrait)
-                this.landingPage.visible ? this.landingPageTransition() : this.scrollContainerTransition()
+                this.landingPage.visible ? this.landingPageTransition(returnToInitials) : this.scrollContainerTransition(returnToInitials)
 
             //Prevent too fast reopening
             this.isAnimating = true
@@ -91,8 +85,8 @@ export default class MenuMain extends EventEmitter {
     }
 
     //Open Menu with landing page view
-    landingPageTransition() {
-        this.waypoints.moveToWaypoint((this.visible ? 'landing-menu' : 'landing-page'), true, .9)
+    landingPageTransition(returnToInitials) {
+        this.waypoints.moveToWaypoint((this.visible ? 'landing-menu' : 'landing-page'), returnToInitials || this.isAnimating, .9)
         this.domElements.landingPageContent.style.left = this.visible ? '-100%' : '0'
     }
 
@@ -101,10 +95,11 @@ export default class MenuMain extends EventEmitter {
      * Either lab or contact scene
      * and save initial positions to return to on menu close
      */
-    scrollContainerTransition() {
+    scrollContainerTransition(returnToInitials) {
         if (!this.visible) {
             //Close Menu
-            this.returnToInitialPosition()
+            if (returnToInitials || this.isAnimating)
+                this.returnToInitialPosition()
 
             this.domElements.scrollContainer.style.left = '0'
         } else {
@@ -215,8 +210,19 @@ export default class MenuMain extends EventEmitter {
         gsap.to(this.domElements.menuButtonBar2, { rotation: 0, y: 0, duration: .1 })
     }
 
+    setWidth() {
+        this.domElements.menuContainer.style.width = (window.innerWidth - this.domElements.aboutSection.clientWidth) / 2 + 350 + 'px'
+    }
+
+    updatePositon() {
+        this.domElements.menuContainer.style.right = this.visible ? '0' : `-${this.domElements.menuContainer.clientWidth}px`
+    }
+
     resize() {
+        this.setWidth()
+        this.updatePositon()
+
         if (this.visible)
-            this.switchVisiblity(true, true)
+            this.switchVisiblity(true, true, false)
     }
 }

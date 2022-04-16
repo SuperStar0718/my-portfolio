@@ -12,13 +12,13 @@
 @import 'intro.css';
 
 /**---------------------------------------------------------------Main Stylings-----------------------------------------------------*/
-*
-{
+* {
     margin: 0;
     padding: 0;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     overflow: hidden;
 }
@@ -32,8 +32,7 @@ html, body {
     max-height: 100%;
 }
 
-body
-{
+body {
     font-family: 'Poppins', sans-serif;
     color: #091434;
     position: relative;
@@ -42,7 +41,7 @@ body
 }
 
 .content-width {
-    width: 1440px;
+    width: 92rem;
     max-width: calc(100% - 60px);
 }
 
@@ -131,16 +130,17 @@ hr {
 .section-subheader-container hr {
     width: 40px;
     background-color: #FF923E;
-    margin: 0; 
+    margin: 0;
     margin-right: 20px;
 }
 
 /*Selection*/
-::-moz-selection { /* Code for Firefox */
+::-moz-selection {
+    /* Code for Firefox */
     color: #343352;
     background: #93683327;
 }
-  
+
 ::selection {
     color: #343352;
     background: #9368332a;
@@ -169,7 +169,7 @@ hr {
 
 .orange-hover {
     background-color: #FF923E;
-    background-image: radial-gradient(circle at center , #ff9b4f 50%, transparent 50%);
+    background-image: radial-gradient(circle at center, #ff9b4f 50%, transparent 50%);
     background-repeat: no-repeat;
     transition: background-size 300ms;
     background-size: 0 0;
@@ -182,7 +182,7 @@ hr {
 
 .gray-hover {
     background-color: #a7adb8;
-    background-image: radial-gradient(circle at center , #b1b7c2 50%, transparent 50%);
+    background-image: radial-gradient(circle at center, #b1b7c2 50%, transparent 50%);
     background-repeat: no-repeat;
     transition: background-size 300ms;
     background-size: 0 0;
@@ -196,19 +196,23 @@ hr {
 
 /****************************icons**************************/
 .social-icon {
-    background-size: cover!important;
+    background-size: cover !important;
     background-repeat: no-repeat;
     background-position: center center;
     cursor: pointer;
-    filter:  grayscale(1) brightness(8);
-    height: 32px;
-    width: 32px;
+    filter: grayscale(1) brightness(8);
+    height: 28px;
+    width: 28px;
     transition: 0.125s ease-in;
 }
 
 .social-icon:hover {
     filter: unset;
     transform: scale(1.05);
+}
+
+.twitter-icon {
+    background: url('../assets/icons/twitter-icon.png');
 }
 
 .github-icon {
@@ -246,13 +250,15 @@ section {
     }
 }
 
-@media(max-width: 800px), (max-height: 800px) {
+@media(max-width: 800px),
+(max-height: 800px) {
     h1 {
         font-size: 3.8rem;
     }
 }
 
-@media(max-width: 480px), (max-height: 480px) {
+@media(max-width: 480px),
+(max-height: 480px) {
     h1 {
         font-size: 3rem;
     }

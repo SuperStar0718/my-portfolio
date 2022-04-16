@@ -37,7 +37,7 @@ export default class Sounds {
             name: 'mouseWheel',
             files: [mouseWheel0Sound, mouseWheel1Sound, mouseWheel2Sound],
             group: 'landing',
-            volume: .7,
+            volume: .6,
         },
         {
             name: 'roomAmbience',
@@ -55,7 +55,7 @@ export default class Sounds {
             name: 'longKeyboard',
             files: [longKeyboardSound],
             group: 'landing',
-            volume: .7,
+            volume: .5,
         },
         {
             name: 'labAmbience',

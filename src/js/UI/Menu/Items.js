@@ -245,7 +245,7 @@ export default class MenuItems {
         this.moveWithoutTransition(this.domElements.landingPageContent, 'left', '0')
 
         //Menu position
-        this.moveWithoutTransition(this.domElements.menuContainer, 'right', this.sizes.portrait ? '-100%' : 'calc(-350px - 10vw)')
+        this.moveWithoutTransition(this.domElements.menuContainer, 'right', `-${this.domElements.menuContainer.clientWidth}px`)
 
         //Logo white background
         gsap.to(this.domElements.logoWhiteBackground, { opacity: 1, duration: 0 })
