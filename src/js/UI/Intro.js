@@ -124,6 +124,8 @@ export default class Intro {
             this.hoverIcon.setupDefault()
 
             this.playIntro()
+
+            this.sounds.fadeInRoomAmbience()
         }
     }
 

@@ -43,7 +43,7 @@ export default class Sounds {
             name: 'roomAmbience',
             files: [roomAmbienceSound],
             group: 'landing',
-            volume: .15,
+            volume: .1,
         },
         {
             name: 'notification',
@@ -146,6 +146,10 @@ export default class Sounds {
         this.roomAmbience.name = 'roomAmbience'
     }
 
+    fadeInRoomAmbience() {
+        this.roomFadeTween = gsap.fromTo(this.roomAmbience, { volume: 0 }, { volume: this.items.find((item) => item.name === 'roomAmbience').volume, duration: 7 })
+    }
+
     setLabAmbience() {
         this.labAmbience = this.items.find((item) => item.name === 'labAmbience').howls[0]
 
@@ -213,6 +217,9 @@ export default class Sounds {
                 item.howls.forEach((howl) => {
                     //Fade Out
                     gsap.to(howl, { volume: mute ? 0 : item.volume, duration: 1 })
+
+                    if (howl.name === 'roomAmbience' && this.roomFadeTween)
+                        this.roomFadeTween.kill()
 
                     //Stop
                     if (mute) {

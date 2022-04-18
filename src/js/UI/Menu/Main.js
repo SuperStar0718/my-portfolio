@@ -43,6 +43,16 @@ export default class MenuMain extends EventEmitter {
 
         //Add slide out transition
         window.requestAnimationFrame(() => this.domElements.menuContainer.classList.add('slide-out-left-transition'))
+
+        this.sizes.on('portrait', () => this.onOrientationChange())
+        this.sizes.on('landscape', () => this.onOrientationChange())
+    }
+
+    onOrientationChange() {
+        if (this.yTween) {
+            this.yTween.kill()
+            this.yTween = null
+        }
     }
 
     menuButtonClick() {
@@ -98,8 +108,12 @@ export default class MenuMain extends EventEmitter {
     scrollContainerTransition(returnToInitials) {
         if (!this.visible) {
             //Close Menu
-            if (returnToInitials || this.isAnimating)
+            if (returnToInitials || this.isAnimating) {
                 this.returnToInitialPosition()
+            } else if (!this.sizes.portrait) {
+                this.waypoints.moveToWaypoint(this.sizes.portrait ? 'scroll-start-portrait' : 'scroll-start')
+                this.yTween = gsap.to(this.camera.instance.position, { y: this.initials.cameraY, duration: .9, ease: Power2.easeInOut })
+            }
 
             this.domElements.scrollContainer.style.left = '0'
         } else {
@@ -122,7 +136,7 @@ export default class MenuMain extends EventEmitter {
 
     returnToInitialPosition() {
         //camera
-        this.waypoints.moveToWaypoint('scroll-start')
+        this.waypoints.moveToWaypoint(this.sizes.portrait ? 'scroll-start-portrait' : 'scroll-start')
         gsap.to(this.camera.instance.position, { y: this.initials.cameraY, duration: .9, ease: Power2.easeInOut })
 
         //return elements to positon

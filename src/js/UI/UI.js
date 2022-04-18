@@ -65,10 +65,6 @@ export default class UI {
         this.intro = new Intro()
     }
 
-    update() {
-
-    }
-
     resize() {
         if (this.scroll)
             this.scroll.resize()

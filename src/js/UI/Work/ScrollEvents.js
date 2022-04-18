@@ -29,7 +29,7 @@ export default class WorkScrollEvents {
         },
         { //Cards
             landscapeTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header0) + this.sizes.getAbsoluteHeight(this.domElements.header1) + 100,
-            portraitTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header0) + this.sizes.getAbsoluteHeight(this.domElements.header1)+ 100,
+            portraitTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header0) + this.sizes.getAbsoluteHeight(this.domElements.header1) + 100,
             event: () => {
                 gsap.to(this.domElements.cards[0], { y: 0, opacity: 1, duration: .35 })
                 gsap.to(this.domElements.cards[1], { y: 0, opacity: 1, duration: .25 })
@@ -45,8 +45,10 @@ export default class WorkScrollEvents {
         this.scroll = this.experience.ui.scroll
         this.sizes = this.experience.sizes
 
-        this.setupPositions()
-        this.addScrollEvents()
+        if (!this.sizes.touch) {
+            this.addScrollEvents()
+            this.setupPositions()
+        }
     }
 
     setupPositions() {

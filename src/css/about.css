@@ -80,13 +80,10 @@
 
 /**About Content*/
 #about-svg-about image {
-    height: 64px;
-    width: 64px;
     image-rendering: pixelated;
 }
 
 .about-pixel-mask-rect {
-    width: 64px;
     fill: white;
 }
 

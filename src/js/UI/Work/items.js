@@ -4,7 +4,7 @@ export default [
         name: 'IUCN Redlist',
         description: 'A redesign of the <a href="https://www.iucnredlist.org/" target="_blank">IUCN</a> Redlist website',
         image: 'images/projects/iucn.png',
-        tags: ['react', 'r3f', 'api', 'javascript', 'html', 'css'],
+        tags: ['react', 'r3f', 'javascript', 'html', 'css'],
         alt: 'work in progress portfolio project',
     },
     {
@@ -32,7 +32,7 @@ export default [
         name: 'Portfolio 2022',
         description: `The page you are looking at right now`,
         image: 'images/projects/portfolio.png',
-        tags: ['threejs', 'javascript', 'svg', 'html', 'css'],
+        tags: ['threejs', 'javascript', 'html', 'css'],
         github: 'https://github.com/davidhckh/portfolio-2022',
         alt: 'david heckhoff portfolio project 2022 threejs blender 3d design',
     },

@@ -48,10 +48,10 @@ export default class WorkCards {
         //Check if the current element is focused during swipe
         this.domElements.section.addEventListener('touchend', () => {
             setTimeout(() => this.isCurrentSwipeElement = false)
-        })
+        }, { passive: true })
         this.domElements.section.addEventListener('touchstart', () => {
             this.isCurrentSwipeElement = true
-        })
+        }, { passive: true })
     }
 
     swipe(direction) {

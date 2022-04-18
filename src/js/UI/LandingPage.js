@@ -136,7 +136,7 @@ export default class LandingPage extends EventEmitter {
     }
 
     show() {
-        if (this.domElements.scrollContainer.scrollTop == 0 && !this.visible && !this.isAnimating && !this.transiton.isShowing && this.reopeningEnabled) {
+        if (!this.visible && !this.isAnimating && !this.transiton.isShowing && this.reopeningEnabled) {
             this.visible = true
 
             this.intervals.killLeftDesktopIntervals()

@@ -82,8 +82,8 @@ export default class HoverIcon {
         this.sizes.touch ? this.domElements.icon.classList.add('hide') : this.domElements.icon.classList.remove('hide')
         this.sizes.on('touch', () => this.domElements.icon.classList.add('hide'))
         this.sizes.on('no-touch', () => this.domElements.icon.classList.remove('hide'))
-
     }
+    
     // Apply Mouseenter, mouseleave and mousemove event listeners
     applyEventListeners() {
         this.hoverElements.forEach((element) => {

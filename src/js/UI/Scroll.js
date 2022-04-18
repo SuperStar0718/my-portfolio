@@ -1,12 +1,13 @@
 import Experience from '../Experience'
-import { gsap, Power2 } from 'gsap'
+import { gsap, Power2, Power4 } from 'gsap'
 
 export default class Scroll {
 
     parameters = {
         scrollStrength: 110,
-        scrollDuration: () => this.sizes.touch ? .45 : .8,
-        multiplyTouchStrengthBy: 3,
+        multiplyTouchStrengthBy: 4,
+        scrollDuration: () => this.sizes.touch ? 1 : .8,
+        scrollEase: () => this.sizes.touch ? Power4.easeOut : Power2.easeOut,
     }
 
     scrollY = 0
@@ -39,12 +40,12 @@ export default class Scroll {
         this.setLogoOverlayHeight()
 
         //Scroll
-        this.gestures.on('scroll-down', () => this.scroll(1))
-        this.gestures.on('scroll-up', () => this.scroll(-1))
+        this.gestures.on('scroll-down', () => this.attemptScroll(1))
+        this.gestures.on('scroll-up', () => this.attemptScroll(-1))
 
         //Touch
-        this.gestures.on('touch-down', () => this.scroll(1, -this.gestures.touchDistanceY * this.parameters.multiplyTouchStrengthBy))
-        this.gestures.on('touch-up', () => this.scroll(-1, this.gestures.touchDistanceY * this.parameters.multiplyTouchStrengthBy))
+        this.gestures.on('touch-down', () => this.attemptScroll(1, -this.gestures.touchDistanceY * this.parameters.multiplyTouchStrengthBy))
+        this.gestures.on('touch-up', () => this.attemptScroll(-1, this.gestures.touchDistanceY * this.parameters.multiplyTouchStrengthBy))
 
         //Reset Y on open
         this.landingPage.on('hide', () => {
@@ -150,9 +151,10 @@ export default class Scroll {
         this.events.forEach((event) => event.played = false)
     }
 
-    scroll(direction, strength = this.parameters.scrollStrength) {
+    attemptScroll(direction, strength = this.parameters.scrollStrength) {
         if (!this.landingPage.isAnimating && !this.landingPage.visible && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating && !this.transition.isShowing) {
-            if (direction == -1 && this.scrollY <= 0) {
+
+            if (direction == -1 && this.scrollY <= 20) {
                 //Open landing page
                 this.checkLandingPageOpening()
             } else if (this.scrollY != 0 || direction == 1) {
@@ -169,7 +171,8 @@ export default class Scroll {
             }
 
             //update last wheel to prevent too slow scrolling down before opening landing page
-            if (direction == -1) this.updateLastWheelUp()
+            if (direction == -1)
+                this.lastWheelUp = this.time.current
         }
     }
 
@@ -210,29 +213,24 @@ export default class Scroll {
         if (scrollPercentage > 1) scrollPercentage = 1
 
         //Scroll Container
-        gsap.to(this.domElements.scrollContainer, { y: -this.contentScrollTo, duration: duration, ease: Power2.easeOut })
+        gsap.to(this.domElements.scrollContainer, { y: -this.contentScrollTo, duration: duration, ease: this.parameters.scrollEase() })
 
         if (scrollPercentage >= 0) {
             //Background Plane
-            gsap.to(this.background.material.uniforms.uOffset, { value: ((this.background.height * 1.9) * scrollPercentage) - .75, duration: duration, ease: Power2.easeOut })
+            gsap.to(this.background.material.uniforms.uOffset, { value: ((this.background.height * 1.9) * scrollPercentage) - .75, duration: duration, ease: this.parameters.scrollEase() })
 
             //Camera
-            gsap.to(this.camera.instance.position, { y: (this.cameraRange.bottom - this.cameraRange.top) * scrollPercentage + this.cameraRange.top, duration: duration, ease: Power2.easeOut })
+            gsap.to(this.camera.instance.position, { y: (this.cameraRange.bottom - this.cameraRange.top) * scrollPercentage + this.cameraRange.top, duration: duration, ease: this.parameters.scrollEase() })
 
             //Logo Background
-            gsap.to(this.domElements.logoWhiteBackground, { y: - this.contentScrollTo - window.innerHeight, duration: duration, ease: Power2.easeOut })
+            gsap.to(this.domElements.logoWhiteBackground, { y: - this.contentScrollTo - window.innerHeight, duration: duration, ease: this.parameters.scrollEase() })
         }
     }
 
     checkLandingPageOpening() {
         //open landing if user isnt scrolling too fast
-        if (this.time.current - this.lastWheelUp > 200) {
+        if (this.time.current - this.lastWheelUp > 200)
             this.landingPage.show()
-        }
-    }
-
-    updateLastWheelUp() {
-        this.lastWheelUp = this.time.current
     }
 
     //Re-position logo white background

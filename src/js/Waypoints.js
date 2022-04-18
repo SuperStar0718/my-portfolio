@@ -46,8 +46,20 @@ export default class Waypoints {
         this.camera = this.experience.camera.instance
         this.debug = this.experience.debug
         this.time = this.experience.time
+        this.sizes = this.experience.sizes
+
+        this.tweens = []
 
         this.setupWaypoints()
+
+        this.sizes.on('portrait', () => this.onOrientationChange())
+        this.sizes.on('landscape', () => this.onOrientationChange())
+    }
+
+    onOrientationChange() {
+        this.tweens.forEach(tween => {
+            tween.kill()
+        })
     }
 
     setupWaypoints() {
@@ -73,24 +85,28 @@ export default class Waypoints {
 
         if (withAnimation) {
             // move with animation
-            
+
             //position
-            gsap.to(this.camera.position, {
-                x: waypoint.position.x,
-                y: waypoint.position.y,
-                z: waypoint.position.z,
-                duration: mDuration,
-                ease: Power2.easeInOut
-            })
+            this.tweens.push(
+                gsap.to(this.camera.position, {
+                    x: waypoint.position.x,
+                    y: waypoint.position.y,
+                    z: waypoint.position.z,
+                    duration: mDuration,
+                    ease: Power2.easeInOut
+                })
+            )
 
             //rotation
-            gsap.to(this.camera.rotation, {
-                x: waypoint.rotation.x,
-                y: waypoint.rotation.y,
-                z: waypoint.rotation.z,
-                duration: mDuration,
-                ease: Power2.easeInOut,
-            })
+            this.tweens.push(
+                gsap.to(this.camera.rotation, {
+                    x: waypoint.rotation.x,
+                    y: waypoint.rotation.y,
+                    z: waypoint.rotation.z,
+                    duration: mDuration,
+                    ease: Power2.easeInOut,
+                })
+            )
         } else {
             // move without animation 
             this.camera.position.set(waypoint.position.x, waypoint.position.y, waypoint.position.z)

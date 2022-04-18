@@ -2,10 +2,9 @@ export default {
     html: `<div class="work-item-tag" style="background: white; border: 1px solid #7C8594; color: #7C8594">HTML</div>`,
     css: `<div class="work-item-tag" style="background: white; border: 1px solid #7C8594; color: #7C8594">CSS</div>`,
     javascript: `<div class="work-item-tag" style="background: #FFB800;">JavaScript</div>`,
-    react: `<div class="work-item-tag" style="background: #21BAEB;">React</div>`,
+    react: `<div class="work-item-tag" style="background: #21BAEB;">ReactJS</div>`,
     r3f: `<div class="work-item-tag" style="background: #00156D;">R3F</div>`,
     threejs: `<div class="work-item-tag" style="background: #5A69EC;">ThreeJS</div>`,
     api: `<div class="work-item-tag" style="background: #CA49F8;">API</div>`,
     backend: `<div class="work-item-tag" style="background: #8433CC;">Backend</div>`,
-    svg: `<div class="work-item-tag" style="background: #3ABC61;">SVG</div>`,
 }

@@ -22,7 +22,7 @@ export default class WorkRender {
         this.items.forEach((item) => {
             this.domElements.renderContainer.insertAdjacentHTML('beforeend', `
             <div id="work-item-${item.id}" class="work-item-container column">
-                <img class="work-item-image" src="${item.image}" alt="${item.alt}"/>
+                <img class="work-item-image" src="${item.image}" alt="${item.alt}" height="300" width="334"/>
                 <div class="work-item-content-container">
                     <h3>${item.name}</h3>
                     <div class="work-item-tag-container row">

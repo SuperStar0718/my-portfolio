@@ -22,7 +22,6 @@ export default class ContactAnimationEvents {
             landscapeTrigger: () => this.domElements.scrollContainer.clientHeight - (window.innerHeight * 1.5),
             portraitTrigger: () => this.domElements.scrollContainer.clientHeight - (window.innerHeight * 1.2),
             event: () => gsap.delayedCall(.5, () => this.animation.playTransition()),
-            repeats: true
         },
         { //Small Header
             landscapeTrigger: () => this.domElements.scrollContainer.clientHeight - this.sizes.getAbsoluteHeight(this.domElements.contactSection) - (window.innerHeight * 0.7),
@@ -47,7 +46,9 @@ export default class ContactAnimationEvents {
         this.animation = this.experience.world.contact.animation
         this.sizes = this.experience.sizes
 
-        this.setupPositions()
+        if (!this.sizes.touch)
+            this.setupPositions()
+
         this.addScrollEvents()
     }
 
