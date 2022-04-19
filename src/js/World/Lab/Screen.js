@@ -1,5 +1,6 @@
 import Experience from "../../Experience"
 import * as THREE from 'three'
+import { gsap } from "gsap"
 
 export default class LabScreen {
 
@@ -7,14 +8,22 @@ export default class LabScreen {
         speed: 0.0005
     }
 
+    active = true
+
     constructor() {
         this.experience = new Experience()
         this.resources = this.experience.resources
         this.debug = this.experience.debug
         this.lab = this.experience.world.lab.model
+        this.sounds = this.experience.sounds
 
         this.setModel()
         this.setMaterial()
+
+        this.setBackground()
+
+        this.setButton()
+
         this.initDebug()
     }
 
@@ -26,13 +35,45 @@ export default class LabScreen {
         this.texture = this.resources.items.labScreenGraph
         this.texture.wrapS = THREE.RepeatWrapping
 
-        this.material = new THREE.MeshBasicMaterial({ map: this.texture })
+        this.material = new THREE.MeshBasicMaterial({ map: this.texture, transparent: true })
 
         this.model.material = this.material
     }
 
+    setBackground() {
+        this.background = {
+            geometry: this.model.geometry.clone(),
+            material: new THREE.MeshBasicMaterial({ map: this.resources.items.labScreenOffline }),
+        }
+
+        this.background.mesh = new THREE.Mesh(this.background.geometry, this.background.material)
+
+        this.background.mesh.position.set(this.model.position.x - .001, this.model.position.y, this.model.position.z)
+
+        this.lab.model.add(this.background.mesh)
+    }
+
+    setButton() {
+        this.button = this.lab.model.children.find((child) => child.name === 'pc-button')
+        this.button.material = this.lab.material
+
+        //Hover Icon
+        this.button.hoverIcon = 'pointer'
+
+        this.button.onClick = () => {
+            this.sounds.play('buttonClick')
+            this.switchActivity()
+        }
+    }
+
+    switchActivity() {
+        this.active = !this.active
+
+        gsap.to(this.material, { opacity: this.active ? 1 : 0, duration: .2 })
+    }
+
     initDebug() {
-        if(this.debug.active) {
+        if (this.debug.active) {
             this.debugFolder = this.lab.debugFolder.addFolder('Screen').close()
 
             this.debugFolder.add(this.parameters, 'speed').min(0).max(0.01).step(0.0001).name('Movement Speed')
@@ -40,6 +81,7 @@ export default class LabScreen {
     }
 
     update() {
-        this.texture.offset.x -= this.parameters.speed
+        if (this.active)
+            this.texture.offset.x -= this.parameters.speed
     }
 }

@@ -6,6 +6,10 @@ import mouseWheel0Sound from '../assets/sounds/mouse-wheel-0.mp3'
 import mouseWheel1Sound from '../assets/sounds/mouse-wheel-1.mp3'
 import mouseWheel2Sound from '../assets/sounds/mouse-wheel-2.mp3'
 
+import bubble0Sound from '../assets/sounds/bubble-0.mp3'
+import bubble1Sound from '../assets/sounds/bubble-1.mp3'
+import bubble2Sound from '../assets/sounds/bubble-2.mp3'
+
 import notificationSound from '../assets/sounds/notification.mp3'
 
 import longKeyboardSound from '../assets/sounds/long-keyboard.mp3'
@@ -38,6 +42,12 @@ export default class Sounds {
             files: [mouseWheel0Sound, mouseWheel1Sound, mouseWheel2Sound],
             group: 'landing',
             volume: .6,
+        },
+        {
+            name: 'bubble',
+            files: [bubble0Sound, bubble1Sound, bubble2Sound],
+            group: 'lab',
+            volume: .2,
         },
         {
             name: 'roomAmbience',
@@ -237,7 +247,7 @@ export default class Sounds {
         const item = this.items.find((item) => item.name === name)
 
         //Play random
-        if (this.active)
+        if (this.active && this.experience.sizes.touch ? name != 'buttonClick' : true)
             item.howls[Math.floor(Math.random() * item.howls.length)].play()
     }
 

@@ -68,16 +68,6 @@ module.exports = {
                     }
                 },
 
-                // Fonts
-                {
-                    test: /\.(ttf|eot|woff|woff2)$/,
-                    type: 'asset/resource',
-                    generator:
-                    {
-                        filename: 'assets/fonts/[hash][ext]'
-                    }
-                },
-
                 // Shaders
                 {
                     test: /\.(glsl|vs|fs|vert|frag)$/,

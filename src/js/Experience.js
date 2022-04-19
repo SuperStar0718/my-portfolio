@@ -12,6 +12,7 @@ import UI from './UI/UI.js'
 import Gestures from './Utils/Gestures.js'
 import Waypoints from './Waypoints.js'
 import Sounds from './Sounds.js'
+import Raycasting from './Utils/Raycasting'
 
 let instance = null
 
@@ -42,6 +43,7 @@ export default class Experience {
         this.renderer = new Renderer()
         this.world = new World()
         this.ui = new UI()
+        this.raycaster = new Raycasting()
 
         // Resize event
         this.sizes.on('resize', () => {
@@ -64,5 +66,6 @@ export default class Experience {
         this.camera.update()
         this.world.update()
         this.renderer.update()
+        this.raycaster.update()
     }
 }

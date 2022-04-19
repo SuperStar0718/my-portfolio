@@ -119,7 +119,7 @@ export default class LandingPage extends EventEmitter {
 
                 //spawn bubbles
                 gsap.delayedCall(.05, () => {
-                    const totalBubbles = 12
+                    const totalBubbles = 5
                     for (let i = 0; i < totalBubbles; i++) {
                         this.experience.world.lab.bubbles.spawnBubble(Math.random() * 1.8 + 1.2, 'back')
                     }

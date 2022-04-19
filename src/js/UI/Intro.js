@@ -66,8 +66,13 @@ export default class Intro {
     }
 
     setupClickCTA() {
-        document.querySelector('body').style.cursor = 'pointer'
+        if (!this.experience.sizes.touch)
+            document.querySelector('body').classList.add('pointer')
+
         document.getElementById('hover-icon').classList.add('clickCTA')
+
+        this.clickCTAVisible = true
+
         this.startAnimation()
     }
 
@@ -98,7 +103,11 @@ export default class Intro {
     }
 
     closeClickCTA() {
-        document.querySelector('body').style.cursor = ''
+        setTimeout(() => this.clickCTAVisible = false)
+
+        if (!this.experience.sizes.touch)
+            document.querySelector('body').classList.remove('pointer')
+
         document.getElementById('hover-icon').classList.remove('clickCTA')
 
         this.killAnimation()
@@ -109,7 +118,8 @@ export default class Intro {
         if (!this.closed) {
             this.closed = true
 
-            this.domElements.container.style.cursor = 'unset '
+            if (!this.experience.sizes.touch)
+                this.domElements.container.style.cursor = 'unset'
 
 
             //Start sounds
@@ -151,7 +161,7 @@ export default class Intro {
     //Show overlay and enable gestures
     finish() {
         //Fade in overlay
-        gsap.fromTo(this.domElements.overlay, { opacity: 0 }, { opacity: 1, duration: 1})
+        gsap.fromTo(this.domElements.overlay, { opacity: 0 }, { opacity: 1, duration: 1 })
 
         //Hide Intro Container
         this.domElements.container.classList.add('hide')

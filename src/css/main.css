@@ -49,6 +49,10 @@ body {
     display: none !important;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .center {
     display: flex;
     justify-content: center;

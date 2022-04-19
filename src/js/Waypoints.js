@@ -21,8 +21,8 @@ export default class Waypoints {
         },
         {
             name: 'scroll-start',
-            position: { x: 5.8, y: -14, z: 8.3 },
-            lookAt: { x: -2.7, y: -17.7, z: 0 },
+            position: { x: 6, y: -14.75, z: 8.5 },
+            lookAt: { x: -2.7, y: -17.45, z: 0 },
         },
         {
             name: 'scroll-start-portrait',

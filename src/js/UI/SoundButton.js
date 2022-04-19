@@ -70,8 +70,7 @@ export default class Sound {
 
         if (!this.landingPage.visible) this.sounds.labAmbienceScroll('recent')
 
-        if (!this.experience.ui.landingPage.visible)
-            this.experience.ui.scroll.performScroll()
+        this.experience.ui.scroll.performScroll()
 
         if (updateLocalStorage)
             this.updateLocalStorage()

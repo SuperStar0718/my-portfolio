@@ -22,6 +22,7 @@ import CharacterFace from './Character/Face.js'
 import CharacterIntervals from './Character/Intervals.js'
 import Animations from './Character/Animations.js'
 import Tones from './Room/Tones.js'
+import Speaker from './Room/Speaker.js'
 
 export default class World {
     constructor() {
@@ -42,6 +43,7 @@ export default class World {
             this.landingPage.mouse = new Mouse()
             this.landingPage.messagePopUp = new MessagePopUp()
             this.landingPage.tones = new Tones()
+            this.landingPage.speaker = new Speaker()
 
             // Skills
             this.lab = {}

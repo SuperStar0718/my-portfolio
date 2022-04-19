@@ -43,6 +43,7 @@ export default [
     { name: 'bakedShadowLabTexture', type: 'texture', path: 'models/lab/shadow-baked.jpg' },
     { name: 'bakedLabTexture', type: 'texture', path: 'models/lab/baked.jpg' },
     { name: 'labScreenGraph', type: 'texture', path: 'models/lab/screen-graph.jpg' },
+    { name: 'labScreenOffline', type: 'texture', path: 'models/lab/screen-offline.jpg' },
     { name: 'bubbleSprite', type: 'texture', path: 'textures/sprites/bubble.png' },
 
     //Contact Scene

@@ -5,7 +5,7 @@ export default class Scroll {
 
     parameters = {
         scrollStrength: 110,
-        multiplyTouchStrengthBy: 4,
+        multiplyTouchStrengthBy: () => this.sizes.portrait ? 3 : 2,
         scrollDuration: () => this.sizes.touch ? 1 : .8,
         scrollEase: () => this.sizes.touch ? Power4.easeOut : Power2.easeOut,
     }
@@ -31,7 +31,7 @@ export default class Scroll {
         this.waypoints = this.experience.waypoints
         this.scrollIcon = this.experience.ui.scrollScrollIcon
 
-        //Hide scroll container
+        //Hide scroll container without transition
         this.domElements.scrollContainer.style.top = '100%'
         setTimeout(() => this.domElements.scrollContainer.classList.add('scroll-container-transitions'))
 
@@ -44,8 +44,8 @@ export default class Scroll {
         this.gestures.on('scroll-up', () => this.attemptScroll(-1))
 
         //Touch
-        this.gestures.on('touch-down', () => this.attemptScroll(1, -this.gestures.touchDistanceY * this.parameters.multiplyTouchStrengthBy))
-        this.gestures.on('touch-up', () => this.attemptScroll(-1, this.gestures.touchDistanceY * this.parameters.multiplyTouchStrengthBy))
+        this.gestures.on('touch-down', () => this.attemptScroll(1, -this.gestures.touchDistanceY * this.parameters.multiplyTouchStrengthBy()))
+        this.gestures.on('touch-up', () => this.attemptScroll(-1, this.gestures.touchDistanceY * this.parameters.multiplyTouchStrengthBy()))
 
         //Reset Y on open
         this.landingPage.on('hide', () => {
@@ -63,7 +63,7 @@ export default class Scroll {
 
     stopScrollOnTouchStart() {
         this.gestures.on('touch-start', () => {
-            if (!this.landingPage.visible) {
+            if (!this.landingPage.isAnimating && !this.landingPage.visible && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating && !this.transition.isShowing) {
                 gsap.killTweensOf(this.domElements.scrollContainer)
                 gsap.killTweensOf(this.domElements.logoWhiteBackground)
                 gsap.killTweensOf(this.camera.instance.position)
@@ -189,41 +189,43 @@ export default class Scroll {
     }
 
     performScroll(duration = this.parameters.scrollDuration()) {
-        this.contentScrollTo = this.preventFromScrollingBottom()
+        if (!this.landingPage.visible && !this.landingPage.isAnimating) {
+            this.contentScrollTo = this.preventFromScrollingBottom()
 
-        let scrollPercentage = 0
-        if (this.scrollY > this.aboutContainer.offset || this.sizes.portrait) {
-            if (this.sizes.portrait) {
-                scrollPercentage = this.contentScrollTo / this.domElements.scrollContainer.clientHeight
-                this.sounds.labAmbienceScroll(this.scrollY / this.aboutContainer.height)
+            let scrollPercentage = 0
+            if (this.scrollY > this.aboutContainer.offset || this.sizes.portrait) {
+                if (this.sizes.portrait) {
+                    scrollPercentage = this.contentScrollTo / this.domElements.scrollContainer.clientHeight
+                    this.sounds.labAmbienceScroll(this.scrollY / this.aboutContainer.height)
+                }
+                else {
+                    scrollPercentage = (this.contentScrollTo - this.aboutContainer.offset) / (this.domElements.scrollContainer.clientHeight - this.aboutContainer.height)
+                    this.sounds.labAmbienceScroll((this.contentScrollTo - this.aboutContainer.offset) / ((this.domElements.scrollContainer.clientHeight * 0.7) - this.aboutContainer.height))
+                }
+            } else {
+                this.sounds.labAmbienceScroll(0)
             }
-            else {
-                scrollPercentage = (this.contentScrollTo - this.aboutContainer.offset) / (this.domElements.scrollContainer.clientHeight - this.aboutContainer.height)
-                this.sounds.labAmbienceScroll((this.contentScrollTo - this.aboutContainer.offset) / ((this.domElements.scrollContainer.clientHeight * 0.7) - this.aboutContainer.height))
+
+            //cap scrollY at 0
+            if (this.contentScrollTo < 0) this.contentScrollTo = 0
+
+            //cap scroll percentage
+            if (scrollPercentage < 0) scrollPercentage = 0
+            if (scrollPercentage > 1) scrollPercentage = 1
+
+            //Scroll Container
+            gsap.to(this.domElements.scrollContainer, { y: -this.contentScrollTo, duration: duration, ease: this.parameters.scrollEase() })
+
+            if (scrollPercentage >= 0) {
+                //Background Plane
+                gsap.to(this.background.material.uniforms.uOffset, { value: ((this.background.height * 1.9) * scrollPercentage) - .75, duration: duration, ease: this.parameters.scrollEase() })
+
+                //Camera
+                gsap.to(this.camera.instance.position, { y: (this.cameraRange.bottom - this.cameraRange.top) * scrollPercentage + this.cameraRange.top, duration: duration, ease: this.parameters.scrollEase() })
+
+                //Logo Background
+                gsap.to(this.domElements.logoWhiteBackground, { y: - this.contentScrollTo - window.innerHeight, duration: duration, ease: this.parameters.scrollEase() })
             }
-        } else {
-            this.sounds.labAmbienceScroll(0)
-        }
-
-        //cap scrollY at 0
-        if (this.contentScrollTo < 0) this.contentScrollTo = 0
-
-        //cap scroll percentage
-        if (scrollPercentage < 0) scrollPercentage = 0
-        if (scrollPercentage > 1) scrollPercentage = 1
-
-        //Scroll Container
-        gsap.to(this.domElements.scrollContainer, { y: -this.contentScrollTo, duration: duration, ease: this.parameters.scrollEase() })
-
-        if (scrollPercentage >= 0) {
-            //Background Plane
-            gsap.to(this.background.material.uniforms.uOffset, { value: ((this.background.height * 1.9) * scrollPercentage) - .75, duration: duration, ease: this.parameters.scrollEase() })
-
-            //Camera
-            gsap.to(this.camera.instance.position, { y: (this.cameraRange.bottom - this.cameraRange.top) * scrollPercentage + this.cameraRange.top, duration: duration, ease: this.parameters.scrollEase() })
-
-            //Logo Background
-            gsap.to(this.domElements.logoWhiteBackground, { y: - this.contentScrollTo - window.innerHeight, duration: duration, ease: this.parameters.scrollEase() })
         }
     }
 

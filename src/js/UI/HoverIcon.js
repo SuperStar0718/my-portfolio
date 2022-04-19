@@ -1,7 +1,8 @@
 import { gsap, Power3 } from "gsap"
 import Experience from "../Experience"
+import EventEmitter from "../Utils/EventEmitter"
 
-export default class HoverIcon {
+export default class HoverIcon extends EventEmitter {
 
     domElements = {
         icon: document.getElementById('hover-icon'),
@@ -67,10 +68,13 @@ export default class HoverIcon {
     cursorIsInsideDoc = true
 
     constructor() {
+        super()
+
         this.experience = new Experience()
         this.sizes = this.experience.sizes
         this.scroll = this.experience.ui.scroll
         this.landingPage = this.experience.ui.landingPage
+        this.intro = this.experience.ui.intro
 
         this.setupDefault()
         this.setCursorLeavesDoc()
@@ -83,7 +87,7 @@ export default class HoverIcon {
         this.sizes.on('touch', () => this.domElements.icon.classList.add('hide'))
         this.sizes.on('no-touch', () => this.domElements.icon.classList.remove('hide'))
     }
-    
+
     // Apply Mouseenter, mouseleave and mousemove event listeners
     applyEventListeners() {
         this.hoverElements.forEach((element) => {
@@ -114,7 +118,9 @@ export default class HoverIcon {
         window.addEventListener('mousemove', () => {
             this.updatePosition()
 
-            if (!this.isHoveringCursorElement && this.currentIcon != 'default')
+            this.trigger('move')
+
+            if (!this.isHoveringCursorElement && !this.experience.raycaster.isHovering)
                 this.setupDefault()
         })
     }
@@ -133,12 +139,10 @@ export default class HoverIcon {
         //About (Blue) Color
         const setupAboutColor = () => {
             this.updateBaseColor('#34bfff')
-            this.isHoveringAboutSection = true
         }
 
         //Default (orange) color
         const setupDefaultColor = () => {
-            this.isHoveringAboutSection = false
             this.updateBaseColor('#FF923E')
         }
 
@@ -148,63 +152,71 @@ export default class HoverIcon {
         this.domElements.aboutSection.addEventListener('mouseenter', () => setupAboutColor())
         this.domElements.colorSwitchContainer.addEventListener('mouseleave', () => setupDefaultColor())
         this.domElements.aboutSection.addEventListener('mouseleave', () => setupDefaultColor())
-
-        window.addEventListener('mousemove', () => {
-            if (!this.isHoveringAboutSection)
-                setupDefaultColor()
-        })
     }
 
     updateBaseColor(color) {
         setTimeout(() => {
-            if (!document.hidden && (this.cursorIsInsideDoc || this.landingPage.visible) && this.currentBaseColor != color) {
+            if (!document.hidden && (this.cursorIsInsideDoc || this.landingPage.visible) && this.currentBaseColor != color && !this.experience.raycaster.isHovering) {
                 this.currentBaseColor = color
 
-                if (this.currentIcon == 'default')
-                    this.domElements.icon.style.borderColor = this.currentBaseColor
+                this.domElements.icon.style.borderColor = this.currentBaseColor
             }
         })
     }
 
     setupDefault() {
-        this.currentIcon = 'default'
+        if (this.currentIcon != 'default' && !this.isHoveringCursorElement && !this.experience.raycaster.isHovering) {
+            this.currentIcon = 'default'
 
-        this.domElements.icon.style.borderWidth = '7px'
-        this.domElements.icon.style.height = '0'
-        this.domElements.icon.style.width = '0'
-        this.domElements.icon.style.borderColor = this.currentBaseColor
-        this.domElements.content.classList.add('hide')
+            this.domElements.icon.style.borderWidth = '7px'
+            this.domElements.icon.style.height = '0'
+            this.domElements.icon.style.width = '0'
+            this.domElements.icon.style.borderColor = this.currentBaseColor
+            this.domElements.content.classList.add('hide')
+
+            if (!this.sizes.touch)
+                document.querySelector('body').style.cursor = ''
+        }
     }
 
-    setupPointer(element, domElement) {
+    setupPointer(element = {}, domElement) {
+        if (this.currentIcon != 'pointer') {
+            const isInactiveWorkItem = element.class == '.work-item-container' ? domElement.classList.contains('work-inactive-item-container') : true
+            const isntDisabledWorkNavigationButton = domElement ? !domElement.classList.contains('work-disabled-navigation-button') : true
+            const hasGrayHover = element.class == '.work-item-gray-button' ? domElement.classList.contains('gray-hover') : true
 
-        const isInactiveWorkItem = element.class == '.work-item-container' ? domElement.classList.contains('work-inactive-item-container') : true
-        const isntDisabledWorkNavigationButton = !domElement.classList.contains('work-disabled-navigation-button')
-        const hasGrayHover = element.class == '.work-item-gray-button' ? domElement.classList.contains('gray-hover') : true
+            if (isInactiveWorkItem && isntDisabledWorkNavigationButton && hasGrayHover) {
+                setTimeout(() => {
+                    this.currentIcon = 'pointer'
 
-        if (isInactiveWorkItem && isntDisabledWorkNavigationButton && hasGrayHover) {
-            setTimeout(() => {
-                this.currentIcon = 'pointer'
+                    this.domElements.icon.style.borderWidth = '5px'
+                    this.domElements.icon.style.height = '18px'
+                    this.domElements.icon.style.width = '18px'
+                    this.domElements.icon.style.borderColor = element.color ? element.color : '#091434'
+                    this.domElements.icon.style.background = 'transparent'
+                    this.domElements.content.classList.add('hide')
 
-                this.domElements.icon.style.borderWidth = '5px'
-                this.domElements.icon.style.height = '18px'
-                this.domElements.icon.style.width = '18px'
-                this.domElements.icon.style.borderColor = element.color
-                this.domElements.icon.style.background = 'transparent'
-                this.domElements.content.classList.add('hide')
-            })
+                    if (!this.sizes.touch)
+                        document.querySelector('body').style.cursor = 'pointer'
+                })
+            }
         }
     }
 
     setupCircle(element, domElement) {
-        if (element == 'force' ? true : !domElement.classList.contains('active-menu-item')) {
-            this.currentIcon = 'circle'
+        if (this.currentIcon != 'circle') {
+            if (element == 'force' ? true : !domElement.classList.contains('active-menu-item')) {
+                this.currentIcon = 'circle'
 
-            this.domElements.icon.style.borderWidth = '0'
-            this.domElements.icon.style.height = '55px'
-            this.domElements.icon.style.width = '55px'
-            this.domElements.icon.style.background = element == 'force' ? '#FF923E' : element.color
-            this.domElements.content.classList.remove('hide')
+                this.domElements.icon.style.borderWidth = '0'
+                this.domElements.icon.style.height = '55px'
+                this.domElements.icon.style.width = '55px'
+                this.domElements.icon.style.background = element == 'force' ? '#FF923E' : element.color
+                this.domElements.content.classList.remove('hide')
+
+                if (!this.intro.clickCTAVisbile && !this.sizes.touch)
+                    document.querySelector('body').style.cursor = ''
+            }
         }
     }
 

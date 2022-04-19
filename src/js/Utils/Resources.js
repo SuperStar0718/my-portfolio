@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 import EventEmitter from './EventEmitter.js'
 import Experience from '../Experience.js'
 import { gsap } from 'gsap'
@@ -32,6 +33,7 @@ export default class Resources extends EventEmitter {
         this.loaders = {}
         this.loaders.gltfLoader = new GLTFLoader()
         this.loaders.textureLoader = new THREE.TextureLoader()
+        this.loaders.fontLoader = new FontLoader()
     }
 
     startLoading() {
@@ -44,8 +46,7 @@ export default class Resources extends EventEmitter {
                         this.sourceLoaded(source, file)
                     }
                 )
-            }
-            else if (source.type === 'texture') {
+            } else if (source.type === 'texture') {
                 this.loaders.textureLoader.load(
                     source.path,
                     (file) => {

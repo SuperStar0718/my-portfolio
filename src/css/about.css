@@ -4,12 +4,13 @@
     font-family: 'Electrolize', sans-serif;
     color: #34bfff;
     min-height: 100vh;
+    margin-bottom: 15vh;
 }
 
 /**---------------------------------------------------------------Content-----------------------------------------------------*/
 #about-content-container {
     width: 580px;
-    max-width: 48%;
+    max-width: 45%;
     display: flex;
     flex-direction: column;
 }
@@ -91,6 +92,7 @@
 @media (max-aspect-ratio: 12/10) {
     #about-section {
         justify-content: center;
+        margin-bottom: 3vh;
     }
 
     #about-content-container {

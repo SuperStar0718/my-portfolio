@@ -14,18 +14,17 @@ export default class Room {
         this.desktopLayers = {}
 
         // Debug 
-        if (this.debug.active) {
+        if (this.debug.active)
             this.initDebug()
-        }
 
         this.setModel()
         this.setMaterial()
         this.addShadow()
     }
 
-    // Set room model 
     setModel() {
         this.model = this.resources.items.roomModel.scene
+
         this.baseModel = this.model.children.find((child) => child.name === 'room-base')
         this.shelving = this.model.children.find((child) => child.name === 'shelving')
         this.picture = this.model.children.find((child) => child.name === 'picture')
@@ -40,6 +39,7 @@ export default class Room {
         //Take desktops plane and move to base model to animate room bounce
         this.deskopPlane0 = this.model.children.find((child) => child.name === 'desktop-plane-0')
         this.deskopPlane1 = this.model.children.find((child) => child.name === 'desktop-plane-1')
+
 
         this.baseModel.add(this.deskopPlane0)
         this.baseModel.add(this.deskopPlane1)

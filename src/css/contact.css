@@ -143,6 +143,7 @@ line {
         height: fit-content;
         margin-bottom: 80vh;
         padding: 0;
+        min-height: unset;
     }
 
     #contact-header-container {

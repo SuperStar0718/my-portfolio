@@ -4,7 +4,10 @@ import { gsap, Power0, Back } from 'gsap'
 
 export default class Bubbles {
 
-    count = 17
+    parameters = {
+        count: 11,
+        maxMovementDuration: 3
+    }
 
     constructor() {
         this.experience = new Experience()
@@ -26,7 +29,7 @@ export default class Bubbles {
         this.sprites = []
         this.availableSprites = []
 
-        for (let i = 0; i < this.count; i++) {
+        for (let i = 0; i < this.parameters.count; i++) {
             //Creat new sprite and push to array + available sprites array
             this.sprites.push(
                 new THREE.Sprite(new THREE.SpriteMaterial({
@@ -43,6 +46,20 @@ export default class Bubbles {
 
             //add to lab scene
             this.lab.model.add(this.sprites[i])
+
+            this.addOnHover(this.sprites[i])
+        }
+    }
+
+    addOnHover(object) {
+        object.onHover = () => {
+            if (!object.popped) {
+                this.sounds.play('bubble')
+
+                object.popped = true
+
+                object.scale.set(0, 0, 0)
+            }
         }
     }
 
@@ -62,7 +79,7 @@ export default class Bubbles {
             const bubble = this.getAvailableSprite()
 
             //define ease and speed
-            const maxBubbleMoveDuration = ease === 'back' ? 4 : 2
+            const maxBubbleMoveDuration = ease === 'back' ? 4 : this.parameters.maxMovementDuration
             const easeToUse = ease === 'back' ? Back.easeIn.config(2.5) : Power0.easeNone
             const moveDuration = maxBubbleMoveDuration - (maxBubbleMoveDuration * (startY / 3.9))
 
@@ -77,8 +94,9 @@ export default class Bubbles {
                     }
                 })
 
-            // Opening
-            bubble.material.opacity = 0.5
+            // Reset for opening
+            bubble.material.opacity = Math.random() * 0.5 + 0.5
+            bubble.popped = false
 
             //Opening Bounce In
             const scale = Math.random() * 0.12 + 0.2
@@ -93,7 +111,7 @@ export default class Bubbles {
     }
 
     startInterval() {
-        gsap.delayedCall((Math.random() * 0.3) + 0.15, () => {
+        gsap.delayedCall((Math.random() * 0.3) + 0.25, () => {
             this.spawnBubble()
 
             //repeat
