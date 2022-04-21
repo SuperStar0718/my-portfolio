@@ -4,7 +4,7 @@
     font-family: 'Electrolize', sans-serif;
     color: #34bfff;
     min-height: 100vh;
-    margin-bottom: 15vh;
+    padding-bottom: 15vh;
 }
 
 /**---------------------------------------------------------------Content-----------------------------------------------------*/
@@ -92,7 +92,7 @@
 @media (max-aspect-ratio: 12/10) {
     #about-section {
         justify-content: center;
-        margin-bottom: 3vh;
+        padding-bottom: 3vh;
     }
 
     #about-content-container {

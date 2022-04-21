@@ -12,14 +12,31 @@ export default class Speaker {
         this.model.hoverIcon = 'pointer'
 
         //de/-activate sound on click
-        this.model.onClick = () => {
-            if (!this.experience.ui.intro.clickCTAVisible) {
-                const soundButton = this.experience.ui.soundButton
+        this.model.onClick = () => this.clickEvent()
 
-                soundButton.active ? soundButton.deactivate() : soundButton.activate()
+        //Disable pointer events when menu open
+        window.requestAnimationFrame(() => {
+            const menuMain = this.experience.ui.menu.main
+    
+            menuMain.on('open', () => {
+                this.model.hoverIcon = null
+                this.model.onClick = null
+            })
 
-                this.sounds.play('buttonClick')
-            }
+            menuMain.on('hide', () => {
+                this.model.hoverIcon = 'pointer'
+                this.model.onClick = () => this.clickEvent()
+            })
+        })
+    }
+
+    clickEvent() {
+        if (!this.experience.ui.intro.clickCTAVisible) {
+            const soundButton = this.experience.ui.soundButton
+
+            soundButton.active ? soundButton.deactivate() : soundButton.activate()
+
+            this.sounds.play('buttonClick')
         }
     }
 }

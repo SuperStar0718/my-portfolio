@@ -151,8 +151,12 @@ export default class Scroll {
         this.events.forEach((event) => event.played = false)
     }
 
+    scrollAllowed() {
+        return !this.landingPage.isAnimating && !this.landingPage.visible && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating && !this.transition.isShowing
+    }
+
     attemptScroll(direction, strength = this.parameters.scrollStrength) {
-        if (!this.landingPage.isAnimating && !this.landingPage.visible && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating && !this.transition.isShowing) {
+        if (this.scrollAllowed()) {
 
             if (direction == -1 && this.scrollY <= 20) {
                 //Open landing page
@@ -189,7 +193,7 @@ export default class Scroll {
     }
 
     performScroll(duration = this.parameters.scrollDuration()) {
-        if (!this.landingPage.visible && !this.landingPage.isAnimating) {
+        if (this.scrollAllowed()) {
             this.contentScrollTo = this.preventFromScrollingBottom()
 
             let scrollPercentage = 0
@@ -238,7 +242,7 @@ export default class Scroll {
     //Re-position logo white background
     setLogoOverlayHeight() {
         const whiteBackground = document.getElementById('logo-white-background')
-        whiteBackground.style.height = this.aboutContainer.height + (window.innerHeight * (this.sizes.portrait ? 0.03 : 0.15)) + 'px'
+        whiteBackground.style.height = this.aboutContainer.height + 'px'
         whiteBackground.style.marginTop = window.innerHeight - 15 + 'px'
     }
 

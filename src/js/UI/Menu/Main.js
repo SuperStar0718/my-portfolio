@@ -118,7 +118,7 @@ export default class MenuMain extends EventEmitter {
             this.domElements.scrollContainer.style.left = '0'
         } else {
             //Is lab or contact scene? focues depdening on result
-            const labScene = this.scroll.scrollY <= this.domElements.aboutSection.clientHeight + (window.innerHeight * 0.12)
+            const labScene = this.scroll.scrollY <= this.domElements.aboutSection.clientHeight + (window.innerHeight * 0.2)
             labScene ? this.focusLabScene() : this.focusContactScene()
 
             this.domElements.scrollContainer.style.left = '-100%'
