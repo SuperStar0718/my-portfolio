@@ -5,7 +5,7 @@ export default class ContactScene {
 
     parameters = {
         portraitY: -58.3,
-        landscapeY: -31.5,
+        landscapeY: () => window.requestAnimationFrame(() => this.experience.ui.scroll.cameraRange.bottom),
         portraitScale: 1.7,
     }
 
@@ -30,13 +30,16 @@ export default class ContactScene {
         this.sizes.on('landscape', () => this.onOrientationChange())
     }
 
+    setYPosition(scrollBottom) {
+        this.model.position.y = scrollBottom - 4.7
+    }
+
     onOrientationChange() {
         //Position and scale depening on orientation
         if (this.sizes.portrait) {
             this.model.position.y = this.parameters.portraitY
             this.model.scale.set(this.parameters.portraitScale, this.parameters.portraitScale, this.parameters.portraitScale)
         } else {
-            this.model.position.y = this.parameters.landscapeY
             this.model.scale.set(1, 1, 1)
         }
     }

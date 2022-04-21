@@ -19,21 +19,20 @@ export default class Raycasting {
         this.resources.on('ready', () => {
             this.instance = new THREE.Raycaster()
 
-            this.bubbles = this.experience.world.lab.bubbles
-            this.room = this.experience.world.landingPage.room
             this.hoverIcon = this.experience.ui.hoverIcon
 
-            this.setupBubbles()
-            this.objects.push(this.room.speaker)
-            this.objects.push(this.experience.world.lab.screen.button)
-            this.objects.push(this.room.penguin)
+            //Get all object to test
+            this.scene.traverse(object => {
+                if (object.onHover || object.onClick)
+                    this.objects.push(object)
+            })
 
             //Update pointer on mouse move
             this.hoverIcon.on('move', () => {
                 this.positionTriggered = false
 
-                this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-                this.pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
+                this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1
+                this.pointer.y = - (event.clientY / window.innerHeight) * 2 + 1
             })
 
             //check current intersects click function
@@ -41,12 +40,6 @@ export default class Raycasting {
                 this.positionTriggered = false
                 this.triggerClick = true
             })
-        })
-    }
-
-    setupBubbles() {
-        this.bubbles.sprites.forEach(sprite => {
-            this.objects.push(sprite)
         })
     }
 

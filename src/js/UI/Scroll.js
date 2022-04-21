@@ -30,6 +30,7 @@ export default class Scroll {
         this.sounds = this.experience.sounds
         this.waypoints = this.experience.waypoints
         this.scrollIcon = this.experience.ui.scrollScrollIcon
+        this.contactScene = this.experience.world.contact.scene
 
         //Hide scroll container without transition
         this.domElements.scrollContainer.style.top = '100%'
@@ -78,8 +79,6 @@ export default class Scroll {
     }
 
     onOrientationChange() {
-        this.setCameraRange()
-
         if (!this.landingPage.visible)
             this.moveToTop()
     }
@@ -103,7 +102,9 @@ export default class Scroll {
         const waypoint = this.waypoints.waypoints.find((waypoint) => waypoint.name === (this.sizes.portrait ? 'scroll-start-portrait' : 'scroll-start'))
 
         this.cameraRange.top = waypoint.position.y
-        this.cameraRange.bottom = this.sizes.portrait ? -54 : -26.6
+        this.cameraRange.bottom = this.sizes.portrait ? -54 : -11 - ((this.domElements.scrollContainer.clientHeight / window.innerHeight) * 5)
+
+        this.contactScene.setYPosition(this.cameraRange.bottom)
     }
 
     setAboutContainerDetails() {
@@ -152,7 +153,7 @@ export default class Scroll {
     }
 
     scrollAllowed() {
-        return !this.landingPage.isAnimating && !this.landingPage.visible && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating && !this.transition.isShowing
+        return !this.landingPage.isAnimating && !this.landingPage.visible && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating
     }
 
     attemptScroll(direction, strength = this.parameters.scrollStrength) {
@@ -252,8 +253,7 @@ export default class Scroll {
 
         this.setAboutContainerDetails()
         this.setLogoOverlayHeight()
-
-        if (!this.landingPage.visible)
-            this.performScroll(0)
+        this.setCameraRange()
+        this.performScroll(0)
     }
 }

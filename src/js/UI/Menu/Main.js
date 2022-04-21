@@ -68,8 +68,6 @@ export default class MenuMain extends EventEmitter {
 
     switchVisiblity(withCamera = true, force = false, returnToInitials = true) {
         if ((!this.isAnimating && !this.landingPage.isAnimating && !this.transition.isShowing) || force) {
-            //Trigger Event
-            this.trigger(this.visible ? 'hide' : 'open')
 
             this.visible = !this.visible
 
@@ -216,12 +214,16 @@ export default class MenuMain extends EventEmitter {
         gsap.to(this.domElements.menuButtonBar0, { rotation: 45, y: 9, duration: .1 })
         gsap.to(this.domElements.menuButtonBar1, { opacity: 0, duration: .1 })
         gsap.to(this.domElements.menuButtonBar2, { rotation: -45, y: -9, duration: .1 })
+
+        this.trigger('open')
     }
 
     resetMenuButton() {
         gsap.to(this.domElements.menuButtonBar0, { rotation: 0, y: 0, duration: .1 })
         gsap.to(this.domElements.menuButtonBar1, { opacity: 1, duration: .1 })
         gsap.to(this.domElements.menuButtonBar2, { rotation: 0, y: 0, duration: .1 })
+
+        this.trigger('hide')
     }
 
     setWidth() {

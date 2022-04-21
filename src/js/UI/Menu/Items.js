@@ -124,7 +124,7 @@ export default class MenuItems {
         //Hide Scroll Icon on Landing Page
         this.scrollIcon.kill()
 
-        if(item.name != 'about' && item.name != 'home') {
+        if (item.name != 'about' && item.name != 'home') {
             this.cards = this.experience.ui.work.cards
             this.cards.currentItemIndex = 2
             this.cards.updatePositions()
@@ -132,6 +132,8 @@ export default class MenuItems {
 
         //Hover Icon
         this.experience.ui.hoverIcon.setupDefault()
+        this.experience.ui.hoverIcon.updateBaseColor('#FF923E')
+
 
         if (item.onOpen) item.onOpen()
 

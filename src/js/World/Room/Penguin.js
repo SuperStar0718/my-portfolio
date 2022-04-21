@@ -15,8 +15,11 @@ export default class Penguin {
             this.model.children[1],
         ]
 
+        //Hover Icon
+        this.model.hoverIcon = 'pointer'
+
         //Jump on hover
-        this.model.onHover = () => this.jump()
+        this.model.onClick = () => this.jump()
     }
 
 

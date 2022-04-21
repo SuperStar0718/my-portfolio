@@ -133,7 +133,7 @@ export default class Sounds {
             name: 'bird',
             files: [birdSound],
             group: 'landing',
-            volume: .4,
+            volume: .6,
         },
     ]
 
