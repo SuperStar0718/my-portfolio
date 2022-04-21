@@ -1,7 +1,7 @@
 #menu-container {
     position: absolute;
     right: 0;
-    width: calc(350px + calc((100vw - 90rem) / 2));
+    width: calc(300px + calc((100vw - 90rem) / 2));
     height: 100%;
     background: white;
     z-index: 2;

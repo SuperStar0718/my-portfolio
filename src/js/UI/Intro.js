@@ -61,6 +61,8 @@ export default class Intro {
 
                 if (this.resourcesReady && this.clicked && localStorage.getItem('soundActive') != 'false')
                     this.soundButton.activate(false)
+
+                event.preventDefault()
             }
         })
     }

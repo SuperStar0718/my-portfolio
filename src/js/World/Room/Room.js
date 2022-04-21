@@ -32,7 +32,10 @@ export default class Room {
         this.plant = this.model.children.find((child) => child.name === 'plant')
         this.chair = this.model.children.find((child) => child.name === 'chair')
         this.speaker = this.model.children.find((child) => child.name === 'speaker')
+        this.penguin = this.model.children.find((child) => child.name === 'penguin')
 
+        this.baseModel.add(this.speaker)
+        this.baseModel.add(this.penguin)
         this.baseModel.add(this.speaker)
         this.baseModel.add(this.chair)
 

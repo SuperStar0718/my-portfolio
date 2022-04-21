@@ -53,9 +53,9 @@ export default class ContactAnimationEvents {
     }
 
     setupPositions() {
-        gsap.to(this.domElements.smallHeader, { y: 200, opacity: 0, duration: 0 })
-        gsap.to(this.domElements.header, { y: 200, opacity: 0, duration: 0 })
-        gsap.to(this.domElements.form, { y: 200, opacity: 0, duration: 0 })
+        gsap.to(this.domElements.smallHeader, { y: 150, opacity: 0, duration: 0 })
+        gsap.to(this.domElements.header, { y: 150, opacity: 0, duration: 0 })
+        gsap.to(this.domElements.form, { y: 150, opacity: 0, duration: 0 })
     }
 
     resetPositions() {

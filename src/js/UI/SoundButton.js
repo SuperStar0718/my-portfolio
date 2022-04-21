@@ -16,6 +16,8 @@ export default class Sound {
         this.landingPage = this.experience.ui.landingPage
         this.transition = this.experience.ui.transition
 
+        this.tweens = []
+
         //Init
         this.deactivate(false)
 
@@ -34,10 +36,18 @@ export default class Sound {
         })
     }
 
+    killTweens() {
+        gsap.killTweensOf(this.domElements.body)
+        gsap.killTweensOf(this.domElements.volume0)
+        gsap.killTweensOf(this.domElements.volume1)
+    }
+
     deactivate(updateLocalStorage = true) {
         this.active = false
 
         this.sounds.mute(true)
+
+        this.killTweens()
 
         //Icon
         gsap.to(this.domElements.body, { x: 2, duration: .2 })
@@ -58,6 +68,8 @@ export default class Sound {
     activate(updateLocalStorage = true) {
         this.active = true
         this.sounds.mute(false)
+
+        this.killTweens()
 
         //Icon
         gsap.to(this.domElements.body, { x: 0, duration: .2 })
