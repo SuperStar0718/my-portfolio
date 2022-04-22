@@ -44,7 +44,6 @@ export default class Sound {
 
     deactivate(updateLocalStorage = true) {
         this.active = false
-
         this.sounds.mute(true)
 
         this.killTweens()

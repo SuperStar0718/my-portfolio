@@ -18,6 +18,8 @@ export default class Header {
         //Trigger Events
         this.gestures.on('scroll-up', () => this.show())
         this.gestures.on('scroll-down', () => this.hide())
+        this.gestures.on('touch-up', () => this.show())
+        this.gestures.on('touch-down', () => this.hide())
     }
 
     show() {

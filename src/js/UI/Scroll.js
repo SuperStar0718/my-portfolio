@@ -1,5 +1,6 @@
 import Experience from '../Experience'
 import { gsap, Power2, Power4 } from 'gsap'
+import EventEmitter from '../Utils/EventEmitter'
 
 export default class Scroll {
 
@@ -102,7 +103,7 @@ export default class Scroll {
         const waypoint = this.waypoints.waypoints.find((waypoint) => waypoint.name === (this.sizes.portrait ? 'scroll-start-portrait' : 'scroll-start'))
 
         this.cameraRange.top = waypoint.position.y
-        this.cameraRange.bottom = this.sizes.portrait ? -54 : -11 - ((this.domElements.scrollContainer.clientHeight / window.innerHeight) * 5)
+        this.cameraRange.bottom = this.sizes.portrait ? -54 : -11 - ((this.domElements.scrollContainer.clientHeight / window.innerHeight) * 5.1)
 
         this.contactScene.setYPosition(this.cameraRange.bottom)
     }
@@ -178,6 +179,9 @@ export default class Scroll {
             //update last wheel to prevent too slow scrolling down before opening landing page
             if (direction == -1)
                 this.lastWheelUp = this.time.current
+
+            //Hide keyboard
+            document.activeElement.blur()
         }
     }
 

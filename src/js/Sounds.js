@@ -161,6 +161,7 @@ export default class Sounds {
         this.roomAmbience = this.items.find((item) => item.name === 'roomAmbience').howls[0]
 
         this.roomAmbience._loop = true
+        
         this.roomAmbience.name = 'roomAmbience'
     }
 
@@ -255,7 +256,7 @@ export default class Sounds {
         const item = this.items.find((item) => item.name === name)
 
         //Play random
-        if (this.active && this.experience.sizes.touch ? name != 'buttonClick' : true)
+        if (this.active && (this.experience.sizes.touch ? name != 'buttonClick' : true))
             item.howls[Math.floor(Math.random() * item.howls.length)].play()
     }
 

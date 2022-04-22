@@ -30,10 +30,10 @@ export default [
     {
         id: 3,
         name: 'Portfolio 2022',
-        description: `The page you are looking at right now`,
+        description: `A case study for this project is currently being written. Follow me on <a href="https://twitter.com/DavidHckh" target="_blank">Twitter</a> to stay up to date.`,
         image: 'images/projects/portfolio.png',
         tags: ['threejs', 'javascript', 'html', 'css'],
-        github: 'https://github.com/davidhckh/portfolio-2022',
+        twitter: 'https://twitter.com/DavidHckh',
         alt: 'david heckhoff portfolio project 2022 threejs blender 3d design',
     },
     {

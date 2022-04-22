@@ -1,6 +1,6 @@
 export default [
     {
-        name: 'ThreeJS + R3F',
+        name: 'WebGL (ThreeJS)',
         width: '60%',
     },
     {
@@ -12,11 +12,12 @@ export default [
         width: '85%',
     },
     {
-        name: 'HTML',
+        name: 'HTML + CSS',
         width: '90%'
     },
     {
-        name: 'CSS',
-        width: '85%',
+        name: '3D Modelling',
+        width: '70%',
     },
+    
 ]

@@ -134,8 +134,8 @@ export default class MenuItems {
         this.experience.ui.hoverIcon.setupDefault()
         this.experience.ui.hoverIcon.updateBaseColor('#FF923E')
 
-
-        if (item.onOpen) item.onOpen()
+        if (item.onOpen)
+            item.onOpen()
 
         // setup either scroll or landing page item
         item.name != 'home' ? this.setupScrollContainerItem(item) : this.setupLandingPage()
@@ -150,8 +150,6 @@ export default class MenuItems {
 
         this.sounds.muteGroup('landing', false)
         this.sounds.muteGroup('lab', true)
-
-        this.experience.ui.scrollScrollIcon.fade(false)
 
         //Room
         this.room.baseModel.scale.set(1, 1, 1)
@@ -201,6 +199,12 @@ export default class MenuItems {
         this.waypoints.moveToWaypoint(this.sizes.portrait ? 'scroll-start-portrait' : 'scroll-start', false)
 
         this.contactAnimation.resetCharacter()
+
+        if (item.name != 'about') {
+            this.experience.ui.scrollScrollIcon.kill()
+        } else {
+            this.experience.ui.scrollScrollIcon.fade(true)
+        }
 
         //mute groups
         this.sounds.muteGroup('landing', true)

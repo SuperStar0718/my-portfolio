@@ -175,6 +175,7 @@ export default class MenuMain extends EventEmitter {
         gsap.to(this.domElements.scrollContainer, { y: -this.domElements.scrollContainer.clientHeight + window.innerHeight, duration: .9, ease: Power2.easeInOut })
 
         //camera
+        this.waypoints.waypoints.find(waypoint => waypoint.name == 'contact-menu').position.y = this.experience.world.contact.scene.model.position.y + 5.8
         this.waypoints.moveToWaypoint('contact-menu')
 
         //Animation

@@ -4,8 +4,6 @@ import Experience from '../../Experience.js'
 export default class ContactScene {
 
     parameters = {
-        portraitY: -58.3,
-        landscapeY: () => window.requestAnimationFrame(() => this.experience.ui.scroll.cameraRange.bottom),
         portraitScale: 1.7,
     }
 

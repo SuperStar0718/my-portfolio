@@ -8,6 +8,7 @@ export default [
     { name: 'tone0Texture', type: 'texture', path: 'textures/sprites/tone-0.png' },
     { name: 'tone1Texture', type: 'texture', path: 'textures/sprites/tone-1.png' },
     { name: 'tone2Texture', type: 'texture', path: 'textures/sprites/tone-2.png' },
+    { name: 'heartTexture', type: 'texture', path: 'textures/sprites/heart.png' },
 
     //Character
     { name: 'characterModel', type: 'gltfModel', path: 'models/character/model.glb' },
