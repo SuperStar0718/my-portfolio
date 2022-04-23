@@ -2,9 +2,50 @@
 <html lang="en">
 
 <head>
+    <title>David | Creative Developer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description"
+        content="Portfolio of David Heckhoff - Creative developer living in Germany - Focused on WebGL and ReactJS">
+    <meta name="keywords"
+        content="webgl, threejs, portfolio, reactjs, react, frontend developer, front-end, programming, web developer, web, developer">
+    <meta property="og:site_name" content="David Heckhoff Portfolio">
+    <meta property="og:title" content="David Heckhoff - Creative Developer">
+    <meta property="og:description"
+        content="Portfolio of David Heckhoff - Creative developer living in Germany - Focused on WebGL and ReactJS">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://david-hckh.com/">
+    <meta property="og:image" content="https://david-hckh.com/thumbnail.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="627">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="David Heckhoff">
+    <meta name="twitter:creator" content="@DavidHckh">
+    <meta name="twitter:title" content="David Heckhoff - Creative Developer">
+    <meta name="twitter:description"
+        content="Portfolio of David Heckhoff - Creative developer living in Germany - Focused on WebGL and ReactJS">
+    <meta name="twitter:image" content="https://david-hckh.com/thumbnail.png">
+    <meta name="theme-color" content="#F5EFE6">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="David Heckhoff Portfolio">
+    <meta name="apple-mobile-web-app-status-bar-style" content="translucent">
+    <link rel="mask-icon" href="/src/assets/head/logo.svg" color="#FF923E">
+    <link rel="icon" type="image/png" href="/src/assets/head/favion-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/src/assets/head/favion-16x16.png" sizes="16x16">
+    <link rel="apple-touch-icon" sizes="120x120" href="/src/assets/head/apple-120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/src/assets/head/apple-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/src/assets/head/apple-180.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/src/assets/head/apple-192.png">
+    <meta name="msapplication-config" content="/src/assets/head/browserconfig.xml">
+    <meta name="msapplication-TileColor" content="#FF923E">
+    <meta name="msapplication-square70x70logo" content="/src/assets/head/mstile-70.png">
+    <meta name="msapplication-square150x150logo" content="/src/assets/head/mstile-150.png">
+    <meta name="msapplication-wide310x150logo" content="/src/assets/head/mstile-310x150.png">
+    <meta name="msapplication-square310x310logo" content="/src/assets/head/mstile-310.png">
+    <link rel="manifest" href="/src/assets/head/manifest.webmanifest">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="/src/assets/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/src/assets/head/favicon.ico">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-QBR1ZCHY25"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -139,13 +180,15 @@
             </div>
             <!--Social Link-->
             <div id="menu-social-container" class="row">
-                <a tabindex="-1" class="social-icon twitter-icon" target="_blank"
-                    href="https://twitter.com/DavidHckh"></a>
-                <a tabindex="-1" class="social-icon github-icon" target="_blank"
-                    href="https://github.com/davidhckh"></a>
-                <a tabindex="-1" class="social-icon linkedin-icon" target="_blank"
-                    href="https://www.linkedin.com/in/david-heckhoff-1ba8a622a/"></a>
-                <a tabindex="-1" class="social-icon mail-icon" href="mailto:david.heckhoff@gmail.com"></a>
+                <a tabindex="-1" target="_blank" href="https://twitter.com/DavidHckh"><img class="social-icon"
+                        src="assets/icons/twitter-icon.png" alt="Twitter Menu Icon" height="28" width="28"></img></a>
+                <a tabindex="-1" target="_blank" href="https://github.com/davidhckh"><img class="social-icon"
+                        alt="Github Menu Icon" height="28" width="28" src="assets/icons/github-icon.png"></img></a>
+                <a tabindex="-1" target="_blank" href="https://www.linkedin.com/in/david-heckhoff-1ba8a622a/"> <img
+                        class="social-icon " alt="Linkedin Menu Icon" height="28" width="28"
+                        src="assets/icons/linkedin-icon.png"></img></a>
+                <a tabindex="-1" href="mailto:david.heckhoff@gmail.com"> <img class="social-icon" alt="Email Menu Icon"
+                        height="28" width="28" src="assets/icons/mail-icon.png"></img></a>
             </div>
             <hr>
             <!--Legal Container-->
@@ -447,33 +490,40 @@
                 <div id="contact-form-container" class="column contact-container">
                     <div id="contact-name-input" class="input-container column">
                         <div class="row">
-                            <span>Name :</span>
+                            <label for="contact-name-input-field">Name :</label>
                             <span class="error-label hide">Please enter your name.</span>
                         </div>
                         <input id="contact-name-input-field" tabindex="-1">
                     </div>
                     <div id="contact-email-input" class="input-container column">
                         <div class="row">
-                            <span>Email :</span>
+                            <label for="contact-email-input-field">Email :</label>
                             <span class="error-label hide">Please enter a valid email address.</span>
                         </div>
                         <input id="contact-email-input-field" type="email" tabindex="-1">
                     </div>
                     <div id="contact-message-input" class="input-container column">
                         <div class="row">
-                            <span>Message :</span>
+                            <label for="contact-message-input-field">Message :</label>
                             <span class="error-label hide">Please enter your message.</span>
                         </div>
                         <textarea id="contact-message-input-field" tabindex="-1"></textarea>
                     </div>
                     <div class="row" id="contact-button-container">
-                        <a tabindex="-1" class="social-icon twitter-icon" target="_blank"
-                            href="https://twitter.com/DavidHckh"></a>
-                        <a tabindex="-1" class="social-icon github-icon" target="_blank"
-                            href="https://github.com/davidhckh"></a>
-                        <a tabindex="-1" class="social-icon linkedin-icon" target="_blank"
-                            href="https://www.linkedin.com/in/david-heckhoff-1ba8a622a/"></a>
-                        <a tabindex="-1" class="social-icon mail-icon" href="mailto:david.heckhoff@gmail.com"></a>
+                        <!--Social Icons-->
+                        <a tabindex="-1" target="_blank" href="https://twitter.com/DavidHckh"><img class="social-icon"
+                                src="assets/icons/twitter-icon.png" alt="twitter contact social icon small 28x28" height="28"
+                                width="28"></img></a>
+                        <a tabindex="-1" target="_blank" href="https://github.com/davidhckh"><img class="social-icon"
+                                alt="github contact social icon small 28x28" height="28" width="28"
+                                src="assets/icons/github-icon.png"></img></a>
+                        <a tabindex="-1" target="_blank" href="https://www.linkedin.com/in/david-heckhoff-1ba8a622a/">
+                            <img class="social-icon " alt="linkedin contact social icon small 28x28" height="28" width="28"
+                                src="assets/icons/linkedin-icon.png"></img></a>
+                        <a tabindex="-1" href="mailto:david.heckhoff@gmail.com"> <img class="social-icon"
+                                alt="email contact social icon small 28x28" height="28" width="28"
+                                src="assets/icons/mail-icon.png"></img></a>
+                        <!--Submit Button-->
                         <div id="contact-submit-button" class="small-button orange-hover">
                             Submit
                         </div>

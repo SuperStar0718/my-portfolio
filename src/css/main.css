@@ -201,35 +201,14 @@ hr {
 
 /****************************icons**************************/
 .social-icon {
-    background-size: cover !important;
-    background-repeat: no-repeat;
-    background-position: center center;
     cursor: pointer;
     filter: grayscale(1) brightness(8);
-    height: 28px;
-    width: 28px;
     transition: 0.125s ease-in;
 }
 
 .social-icon:hover {
     filter: unset;
     transform: scale(1.05);
-}
-
-.twitter-icon {
-    background: url('../assets/icons/twitter-icon.png');
-}
-
-.github-icon {
-    background: url('../assets/icons/github-icon.png');
-}
-
-.linkedin-icon {
-    background: url('../assets/icons/linkedin-icon.png');
-}
-
-.mail-icon {
-    background: url('../assets/icons/mail-icon.png');
 }
 
 /****************************sections**************************/

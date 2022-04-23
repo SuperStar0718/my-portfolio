@@ -46,6 +46,7 @@ export default [
     { name: 'labScreenGraph', type: 'texture', path: 'models/lab/screen-graph.jpg' },
     { name: 'labScreenOffline', type: 'texture', path: 'models/lab/screen-offline.jpg' },
     { name: 'bubbleSprite', type: 'texture', path: 'textures/sprites/bubble.png' },
+    { name: 'bubblePopSprite', type: 'texture', path: 'textures/sprites/bubble-pop.png' },
 
     //Contact Scene
     { name: 'contactSceneModel', type: 'gltfModel', path: 'models/contact/model.glb' },

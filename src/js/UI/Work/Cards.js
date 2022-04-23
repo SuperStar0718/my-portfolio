@@ -27,18 +27,26 @@ export default class WorkCards {
         this.gestures = this.experience.gestures
         this.render = this.experience.ui.work.render
         this.sounds = this.experience.sounds
+        this.scroll = this.experience.ui.scroll
 
         this.addButtonEventListeners()
         this.initSwipes()
         this.updatePositions()
+        this.onArrowClick()
     }
 
     addButtonEventListeners() {
         // back button event listener
-        this.domElements.backButton.addEventListener('click', () => this.moveBack())
+        this.domElements.backButton.addEventListener('click', () => {
+            this.sounds.play('buttonClick')
+            this.moveBack()
+        })
 
         // next button event listener
-        this.domElements.nextButton.addEventListener('click', () => this.moveForward())
+        this.domElements.nextButton.addEventListener('click', () => {
+            this.sounds.play('buttonClick')
+            this.moveForward()
+        })
     }
 
     initSwipes() {
@@ -49,6 +57,7 @@ export default class WorkCards {
         this.domElements.section.addEventListener('touchend', () => {
             setTimeout(() => this.isCurrentSwipeElement = false)
         }, { passive: true })
+
         this.domElements.section.addEventListener('touchstart', () => {
             this.isCurrentSwipeElement = true
         }, { passive: true })
@@ -63,7 +72,6 @@ export default class WorkCards {
         if (this.currentItemIndex != 4 && !this.itemsAreMoving) {
             this.currentItemIndex++
             this.updatePositions()
-            this.sounds.play('buttonClick')
         }
     }
 
@@ -71,8 +79,19 @@ export default class WorkCards {
         if (this.currentItemIndex != 0 && !this.itemsAreMoving) {
             this.currentItemIndex--
             this.updatePositions()
-            this.sounds.play('buttonClick')
         }
+    }
+
+    onArrowClick() {
+        window.addEventListener('keyup', () => {
+            if (this.scroll.scrollAllowed()) {
+                if (event.keyCode == 39) {
+                    this.moveForward()
+                } else if (event.keyCode == 37) {
+                    this.moveBack()
+                }
+            }
+        })
     }
 
     updatePositions() {

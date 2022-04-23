@@ -32,11 +32,13 @@ export default class Bubbles {
         for (let i = 0; i < this.parameters.count; i++) {
             //Creat new sprite and push to array + available sprites array
             this.sprites.push(
-                new THREE.Sprite(new THREE.SpriteMaterial({
-                    map: this.resources.items.bubbleSprite,
-                    depthTest: false,
-                    opacity: 0,
-                }))
+                new THREE.Sprite(
+                    new THREE.SpriteMaterial({
+                        map: this.resources.items.bubbleSprite,
+                        depthTest: false,
+                        opacity: 0,
+                    })
+                )
             )
             this.availableSprites.push(this.sprites[i])
 
@@ -51,16 +53,26 @@ export default class Bubbles {
         }
     }
 
-    addOnHover(object) {
-        object.onHover = () => {
-            if (!object.popped) {
-                this.sounds.play('bubble')
-
-                object.popped = true
-
-                object.scale.set(0, 0, 0)
+    addOnHover(bubble) {
+        bubble.onHover = () => {
+            if (!bubble.popped) {
+                this.popBubble(bubble)
             }
         }
+    }
+
+    popBubble(bubble) {
+        this.sounds.play('bubble')
+
+        bubble.popped = true
+
+        bubble.material.map = this.resources.items.bubblePopSprite
+
+        gsap.to(bubble.material, { opacity: 0, duration: .2 })
+
+        //scale
+        const scaleTo = bubble.scale.x + .1
+        gsap.to(bubble.scale, { x: scaleTo, y: scaleTo, duration: .2 })
     }
 
     getAvailableSprite() {
@@ -97,6 +109,7 @@ export default class Bubbles {
             // Reset for opening
             bubble.material.opacity = Math.random() * 0.5 + 0.5
             bubble.popped = false
+            bubble.material.map = this.resources.items.bubbleSprite
 
             //Opening Bounce In
             const scale = Math.random() * 0.12 + 0.2

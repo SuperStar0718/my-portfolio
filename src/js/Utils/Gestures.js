@@ -25,7 +25,7 @@ export default class Gestures extends EventEmitter {
         document.addEventListener('touchend', this.touchEnd)
         document.addEventListener('mousewheel', this.mousewheelOrKey)
         document.addEventListener('wheel', this.mousewheelOrKey)
-        window.addEventListener('keyup', this.mousewheelOrKey)
+        window.addEventListener('keydown', this.mousewheelOrKey)
     }
 
     //Current Hover Element

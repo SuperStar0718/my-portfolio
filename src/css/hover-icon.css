@@ -11,6 +11,7 @@
     justify-content: center;
     align-items: center;
     transition: height 200ms, width 200ms, border-color 200ms, border-width 200ms;
+    opacity: 0;
 }
 
 .clickCTA::after {

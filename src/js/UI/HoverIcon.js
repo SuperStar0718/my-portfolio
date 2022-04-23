@@ -40,7 +40,7 @@ export default class HoverIcon extends EventEmitter {
         {
             class: '#logo-click-container',
             type: 'pointer',
-            color: '#CCCCCC',
+            color: '#FF923E',
         },
         {
             class: '.overlay-button',
@@ -60,7 +60,7 @@ export default class HoverIcon extends EventEmitter {
         {
             class: 'a',
             type: 'pointer',
-            color: '#091434',
+            color: '#FF923E',
         },
     ]
 
@@ -116,6 +116,8 @@ export default class HoverIcon extends EventEmitter {
 
         // mouse move 
         window.addEventListener('mousemove', () => {
+            this.domElements.icon.style.opacity = 1
+
             this.updatePosition()
 
             this.trigger('move')
@@ -126,7 +128,7 @@ export default class HoverIcon extends EventEmitter {
     }
 
     updatePosition() {
-        if (!this.sizes.touch)
+        if (!this.sizes.touch) 
             gsap.to(this.domElements.icon, { x: event.pageX, y: event.pageY, duration: .4, ease: Power3.easeOut })
     }
 

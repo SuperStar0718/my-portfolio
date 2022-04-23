@@ -161,7 +161,7 @@ export default class Sounds {
         this.roomAmbience = this.items.find((item) => item.name === 'roomAmbience').howls[0]
 
         this.roomAmbience._loop = true
-        
+
         this.roomAmbience.name = 'roomAmbience'
     }
 
@@ -207,7 +207,11 @@ export default class Sounds {
 
             item.files.forEach((file) => {
                 item.howls.push(
-                    new Howl({ src: file, volume: item.volume, })
+                    new Howl({
+                        src: file,
+                        volume: item.volume,
+                        
+                    })
                 )
             })
         })
