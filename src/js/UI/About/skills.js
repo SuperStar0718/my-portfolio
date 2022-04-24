@@ -17,7 +17,7 @@ export default [
     },
     {
         name: '3D Modelling',
-        width: '70%',
+        width: '60%',
     },
     
 ]

@@ -55,13 +55,14 @@ export default class LandingPage extends EventEmitter {
     }
 
     playOpeningAnimation(delay = 0) {
-        //content opacity
-        gsap.fromTo(this.domElements.contentSvg, { opacity: 0 }, { opacity: 1, delay: delay, duration: .4 })
-
-        //content position and scale
         if (this.sizes.portrait) {
-            gsap.fromTo(this.domElements.contentSvg, { y: this.domElements.contentSvg.clientWidth * .8, scale: .2 }, { y: 0, scale: 1, delay: delay, duration: .8, ease: Back.easeOut.config(1.6) })
+            //Opacity
+            gsap.fromTo(this.domElements.contentSvg, { opacity: 0 }, { opacity: 1, delay: this.experience.ui.intro.parameters.timeTillFinish, duration: 1 })
         } else {
+            //Opacity
+            gsap.fromTo(this.domElements.contentSvg, { opacity: 0 }, { opacity: 1, delay: delay, duration: .4 })
+
+            //Bounce In from right
             gsap.fromTo(this.domElements.contentSvg, { x: this.domElements.contentSvg.clientWidth * .6, scale: .6 }, { x: 0, scale: 1, delay: delay, duration: .6, ease: Back.easeOut.config(1.4) })
         }
     }

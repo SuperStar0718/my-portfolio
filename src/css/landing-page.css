@@ -17,7 +17,7 @@
 #landing-content-svg {
     width: 550px;
     max-width: 45%;
-    max-height: 80%;
+    max-height: 53%;
     position: relative;
 }
 
@@ -39,6 +39,7 @@
 @media (max-aspect-ratio: 12/10) {
     #landing-content-svg {
         max-width: 94%;
+        max-height: 80%;
     }
 
     #landing-page {

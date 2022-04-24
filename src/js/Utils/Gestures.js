@@ -54,6 +54,8 @@ export default class Gestures extends EventEmitter {
         this.mTouchStartX = event.changedTouches[0].clientX
 
         this.trigger('touch-start')
+
+        this.touchStartTime = this.experience.time.current
     }
 
     //Swipe gesutres -> left, right, top, bottom
