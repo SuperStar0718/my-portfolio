@@ -13,12 +13,10 @@ export default class Tube {
 
     constructor() {
         this.experience = new Experience()
-        this.debug = this.experience.debug
         this.lab = this.experience.world.lab.model
 
         this.setMaterial()
         this.setModel()
-        this.initDebug()
     }
 
     setMaterial() {
@@ -46,35 +44,5 @@ export default class Tube {
         this.model.scale.set(0.92, 1.55, 0.92)
 
         this.lab.model.add(this.model)
-    }
-
-    initDebug() {
-        if (this.debug.active) {
-            this.debugFolder = this.lab.debugFolder.addFolder('Tube').close()
-
-            //Opacity
-            this.debugFolder.add(this.material.uniforms.uOpacity, 'value').min(0).max(1).step(0.01).name('Opacity')
-
-            // Scale
-            this.debugFolder.add(this.model.scale, 'x').min(0).max(4).step(0.01).name('Scale X')
-            this.debugFolder.add(this.model.scale, 'y').min(0).max(4).step(0.01).name('Scale Y')
-            this.debugFolder.add(this.model.scale, 'z').min(0).max(4).step(0.01).name('Scale Z')
-
-            //Position
-            this.debugFolder.add(this.model.position, 'x').min(-5).max(5).step(0.01).name('Position X')
-            this.debugFolder.add(this.model.position, 'y').min(-5).max(5).step(0.01).name('Position Y')
-            this.debugFolder.add(this.model.position, 'z').min(-5).max(5).step(0.01).name('Position Z')
-
-            //Colors
-            this.debugFolder
-                .addColor(this.parameters, 'uColorTop')
-                .onChange(() => { this.material.uniforms.uColorTop.value = new THREE.Color(this.parameters.uColorTop) })
-                .name('Top Color')
-
-            this.debugFolder
-                .addColor(this.parameters, 'uColorBottom')
-                .onChange(() => { this.material.uniforms.uColorBottom.value = new THREE.Color(this.parameters.uColorBottom) })
-                .name('Bottom Color')
-        }
     }
 }

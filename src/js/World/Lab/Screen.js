@@ -13,7 +13,6 @@ export default class LabScreen {
     constructor() {
         this.experience = new Experience()
         this.resources = this.experience.resources
-        this.debug = this.experience.debug
         this.lab = this.experience.world.lab.model
         this.sounds = this.experience.sounds
 
@@ -23,8 +22,6 @@ export default class LabScreen {
         this.setBackground()
 
         this.setButton()
-
-        this.initDebug()
     }
 
     setModel() {
@@ -70,14 +67,6 @@ export default class LabScreen {
         this.active = !this.active
 
         gsap.to(this.material, { opacity: this.active ? 1 : 0, duration: .2 })
-    }
-
-    initDebug() {
-        if (this.debug.active) {
-            this.debugFolder = this.lab.debugFolder.addFolder('Screen').close()
-
-            this.debugFolder.add(this.parameters, 'speed').min(0).max(0.01).step(0.0001).name('Movement Speed')
-        }
     }
 
     update() {

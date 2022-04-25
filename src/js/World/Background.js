@@ -9,7 +9,6 @@ export default class Background {
 
     constructor() {
         this.experience = new Experience()
-        this.debug = this.experience.debug
         this.resources = this.experience.resources
         this.scene = this.experience.scene
 
@@ -82,15 +81,5 @@ export default class Background {
             this.geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3))
         }
         this.updateColors()
-
-        // Debug
-        if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder('Lab Background').close()
-
-            this.debugFolder.addColor(this.colors.topLeft, 'value').onChange(() => this.updateColors()).name('Top Left Color')
-            this.debugFolder.addColor(this.colors.topRight, 'value').onChange(() => this.updateColors()).name('Top Right Color')
-            this.debugFolder.addColor(this.colors.bottomLeft, 'value').onChange(() => this.updateColors()).name('Bottom Left Color')
-            this.debugFolder.addColor(this.colors.bottomRight, 'value').onChange(() => this.updateColors()).name('Bottom Rigth Color')
-        }
     }
 }

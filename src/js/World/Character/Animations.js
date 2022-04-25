@@ -7,7 +7,6 @@ export default class Animations {
         this.experience = new Experience()
         this.resources = this.experience.resources
         this.time = this.experience.time
-        this.debug = this.experience.debug
         this.chair = this.experience.world.landingPage.room.chair
         this.resource = this.resources.items.characterModel
         this.model = this.resource.scene
@@ -81,8 +80,6 @@ export default class Animations {
 
             //update current
             this.actions.current = newAction
-        } else if (this.debug.active) {
-            console.log('Illegal animation.')
         }
     }
 

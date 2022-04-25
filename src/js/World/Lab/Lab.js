@@ -7,14 +7,8 @@ export default class Lab {
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.resources = this.experience.resources
-        this.debug = this.experience.debug
 
         this.desktopLayers = {}
-
-        // Debug 
-        if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder('Lab').close()
-        }
 
         this.setModel()
         this.setMaterial()

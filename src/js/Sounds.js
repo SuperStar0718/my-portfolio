@@ -56,6 +56,7 @@ export default class Sounds {
             files: [roomAmbienceSound],
             group: 'landing',
             volume: .1,
+            html5: true,
         },
         {
             name: 'notification',
@@ -139,7 +140,6 @@ export default class Sounds {
 
     constructor() {
         this.experience = new Experience()
-        this.debug = this.experience.debug
 
         this.active = false
 
@@ -152,9 +152,6 @@ export default class Sounds {
 
         this.setRoomAmbience()
         this.setLabAmbience()
-
-        if (this.debug.active)
-            this.initDebug()
     }
 
     setRoomAmbience() {
@@ -163,10 +160,6 @@ export default class Sounds {
         this.roomAmbience._loop = true
 
         this.roomAmbience.name = 'roomAmbience'
-    }
-
-    fadeInRoomAmbience() {
-        this.roomFadeTween = gsap.fromTo(this.roomAmbience, { volume: 0 }, { volume: this.items.find((item) => item.name === 'roomAmbience').volume, duration: 7 })
     }
 
     setLabAmbience() {
@@ -210,7 +203,7 @@ export default class Sounds {
                     new Howl({
                         src: file,
                         volume: item.volume,
-                        
+                        html5: item.html5 ? item.html5 : false,
                     })
                 )
             })
@@ -288,11 +281,5 @@ export default class Sounds {
         window.requestAnimationFrame(() => {
             Howler.volume(this.masterVolume)
         })
-    }
-
-    initDebug() {
-        this.debugFolder = this.debug.ui.addFolder('Sound')
-
-        this.debugFolder.add(this, 'masterVolume').step(0.001).min(0).max(1).onChange(() => { Howler.volume(this.masterVolume) })
     }
 }

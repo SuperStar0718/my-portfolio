@@ -13,16 +13,10 @@ export default class Bubbles {
         this.experience = new Experience()
         this.resources = this.experience.resources
         this.lab = this.experience.world.lab.model
-        this.debug = this.experience.debug
         this.sounds = this.experience.sounds
 
         this.setSprite()
         this.startInterval()
-
-        //Debug
-        if (this.debug.active) {
-            this.initDebug()
-        }
     }
 
     setSprite() {
@@ -117,9 +111,6 @@ export default class Bubbles {
 
             // Fade Out
             gsap.to(bubble.material, { opacity: 0, duration: .2, delay: moveDuration - .2, ease: easeToUse })
-        } else {
-            if (this.debug.active)
-                console.log('No available bubbles')
         }
     }
 
@@ -130,15 +121,5 @@ export default class Bubbles {
             //repeat
             this.startInterval()
         })
-    }
-
-    initDebug() {
-        this.debugFolder = this.lab.debugFolder.addFolder('Bubbles').close()
-
-        const debugObject = {
-            spawnBubble: () => { this.spawnBubble() },
-        }
-
-        this.debugFolder.add(debugObject, 'spawnBubble').name('Spawn Bubble')
     }
 }

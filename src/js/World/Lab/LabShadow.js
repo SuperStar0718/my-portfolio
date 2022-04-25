@@ -13,14 +13,12 @@ export default class LabShadow {
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.time = this.experience.time
-        this.debug = this.experience.debug
         this.lab = this.experience.world.lab.model
 
         this.resource = this.resources.items.labShadowModel
 
         this.setModel()
         this.setMaterial()
-        this.initDebug()
     }
 
     setModel() {
@@ -49,18 +47,5 @@ export default class LabShadow {
         })
 
         this.model.children.find((children) => children.name === 'shadowCatcher').material = this.material
-    }
-
-    initDebug() {
-        if (this.debug.active) {
-            this.lab.debugFolder
-                .addColor(this.parameters, 'color')
-                .onChange(() => {
-                    this.material.uniforms.uColor.value = new THREE.Color(this.parameters.color)
-                })
-                .name('Shadow Color')
-
-            this.lab.debugFolder.add(this.model.position, 'y', -.1, .1).name('Shadow Y')
-        }
     }
 }

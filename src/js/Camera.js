@@ -18,12 +18,10 @@ export default class Camera {
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene
         this.canvas = this.experience.canvas
-        this.debug = this.experience.debug
         this.time = this.experience.time
 
         this.setInstance()
         this.setCursor()
-        this.initDebug()
     }
 
     setInstance() {
@@ -70,44 +68,5 @@ export default class Camera {
         //Update camera position
         if (byX < 0.05 && byX > -0.05) this.cameraParallaxGroup.position.x += byX
         if (byY < 0.05 && byY > -0.05) this.cameraParallaxGroup.position.y += byY
-    }
-
-    // Debug 
-    initDebug() {
-        if (this.debug.active) {
-            this.debugFolder = this.debug.ui.addFolder('Camera').close()
-
-            const debugObject = {
-                unlockControls: () => { this.unlockControls() },
-            }
-            this.debugFolder.add(debugObject, 'unlockControls').name('Unlock Orbit Controls')
-
-            const logPosition = () => console.log('Position updated:', this.instance.position.x, this.instance.position.y, this.instance.position.z)
-
-            this.debugFolder.add(this.instance.position, 'x').min(-5).max(15).step(0.01).onChange(() => logPosition())
-            this.debugFolder.add(this.instance.position, 'y').min(-5).max(15).step(0.01).onChange(() => logPosition())
-
-
-            this.debugFolder.add(this.instance, 'near').min(0.01).max(20).step(0.1).onChange(() => this.instance.updateProjectionMatrix())
-            this.debugFolder.add(this.instance, 'far').min(0.01).max(2000).step(1).onChange(() => this.instance.updateProjectionMatrix())
-
-            const updateLookAt = () => {
-                this.instance.lookAt(this.lookAtStartParameters)
-                console.log('Looking at: ', this.lookAtStartParameters.x, this.lookAtStartParameters.y, this.lookAtStartParameters.z)
-            }
-
-            this.debugFolder.add(this.lookAtStartParameters, 'x').min(-20).max(10).step(0.01).name('Look At X').onChange(() => updateLookAt())
-            this.debugFolder.add(this.lookAtStartParameters, 'y').min(-20).max(10).step(0.01).name('Look At Y').onChange(() => updateLookAt())
-            this.debugFolder.add(this.lookAtStartParameters, 'z').min(-20).max(10).step(0.01).name('Look At Z').onChange(() => updateLookAt())
-        }
-    }
-
-    unlockControls() {
-        if (!this.controls) {
-            this.controls = new OrbitControls(this.instance, this.canvas)
-            this.controls.enableDamping = true
-            this.experience.canvas.style.zIndex = 1000
-            this.controls.target.y = this.instance.position.y - 3
-        }
     }
 }

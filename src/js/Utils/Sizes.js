@@ -10,7 +10,6 @@ export default class Sizes extends EventEmitter {
         super()
 
         this.experience = new Experience()
-        this.debug = this.experience.debug
 
         // Setup
         this.resize()

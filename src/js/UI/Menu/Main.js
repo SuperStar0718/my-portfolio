@@ -139,8 +139,8 @@ export default class MenuMain extends EventEmitter {
 
         //return elements to positon
         gsap.to(this.domElements.scrollContainer, { y: -this.initials.scrollY, duration: .9, ease: Power2.easeInOut })
-        gsap.to(this.domElements.logoWhiteBackground, { y: this.initials.logoBackgroundY, duration: .9, ease: Power2.easeInOut })
         gsap.to(this.labBackground.material.uniforms.uOffset, { value: this.initials.backgroundY, duration: .9, ease: Power2.easeInOut })
+        gsap.to(this.domElements.logoWhiteBackground, { y: (this.initials.logoBackgroundY ? this.initials.logoBackgroundY : -window.innerHeight), duration: .9, ease: Power2.easeInOut })
 
         //Lab Sounds
         this.sounds.labAmbienceScroll('recent')

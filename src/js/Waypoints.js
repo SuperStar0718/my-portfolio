@@ -44,7 +44,6 @@ export default class Waypoints {
     constructor() {
         this.experience = new Experience()
         this.camera = this.experience.camera.instance
-        this.debug = this.experience.debug
         this.time = this.experience.time
         this.sizes = this.experience.sizes
 
@@ -77,11 +76,6 @@ export default class Waypoints {
 
     moveToWaypoint(waypointName, withAnimation = true, mDuration = .8) {
         const waypoint = this.waypoints.find((waypoint) => waypoint.name === waypointName)
-
-        // console log details if debug is active 
-        if (this.debug.active) {
-            console.log('%c Moving to waypoint: ' + waypoint.name + ' at ' + this.time.current, 'color: #bada55')
-        }
 
         if (withAnimation) {
             // move with animation

@@ -125,10 +125,9 @@ export default class Intro {
 
 
             //Start sounds
-            gsap.delayedCall(.5, () => {
-                this.sounds.roomAmbience.play()
-
-                gsap.delayedCall(1, () => this.tones.startAnimations())
+            this.sounds.roomAmbience.play()
+            gsap.delayedCall(1, () => {
+                this.tones.startAnimations()
             })
 
             //Update Hover Icon
@@ -136,8 +135,6 @@ export default class Intro {
             this.hoverIcon.setupDefault()
 
             this.playIntro()
-
-            this.sounds.fadeInRoomAmbience()
         }
     }
 

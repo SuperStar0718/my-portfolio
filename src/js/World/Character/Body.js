@@ -5,11 +5,7 @@ export default class Body {
     constructor() {
         this.experience = new Experience()
         this.resources = this.experience.resources
-        this.debug = this.experience.debug
         this.scene = this.experience.scene
-
-        if (this.debug.active) 
-            this.debugFolder = this.debug.ui.addFolder('Character').close()
         
         // Setup main 
         this.setModel()
@@ -23,8 +19,6 @@ export default class Body {
         this.defineWireframeAt()
         this.preloadWireframe()
 
-        if (this.debug.active)
-            this.initDebug()
     }
 
     setModel() {
@@ -219,25 +213,5 @@ export default class Body {
 
             children.material = this.materials.wireframeMaterial
         }
-    }
-
-    initDebug() {
-        this.paramters = {
-            scale: 1
-        }
-
-        this.debugFolder.add(this.model.position, 'y').min(-50).max(10)
-        this.debugFolder.add(this.paramters, 'scale').min(0.5).max(3).name('Scale').onChange(() => {
-            this.model.scale.set(this.paramters.scale, this.paramters.scale, this.paramters.scale)
-        })
-
-        //Wireframe
-        this.wireframeDebugFolder = this.debugFolder.addFolder('Wireframe')
-        this.wireframeDebugFolder.addColor(this.wireframeParameters, 'color').onChange(() => { this.materials.wireframeMaterial.color = new THREE.Color(this.wireframeParameters.color) })
-        this.wireframeDebugFolder.add(this.materials.wireframeMaterial, 'opacity').min(0).max(1).step(0.01)
-        this.wireframeDebugFolder.add(this.materials.wireframeMaterial, 'wireframeLinewidth').min(0.01).max(5).step(0.1)
-        this.wireframeDebugFolder.add(this.materials.wireframeMaterial, 'blending').min(0).max(5).step(1)
-        this.wireframeDebugFolder.add(this.materials.wireframeMaterial, 'depthTest')
-        this.wireframeDebugFolder.add(this.materials.wireframeMaterial, 'transparent').onChange(() => this.materials.wireframeMaterial.needsUpdate = true)
     }
 }

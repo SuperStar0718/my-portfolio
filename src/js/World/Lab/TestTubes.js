@@ -11,10 +11,8 @@ export default class TestTubes {
     constructor() {
         this.experience = new Experience()
         this.lab = this.experience.world.lab.model
-        this.debug = this.experience.debug
 
         this.setTubes()
-        this.initDebug()
     }
 
     setTubes() {
@@ -25,13 +23,5 @@ export default class TestTubes {
         this.material = new THREE.MeshBasicMaterial({ color: this.parameters.color, transparent: true, opacity: this.parameters.opacity, blending: 5 })
 
         this.tubes.material = this.material
-    }
-
-    initDebug() {
-        if(this.debug.active) {
-            this.debugFolder = this.lab.debugFolder.addFolder('Test Tubes').close()
-            this.debugFolder.addColor(this.parameters, 'color').onChange(() => { this.material.color = new THREE.Color(this.parameters.color) }).name('Test Tube Color')
-            this.debugFolder.add(this.material, 'opacity').min(0).max(1).step(0.01).name('Test Tube Opacity')
-        }
     }
 }

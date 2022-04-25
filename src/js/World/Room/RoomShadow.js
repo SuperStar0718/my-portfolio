@@ -13,7 +13,6 @@ export default class RoomShadow {
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.time = this.experience.time
-        this.debug = this.experience.debug
 
         // Resource
         this.resource = this.resources.items.roomShadowModel

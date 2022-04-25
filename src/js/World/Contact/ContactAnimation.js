@@ -15,7 +15,6 @@ export default class ContactAnimation {
     constructor() {
         this.experience = new Experience()
         this.character = this.experience.world.character
-        this.debug = this.experience.debug
         this.contactScene = this.experience.world.contact.scene
         this.david = this.experience.world.contact.david
         this.exclamationMark = this.experience.world.contact.exclamationMark

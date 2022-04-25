@@ -12,12 +12,7 @@ export default class ContactScene {
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.time = this.experience.time
-        this.debug = this.experience.debug
         this.sizes = this.experience.sizes
-
-        // Debug 
-        if (this.debug.active)
-            this.debugFolder = this.debug.ui.addFolder('Contact Scene').close()
 
         this.setModel()
         this.setMaterial()

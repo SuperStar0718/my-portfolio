@@ -8,14 +8,9 @@ export default class Room {
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.time = this.experience.time
-        this.debug = this.experience.debug
         this.shadow = this.experience.world.landingPage.roomShadow
         this.sounds = this.experience.sounds
         this.desktopLayers = {}
-
-        // Debug 
-        if (this.debug.active)
-            this.initDebug()
 
         this.setModel()
         this.setMaterial()
@@ -93,16 +88,5 @@ export default class Room {
 
         //shadow fade out
         gsap.fromTo(this.shadow.material.uniforms.uOpacity, { value: 1 }, { value: 0, duration: .15, delay: delay + .25 })
-    }
-
-    initDebug() {
-        this.debugFolder = this.debug.ui.addFolder('Room').close()
-
-        this.debugFolder
-            .addColor(this.shadow.parameters, 'color')
-            .onChange(() => {
-                this.shadow.material.uniforms.uColor.value = new THREE.Color(this.shadow.parameters.color)
-            })
-            .name('Shadow Color')
     }
 }

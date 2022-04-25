@@ -13,7 +13,6 @@ export default class ContactShadow {
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.time = this.experience.time
-        this.debug = this.experience.debug
         this.contactScene = this.experience.world.contact.scene
 
         // Resource
@@ -21,7 +20,6 @@ export default class ContactShadow {
 
         this.setModel()
         this.setMaterial()
-        this.initDebug()
     }
 
     setModel() {
@@ -48,16 +46,5 @@ export default class ContactShadow {
         })
 
         this.model.children.find((children) => children.name === 'shadowCatcher').material = this.material
-    }
-
-    initDebug() {
-        if (this.debug.active) {
-            this.contactScene.debugFolder
-                .addColor(this.parameters, 'color')
-                .onChange(() => {
-                    this.material.uniforms.uColor.value = new THREE.Color(this.parameters.color)
-                })
-                .name('Shadow Color')
-        }
     }
 }

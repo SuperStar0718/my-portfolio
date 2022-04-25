@@ -40,17 +40,15 @@
     background: white;
     height: 100%;
     position: absolute;
-    transition: transform 400ms ease-in-out, opacity 400ms ease-in-out, filter 400ms ease-in-out, height 400ms ease-in-out, border-color 100ms;
+    transition: transform 400ms ease-in-out, opacity 400ms ease-in-out, filter 400ms ease-in-out, border-color 100ms;
     border: 2px solid white;
     border-radius: 20px;
-    box-shadow: 0px 30px 70px #93683325;
     width: 100%;
-
 }
 
 .work-inactive-item-container {
-    opacity: 0.4 !important;
-    filter: grayscale(50%) !important;
+    opacity: .5 !important;
+    filter: grayscale(.5) !important;
     cursor: pointer;
 }
 
@@ -143,7 +141,6 @@
     margin: 20px;
     margin-bottom: 0;
     cursor: pointer;
-    box-shadow: 0px 30px 70px #93683325;
     display: flex;
     justify-content: center;
     align-items: center;
