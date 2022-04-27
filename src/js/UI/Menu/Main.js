@@ -18,6 +18,7 @@ export default class MenuMain extends EventEmitter {
         aboutSection: document.getElementById('about-section'),
         scrollContainer: document.getElementById('scroll-container'),
         logoWhiteBackground: document.getElementById('logo-white-background'),
+        workSection: document.getElementById('work-section')
     }
 
     constructor() {
@@ -116,7 +117,7 @@ export default class MenuMain extends EventEmitter {
             this.domElements.scrollContainer.style.left = '0'
         } else {
             //Is lab or contact scene? focues depdening on result
-            const labScene = this.scroll.scrollY <= this.domElements.aboutSection.clientHeight + (window.innerHeight * 0.2)
+            const labScene = this.scroll.scrollY + (window.innerHeight / 2) <= this.sizes.getAbsoluteHeight(this.domElements.aboutSection) + (this.sizes.getAbsoluteHeight(this.domElements.workSection) / 2)
             labScene ? this.focusLabScene() : this.focusContactScene()
 
             this.domElements.scrollContainer.style.left = '-100%'
@@ -154,7 +155,7 @@ export default class MenuMain extends EventEmitter {
         gsap.to(this.domElements.scrollContainer, { y: 0, duration: .9, ease: Power2.easeInOut })
 
         //Logo background
-        gsap.to(this.domElements.logoWhiteBackground, { y: -window.innerHeight })
+        gsap.to(this.domElements.logoWhiteBackground, { y: -window.innerHeight, duration: .9, ease: Power2.easeInOut })
 
         //camera
         this.waypoints.moveToWaypoint('lab-menu')
@@ -181,6 +182,10 @@ export default class MenuMain extends EventEmitter {
         //Animation
         this.contactAnimation.playIdle()
         gsap.delayedCall(1, () => this.contactAnimation.playTransition())
+
+        window.requestAnimationFrame(() => {
+            this.sounds.labAmbienceScroll(this.sizes.getAbsoluteHeight(this.domElements.scrollContainer))
+        })
     }
 
     //Hide Event Triggers

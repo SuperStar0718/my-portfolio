@@ -31,21 +31,20 @@ export default class Gestures extends EventEmitter {
     //Current Hover Element
     defineCurrentHoverElement() {
         window.addEventListener('mouseover', () => {
-            if (event.path) {
+            if (event.path)
                 this.currentHoveringElement = event.path[0]
-            }
         })
     }
 
     //scroll down and up
     mousewheelOrKey() {
         if (event.deltaY > 0 || event.keyCode == 40) {
-            this.trigger('scroll')
             this.trigger('scroll-down')
         } else if (event.deltaY < 0 || event.keyCode == 38) {
-            this.trigger('scroll')
             this.trigger('scroll-up')
         }
+
+        this.trigger('scroll')
     }
 
     //Touch

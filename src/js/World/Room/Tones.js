@@ -9,6 +9,7 @@ export default class Tones {
         this.resources = this.experience.resources
 
         this.setSprites()
+        gsap.delayedCall(2, () => this.startAnimations())
     }
 
     startAnimations() {

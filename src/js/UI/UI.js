@@ -17,6 +17,7 @@ import ContactForm from './Contact/ContactForm'
 import ContactAnimationEvents from './Contact/ScrollEvents'
 import Intro from './Intro'
 import WorkScrollEvents from './Work/ScrollEvents'
+import AboutScrollLines from './About/ScrollLines'
 
 export default class UI {
 
@@ -46,6 +47,7 @@ export default class UI {
             this.about = {}
             this.about.render = new SkillsRender()
             this.about.animations = new AboutAnimations()
+            this.about.scrollLines = new AboutScrollLines()
 
             //Work
             this.work = {}
@@ -89,5 +91,10 @@ export default class UI {
 
         if (this.work) if (this.work.scrollEvents)
             this.work.scrollEvents.resize()
+    }
+
+    update() {
+        if (this.scroll)
+            this.scroll.update()
     }
 }

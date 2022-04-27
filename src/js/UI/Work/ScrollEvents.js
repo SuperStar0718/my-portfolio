@@ -1,5 +1,6 @@
 import Experience from "../../Experience"
 import { gsap } from 'gsap'
+import ScrollEvent from "../ScrollEvent"
 
 export default class WorkScrollEvents {
 
@@ -9,90 +10,91 @@ export default class WorkScrollEvents {
         header0: document.querySelector('.section-header-container'),
         header1: document.querySelectorAll('.section-header-container')[1],
         cards: document.querySelectorAll('.work-item-container'),
+        renderContainer: document.getElementById('work-render-container'),
+        navigation: document.getElementById('work-navigation-container')
     }
-
-    events = [
-        { //Small Header
-            landscapeTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7),
-            portraitTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7),
-            event: () => gsap.to(this.domElements.smallHeader, { y: 0, duration: .3 })
-        },
-        { //Header 0
-            landscapeTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader),
-            portraitTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader),
-            event: () => gsap.to(this.domElements.header0, { y: 0, duration: .45 })
-        },
-        { //Header 1
-            landscapeTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header0),
-            portraitTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header0),
-            event: () => gsap.to(this.domElements.header1, { y: 0, duration: .6 })
-        },
-        { //Cards
-            landscapeTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header0) + this.sizes.getAbsoluteHeight(this.domElements.header1),
-            portraitTrigger: () => this.sizes.getAbsoluteHeight(this.domElements.aboutSection) - (window.innerHeight * 0.7) + this.sizes.getAbsoluteHeight(this.domElements.smallHeader) + this.sizes.getAbsoluteHeight(this.domElements.header0) + this.sizes.getAbsoluteHeight(this.domElements.header1),
-            event: () => {
-                gsap.to(this.domElements.cards[0], { y: 0, duration: .3 })
-                gsap.to(this.domElements.cards[1], { y: 0, duration: .3 })
-                gsap.to(this.domElements.cards[2], { y: 0, duration: .3 })
-                gsap.to(this.domElements.cards[3], { y: 0, duration: .3 })
-                gsap.to(this.domElements.cards[4], { y: 0, duration: .3 })
-            }
-        },
-    ]
 
     constructor() {
         this.experience = new Experience()
-        this.scroll = this.experience.ui.scroll
         this.sizes = this.experience.sizes
 
-        if (!this.sizes.touch) {
-            this.addScrollEvents()
-            this.setupPositions()
-        }
-    }
-
-    setupPositions() {
-        //Header
-        gsap.to(this.domElements.smallHeader, { y: 100, duration: 0 })
-        gsap.to(this.domElements.header0, { y: 100, duration: 0 })
-        gsap.to(this.domElements.header1, { y: 100, duration: 0 })
-
-        //Cards
-        gsap.to(this.domElements.cards[0], { y: 200, duration: 0 })
-        gsap.to(this.domElements.cards[1], { y: 150, duration: 0 })
-        gsap.to(this.domElements.cards[2], { y: 100, duration: 0 })
-        gsap.to(this.domElements.cards[3], { y: 150, duration: 0 })
-        gsap.to(this.domElements.cards[4], { y: 200, duration: 0 })
+        this.addScrollEvents()
     }
 
     resetPositions() {
-        //Header
-        gsap.to(this.domElements.smallHeader, { y: 0, duration: 0 })
-        gsap.to(this.domElements.header0, { y: 0, duration: 0 })
-        gsap.to(this.domElements.header1, { y: 0, duration: 0 })
-
-        //Cards
-        gsap.to(this.domElements.cards[0], { y: 0, duration: 0 })
-        gsap.to(this.domElements.cards[1], { y: 0, duration: 0 })
-        gsap.to(this.domElements.cards[2], { y: 0, duration: 0 })
-        gsap.to(this.domElements.cards[3], { y: 0, duration: 0 })
-        gsap.to(this.domElements.cards[4], { y: 0, duration: 0 })
+        this.scrollEvents.forEach(event => {
+            if (event.reset)
+                event.reset()
+        })
     }
 
     addScrollEvents() {
-        this.events.forEach((event) => {
-            //add event
-            this.scroll.addEvent(this.sizes.portrait ? event.portraitTrigger() : event.landscapeTrigger(), 'down', () => {
-                //play event and prevent replays
-                if (!event.played) {
-                    event.played = true
-                    event.event()
+        this.scrollEvents = [
+            // Small Header
+            new ScrollEvent({
+                element: this.domElements.smallHeader,
+                direction: 'down',
+                f: () => {
+                    gsap.to(this.domElements.smallHeader, { y: 0, duration: .3 })
+                },
+                setup: () => gsap.to(this.domElements.smallHeader, { y: 300, duration: 0 }),
+                reset: () => gsap.to(this.domElements.smallHeader, { y: 0, duration: 0 }),
+            }),
+
+            //Headers
+            new ScrollEvent({
+                element: this.domElements.header0,
+                direction: 'down',
+                f: () => gsap.to(this.domElements.header0, { y: 0, duration: .4 }),
+                setup: () => gsap.to(this.domElements.header0, { y: 300, duration: 0 }),
+                reset: () => gsap.to(this.domElements.header0, { y: 0, duration: 0 })
+            }),
+
+            new ScrollEvent({
+                element: this.domElements.header1,
+                direction: 'down',
+                f: () => gsap.to(this.domElements.header1, { y: 0, duration: .5 }),
+                setup: () => gsap.to(this.domElements.header1, { y: 300, duration: 0 }),
+                reset: () => gsap.to(this.domElements.header1, { y: 0, duration: 0 })
+            }),
+
+            //Cards
+            new ScrollEvent({
+                element: this.domElements.cards[2],
+                direction: 'down',
+                f: () => {
+                    gsap.to(this.domElements.cards[0], { y: 0, duration: .85 })
+                    gsap.to(this.domElements.cards[1], { y: 0, duration: .75 })
+                    gsap.to(this.domElements.cards[2], { y: 0, duration: .65 })
+                    gsap.to(this.domElements.cards[3], { y: 0, duration: .75 })
+                    gsap.to(this.domElements.cards[4], { y: 0, duration: .85, onComplete: () => this.addTransitionClass(true) })
+                },
+                setup: () => {
+                    this.addTransitionClass(false)
+                    gsap.to(this.domElements.cards[0], { y: 300, duration: 0 })
+                    gsap.to(this.domElements.cards[1], { y: 300, duration: 0 })
+                    gsap.to(this.domElements.cards[2], { y: 300, duration: 0 })
+                    gsap.to(this.domElements.cards[3], { y: 300, duration: 0 })
+                    gsap.to(this.domElements.cards[4], { y: 300, duration: 0 })
+                },
+                reset: () => {
+                    gsap.to(this.domElements.cards[0], { y: 0, duration: 0 })
+                    gsap.to(this.domElements.cards[1], { y: 0, duration: 0 })
+                    gsap.to(this.domElements.cards[2], { y: 0, duration: 0 })
+                    gsap.to(this.domElements.cards[3], { y: 0, duration: 0 })
+                    gsap.to(this.domElements.cards[4], { y: 0, duration: 0 })
                 }
-            })
+            }),
+        ]
+    }
+
+    addTransitionClass(addOrRemove) {
+        this.domElements.cards.forEach((card) => {
+            addOrRemove ? card.classList.add('work-item-container-transition') : card.classList.remove('work-item-container-transition')
         })
     }
 
     resize() {
-        this.addScrollEvents()
+        setTimeout(() => this.addScrollEvents())
     }
 }

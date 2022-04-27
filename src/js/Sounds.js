@@ -128,7 +128,7 @@ export default class Sounds {
             name: 'chairImpact',
             files: [chairImpactSound],
             group: 'landing',
-            volume: .4,
+            volume: 1,
         },
         {
             name: 'bird',
@@ -160,6 +160,13 @@ export default class Sounds {
         this.roomAmbience._loop = true
 
         this.roomAmbience.name = 'roomAmbience'
+    }
+
+    playRoomAmbience() {
+        if(!this.roomAmbiencePlaying) {
+            this.roomAmbiencePlaying = true
+            this.roomAmbience.play()
+        }
     }
 
     setLabAmbience() {

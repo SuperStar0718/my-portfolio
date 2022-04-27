@@ -30,11 +30,15 @@ export default class ContactAnimation {
             this.character.body.model.position.y = this.experience.world.contact.scene.model.position.y + this.parameters[this.sizes.portrait ? 'characterPortraitY' : 'characterLandscapeY']
 
             //scale
-            if (this.sizes.portrait) this.character.body.model.scale.set(this.parameters.characterPortraitScale, this.parameters.characterPortraitScale, this.parameters.characterPortraitScale)
+            if (this.sizes.portrait)
+                this.character.body.model.scale.set(this.parameters.characterPortraitScale, this.parameters.characterPortraitScale, this.parameters.characterPortraitScale)
 
             this.character.body.setAllToOriginal()
             this.character.face.material.map = this.character.face.textures.sleepy
-            this.character.animations.play('standingIdle', 0)
+            
+            //Animation
+            if (this.character.animations.actions.current._clip.name != 'standing-idle')
+                this.character.animations.play('standingIdle', 0)
         }
     }
 

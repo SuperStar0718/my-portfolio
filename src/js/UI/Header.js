@@ -14,6 +14,7 @@ export default class Header {
         this.menu = this.experience.ui.menu.main
         this.gestures = this.experience.gestures
         this.scroll = this.experience.ui.scroll
+        this.transition = this.experience.ui.transition
 
         //Trigger Events
         this.gestures.on('scroll-up', () => this.show())
@@ -30,7 +31,7 @@ export default class Header {
     }
 
     hide() {
-        if (this.visible && !this.landingPage.isAnimating && !this.menu.isAnimating && !this.landingPage.visible) {
+        if (this.scroll.scrollAllowed()) {
             this.visible = false
             this.domElements.header.style.top = '-80px'
         }

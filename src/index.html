@@ -7,7 +7,7 @@
     <meta name="description"
         content="Portfolio of David Heckhoff - Creative developer living in Germany - Focused on WebGL and ReactJS">
     <meta name="keywords"
-        content="webgl, threejs, portfolio, reactjs, react, frontend developer, front-end, programming, web developer, web, developer">
+        content="webgl, threejs, portfolio, reactjs, react, frontend developer, front-end, programming, web developer, web, developer, 3d website, 3d, blender, germany">
     <meta property="og:site_name" content="David Heckhoff Portfolio">
     <meta property="og:title" content="David Heckhoff - Creative Developer">
     <meta property="og:description"
@@ -190,12 +190,6 @@
                     <a href="https://soundcloud.com/hmsurf" target="_blank">HM Surf</a>
                 </span>
             </div>
-
-            <!--Legal Container-->
-            <div id="legal-container" class="row">
-                <a class="menu-legal-link" href="https://david-hckh.com/legal" target="_blank">Legal Notice</a>
-                <a class="menu-legal-link" href="https://david-hckh.com/privacy" target="_blank">Privacy Policy</a>
-            </div>
         </div>
     </div>
 
@@ -235,9 +229,10 @@
         <section id="about-section" class="content-width">
             <div id="about-content-container">
                 <!--Header Container SVG-->
-                <svg id="skills-svg" viewBox="-2 -2 506 720" xmlns="http://www.w3.org/2000/svg"
+                <svg id="skills-svg" viewBox="-2 -2 506 815" xmlns="http://www.w3.org/2000/svg"
                     preserveAspectRatio="xMinYMid">
 
+                    <!--Defs-->
                     <defs>
                         <!--Profile picture aniamtion line gradient-->
                         <linearGradient id="about-profile-picture-mask-gradient" gradientTransform="rotate(90)">
@@ -247,12 +242,12 @@
 
                         <!--Background Gradient-->
                         <linearGradient id="about-background-gradient" gradientTransform="rotate(90)">
-                            <stop offset="30%" stop-color="rgba(0, 88, 165, 0.15)" />
-                            <stop offset="95%" stop-color="rgba(0, 132, 255, 0.25)" />
+                            <stop offset="30%" stop-color="rgba(0, 88, 165, .15)" />
+                            <stop offset="95%" stop-color="rgba(0, 132, 255, .3)" />
                         </linearGradient>
 
                         <!--Icon Template-->
-                        <polyline id="about-icon-background" fill="#00b7ff33"
+                        <polyline id="about-icon-background" fill="#00b7ff18"
                             points="0,10 10,0 65,0 75,10 75,65 65,75 10,75 0,65" />
                     </defs>
 
@@ -260,19 +255,20 @@
                     <g id="about-svg-header">
                         <!--Profile Picture Background-->
                         <polyline id="about-profile-background" class="about-box-background"
-                            points="65,170 15,170 0,155 0,15 15,0 70,0 130,0 145,15 145,170" />
+                            points="65,170 145,170 145,50 135,40 135,10 125,0 70,0 10,0 0,10 0,160 10,170" />
 
 
                         <!--Header Content Background-->
                         <polyline id="about-header-background" class="about-box-background"
-                            points="145,100 205,100 215,110 485,110 500,125 500,150 500,170 145,170" />
+                            points="145,85 250,85 260,95 490,95 500,105 500,135 500,150 490,160 200,160 190,170 145,170" />
 
                         <!--Profile Picture Mask-->
                         <mask id="about-profil-picture-mask">
                             <!--Black Background-->
                             <rect fill="black" x="0" y="0" width="145" height="170" />
                             <!--White Background-->
-                            <polyline fill="white" points="65,170 15,170 0,155 0,15 15,0 70,0 130,0 145,15 145,170">
+                            <polyline fill="white"
+                                points="65,170 145,170 145,50 135,40 135,10 125,0 70,0 10,0 0,10 0,160 10,170">
                             </polyline>
                             <!--Rect to make white background visible-->
                             <rect id="about-profile-picture-mask-rect" fill="black" width="145" height="170"
@@ -290,15 +286,15 @@
                         </g>
 
                         <!--Profile Picture Borders-->
-                        <polyline class="about-box-line" points="65,170 15,170 0,155 0,15 15,0 70,0" />
-                        <polyline class="about-box-line" points="65,170 145,170 145,15 130,0 70,0" />
+                        <polyline class="about-box-line" points="65,170 10,170 0,160 0,10 10,0 70,0" />
+                        <polyline class="about-box-line" points="65,170 145,170 145,50 135,40 135,10 125,0 70,0" />
 
                         <!--Header Content Borders-->
-                        <polyline class="about-box-line" points="145,100 205,100 215,110 485,110 500,125 500,150" />
-                        <polyline class="about-box-line" points="145,170 500,170 500,150" />
+                        <polyline class="about-box-line" points="145,85 250,85 260,95 490,95 500,105 500,135" />
+                        <polyline class="about-box-line" points="145,170 190,170 200,160 490,160 500,150 500,135" />
 
                         <!--Header Content-->
-                        <g transform="translate(170 133)" fill="#34bfff" font-weight="bold">
+                        <g transform="translate(170 118)" fill="#34bfff" font-weight="bold">
                             <text x="0" y="0" font-size="12" class="about-header-upper-text">Name :</text>
                             <text x="0" y="20" font-size="18" class="about-header-lower-text">David</text>
                             <text x="110" y="0" font-size="12" class="about-header-upper-text">Age :</text>
@@ -309,28 +305,32 @@
                     </g>
 
                     <!--Skills -->
-                    <g transform="translate(0 -20)" id="about-svg-skills">
+                    <g transform="translate(0 188)" id="about-svg-skills">
                         <!--Background-->
                         <polyline id="about-skills-background" class="about-box-background"
-                            points="50,210 500,210 500,265 500,410 250,410 0,410 0,210" />
+                            points="250,35 200,35 200,10 190,0 10,0 0,10 0,245 10,255 197,255 215,273 215,290 250,290 400,290 410,280 490,280 500,270 500,55 490,45 310,45 300,35" />
 
                         <!--Lines-->
-                        <polyline class="about-box-line" points="250,210 500,210 500,265 500,410 250,410" />
-                        <polyline class="about-box-line" points="250,210 0,210 0,410 250,410" />
+                        <polyline class="about-box-line"
+                            points="250,35 200,35 200,10 190,0 10,0 0,10 0,245 10,255 197,255 215,273 215,290 250,290" />
+                        <polyline class="about-box-line"
+                            points="250,35 300,35 310,45 490,45 500,55 500,270 490,280 410,280 400,290 250,290" />
 
                         <!--Header Mask-->
                         <mask id="skills-header-mask">
-                            <polyline fill="white" points="0,210 0,245 140,245 150,210"></polyline>
-                            <text x="20" y="234" font-size="18" font-weight="bold">SKILLS</text>
+                            <polyline fill="white" points="0,37 0,10 10,0 190,0 200,10 200,37"></polyline>
                             <rect fill="white" x="0" y="210" width="500" height="6"></rect>
                         </mask>
 
                         <!--Header Box-->
-                        <rect id="skills-header-rect" x="0" y="210" height="38" width="500" fill="#00b7ff"
+                        <rect id="skills-header-rect" x="0" y="0" height="47" width="500" fill="#00b7ff" opacity=".15"
                             mask="url(#skills-header-mask)">
                         </rect>
 
-                        <foreignObject x="0" y="202" width="506" height="340" transform="translate(0 47)">
+                        <!--Header Text-->
+                        <text x="71" y="25" class="about-header" font-size="18" font-weight="bold">SKILLS</text>
+
+                        <foreignObject x="0" y="60" width="506" height="340">
                             <!--Skills Content-->
                             <div id="about-skills-container" class="about-container">
                                 <!--Main Render Container-->
@@ -342,32 +342,34 @@
                     </g>
 
                     <!--About-->
-                    <g transform="translate(0 201)" id="about-svg-about">
+                    <g transform="translate(0 459)" id="about-svg-about">
 
                         <!--Background-->
                         <polyline id="about-about-background" class="about-box-background"
-                            points="250,210 0,210 0,495 15,510 200,510 210,500 250,500 500,500 500,210" />
+                            points="250,35 200,35 200,10 190,0 10,0 0,10 0,35 0,315 10,325 100,325 110,335 250,335 490,335 500,325 500,55 490,45 410,45 400,35" />
 
                         <!--Lines-->
-                        <polyline class="about-box-line" points="250,210 500,210 500,500 250,500" />
-                        <polyline class="about-box-line" points="250,210 0,210 0,495 15,510 200,510 210,500 250,500" />
+                        <polyline class="about-box-line"
+                            points="250,35 200,35 200,10 190,0 10,0 0,10 0,35 0,315 10,325 100,325 110,335 250,335" />
+                        <polyline class="about-box-line"
+                            points="250,35 400,35 410,45 490,45 500,55 500,325 490,335 250,335" />
 
                         <!--Header Mask-->
                         <mask id="about-header-mask">
-                            <polyline fill="white" points="0,210 0,245 140,245 150,210"></polyline>
-                            <text x="20" y="234" font-size="18" font-weight="bold">ABOUT</text>
+                            <polyline fill="white" points="0,37 0,10 10,0 190,0 200,10 200,37"></polyline>
                             <rect fill="white" x="0" y="210" width="500" height="6"></rect>
                         </mask>
 
                         <!--Header Box-->
-                        <rect id="about-header-rect" x="0" y="210" height="38" width="500" fill="#00b7ff"
+                        <rect id="about-header-rect" x="0" y="0" height="47" width="500" fill="#00b7ff" opacity=".15"
                             mask="url(#about-header-mask)">
                         </rect>
 
-                        <!--Pixel Images Mask-->
+                        <!--Header Text-->
+                        <text x="73" y="25" class="about-header" font-size="18" font-weight="bold">ABOUT</text>
 
                         <!--First Content-->
-                        <g transform="translate(10 255)">
+                        <g transform="translate(10 65)">
 
                             <use class="about-icon" href="#about-icon-background"></use>
 
@@ -384,7 +386,7 @@
                         </g>
 
                         <!--Second Content-->
-                        <g transform="translate(10 335)">
+                        <g transform="translate(10 145)">
 
                             <use class="about-icon" href="#about-icon-background" x="405"></use>
 
@@ -404,7 +406,7 @@
                         </g>
 
                         <!--Third Content-->
-                        <g transform="translate(10 415)">
+                        <g transform="translate(10 225)">
 
                             <use class="about-icon" href="#about-icon-background"></use>
 
@@ -424,6 +426,35 @@
                             <text x="88" y="50" class="about-text">new challenges to work as a web developer.</text>
                         </g>
                     </g>
+
+                    <!--Down Animation Lines-->
+                    <g transform="translate(145 76)">
+                        <polyline class="about-down-animation-line"
+                            points="0,0 110,0 120,10 325,10 333,18" />
+                    </g>
+                    <g transform="translate(195 192)">
+                        <polyline class="about-down-animation-line"
+                            points="0,0 8,0 13,5 13,22 110,22 120,32 275,32 283,40" />
+                    </g>
+                    <g transform="translate(403 496)">
+                        <polyline class="about-down-animation-line"
+                            points="0,0 70,0 78,8" />
+                    </g>
+
+                    <!--Up Animation Lines-->
+                    <g transform="translate(193 160)">
+                        <polyline class="about-up-animation-line"
+                            points="0,7 275,7 282,0" />
+                    </g>
+                    <g transform="translate(403 468)">
+                        <polyline class="about-up-animation-line"
+                            points="0,8 70,8 78,0" />
+                    </g>
+                    <g transform="translate(20 784)">
+                        <polyline class="about-up-animation-line"
+                            points="0,0 9,9 74,9 84,19 450,19 458,11" />
+                    </g>
+
                 </svg>
             </div>
         </section>
@@ -444,7 +475,7 @@
                         Some things
                     </h1>
                     <h1 class="section-header-container">
-                        I"ve worked on.
+                        I"ve worked on
                     </h1>
                 </div>
 
@@ -481,7 +512,7 @@
                     <h5>Say hello 👋</h5>
                 </div>
                 <h1 class="section-header-container">
-                    Contact me.
+                    Contact me
                 </h1>
             </div>
 
@@ -553,6 +584,16 @@
 
             </div>
         </section>
+
+        <footer class="row center">
+            <span>&copy; David Heckhoff</span>
+
+            <!--Legal Container-->
+            <div id="legal-container" class="row">
+                <a class="legal-link" href="https://david-hckh.com/legal" target="_blank">Legal Notice</a>
+                <a class="legal-link" href="https://david-hckh.com/privacy" target="_blank">Privacy Policy</a>
+            </div>
+        </footer>
     </div>
 </body>
 

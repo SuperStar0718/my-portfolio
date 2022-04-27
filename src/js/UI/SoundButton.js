@@ -85,6 +85,8 @@ export default class Sound {
 
         if (updateLocalStorage)
             this.updateLocalStorage()
+
+        this.sounds.playRoomAmbience()
     }
 
     updateLocalStorage() {

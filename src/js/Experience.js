@@ -65,5 +65,6 @@ export default class Experience {
         this.world.update()
         this.renderer.update()
         this.raycaster.update()
+        this.ui.update()
     }
 }

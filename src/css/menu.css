@@ -68,17 +68,13 @@
     margin-bottom: 10px;
 }
 
-/**Legal container*/
-#legal-container a, #music-credit-container a, #music-credit-container span {
-    font-size: 0.8rem;
+/**Music Credit Container*/
+ #music-credit-container a, #music-credit-container span {
+    font-size: .9rem;
     color: #7C8594;
 }
 
-#legal-container :first-child {
-    margin-right: 20px;
-}
-
-#legal-container a:hover, #music-credit-container a:hover {
+#music-credit-container a:hover {
     text-decoration: underline;
 }
 
@@ -98,7 +94,7 @@
         justify-content: center;
     }
 
-    #legal-container, #music-credit-container  {
+     #music-credit-container  {
         justify-content: center;
     }
 
@@ -136,7 +132,7 @@
         margin: 15px 0;
     }
 
-    #legal-container a, #music-credit-container a, #music-credit-container span {
+    #music-credit-container a, #music-credit-container span {
         font-size: 12px;
     }
 

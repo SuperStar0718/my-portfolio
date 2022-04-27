@@ -237,7 +237,7 @@ export default class MenuItems {
 
         //set scrollY to section's Y-position and perform instant-scroll
         this.scroll.scrollY = section.y
-        this.scroll.performScroll(0)
+        this.scroll.performScroll(0, 'force')
     }
 
     instantHideMenu() {

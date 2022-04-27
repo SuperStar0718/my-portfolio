@@ -1,10 +1,10 @@
 import Experience from '../Experience'
-import { gsap, Power2, Power4 } from 'gsap'
+import { gsap, Power2 } from 'gsap'
+import EventEmitter from '../Utils/EventEmitter'
 
-export default class Scroll {
+export default class Scroll extends EventEmitter {
 
     parameters = {
-        scrollStrength: 110,
         multiplyTouchStrengthBy: () => this.sizes.portrait ? 2 : 2,
         scrollDuration: () => this.sizes.touch ? .6 : .8,
         scrollEase: () => this.sizes.touch ? Power2.easeOut : Power2.easeOut,
@@ -20,6 +20,8 @@ export default class Scroll {
     }
 
     constructor() {
+        super()
+
         this.experience = new Experience()
         this.camera = this.experience.camera
         this.sizes = this.experience.sizes
@@ -89,16 +91,20 @@ export default class Scroll {
         this.stopScrollOnTouchStart()
     }
 
-    attemptScroll(direction, strength = this.parameters.scrollStrength) {
+    attemptScroll(direction, strength = direction * ((event.deltaY ? event.deltaY : 100 * direction) * .9)) {
         if (this.scrollAllowed()) {
             if (direction == -1 && this.scrollY <= 20) {
                 //Open landing page
                 this.checkLandingPageOpening()
             } else if (this.scrollY != 0 || direction == 1) {
                 //check if scroll is possible
-                if (this.scrollY < this.domElements.scrollContainer.scrollHeight - window.innerHeight || direction == -1) {
+                if (this.scrollY < this.sizes.getAbsoluteHeight(this.domElements.scrollContainer) - window.innerHeight || direction == -1) {
                     //set scroll height if possible
                     this.scrollY += direction * strength
+
+                    //update last wheel to prevent too slow scrolling down before opening landing page
+                    if (direction == -1)
+                        this.lastWheelUp = this.time.current
 
                     this.performScroll()
 
@@ -107,9 +113,7 @@ export default class Scroll {
                 }
             }
 
-            //update last wheel to prevent too slow scrolling down before opening landing page
-            if (direction == -1)
-                this.lastWheelUp = this.time.current
+            this.trigger(direction == -1 ? 'scroll-up' : 'scroll-down')
 
             //Hide keyboard
             document.activeElement.blur()
@@ -121,26 +125,26 @@ export default class Scroll {
          * Set scroll maximum at bottom
          *  return original scrollY if not required
         **/
-        if (this.scrollY >= this.domElements.scrollContainer.scrollHeight - window.innerHeight) {
-            return this.domElements.scrollContainer.scrollHeight - window.innerHeight
+        if (this.scrollY >= this.sizes.getAbsoluteHeight(this.domElements.scrollContainer) - window.innerHeight) {
+            return this.sizes.getAbsoluteHeight(this.domElements.scrollContainer) - window.innerHeight
         } else {
             return this.scrollY
         }
     }
 
-    performScroll(duration = this.parameters.scrollDuration()) {
-        if (this.scrollAllowed()) {
+    performScroll(duration = this.parameters.scrollDuration(), force = false) {
+        if (this.scrollAllowed() || force == 'force') {
             this.contentScrollTo = this.preventFromScrollingBottom()
 
             let scrollPercentage = 0
             if (this.scrollY > this.aboutContainer.offset || this.sizes.portrait) {
                 if (this.sizes.portrait) {
-                    scrollPercentage = this.contentScrollTo / this.domElements.scrollContainer.scrollHeight
+                    scrollPercentage = this.contentScrollTo / this.sizes.getAbsoluteHeight(this.domElements.scrollContainer)
                     this.sounds.labAmbienceScroll(this.scrollY / this.aboutContainer.height)
                 }
                 else {
-                    scrollPercentage = (this.contentScrollTo - this.aboutContainer.offset) / (this.domElements.scrollContainer.scrollHeight - this.aboutContainer.height)
-                    this.sounds.labAmbienceScroll((this.contentScrollTo - this.aboutContainer.offset) / ((this.domElements.scrollContainer.scrollHeight * 0.7) - this.aboutContainer.height))
+                    scrollPercentage = (this.contentScrollTo - this.aboutContainer.offset) / (this.sizes.getAbsoluteHeight(this.domElements.scrollContainer) - this.aboutContainer.height)
+                    this.sounds.labAmbienceScroll((this.contentScrollTo - this.aboutContainer.offset) / ((this.sizes.getAbsoluteHeight(this.domElements.scrollContainer) * 0.7) - this.aboutContainer.height))
                 }
             } else {
                 this.sounds.labAmbienceScroll(0)
@@ -177,10 +181,7 @@ export default class Scroll {
                 gsap.killTweensOf(this.camera.instance.position)
                 gsap.killTweensOf(this.background.material.uniforms.uOffset)
 
-                const style = window.getComputedStyle(this.domElements.scrollContainer)
-                const matrix = new WebKitCSSMatrix(style.transform)
-
-                this.scrollY = -matrix.m42
+                this.scrollY = this.actualScroll
             }
         })
     }
@@ -209,9 +210,10 @@ export default class Scroll {
         const waypoint = this.waypoints.waypoints.find((waypoint) => waypoint.name === (this.sizes.portrait ? 'scroll-start-portrait' : 'scroll-start'))
 
         this.cameraRange.top = waypoint.position.y
-        this.cameraRange.bottom = this.sizes.portrait ? -54 : -11 - ((this.domElements.scrollContainer.scrollHeight / window.innerHeight) * 5.1)
+        //this.cameraRange.bottom = this.sizes.portrait ? -54 : -9.3 - ((this.sizes.getAbsoluteHeight(this.domElements.scrollContainer) / window.innerHeight) * 5.2)
+        this.cameraRange.bottom = this.sizes.portrait ? -54 : -17 - (((this.sizes.getAbsoluteHeight(this.domElements.scrollContainer) - this.sizes.getAbsoluteHeight(document.getElementById('about-section'))) / window.innerHeight) * 5)
 
-        this.contactScene.setYPosition(this.cameraRange.bottom)
+        this.contactScene.setYPosition(this.cameraRange.bottom + (this.sizes.portrait ? .5 : 0))
     }
 
     setAboutContainerDetails() {
@@ -222,37 +224,24 @@ export default class Scroll {
         this.aboutContainer.height = this.aboutContainer.domElement.clientHeight
     }
 
-    addEvent(height, direction, task) {
+    addEvent(height, direction, task, repeats) {
+        let played = false
         //Add to array
-        this.events.push({ height: height, direction: direction, task: task, played: false })
-        const index = this.events.length - 1
+        this.events.push({
+            height: height,
+            direction: direction,
+            task: task,
+            check: () => {
+                if (!played) {
+                    if (direction === 'up' ? height >= this.actualScroll && this.actualScroll != 0 : height <= this.actualScroll) {
+                        task()
 
-        const checkEvent = () => {
-            if (this.events[index]) {
-                if ((direction === 'up' ? height >= this.scrollY : height <= this.scrollY) && !this.events[index].played) {
-                    //execute
-                    this.events[index].task()
-
-                    //prevent multiple playing
-                    this.events[index].played = true
+                        if (!repeats)
+                            played = true
+                    }
                 }
             }
-        }
-
-        //wheel event listeners
-        this.gestures.on('scroll-' + direction, () => checkEvent())
-        this.gestures.on('touch-' + direction, () => checkEvent())
-
-        const checkReset = () => {
-            if (this.events[index]) {
-                if ((direction === 'up' ? height < this.scrollY : height > this.scrollY) && this.events[index].played)
-                    this.events[index].played = false
-            }
-        }
-
-        //check if unique -> listen to opposite direction to make event playable again
-        this.gestures.on('scroll-' + (direction === 'up' ? 'down' : 'up'), () => checkReset())
-        this.gestures.on('touch-' + (direction === 'up' ? 'down' : 'up'), () => checkReset())
+        })
     }
 
     resetAllEvents() {
@@ -260,12 +249,12 @@ export default class Scroll {
     }
 
     scrollAllowed() {
-        return !this.landingPage.isAnimating && !this.landingPage.visible && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating
+        return !this.landingPage.isAnimating && !this.landingPage.visible && !this.experience.ui.menu.main.visible && !this.experience.ui.menu.main.isAnimating && !this.transition.isShowing
     }
 
     checkLandingPageOpening() {
         //open landing if user isnt scrolling too fast
-        if (this.time.current - this.lastWheelUp > 200)
+        if (this.lastWheelUp ? this.time.current - this.lastWheelUp > 200 : true)
             this.landingPage.show()
     }
 
@@ -284,5 +273,25 @@ export default class Scroll {
         this.setLogoOverlayHeight()
         this.setCameraRange()
         this.performScroll(0)
+
+        //check all events
+        setTimeout(() => {
+            this.events.forEach((event) => {
+                event.check()
+            })
+        }, 10)
+    }
+
+    update() {
+        //Update actual scroll
+        const style = window.getComputedStyle(this.domElements.scrollContainer)
+        const matrix = new WebKitCSSMatrix(style.transform)
+        this.actualScroll = -matrix.m42
+
+        //check all events
+        this.events.forEach((event) => {
+            if (this.scrollY != this.actualScroll)
+                event.check()
+        })
     }
 }

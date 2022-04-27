@@ -1,6 +1,6 @@
 import { gsap, Power2 } from 'gsap'
 import Experience from '../../Experience'
-
+import ScrollEvent from '../ScrollEvent'
 
 export default class AboutAnimations {
 
@@ -88,7 +88,7 @@ export default class AboutAnimations {
         const upperTexts = document.querySelectorAll('.about-header-upper-text')
         const lowerTexts = document.querySelectorAll('.about-header-lower-text')
 
-        for(let i = 0; i < upperTexts.length; i++) {
+        for (let i = 0; i < upperTexts.length; i++) {
             gsap.fromTo(upperTexts[i], { opacity: 0 }, { opacity: 1, duration: .4, delay: .4 + i / 10 })
             gsap.fromTo(lowerTexts[i], { opacity: 0 }, { opacity: 1, duration: .4, delay: .4 + i / 10 })
         }
@@ -159,16 +159,24 @@ export default class AboutAnimations {
     }
 
     addScrollEvents() {
-        this.scroll.addEvent(this.domElements.aboutSection.clientHeight, 'up', () => {
-            this.playHologramAnimation(.1)
-            this.resetCharacterToPosition()
+        new ScrollEvent({
+            element: document.getElementById('work-section'),
+            direction: 'up',
+            f: () => {
+                this.playHologramAnimation(.1)
+                this.resetCharacterToPosition()
+            },
+            repeats: true,
         })
     }
 
     resetCharacterToPosition() {
         if (!this.experience.ui.landingPage.visible && this.character.body.model.position.y != -18.95 && !this.experience.ui.landingPage.isAnimating) {
+            //Animation
+            if (this.character.animations.actions.current._clip.name != 'water-idle')
+                this.character.animations.play('waterIdle', 0)
+
             this.character.body.model.position.y = -18.95
-            this.character.animations.play('waterIdle', 0)
             this.character.body.updateWireframe('down')
             this.character.body.model.scale.set(1, 1, 1)
         }

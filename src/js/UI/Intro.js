@@ -63,6 +63,9 @@ export default class Intro {
                     this.soundButton.activate(false)
 
                 event.preventDefault()
+
+                if (this.sounds)
+                    this.sounds.playRoomAmbience()
             }
         })
     }
@@ -123,13 +126,6 @@ export default class Intro {
             if (!this.experience.sizes.touch)
                 this.domElements.container.style.cursor = 'unset'
 
-
-            //Start sounds
-            this.sounds.roomAmbience.play()
-            gsap.delayedCall(1, () => {
-                this.tones.startAnimations()
-            })
-
             //Update Hover Icon
             gsap.to(this.hoverIcon.domElements.icon, { scale: 1, duration: .3, delay: .5 })
             this.hoverIcon.setupDefault()
@@ -155,6 +151,9 @@ export default class Intro {
         this.character.animations.playIntroAnimation()
 
         gsap.delayedCall(this.parameters.timeTillFinish, () => this.finish())
+
+        if (this.clicked)
+            this.sounds.playRoomAmbience()
     }
 
     //Show overlay and enable gestures

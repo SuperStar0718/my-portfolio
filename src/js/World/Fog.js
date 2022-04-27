@@ -18,6 +18,7 @@ export default class SceneFog {
     onOrientationChange() {
         this.fog.near = this.sizes.portrait ? 18 : 10
         this.fog.far = this.sizes.portrait ? 23 : 17
+        this.fog.color = new THREE.Color(this.sizes.portrait ? '#001945' : '#002C6A')
     }
 
     setFog() {

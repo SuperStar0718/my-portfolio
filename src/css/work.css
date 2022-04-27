@@ -40,10 +40,13 @@
     background: white;
     height: 100%;
     position: absolute;
-    transition: transform 400ms ease-in-out, opacity 400ms ease-in-out, filter 400ms ease-in-out, border-color 100ms;
     border: 2px solid white;
     border-radius: 20px;
     width: 100%;
+}
+
+.work-item-container-transition {
+    transition: transform 400ms ease-in-out, opacity 400ms ease-in-out, filter 400ms ease-in-out, border-color 100ms;
 }
 
 .work-inactive-item-container {

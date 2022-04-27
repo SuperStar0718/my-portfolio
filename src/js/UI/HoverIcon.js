@@ -86,6 +86,11 @@ export default class HoverIcon extends EventEmitter {
         this.sizes.touch ? this.domElements.icon.classList.add('hide') : this.domElements.icon.classList.remove('hide')
         this.sizes.on('touch', () => this.domElements.icon.classList.add('hide'))
         this.sizes.on('no-touch', () => this.domElements.icon.classList.remove('hide'))
+
+        document.addEventListener('visibilitychange', () => {
+            this.updateBaseColor('#FF923E', true)
+            console.log()
+        })
     }
 
     // Apply Mouseenter, mouseleave and mousemove event listeners
@@ -128,7 +133,7 @@ export default class HoverIcon extends EventEmitter {
     }
 
     updatePosition() {
-        if (!this.sizes.touch) 
+        if (!this.sizes.touch)
             gsap.to(this.domElements.icon, { x: event.pageX, y: event.pageY, duration: .4, ease: Power3.easeOut })
     }
 
@@ -156,9 +161,9 @@ export default class HoverIcon extends EventEmitter {
         this.domElements.aboutSection.addEventListener('mouseleave', () => setupDefaultColor())
     }
 
-    updateBaseColor(color) {
+    updateBaseColor(color, force = false) {
         setTimeout(() => {
-            if (!document.hidden && (this.cursorIsInsideDoc || this.landingPage.visible) && this.currentBaseColor != color && !this.experience.raycaster.isHovering) {
+            if (force || (!document.hidden && (this.cursorIsInsideDoc || this.landingPage.visible) && this.currentBaseColor != color && !this.experience.raycaster.isHovering)) {
                 this.currentBaseColor = color
 
                 this.domElements.icon.style.borderColor = this.currentBaseColor

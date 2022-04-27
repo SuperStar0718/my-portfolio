@@ -21,6 +21,7 @@ export default class WorkCards {
     }
 
     currentItemIndex = 2
+    itemsAreMoving = true
 
     constructor() {
         this.experience = new Experience()
@@ -28,11 +29,21 @@ export default class WorkCards {
         this.render = this.experience.ui.work.render
         this.sounds = this.experience.sounds
         this.scroll = this.experience.ui.scroll
+        this.sizes = this.experience.sizes
 
         this.addButtonEventListeners()
         this.initSwipes()
         this.updatePositions()
         this.onArrowClick()
+
+        //Orientation Change
+        this.sizes.on('portrait', () => this.onOrientationChange())
+        this.sizes.on('landscape', () => this.onOrientationChange())
+    }
+
+    onOrientationChange() {
+        this.currentItemIndex = 2
+        this.updatePositions()
     }
 
     addButtonEventListeners() {
@@ -69,14 +80,14 @@ export default class WorkCards {
     }
 
     moveBack() {
-        if (this.currentItemIndex != 4 && !this.itemsAreMoving) {
+        if (this.currentItemIndex != 4 && !this.itemsAreMoving && document.getElementById('work-item-0').classList.contains('work-item-container-transition')) {
             this.currentItemIndex++
             this.updatePositions()
         }
     }
 
     moveForward() {
-        if (this.currentItemIndex != 0 && !this.itemsAreMoving) {
+        if (this.currentItemIndex != 0 && !this.itemsAreMoving && document.getElementById('work-item-0').classList.contains('work-item-container-transition')) {
             this.currentItemIndex--
             this.updatePositions()
         }

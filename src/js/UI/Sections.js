@@ -24,7 +24,7 @@ export default class Sections {
             name: 'contact',
             y: 0,
             container: document.getElementById('contact-section'),
-            offset: () => this.sizes.portrait ? -80 : 0,
+            offset: () => this.sizes.portrait ? -100 : 0,
         }
     ]
 

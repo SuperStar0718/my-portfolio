@@ -89,7 +89,7 @@ export default class WorkRender {
 
         // Inactive Container click
         container.addEventListener('click', () => {
-            if (container.classList.contains('work-inactive-item-container')) {
+            if (container.classList.contains('work-inactive-item-container') && document.getElementById('work-item-0').classList.contains('work-item-container-transition')) {
                 this.experience.ui.work.cards.currentItemIndex = -item.id + 4
                 this.experience.ui.work.cards.updatePositions()
                 this.sounds.play('buttonClick')
