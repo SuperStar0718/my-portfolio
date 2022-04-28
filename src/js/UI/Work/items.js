@@ -45,6 +45,6 @@ export default [
         image: 'images/projects/jelly-battle.jpg',
         tags: ['react', 'r3f', 'javascript', 'html', 'css'],
         twitter: 'https://twitter.com/DavidHckh',
-        alt: 'work in progress portfolio project jelly battle strategy game flash',
+        alt: 'work in progress portfolio project jelly battle strategy game flash multiplayer',
     },
 ]
