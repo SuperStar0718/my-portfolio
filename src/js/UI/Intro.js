@@ -87,10 +87,10 @@ export default class Intro {
 
         for (let i = 0; i < this.animationElements.length; i++) {
             //scale
-            gsap.fromTo(this.animationElements[i], { scale: 1 }, { scale: 5, repeat: -1, duration: 1, repeatDelay: .4, delay: i / 2, ease: Linear.easeNone })
+            gsap.fromTo(this.animationElements[i], { scale: 1 }, { scale: 5, repeat: -1, duration: 1.5, delay: i * 1.5 / 2, ease: Linear.easeNone })
 
             //opacity
-            gsap.fromTo(this.animationElements[i], { opacity: .175 }, { opacity: 0, repeat: -1, duration: 1, repeatDelay: .4, delay: i / 2, ease: Power4.easeIn })
+            gsap.fromTo(this.animationElements[i], { opacity: .175 }, { opacity: 0, repeat: -1, duration: 1.5, delay: i * 1.5 / 2, ease: Power4.easeIn })
         }
     }
 

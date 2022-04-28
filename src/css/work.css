@@ -84,18 +84,18 @@
 }
 
 .work-item-tag-container {
-    margin: 10px 0;
+    margin-top: 5px;
     margin-bottom: 15px;
     max-width: 100%;
     flex-wrap: wrap;
 }
 
 .work-item-tag {
-    font-size: .7rem;
-    padding: 3px 8px;
+    font-size: .65rem;
+    padding: 1px 7px;
     margin-right: 5px;
     color: white;
-    border-radius: 8px;
+    border-radius: 10px;
     margin-bottom: 4px;
     display: flex;
     align-items: center;

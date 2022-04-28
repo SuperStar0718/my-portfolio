@@ -43,27 +43,27 @@ export default class ContactAnimationEvents {
             new ScrollEvent({
                 element: this.domElements.smallHeader,
                 direction: 'down',
-                f: () => gsap.to(this.domElements.smallHeader, { y: 0, duration: .4 }),
-                setup: () => gsap.to(this.domElements.smallHeader, { y: 200, duration: 0 }),
-                reset: () => gsap.to(this.domElements.smallHeader, { y: 0, duration: 0 })
+                f: () => gsap.to(this.domElements.smallHeader, { y: 0, opacity: 1, duration: .4 }),
+                setup: () => gsap.to(this.domElements.smallHeader, { y: 100, opacity: 0, duration: 0 }),
+                reset: () => gsap.to(this.domElements.smallHeader, { y: 0, opacity: 1, duration: 0 })
             }),
 
             //Header
             new ScrollEvent({
                 element: this.domElements.header,
                 direction: 'down',
-                f: () => gsap.to(this.domElements.header, { y: 0, duration: .6 }),
-                setup: () => gsap.to(this.domElements.header, { y: 200, duration: 0 }),
-                reset: () => gsap.to(this.domElements.header, { y: 0, duration: 0 })
+                f: () => gsap.to(this.domElements.header, { y: 0, opacity: 1, duration: .6 }),
+                setup: () => gsap.to(this.domElements.header, { y: 100, opacity: 0, duration: 0 }),
+                reset: () => gsap.to(this.domElements.header, { y: 0, opacity: 1, duration: 0 })
             }),
 
             //Form
             new ScrollEvent({
                 element: this.domElements.form,
                 direction: 'down',
-                f: () => gsap.to(this.domElements.form, { y: 0, duration: .8 }),
-                setup: () => gsap.to(this.domElements.form, { y: 200, duration: 0 }),
-                reset: () => gsap.to(this.domElements.form, { y: 0, duration: 0 })
+                f: () => gsap.to(this.domElements.form, { y: 0, opacity: 1, duration: .8 }),
+                setup: () => gsap.to(this.domElements.form, { y: 100, opacity: 0, duration: 0 }),
+                reset: () => gsap.to(this.domElements.form, { y: 0, opacity: 1, duration: 0 })
             }),
         ]
     }

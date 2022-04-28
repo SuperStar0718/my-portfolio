@@ -57,6 +57,9 @@ export default class AboutAnimations {
         if (!this.hologramPlayed) {
             this.hologramPlayed = true
 
+            this.isAnimating = true
+            gsap.delayedCall(.9, () => this.isAnimating = false)
+
             gsap.delayedCall(.3, () => this.sounds.play('hologram'))
 
             this.fadeInHologramUI(delay)

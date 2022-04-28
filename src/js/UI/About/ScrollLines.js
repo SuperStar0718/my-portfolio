@@ -1,5 +1,5 @@
 import Experience from '../../Experience'
-import {gsap} from 'gsap'
+import { gsap } from 'gsap'
 
 export default class AboutScrollLines {
 
@@ -9,16 +9,20 @@ export default class AboutScrollLines {
     constructor() {
         this.experience = new Experience()
         this.scroll = this.experience.ui.scroll
+        this.aboutAnimations = this.experience.ui.about.animations
 
         this.scroll.on('scroll-down', () => this.showLines(this.downLines))
         this.scroll.on('scroll-up', () => this.showLines(this.upLines))
     }
 
     showLines(lines) {
-        lines.forEach(line => {
-            gsap.to(line, {opacity: .8, duration: .3, onComplete: () => {
-                gsap.to(line, {opacity: 0, duration: .5})
-            }})
-        })
+        if (!this.aboutAnimations.isAnimating)
+            lines.forEach(line => {
+                gsap.to(line, {
+                    opacity: .8, duration: .3, onComplete: () => {
+                        gsap.to(line, { opacity: 0, duration: .5 })
+                    }
+                })
+            })
     }
 }
