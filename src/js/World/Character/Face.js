@@ -65,7 +65,7 @@ export default class CharacterFace {
 
             //Interval
             const faceTransitionsTimeout = () => this.faceCall = gsap.delayedCall(.03, () => {
-                if (this.landingPage.visible || this.faceTransitions.current.allowedOutsideLanding) {
+                if (this.landingPage.visible || this.faceTransitions.current.allowedOutsideLanding || this.landingPage.isAnimating) {
                     //Update Map
                     this.model.material.map = this.faceTransitions.current.faces[this.faceTransitions.count]
                     //Decrease count until -1 then set to default face

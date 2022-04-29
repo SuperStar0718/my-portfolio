@@ -112,12 +112,12 @@ export default class LandingPage extends EventEmitter {
                 // Character Animation
                 this.character.animations.play('fallDown', .35)
 
-                // Update Face
-                this.character.face.material.map = this.character.face.textures.scared
-
                 //character fall down
                 gsap.to(this.character.body.model.position, { y: -18.95, duration: this.scrollAnimationDuration, ease: Power2.easeInOut })
                 gsap.delayedCall(.05, () => this.sounds.play('waterSplash'))
+
+                // Update Face
+                this.character.face.material.map = this.character.face.textures.scared
 
                 //play water idle animation 
                 gsap.delayedCall(.65, () => this.character.animations.play('waterIdle', 1))
