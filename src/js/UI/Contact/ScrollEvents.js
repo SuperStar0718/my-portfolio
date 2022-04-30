@@ -39,33 +39,43 @@ export default class ContactAnimationEvents {
                     this.domElements.contactSection.clientHeight * 0.5,
             }),
 
-            // Small Header
-            new ScrollEvent({
-                element: this.domElements.smallHeader,
-                direction: 'down',
-                f: () => gsap.to(this.domElements.smallHeader, { y: 0, opacity: 1, duration: .4 }),
-                setup: () => gsap.to(this.domElements.smallHeader, { y: 100, opacity: 0, duration: 0 }),
-                reset: () => gsap.to(this.domElements.smallHeader, { y: 0, opacity: 1, duration: 0 })
-            }),
-
-            //Header
-            new ScrollEvent({
-                element: this.domElements.header,
-                direction: 'down',
-                f: () => gsap.to(this.domElements.header, { y: 0, opacity: 1, duration: .6 }),
-                setup: () => gsap.to(this.domElements.header, { y: 100, opacity: 0, duration: 0 }),
-                reset: () => gsap.to(this.domElements.header, { y: 0, opacity: 1, duration: 0 })
-            }),
-
-            //Form
-            new ScrollEvent({
-                element: this.domElements.form,
-                direction: 'down',
-                f: () => gsap.to(this.domElements.form, { y: 0, opacity: 1, duration: .8 }),
-                setup: () => gsap.to(this.domElements.form, { y: 100, opacity: 0, duration: 0 }),
-                reset: () => gsap.to(this.domElements.form, { y: 0, opacity: 1, duration: 0 })
-            }),
         ]
+
+        //Non-repeating on resize
+        if (!this.played) {
+            this.scrollEvents.push(
+                // Small Header
+                new ScrollEvent({
+                    element: this.domElements.smallHeader,
+                    direction: 'down',
+                    f: () => gsap.to(this.domElements.smallHeader, { y: 0, opacity: 1, duration: .4 }),
+                    setup: () => gsap.to(this.domElements.smallHeader, { y: 100, opacity: 0, duration: 0 }),
+                    reset: () => gsap.to(this.domElements.smallHeader, { y: 0, opacity: 1, duration: 0 })
+                }),
+            )
+
+            this.scrollEvents.push(
+                //Header
+                new ScrollEvent({
+                    element: this.domElements.header,
+                    direction: 'down',
+                    f: () => gsap.to(this.domElements.header, { y: 0, opacity: 1, duration: .6 }),
+                    setup: () => gsap.to(this.domElements.header, { y: 100, opacity: 0, duration: 0 }),
+                    reset: () => gsap.to(this.domElements.header, { y: 0, opacity: 1, duration: 0 })
+                }),
+            )
+
+            this.scrollEvents.push(
+                //Form
+                new ScrollEvent({
+                    element: this.domElements.form,
+                    direction: 'down',
+                    f: () => gsap.to(this.domElements.form, { y: 0, opacity: 1, duration: .8, onComplete: () => this.played = true }),
+                    setup: () => gsap.to(this.domElements.form, { y: 100, opacity: 0, duration: 0 }),
+                    reset: () => gsap.to(this.domElements.form, { y: 0, opacity: 1, duration: 0, onComplete: () => this.played = true })
+                }),
+            )
+        }
     }
 
     resetPositions() {

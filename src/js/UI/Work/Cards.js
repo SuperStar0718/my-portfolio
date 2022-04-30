@@ -2,6 +2,7 @@ import Experience from '../../Experience.js'
 import { gsap } from 'gsap'
 
 export default class WorkCards {
+
     positionStyles = [
         'transform: translateX(-410%) scale(0.9);',// Left
         'transform: translateX(-310%) scale(0.9); ',

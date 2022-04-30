@@ -16,7 +16,7 @@ export default class AboutScrollLines {
     }
 
     showLines(lines) {
-        if (!this.aboutAnimations.isAnimating)
+        if (!this.aboutAnimations.isAnimating && this.aboutAnimations.hologramPlayed)
             lines.forEach(line => {
                 gsap.to(line, {
                     opacity: .8, duration: .3, onComplete: () => {
