@@ -1,6 +1,6 @@
 export default [
     {
-        name: 'WebGL (ThreeJS)',
+        name: 'WebGL',
         width: '60%',
     },
     {
@@ -19,5 +19,4 @@ export default [
         name: '3D Modelling',
         width: '60%',
     },
-    
 ]

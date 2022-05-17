@@ -92,13 +92,13 @@ export default class Sounds {
             name: 'transition0',
             files: [transition0Sound],
             group: 'general',
-            volume: .5,
+            volume: .3,
         },
         {
             name: 'transition1',
             files: [transition1Sound],
             group: 'general',
-            volume: .5,
+            volume: .3,
         },
         {
             name: 'waterUp',
