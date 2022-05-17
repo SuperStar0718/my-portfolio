@@ -33,11 +33,27 @@ export default class WorkRender {
                 <div class="work-item-button-container row">
                     ${this.renderButtons(item)}
                 </div>
+                ${item.bannerIcons ? this.renderBanner(item) : ''}
             </div>
             `)
 
             this.addEventListenersToCard(item)
         })
+    }
+
+    renderBanner(item) {
+        let content = ''
+
+        content = `
+            <div class="work-banner-container row center">
+                ${item.bannerIcons.map(icon =>  {
+                    return `<img src="${icon.src}" alt="${icon.alt}" height="64" width="64"/>`
+                })}
+                <span>Website Of<br>The Day</span>
+            </div>
+        `
+
+        return content
     }
 
     renderButtons(item) {

@@ -70,8 +70,10 @@ export default class WorkScrollEvents {
                         gsap.to(this.domElements.cards[3], { y: 0, opacity: 1, duration: .75 })
                         gsap.to(this.domElements.cards[4], {
                             y: 0, opacity: 1, duration: .85, onComplete: () => {
-                                this.addTransitionClass(true)
-                                this.played = true
+                                gsap.delayedCall(.2, () => {
+                                    this.addTransitionClass(true)
+                                    this.played = true
+                                })
                             }
                         })
                     },

@@ -37,6 +37,7 @@ export default [
         tags: ['threejs', 'javascript', 'html', 'css'],
         twitter: 'https://twitter.com/DavidHckh',
         alt: 'david heckhoff portfolio project 2022 threejs blender 3d design',
+        bannerIcons: [{ src: 'images/cssda-icon.png', alt: 'cssda icon site of the day' }],
     },
     {
         id: 4,

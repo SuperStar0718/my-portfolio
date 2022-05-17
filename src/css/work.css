@@ -40,17 +40,18 @@
     background: white;
     height: 100%;
     position: absolute;
-    border: 2px solid white;
+    padding: 2px;
     border-radius: 20px;
     width: 100%;
+    overflow: hidden;
 }
 
 .work-item-container-transition {
-    transition: transform 400ms ease-in-out, opacity 400ms ease-in-out, filter 400ms ease-in-out, border-color 100ms;
+    transition: transform 400ms ease-in-out, opacity 350ms ease-in-out, filter 350ms ease-in-out;
 }
 
 .work-inactive-item-container {
-    opacity: .5 !important;
+    opacity: .7 !important;
     filter: grayscale(.5) !important;
     cursor: pointer;
 }
@@ -62,6 +63,7 @@
 
 .work-inactive-item-container:hover {
     border: 2px solid #7C8594;
+    padding: 0;
 }
 
 .work-item-image {
@@ -129,6 +131,27 @@
 .work-item-gray-button span {
     color: white;
     margin-left: 10px;
+}
+
+.work-banner-container {
+    height: 50px;
+    width: 300px;
+    background-color: #FFCB00;
+    position: absolute;
+    transform: rotate(-45deg) translate(-92px, -30px);
+}
+
+.work-banner-container span {
+    color: #091434;
+    font-weight: 500;
+    line-height: 1.3;
+    font-size: 15px;
+}
+
+.work-banner-container img {
+    height: 30px;
+    width: 30px;
+    margin-right: 12px;
 }
 
 /**---------------------------------------------------------------Navigation-----------------------------------------------------*/

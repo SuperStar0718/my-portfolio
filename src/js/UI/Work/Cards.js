@@ -34,7 +34,7 @@ export default class WorkCards {
 
         this.addButtonEventListeners()
         this.initSwipes()
-        this.updatePositions()
+        this.updatePositions(true)
         this.onArrowClick()
 
         //Orientation Change
@@ -106,26 +106,28 @@ export default class WorkCards {
         })
     }
 
-    updatePositions() {
-        this.render.items.forEach((item) => {
-            const index = this.render.items.indexOf(item)
+    updatePositions(force = false) {
+        if (!this.itemsAreMoving || force) {
+            this.render.items.forEach((item) => {
+                const index = this.render.items.indexOf(item)
 
-            //update position style
-            document.getElementById('work-item-' + item.id).style = this.positionStyles[index + this.currentItemIndex]
+                //update position style
+                document.getElementById('work-item-' + item.id).style = this.positionStyles[index + this.currentItemIndex]
 
-            //update style class
-            if (index + this.currentItemIndex != 4) {
-                document.getElementById('work-item-' + item.id).classList.add('work-inactive-item-container')
-            } else {
-                document.getElementById('work-item-' + item.id).classList.remove('work-inactive-item-container')
-            }
-        })
+                //update style class
+                if (index + this.currentItemIndex != 4) {
+                    document.getElementById('work-item-' + item.id).classList.add('work-inactive-item-container')
+                } else {
+                    document.getElementById('work-item-' + item.id).classList.remove('work-inactive-item-container')
+                }
+            })
 
-        //prevent too fast switching
-        this.itemsAreMoving = true
-        gsap.delayedCall(.4, () => this.itemsAreMoving = false)
+            //prevent too fast switching
+            this.itemsAreMoving = true
+            gsap.delayedCall(.5, () => this.itemsAreMoving = false)
 
-        this.updateNavigation()
+            this.updateNavigation()
+        }
     }
 
     // disable or enable back and next navigation buttons
