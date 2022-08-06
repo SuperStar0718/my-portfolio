@@ -32,12 +32,13 @@ export default [
     {
         id: 3,
         name: 'Portfolio 2022',
-        description: `A case study for this project is currently being written. Follow me on <a tabindex="-1" href="https://twitter.com/DavidHckh" target="_blank">Twitter</a> to stay up to date.`,
+        description: `My portfolio website, you're probably looking at right now.`,
         image: 'images/projects/portfolio.jpg',
         tags: ['webgl', 'javascript', 'html', 'css'],
         twitter: 'https://twitter.com/DavidHckh',
         alt: 'david heckhoff portfolio project 2022 threejs blender 3d design',
         bannerIcons: [{ src: 'images/cssda-icon.png', alt: 'cssda icon site of the day' }],
+        github: 'https://github.com/davidhckh/portfolio-2022',
     },
     {
         id: 4,
