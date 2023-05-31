@@ -1,22 +1,30 @@
 export default [
     {
-        name: 'WebGL',
-        width: '60%',
+        name: 'Laravel',
+        width: '90%',
     },
     {
-        name: 'ReactJS',
-        width: '65%',
+        name: 'React/NextJS',
+        width: '90%',
     },
     {
-        name: 'JavaScript',
+        name: 'React Native',
         width: '85%',
     },
     {
-        name: 'HTML + CSS',
+        name: 'Vue',
         width: '90%'
     },
     {
-        name: '3D Modelling',
-        width: '60%',
+        name: 'Django',
+        width: '90%',
+    },
+    {
+        name: 'Angular',
+        width: '80%',
+    },
+    {
+        name: 'Solidity',
+        width: '90%',
     },
 ]

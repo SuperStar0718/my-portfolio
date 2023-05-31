@@ -159,7 +159,7 @@ export default class ContactForm {
         this.showContainer('loading')
 
         //await fetch than show result
-        this.showResult(await fetch('https://david-hckh.com/dvPUgZZmtUufcKM59gv9zX4NiNKQqGs5.php', { method: 'POST', body: formData }))
+        // this.showResult(await fetch('https://david-hckh.com/dvPUgZZmtUufcKM59gv9zX4NiNKQqGs5.php', { method: 'POST', body: formData }))
     }
 
     hideAllContainers() {

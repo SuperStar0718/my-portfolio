@@ -4,7 +4,9 @@ import { gsap } from 'gsap'
 export default class WorkCards {
 
     positionStyles = [
-        'transform: translateX(-410%) scale(0.9);',// Left
+        'transform: translateX(-610%) scale(0.9); ',
+        'transform: translateX(-510%) scale(0.9); ',
+        'transform: translateX(-410%) scale(0.9); ',
         'transform: translateX(-310%) scale(0.9); ',
         'transform: translateX(-210%) scale(0.9);',
         'transform: translateX(-110%) scale(0.9); ',
@@ -13,6 +15,8 @@ export default class WorkCards {
         'transform: translateX(210%) scale(0.9)',
         'transform: translateX(310%) scale(0.9);',
         'transform: translateX(410%) scale(0.9);',
+        'transform: translateX(510%) scale(0.9);',
+        'transform: translateX(610%) scale(0.9);',
     ]
 
     domElements = {
@@ -21,7 +25,7 @@ export default class WorkCards {
         nextButton: document.getElementById('work-next-button'),
     }
 
-    currentItemIndex = 2
+    currentItemIndex = 3
     itemsAreMoving = true
 
     constructor() {
@@ -43,7 +47,7 @@ export default class WorkCards {
     }
 
     onOrientationChange() {
-        this.currentItemIndex = 2
+        this.currentItemIndex = 3
         this.updatePositions()
     }
 
@@ -81,10 +85,11 @@ export default class WorkCards {
     }
 
     moveBack() {
-        if (this.currentItemIndex != 4 && !this.itemsAreMoving && document.getElementById('work-item-0').classList.contains('work-item-container-transition')) {
+        if (this.currentItemIndex != 6 && !this.itemsAreMoving && document.getElementById('work-item-0').classList.contains('work-item-container-transition')) {
             this.currentItemIndex++
             this.updatePositions()
         }
+        console.log("back", this.currentItemIndex)
     }
 
     moveForward() {
@@ -92,6 +97,8 @@ export default class WorkCards {
             this.currentItemIndex--
             this.updatePositions()
         }
+        console.log("forward", this.currentItemIndex)
+
     }
 
     onArrowClick() {
@@ -115,7 +122,7 @@ export default class WorkCards {
                 document.getElementById('work-item-' + item.id).style = this.positionStyles[index + this.currentItemIndex]
 
                 //update style class
-                if (index + this.currentItemIndex != 4) {
+                if (index + this.currentItemIndex != 6) {
                     document.getElementById('work-item-' + item.id).classList.add('work-inactive-item-container')
                 } else {
                     document.getElementById('work-item-' + item.id).classList.remove('work-inactive-item-container')
@@ -135,7 +142,7 @@ export default class WorkCards {
         if (this.currentItemIndex == 0) {
             this.domElements.nextButton.classList.add('work-disabled-navigation-button')
             this.experience.ui.hoverIcon.setupDefault()
-        } else if (this.currentItemIndex == 4) {
+        } else if (this.currentItemIndex == 6) {
             this.domElements.backButton.classList.add('work-disabled-navigation-button')
             this.experience.ui.hoverIcon.setupDefault()
         } else {

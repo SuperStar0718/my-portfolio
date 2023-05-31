@@ -204,11 +204,11 @@ hr {
 .social-icon {
     cursor: pointer;
     filter: grayscale(1) brightness(8);
+    filter: unset;
     transition: 0.125s ease-in;
 }
 
 .social-icon:hover {
-    filter: unset;
     transform: scale(1.05);
 }
 

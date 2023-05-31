@@ -34,6 +34,6 @@ export default class David {
 
         this.sprite = new THREE.Sprite(this.material)
 
-        this.contactScene.model.add(this.sprite)
+        // this.contactScene.model.add(this.sprite)
     }
 } 

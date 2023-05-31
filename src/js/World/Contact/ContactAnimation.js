@@ -81,9 +81,9 @@ export default class ContactAnimation {
                 this.character.face.model.renderOrder = 1
 
                 //Fade out
-                this.materialsToHide.forEach((material) => {
-                    this.timeline.to(material, { opacity: 0, duration: this.parameters.transitionDuration, ease: Power3.easeIn }, 0)
-                })
+                // this.materialsToHide.forEach((material) => {
+                //     this.timeline.to(material, { opacity: 0, duration: this.parameters.transitionDuration, ease: Power3.easeIn }, 0)
+                // })
             })
         }
     }
