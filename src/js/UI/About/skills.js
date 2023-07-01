@@ -20,11 +20,11 @@ export default [
         width: '90%',
     },
     {
-        name: 'Angular',
-        width: '80%',
+        name: 'Golang',
+        width: '90%',
     },
     {
-        name: 'Solidity',
+        name: 'Ruby on Rails',
         width: '90%',
     },
 ]
