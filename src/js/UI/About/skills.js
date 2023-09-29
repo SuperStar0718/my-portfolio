@@ -1,18 +1,18 @@
 export default [
     {
         name: 'Laravel',
-        width: '90%',
+        width: '100%',
     },
     {
         name: 'React/NextJS',
-        width: '90%',
+        width: '100%',
     },
     {
-        name: 'React Native',
-        width: '85%',
+        name: 'Vue/NuxtJs',
+        width: '100%',
     },
     {
-        name: 'Vue',
+        name: 'Angular',
         width: '90%'
     },
     {
@@ -20,11 +20,11 @@ export default [
         width: '90%',
     },
     {
-        name: 'Golang',
+        name: 'Wordpress',
         width: '90%',
     },
     {
-        name: 'Ruby on Rails',
+        name: 'Symfony',
         width: '90%',
     },
 ]
